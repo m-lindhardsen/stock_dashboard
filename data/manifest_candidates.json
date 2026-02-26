@@ -1,0 +1,16 @@
+{
+  "grid": "candidates",
+  "tickers": [
+    "AAPL",
+    "MSFT",
+    "AMD",
+    "INTC",
+    "ASML",
+    "TSM",
+    "SNOW",
+    "PLTR",
+    "CRWD",
+    "NET"
+  ],
+  "generated": "2026-02-26T15:09:25.747422"
+}

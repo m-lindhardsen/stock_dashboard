@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Market Grid — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,500;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg:      #0d0f14;
+    --surface: #141820;
+    --border:  #1e2530;
+    --muted:   #3a4252;
+    --text:    #e2e8f0;
+    --dim:     #8896aa;
+    --accent:  #4af0b0;
+    --radius:  8px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    padding: 18px 32px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    color: var(--accent);
+  }
+  .logo span { color: var(--dim); font-weight: 400; }
+
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+    gap: 48px;
+  }
+
+  .hero {
+    text-align: center;
+  }
+  .hero h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .hero p {
+    color: var(--dim);
+    font-size: .9rem;
+    max-width: 420px;
+  }
+
+  #grid-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    justify-content: center;
+    max-width: 900px;
+  }
+
+  .grid-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    min-width: 200px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color .15s, box-shadow .15s, transform .15s;
+    cursor: pointer;
+  }
+  .grid-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent), 0 8px 32px rgba(0,0,0,0.4);
+    transform: translateY(-2px);
+  }
+  .grid-card-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+  .grid-card-count {
+    font-family: 'Space Mono', monospace;
+    font-size: .72rem;
+    color: var(--dim);
+  }
+  .grid-card-updated {
+    font-size: .68rem;
+    color: var(--muted);
+  }
+  .grid-card-arrow {
+    margin-top: 12px;
+    font-size: .8rem;
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+  }
+
+  #status {
+    font-family: 'Space Mono', monospace;
+    font-size: .82rem;
+    color: var(--dim);
+    text-align: center;
+  }
+  .spinner {
+    display: inline-block;
+    width: 20px; height: 20px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Space Mono', monospace;
+    font-size: .62rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">MARKET<span>/</span>GRID</div>
+</header>
+
+<main>
+  <div class="hero">
+    <h1>Select a Dashboard</h1>
+    <p>Choose a chart grid to open. Each grid has its own ticker list and can be filtered by sector.</p>
+  </div>
+
+  <div id="status"><span class="spinner"></span> Loading grids…</div>
+  <div id="grid-cards" style="display:none"></div>
+</main>
+
+<footer>Run <code>python download_data.py</code> to refresh data · Serve with <code>python -m http.server 8080</code></footer>
+
+<script>
+async function main() {
+  const status = document.getElementById('status');
+  const cards  = document.getElementById('grid-cards');
+
+  try {
+    const gridsIndex = await fetch('./data/grids.json?_=' + Date.now()).then(r => {
+      if (!r.ok) throw new Error('grids.json not found');
+      return r.json();
+    });
+
+    const manifests = await Promise.all(
+      gridsIndex.grids.map(name =>
+        fetch(`./data/manifest_${name}.json?_=` + Date.now())
+          .then(r => r.ok ? r.json() : null)
+          .catch(() => null)
+      )
+    );
+
+    status.style.display = 'none';
+    cards.style.display  = 'flex';
+
+    gridsIndex.grids.forEach((name, i) => {
+      const m   = manifests[i];
+      const count = m ? m.tickers.length : 0;
+      const updated = m ? new Date(m.generated).toLocaleDateString() : '—';
+
+      const a = document.createElement('a');
+      a.className = 'grid-card';
+      a.href      = `./pages/${name}.html`;
+      a.innerHTML = `
+        <div class="grid-card-name">${name}</div>
+        <div class="grid-card-count">${count} tickers</div>
+        <div class="grid-card-updated">Updated ${updated}</div>
+        <div class="grid-card-arrow">Open grid →</div>
+      `;
+      cards.appendChild(a);
+    });
+
+  } catch(e) {
+    status.innerHTML = `⚠ ${e.message}<br><small>Run <code>python download_data.py</code> first.</small>`;
+  }
+}
+main();
+</script>
+</body>
+</html>

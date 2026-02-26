@@ -1,0 +1,7 @@
+# Portfolio — current holdings
+# Add or remove tickers freely, one per line
+
+AAPL
+MSFT
+NVDA
+JPM

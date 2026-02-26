@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Market Grid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,500;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg:         #0d0f14;
+    --surface:    #141820;
+    --border:     #1e2530;
+    --muted:      #3a4252;
+    --text:       #e2e8f0;
+    --dim:        #8896aa;
+    --accent:     #4af0b0;
+    --up:         #26d97f;
+    --down:       #f04f5e;
+    --sma10:      #facc15;
+    --sma50:      #60a5fa;
+    --sma250:     #f97316;
+    --vol:        rgba(100,140,255,0.30);
+    --vol-border: rgba(100,140,255,0.65);
+    --radius:     6px;
+    --gap:        14px;
+    font-size: 14px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 22px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    flex-wrap: wrap;
+  }
+  .logo {
+    font-family: 'Space Mono', monospace;
+    font-size: .95rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    color: var(--accent);
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .logo span { color: var(--dim); font-weight: 400; }
+  .logo:hover { opacity: .8; }
+
+  /* ── NAV TABS ── */
+  #nav-tabs {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+    flex-wrap: wrap;
+  }
+  .nav-tab {
+    font-family: 'Space Mono', monospace;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--dim);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 12px;
+    transition: all .13s;
+    white-space: nowrap;
+  }
+  .nav-tab:hover { color: var(--text); border-color: var(--muted); }
+  .nav-tab.active {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+
+  #meta-info {
+    font-size: .68rem;
+    color: var(--dim);
+    font-family: 'Space Mono', monospace;
+    white-space: nowrap;
+  }
+  .header-actions { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  #watchlist-count {
+    font-family: 'Space Mono', monospace;
+    font-size: .66rem;
+    color: var(--sma10);
+    white-space: nowrap;
+  }
+
+  /* ── COLUMN TOGGLE ── */
+  .col-toggle {
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .col-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: .65rem;
+    font-weight: 700;
+    background: transparent;
+    color: var(--dim);
+    border: none;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: background .12s, color .12s;
+    border-right: 1px solid var(--border);
+  }
+  .col-btn:last-child { border-right: none; }
+  .col-btn.active { background: var(--accent); color: var(--bg); }
+  .col-btn:not(.active):hover { color: var(--text); background: var(--border); }
+
+  /* ── EXPORT ── */
+  .btn-export {
+    font-family: 'Space Mono', monospace;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: background .12s, color .12s;
+    white-space: nowrap;
+  }
+  .btn-export:hover { background: var(--accent); color: var(--bg); }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    gap: 14px;
+    padding: 7px 22px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: .66rem;
+    color: var(--dim);
+    font-family: 'Space Mono', monospace;
+  }
+  .ls { width: 18px; height: 2px; border-radius: 1px; }
+  .ls.up    { background: var(--up);         width:7px; height:7px; border-radius:2px; }
+  .ls.down  { background: var(--down);       width:7px; height:7px; border-radius:2px; }
+  .ls.sma10  { background: var(--sma10);  }
+  .ls.sma50  { background: var(--sma50);  }
+  .ls.sma250 { background: var(--sma250); }
+  .ls.vol    { background: var(--vol-border); }
+
+  /* ── FILTER BAR ── */
+  #filter-bar {
+    display: none;
+    gap: 7px;
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter-label {
+    font-family: 'Space Mono', monospace;
+    font-size: .6rem;
+    color: var(--dim);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .fdiv { width:1px; height:16px; background:var(--border); margin:0 2px; flex-shrink:0; }
+  .filter-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: .63rem;
+    background: transparent;
+    color: var(--dim);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 3px 8px;
+    cursor: pointer;
+    transition: all .13s;
+    white-space: nowrap;
+  }
+  .filter-btn:hover { border-color: var(--muted); color: var(--text); }
+  .filter-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 700; }
+  .filter-btn.wl-btn { border-color: rgba(250,204,21,.35); color: var(--sma10); }
+  .filter-btn.wl-btn.active { background: var(--sma10); border-color: var(--sma10); color: var(--bg); }
+  #filter-count { font-family:'Space Mono',monospace; font-size:.6rem; color:var(--dim); margin-left:auto; white-space:nowrap; }
+
+  /* ── GRID ── */
+  #grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--gap);
+    padding: var(--gap) 16px 32px;
+  }
+  #grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  @media(max-width:1100px){ #grid:not(.cols-2){ grid-template-columns: repeat(3,1fr); } }
+  @media(max-width:800px) { #grid{ grid-template-columns: repeat(2,1fr) !important; } }
+  @media(max-width:520px) { #grid{ grid-template-columns: 1fr !important; } }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .card:hover { border-color: var(--muted); box-shadow: 0 0 0 1px var(--muted); }
+  .card.in-watchlist { border-color: rgba(250,204,21,.32); }
+  .card.in-watchlist:hover { border-color: var(--sma10); box-shadow: 0 0 0 1px var(--sma10); }
+
+  .card-header {
+    padding: 9px 11px 7px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .card-row1 { display:flex; align-items:center; gap:5px; }
+  .ticker-symbol {
+    font-family: 'Space Mono', monospace;
+    font-size: .9rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: .04em;
+    flex-shrink: 0;
+  }
+  .company-name {
+    font-size: .68rem;
+    color: var(--dim);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+  }
+  .last-price {
+    font-family: 'Space Mono', monospace;
+    font-size: .82rem;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .last-price.up   { color: var(--up); }
+  .last-price.down { color: var(--down); }
+  .btn-watch {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--dim);
+    font-family: 'Space Mono', monospace;
+    font-size: .57rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    cursor: pointer;
+    transition: all .13s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .btn-watch:hover { border-color: var(--sma10); color: var(--sma10); }
+  .btn-watch.watched { background: rgba(250,204,21,.1); border-color: var(--sma10); color: var(--sma10); }
+  .card-row2 { display:flex; gap:5px; flex-wrap:wrap; }
+  .tag {
+    font-size: .58rem;
+    background: var(--border);
+    color: var(--dim);
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-family: 'Space Mono', monospace;
+    white-space: nowrap;
+  }
+  .chart-wrap { position:relative; flex:1; }
+  canvas { display:block; width:100% !important; }
+
+  .empty-state {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--dim);
+    font-family: 'Space Mono', monospace;
+    font-size: .75rem;
+    grid-column: 1 / -1;
+  }
+
+  /* ── STATUS ── */
+  #status {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--dim);
+    font-family: 'Space Mono', monospace;
+    font-size: .8rem;
+  }
+  .spinner {
+    display: inline-block;
+    width: 20px; height: 20px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── LIGHTBOX ── */
+  #lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(5,7,11,0.88);
+    backdrop-filter: blur(4px);
+    padding: 18px;
+    flex-direction: column;
+  }
+  #lightbox.open { display: flex; }
+  #lb-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 15px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: var(--radius) var(--radius) 0 0;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+  #lb-ticker { font-family:'Space Mono',monospace; font-size:1.05rem; font-weight:700; color:var(--accent); letter-spacing:.06em; }
+  #lb-name   { font-size:.78rem; color:var(--dim); flex:1; }
+  #lb-price  { font-family:'Space Mono',monospace; font-size:.96rem; font-weight:700; }
+  #lb-price.up { color:var(--up); } #lb-price.down { color:var(--down); }
+  #lb-tags   { display:flex; gap:5px; }
+  #lb-hint   { font-family:'Space Mono',monospace; font-size:.58rem; color:var(--muted); }
+  #lb-close  {
+    background: transparent; border: 1px solid var(--muted); border-radius:4px;
+    color: var(--dim); font-family:'Space Mono',monospace; font-size:.68rem;
+    padding: 3px 9px; cursor:pointer; transition:all .12s; flex-shrink:0;
+  }
+  #lb-close:hover { border-color:var(--text); color:var(--text); }
+  #lb-canvas-wrap {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0 0 var(--radius) var(--radius);
+    overflow: hidden;
+    min-height: 0;
+  }
+  #lb-canvas { display:block; width:100% !important; height:100% !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="../index.html">MARKET<span>/</span>GRID</a>
+  <div id="nav-tabs"><!-- injected by JS --></div>
+  <div id="meta-info">—</div>
+  <div class="header-actions">
+    <div class="col-toggle">
+      <button class="col-btn active" data-cols="4">4</button>
+      <button class="col-btn"        data-cols="2">2</button>
+    </div>
+    <span id="watchlist-count"></span>
+    <button class="btn-export" id="btn-export">⬇ Export</button>
+  </div>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><div class="ls up"></div> Up</div>
+  <div class="legend-item"><div class="ls down"></div> Down</div>
+  <div class="legend-item"><div class="ls sma10"></div> SMA 10</div>
+  <div class="legend-item"><div class="ls sma50"></div> SMA 50</div>
+  <div class="legend-item"><div class="ls sma250"></div> SMA 250</div>
+  <div class="legend-item"><div class="ls vol"></div> Volume</div>
+</div>
+
+<div id="filter-bar">
+  <span class="filter-label">Sectors</span>
+  <button class="filter-btn active" data-sector="__all__">All</button>
+  <span class="fdiv" id="fdiv-start"></span>
+  <span class="fdiv" id="fdiv-end"></span>
+  <button class="filter-btn wl-btn" data-sector="__watchlist__">★ Watchlist</button>
+  <span id="filter-count"></span>
+</div>
+
+<div id="status"><span class="spinner"></span> Loading…</div>
+<div id="grid" style="display:none">
+  <div class="empty-state" id="empty-state">No stocks match the current filter.</div>
+</div>
+
+<div id="lightbox">
+  <div id="lb-header">
+    <span id="lb-ticker"></span>
+    <span id="lb-name"></span>
+    <span id="lb-price"></span>
+    <div id="lb-tags"></div>
+    <span id="lb-hint">ESC or click outside to close</span>
+    <button id="lb-close">✕ Close</button>
+  </div>
+  <div id="lb-canvas-wrap">
+    <canvas id="lb-canvas"></canvas>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+// GRID NAME — derived from the HTML filename
+// e.g. pages/sp500.html → "sp500"
+// ─────────────────────────────────────────────
+const GRID_NAME = location.pathname.split('/').pop().replace('.html','');
+const DATA_PATH = '../data/';
+const CHART_H   = 280;
+const PRICE_RATIO = 0.72;
+const PAD       = { top:12, right:8, bottom:18, left:62 };
+const TICK_W    = 3;
+const LS_KEY    = 'marketgrid_watchlist_v1';   // shared across all grids
+
+const C = {
+  bg:'#141820', grid:'#1a2030', text:'#8896aa',
+  up:'#26d97f', down:'#f04f5e',
+  sma10:'#facc15', sma50:'#60a5fa', sma250:'#f97316',
+  vol:'rgba(100,140,255,0.30)', volEdge:'rgba(100,140,255,0.65)',
+};
+
+// ─────────────────────────────────────────────
+// WATCHLIST (shared across all grids)
+// ─────────────────────────────────────────────
+function loadWatchlist() {
+  try { return new Set(JSON.parse(localStorage.getItem(LS_KEY)) || []); }
+  catch { return new Set(); }
+}
+function saveWatchlist(s) { localStorage.setItem(LS_KEY, JSON.stringify([...s])); }
+let watchlist = loadWatchlist();
+
+function toggleWatch(ticker, e) {
+  if (e) e.stopPropagation();
+  watchlist.has(ticker) ? watchlist.delete(ticker) : watchlist.add(ticker);
+  saveWatchlist(watchlist);
+  refreshWatchlistUI();
+  applyFilter();
+}
+
+function refreshWatchlistUI() {
+  const n = watchlist.size;
+  document.getElementById('watchlist-count').textContent = n > 0 ? `★ ${n}` : '';
+  document.querySelectorAll('.card[data-ticker]').forEach(card => {
+    const t = card.dataset.ticker, w = watchlist.has(t);
+    const btn = card.querySelector('.btn-watch');
+    btn.textContent = w ? '★' : '+';
+    btn.title = w ? 'Remove from watchlist' : 'Add to watchlist';
+    btn.classList.toggle('watched', w);
+    card.classList.toggle('in-watchlist', w);
+  });
+}
+
+// ─────────────────────────────────────────────
+// EXPORT
+// ─────────────────────────────────────────────
+document.getElementById('btn-export').addEventListener('click', () => {
+  if (!watchlist.size) { alert('Watchlist is empty.'); return; }
+  const a = Object.assign(document.createElement('a'), {
+    href:     URL.createObjectURL(new Blob([[...watchlist].sort().join('\n')+'\n'],{type:'text/plain'})),
+    download: 'watchlist.txt',
+  });
+  a.click(); URL.revokeObjectURL(a.href);
+});
+
+// ─────────────────────────────────────────────
+// COLUMN TOGGLE
+// ─────────────────────────────────────────────
+document.querySelectorAll('.col-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.col-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const grid = document.getElementById('grid');
+    btn.dataset.cols === '2' ? grid.classList.add('cols-2') : grid.classList.remove('cols-2');
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.card canvas').forEach(c => {
+        if (c._ohlcv) drawChart(c, c._ohlcv, CHART_H);
+      });
+    });
+  });
+});
+
+// ─────────────────────────────────────────────
+// SECTOR FILTER
+// ─────────────────────────────────────────────
+let activeSectors = new Set(['__all__']);
+
+function buildSectorButtons(datasets) {
+  const sectors = [...new Set(
+    datasets.filter(Boolean).map(d => d.info.sector || '—')
+  )].sort();
+
+  const bar  = document.getElementById('filter-bar');
+  const end  = document.getElementById('fdiv-end');
+  sectors.forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.dataset.sector = s;
+    btn.textContent = s;
+    bar.insertBefore(btn, end);
+  });
+  bar.style.display = 'flex';
+
+  bar.addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    const s = btn.dataset.sector;
+    if (s === '__all__') {
+      activeSectors = new Set(['__all__']);
+    } else if (s === '__watchlist__') {
+      activeSectors = activeSectors.has('__watchlist__')
+        ? new Set(['__all__']) : new Set(['__watchlist__']);
+    } else {
+      activeSectors.delete('__all__'); activeSectors.delete('__watchlist__');
+      activeSectors.has(s) ? activeSectors.delete(s) : activeSectors.add(s);
+      if (!activeSectors.size) activeSectors = new Set(['__all__']);
+    }
+    bar.querySelectorAll('.filter-btn').forEach(b =>
+      b.classList.toggle('active', activeSectors.has(b.dataset.sector))
+    );
+    applyFilter();
+  });
+}
+
+function applyFilter() {
+  const cards = [...document.querySelectorAll('.card[data-ticker]')];
+  let visible = 0;
+  cards.forEach(card => {
+    const show = activeSectors.has('__all__')       ? true
+               : activeSectors.has('__watchlist__') ? watchlist.has(card.dataset.ticker)
+               : activeSectors.has(card.dataset.sector);
+    card.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('filter-count').textContent =
+    activeSectors.has('__all__') ? `${cards.length} stocks` : `${visible} of ${cards.length} stocks`;
+  document.getElementById('empty-state').style.display = visible === 0 ? 'block' : 'none';
+}
+
+// ─────────────────────────────────────────────
+// LIGHTBOX
+// ─────────────────────────────────────────────
+const lb       = document.getElementById('lightbox');
+const lbCanvas = document.getElementById('lb-canvas');
+let   lbData   = null;
+
+function openLightbox(data) {
+  lbData = data;
+  const { ticker, info, ohlcv } = data;
+  const last = ohlcv[ohlcv.length-1], prev = ohlcv[ohlcv.length-2]||last;
+  const isUp = last.c >= prev.c;
+  document.getElementById('lb-ticker').textContent = ticker;
+  document.getElementById('lb-name').textContent   = info.shortName || '';
+  const pe = document.getElementById('lb-price');
+  pe.textContent = last.c.toFixed(2); pe.className = isUp ? 'up' : 'down';
+  const te = document.getElementById('lb-tags'); te.innerHTML = '';
+  if (info.sector)   te.innerHTML += `<span class="tag">${esc(info.sector)}</span>`;
+  if (info.industry) te.innerHTML += `<span class="tag">${esc(info.industry)}</span>`;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  requestAnimationFrame(() => {
+    const wrap = document.getElementById('lb-canvas-wrap');
+    drawChart(lbCanvas, ohlcv, wrap.clientHeight);
+  });
+}
+
+function closeLightbox() {
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+  lbData = null;
+}
+
+document.getElementById('lb-close').addEventListener('click', closeLightbox);
+lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+window.addEventListener('resize', () => {
+  if (!lbData) return;
+  const wrap = document.getElementById('lb-canvas-wrap');
+  drawChart(lbCanvas, lbData.ohlcv, wrap.clientHeight);
+});
+
+// ─────────────────────────────────────────────
+// FETCH + BOOTSTRAP
+// ─────────────────────────────────────────────
+async function fetchJSON(url) {
+  const r = await fetch(url + '?_=' + Date.now());
+  if (!r.ok) throw new Error(`HTTP ${r.status} — ${url}`);
+  return r.json();
+}
+
+async function main() {
+  const status = document.getElementById('status');
+  const grid   = document.getElementById('grid');
+
+  // Set page title
+  document.title = `Market Grid — ${GRID_NAME.toUpperCase()}`;
+
+  try {
+    // Load nav grids
+    const gridsIndex = await fetchJSON(DATA_PATH + 'grids.json').catch(() => ({ grids: [GRID_NAME] }));
+    buildNavTabs(gridsIndex.grids);
+
+    // Load this grid's manifest
+    const manifest = await fetchJSON(DATA_PATH + `manifest_${GRID_NAME}.json`);
+    const tickers  = manifest.tickers || [];
+    const updated  = manifest.generated ? new Date(manifest.generated).toLocaleString() : '—';
+    document.getElementById('meta-info').textContent = `${tickers.length} tickers · ${updated}`;
+
+    status.innerHTML = `<span class="spinner"></span> Loading ${tickers.length} tickers…`;
+
+    // Load ticker data (shared pool)
+    const datasets = await Promise.all(
+      tickers.map(t =>
+        fetchJSON(DATA_PATH + t + '.json').catch(e => { console.warn(`Skip ${t}:`, e); return null; })
+      )
+    );
+
+    status.style.display = 'none';
+    grid.style.display   = 'grid';
+
+    buildSectorButtons(datasets);
+
+    const emptyEl = document.getElementById('empty-state');
+    datasets.forEach(data => {
+      if (data) grid.insertBefore(buildCard(data), emptyEl);
+    });
+
+    refreshWatchlistUI();
+    applyFilter();
+
+  } catch(e) {
+    status.innerHTML = `⚠ ${e.message}<br><small>Run <code>python download_data.py</code> first.</small>`;
+  }
+}
+
+function buildNavTabs(grids) {
+  const nav = document.getElementById('nav-tabs');
+  grids.forEach(name => {
+    const a = document.createElement('a');
+    a.className = 'nav-tab' + (name === GRID_NAME ? ' active' : '');
+    a.href      = `${name}.html`;
+    a.textContent = name.toUpperCase();
+    nav.appendChild(a);
+  });
+}
+
+// ─────────────────────────────────────────────
+// BUILD CARD
+// ─────────────────────────────────────────────
+function buildCard(data) {
+  const { ticker, info, ohlcv } = data;
+  const last = ohlcv[ohlcv.length-1], prev = ohlcv[ohlcv.length-2]||last;
+  const isUp = last.c >= prev.c, sector = info.sector || '—', w = watchlist.has(ticker);
+
+  const card = document.createElement('div');
+  card.className = 'card' + (w ? ' in-watchlist' : '');
+  card.dataset.ticker = ticker;
+  card.dataset.sector = sector;
+  card.addEventListener('click', () => openLightbox(data));
+
+  const hdr  = document.createElement('div'); hdr.className = 'card-header';
+  const row1 = document.createElement('div'); row1.className = 'card-row1';
+  row1.innerHTML = `
+    <span class="ticker-symbol">${ticker}</span>
+    <span class="company-name">${esc(info.shortName)}</span>
+    <span class="last-price ${isUp?'up':'down'}">${last.c.toFixed(2)}</span>
+    <button class="btn-watch ${w?'watched':''}" title="${w?'Remove from watchlist':'Add to watchlist'}"
+            data-ticker="${ticker}">${w?'★':'+'}</button>`;
+  row1.querySelector('.btn-watch').addEventListener('click', e => toggleWatch(ticker, e));
+
+  const row2 = document.createElement('div'); row2.className = 'card-row2';
+  if (info.sector)   row2.innerHTML += `<span class="tag">${esc(info.sector)}</span>`;
+  if (info.industry) row2.innerHTML += `<span class="tag">${esc(info.industry)}</span>`;
+
+  hdr.appendChild(row1); hdr.appendChild(row2); card.appendChild(hdr);
+
+  const wrap = document.createElement('div'); wrap.className = 'chart-wrap';
+  const canvas = document.createElement('canvas');
+  canvas.height = CHART_H; canvas._ohlcv = ohlcv;
+  wrap.appendChild(canvas); card.appendChild(wrap);
+
+  requestAnimationFrame(() => drawChart(canvas, ohlcv, CHART_H));
+  return card;
+}
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ─────────────────────────────────────────────
+// CHART RENDERER — OHLC bars
+// ─────────────────────────────────────────────
+function drawChart(canvas, ohlcv, H) {
+  const dpr = window.devicePixelRatio || 1;
+  const W   = canvas.offsetWidth;
+  if (!W || !H) return;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  const priceH      = Math.floor(H * PRICE_RATIO);
+  const innerW      = W - PAD.left - PAD.right;
+  const priceY      = PAD.top;
+  const priceBottom = priceY + priceH - PAD.bottom;
+  const volY        = priceY + priceH;
+  const volBottom   = volY + (H - priceH) - 4;
+  const n           = ohlcv.length;
+  const slotW       = innerW / n;
+
+  let pmin = Infinity, pmax = -Infinity;
+  ohlcv.forEach(r => {
+    pmin = Math.min(pmin,r.l); pmax = Math.max(pmax,r.h);
+    [r.sma10,r.sma50,r.sma250].forEach(v => { if(v!=null){pmin=Math.min(pmin,v);pmax=Math.max(pmax,v);} });
+  });
+  const pad5 = (pmax-pmin||1)*0.04;
+  const plo = pmin-pad5, phi = pmax+pad5, pspan = phi-plo;
+  const volMax = Math.max(...ohlcv.map(r=>r.v))||1;
+
+  const px = i => PAD.left + (i+0.5)*slotW;
+  const py = v => priceY + (priceBottom-priceY)*(1-(v-plo)/pspan);
+  const vy = v => volY   + (volBottom-volY)*(1-v/volMax);
+
+  ctx.fillStyle = C.bg; ctx.fillRect(0,0,W,H);
+
+  // Grid + labels
+  ctx.strokeStyle = C.grid; ctx.lineWidth = 1;
+  for (let i=0; i<=5; i++) {
+    const v = plo+pspan*i/5, y = py(v);
+    ctx.beginPath(); ctx.moveTo(PAD.left,y); ctx.lineTo(W-PAD.right,y); ctx.stroke();
+    ctx.fillStyle = C.text;
+    ctx.font = `10px 'Space Mono',monospace`; ctx.textAlign = 'right';
+    ctx.fillText(v.toFixed(v>=100?0:2), PAD.left-4, y+3);
+  }
+
+  // Volume
+  for (let i=0; i<n; i++) {
+    const r=ohlcv[i], x=px(i), bw=Math.max(1,slotW*0.6);
+    ctx.fillStyle=C.vol; ctx.strokeStyle=C.volEdge; ctx.lineWidth=0.5;
+    ctx.fillRect(x-bw/2, vy(r.v), bw, volBottom-vy(r.v));
+  }
+
+  // SMAs
+  const drawSMA = (key,color) => {
+    ctx.strokeStyle=color; ctx.lineWidth=1.2; ctx.beginPath();
+    let go=false;
+    for(let i=0;i<n;i++){
+      const v=ohlcv[i][key]; if(v==null) continue;
+      go ? ctx.lineTo(px(i),py(v)) : (ctx.moveTo(px(i),py(v)),go=true);
+    }
+    ctx.stroke();
+  };
+  drawSMA('sma250',C.sma250); drawSMA('sma50',C.sma50); drawSMA('sma10',C.sma10);
+
+  // OHLC bars
+  const tw = Math.min(TICK_W, Math.max(1, slotW*0.35));
+  ctx.lineWidth = 1;
+  for (let i=0; i<n; i++) {
+    const r=ohlcv[i], x=px(i);
+    ctx.strokeStyle = r.c >= r.o ? C.up : C.down;
+    ctx.beginPath();
+    ctx.moveTo(x, py(r.h)); ctx.lineTo(x, py(r.l));   // high-low
+    ctx.moveTo(x-tw, py(r.o)); ctx.lineTo(x, py(r.o)); // open tick left
+    ctx.moveTo(x, py(r.c)); ctx.lineTo(x+tw, py(r.c)); // close tick right
+    ctx.stroke();
+  }
+
+  // Pane divider
+  ctx.strokeStyle=C.grid; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(PAD.left,volY); ctx.lineTo(W-PAD.right,volY); ctx.stroke();
+}
+
+// ─────────────────────────────────────────────
+// RESIZE
+// ─────────────────────────────────────────────
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    document.querySelectorAll('.card canvas').forEach(c => {
+      if (c._ohlcv) drawChart(c, c._ohlcv, CHART_H);
+    });
+  }, 150);
+});
+
+main();
+</script>
+</body>
+</html>

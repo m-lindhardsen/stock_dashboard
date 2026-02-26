@@ -1,0 +1,13 @@
+# Candidates — stocks under consideration
+# Add or remove tickers freely, one per line
+
+AAPL
+MSFT
+AMD
+INTC
+ASML
+TSM
+SNOW
+PLTR
+CRWD
+NET
