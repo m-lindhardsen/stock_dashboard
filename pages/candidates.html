@@ -126,6 +126,30 @@
   .col-btn.active { background: var(--accent); color: var(--bg); }
   .col-btn:not(.active):hover { color: var(--text); background: var(--border); }
 
+  /* ── SORT TOGGLE ── */
+  .sort-toggle {
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .sort-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: .65rem;
+    font-weight: 700;
+    background: transparent;
+    color: var(--dim);
+    border: none;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: background .12s, color .12s;
+    border-right: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .sort-btn:last-child { border-right: none; }
+  .sort-btn.active { background: var(--accent); color: var(--bg); }
+  .sort-btn:not(.active):hover { color: var(--text); background: var(--border); }
+
   /* ── EXPORT ── */
   .btn-export {
     font-family: 'Space Mono', monospace;
@@ -382,6 +406,10 @@
       <button class="col-btn active" data-cols="4">4</button>
       <button class="col-btn"        data-cols="2">2</button>
     </div>
+    <div class="sort-toggle">
+      <button class="sort-btn active" data-sort="default">Default</button>
+      <button class="sort-btn"        data-sort="sector">Sector</button>
+    </div>
     <span id="watchlist-count"></span>
     <button class="btn-export" id="btn-export">⬇ Export</button>
   </div>
@@ -503,6 +531,51 @@ document.querySelectorAll('.col-btn').forEach(btn => {
     });
   });
 });
+
+// ─────────────────────────────────────────────
+// SORT
+// ─────────────────────────────────────────────
+let currentSort = 'default';
+
+document.querySelectorAll('.sort-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentSort = btn.dataset.sort;
+    sortCards();
+  });
+});
+
+function sortCards() {
+  const grid    = document.getElementById('grid');
+  const emptyEl = document.getElementById('empty-state');
+  const cards   = [...grid.querySelectorAll('.card[data-ticker]')];
+
+  if (currentSort === 'sector') {
+    cards.sort((a, b) => {
+      const sA = (a.dataset.sector   || '').toLowerCase();
+      const sB = (b.dataset.sector   || '').toLowerCase();
+      const iA = (a.dataset.industry || '').toLowerCase();
+      const iB = (b.dataset.industry || '').toLowerCase();
+      if (sA !== sB) return sA < sB ? -1 : 1;
+      return iA < iB ? -1 : iA > iB ? 1 : 0;
+    });
+  } else {
+    // Default: restore original load order via data-index
+    cards.sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
+  }
+
+  // Re-insert in sorted order (before empty-state sentinel)
+  cards.forEach(card => grid.insertBefore(card, emptyEl));
+
+  // Redraw canvases (layout may have shifted)
+  requestAnimationFrame(() => {
+    cards.forEach(card => {
+      const c = card.querySelector('canvas');
+      if (c && c._ohlcv) drawChart(c, c._ohlcv, CHART_H);
+    });
+  });
+}
 
 // ─────────────────────────────────────────────
 // SECTOR FILTER
@@ -645,8 +718,8 @@ async function main() {
     buildSectorButtons(datasets);
 
     const emptyEl = document.getElementById('empty-state');
-    datasets.forEach(data => {
-      if (data) grid.insertBefore(buildCard(data), emptyEl);
+    datasets.forEach((data, idx) => {
+      if (data) grid.insertBefore(buildCard(data, idx), emptyEl);
     });
 
     refreshWatchlistUI();
@@ -671,15 +744,17 @@ function buildNavTabs(grids) {
 // ─────────────────────────────────────────────
 // BUILD CARD
 // ─────────────────────────────────────────────
-function buildCard(data) {
+function buildCard(data, idx) {
   const { ticker, info, ohlcv } = data;
   const last = ohlcv[ohlcv.length-1], prev = ohlcv[ohlcv.length-2]||last;
   const isUp = last.c >= prev.c, sector = info.sector || '—', w = watchlist.has(ticker);
 
   const card = document.createElement('div');
   card.className = 'card' + (w ? ' in-watchlist' : '');
-  card.dataset.ticker = ticker;
-  card.dataset.sector = sector;
+  card.dataset.ticker   = ticker;
+  card.dataset.sector   = sector;
+  card.dataset.industry = info.industry || '—';
+  card.dataset.index    = idx;
   card.addEventListener('click', () => openLightbox(data));
 
   const hdr  = document.createElement('div'); hdr.className = 'card-header';
