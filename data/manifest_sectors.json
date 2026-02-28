@@ -1,0 +1,18 @@
+{
+  "grid": "sectors",
+  "tickers": [
+    "SPY",
+    "XLK",
+    "XLF",
+    "XLV",
+    "XLE",
+    "XLI",
+    "XLY",
+    "XLP",
+    "XLU",
+    "XLRE",
+    "XLB",
+    "XLC"
+  ],
+  "generated": "2026-02-28T20:38:54.157139"
+}

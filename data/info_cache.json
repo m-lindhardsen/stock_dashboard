@@ -2743,5 +2743,65 @@
     "shortName": "Zoetis Inc.",
     "sector": "Healthcare",
     "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "SPY": {
+    "shortName": "State Street SPDR S&P 500 ETF T",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "XLB": {
+    "shortName": "State Street Materials Select S",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "XLC": {
+    "shortName": "State Street Communication Serv",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "XLE": {
+    "shortName": "State Street Energy Select Sect",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "XLF": {
+    "shortName": "State Street Financial Select S",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "XLI": {
+    "shortName": "State Street Industrial Select ",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "XLK": {
+    "shortName": "State Street Technology Select ",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "XLP": {
+    "shortName": "State Street Consumer Staples S",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "XLRE": {
+    "shortName": "State Street Real Estate Select",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "XLU": {
+    "shortName": "State Street Utilities Select S",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "XLV": {
+    "shortName": "State Street Health Care Select",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "XLY": {
+    "shortName": "State Street Consumer Discretio",
+    "sector": "\u2014",
+    "industry": "\u2014"
   }
 }
