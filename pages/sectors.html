@@ -195,6 +195,30 @@
   .chart-wrap { position:relative; flex:1; }
   canvas { display:block; width:100% !important; }
 
+  /* ── INTERVAL TOGGLE ── */
+  .interval-toggle {
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .interval-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: .65rem;
+    font-weight: 700;
+    background: transparent;
+    color: var(--dim);
+    border: none;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: background .12s, color .12s;
+    border-right: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .interval-btn:last-child { border-right: none; }
+  .interval-btn.active { background: var(--accent); color: var(--bg); }
+  .interval-btn:not(.active):hover { color: var(--text); background: var(--border); }
+
   /* ── STATUS ── */
   #status { text-align:center; padding:80px 20px; color:var(--dim); font-family:'Space Mono',monospace; font-size:.8rem; }
   .spinner {
@@ -233,6 +257,11 @@
   <div id="nav-tabs"></div>
   <div id="meta-info">—</div>
   <div class="header-actions">
+    <!-- Interval toggle -->
+    <div class="interval-toggle">
+      <button class="interval-btn active" data-interval="daily">Daily</button>
+      <button class="interval-btn"        data-interval="weekly">Weekly</button>
+    </div>
     <!-- Chart mode toggle -->
     <div class="toggle-group" id="mode-toggle">
       <button class="tg-btn active" data-mode="price">Price</button>
@@ -301,9 +330,10 @@ const C = {
 };
 
 // ── State ──────────────────────────────────────
-let chartMode  = 'price';   // 'price' | 'ratio'
-let spyOhlcv   = null;      // SPY data reference
-let allDatasets = [];
+let chartMode    = 'price';   // 'price' | 'ratio'
+let currentInterval = 'daily'; // 'daily' | 'weekly'
+let spyOhlcv     = null;
+let allDatasets  = [];
 
 // ── Watchlist ──────────────────────────────────
 function loadWatchlist() {
@@ -330,6 +360,26 @@ function refreshWatchlistUI() {
     card.classList.toggle('in-watchlist', w);
   });
 }
+
+// ── Interval toggle ────────────────────────────
+document.querySelectorAll('.interval-btn').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    if (btn.dataset.interval === currentInterval) return;
+    document.querySelectorAll('.interval-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentInterval = btn.dataset.interval;
+    // Reload all datasets for new interval
+    const tickers = allDatasets.map(d => d.ticker);
+    const newDatasets = await Promise.all(
+      tickers.map(t =>
+        fetchJSON(DATA_PATH + t + `_${currentInterval}.json`).catch(() => null)
+      )
+    );
+    allDatasets = newDatasets.filter(Boolean);
+    spyOhlcv = allDatasets.find(d => d.ticker === SPY_TICKER)?.ohlcv || null;
+    redrawAllCards();
+  });
+});
 
 // ── Chart mode toggle ──────────────────────────
 document.getElementById('mode-toggle').addEventListener('click', e => {
@@ -500,7 +550,7 @@ async function main() {
 
     const datasets = await Promise.all(
       tickers.map(t =>
-        fetchJSON(DATA_PATH + t + '.json').catch(e => { console.warn(`Skip ${t}:`, e); return null; })
+        fetchJSON(DATA_PATH + t + '_daily.json').catch(e => { console.warn(`Skip ${t}:`, e); return null; })
       )
     );
 

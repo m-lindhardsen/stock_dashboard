@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 """
-Stock Data Downloader — Multi-Grid Edition (Bulk)
----------------------------------------------------
-Scans for all tickers_*.txt files in the same folder.
-Downloads OHLCV data in bulk using yf.download() — much faster for large lists.
-Company info (name, sector, industry) is still fetched per-ticker but only once,
-and is cached so it is not re-fetched on subsequent days.
+Stock Data Downloader — Multi-Grid Edition (Bulk, Daily + Weekly)
+------------------------------------------------------------------
+Downloads two datasets per ticker:
+  - Daily  2 years  → data/AAPL_daily.json
+  - Weekly 5 years  → data/AAPL_weekly.json
 
-To add a new grid:  just create tickers_mygrid.txt and re-run.
+Both use bulk yf.download() for speed.
+Company info is cached in info_cache.json and only fetched once per ticker.
+Cache tracks daily and weekly separately so either can be force-refreshed.
+
+To add a new grid: create tickers_mygrid.txt and re-run.
 """
 
 import os
@@ -33,8 +36,13 @@ SCRIPT_DIR  = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR    = os.path.join(SCRIPT_DIR, "data")
 CACHE_FILE  = os.path.join(DATA_DIR, "cache_meta.json")
 INFO_FILE   = os.path.join(DATA_DIR, "info_cache.json")
-PERIOD      = "2y"
-CHUNK_SIZE  = 100   # tickers per bulk download batch
+CHUNK_SIZE  = 100
+
+# Intervals to download: (label, yfinance period, yfinance interval, filename suffix)
+INTERVALS = [
+    ("daily",  "2y", "1d", "daily"),
+    ("weekly", "5y", "1wk", "weekly"),
+]
 
 
 # ── Ticker file helpers ────────────────────────────────────────────────────────
@@ -58,7 +66,7 @@ def load_tickers_from_file(filepath):
     return tickers
 
 
-# ── Caches ─────────────────────────────────────────────────────────────────────
+# ── Cache helpers ──────────────────────────────────────────────────────────────
 
 def load_json(path, default):
     if os.path.exists(path):
@@ -72,9 +80,15 @@ def save_json(path, data):
         json.dump(data, f, indent=2)
 
 
-def needs_price_update(ticker, date_cache):
+def cache_key(ticker, interval_label):
+    return f"{ticker}_{interval_label}"
+
+
+def needs_update(ticker, interval_label, date_cache):
     today = datetime.date.today().isoformat()
-    return date_cache.get(ticker) != today
+    key   = cache_key(ticker, interval_label)
+    fname = os.path.join(DATA_DIR, f"{ticker}_{interval_label}.json")
+    return date_cache.get(key) != today or not os.path.exists(fname)
 
 
 # ── SMA ────────────────────────────────────────────────────────────────────────
@@ -88,29 +102,23 @@ def sma(values, n):
 
 def enrich_with_sma(rows):
     closes = [r["c"] for r in rows]
-    sma10  = sma(closes, 10)
-    sma50  = sma(closes, 50)
-    sma250 = sma(closes, 250)
-    for i, r in enumerate(rows):
-        r["sma10"]  = sma10[i]
-        r["sma50"]  = sma50[i]
-        r["sma250"] = sma250[i]
+    for period, key in [(10, "sma10"), (50, "sma50"), (250, "sma250")]:
+        vals = sma(closes, period)
+        for i, r in enumerate(rows):
+            r[key] = vals[i]
     return rows
 
 
-# ── Bulk OHLCV download ────────────────────────────────────────────────────────
+# ── Bulk download ──────────────────────────────────────────────────────────────
 
-def bulk_download(tickers):
-    """
-    Download OHLCV for a list of tickers in one request.
-    Returns dict: {ticker: [{"t":..,"o":..,"h":..,"l":..,"c":..,"v":..}, ...]}
-    """
-    print(f"  Bulk downloading {len(tickers)} tickers...", flush=True)
+def bulk_download(tickers, period, interval):
+    print(f"  Bulk downloading {len(tickers)} tickers "
+          f"[{interval}, {period}]...", flush=True)
 
     df = yf.download(
         tickers,
-        period=PERIOD,
-        interval="1d",
+        period=period,
+        interval=interval,
         auto_adjust=True,
         group_by="ticker",
         progress=False,
@@ -120,7 +128,6 @@ def bulk_download(tickers):
     results = {}
 
     if len(tickers) == 1:
-        # Single ticker — yfinance returns flat columns
         t = tickers[0]
         rows = []
         for dt, row in df.iterrows():
@@ -159,14 +166,14 @@ def bulk_download(tickers):
     return results
 
 
-# ── Company info (cached separately, only fetched once per ticker ever) ────────
+# ── Company info ───────────────────────────────────────────────────────────────
 
 def fetch_info(ticker, info_cache):
     if ticker in info_cache:
         return info_cache[ticker]
     print(f"    Fetching info for {ticker}...")
     try:
-        raw = yf.Ticker(ticker).info
+        raw  = yf.Ticker(ticker).info
         info = {
             "shortName": raw.get("shortName", ticker),
             "sector":    raw.get("sector",    "—"),
@@ -188,7 +195,7 @@ def main():
         print("No tickers_*.txt files found.")
         sys.exit(1)
 
-    print("Stock Dashboard — Bulk Downloader")
+    print("Stock Dashboard — Bulk Downloader (Daily + Weekly)")
     print(f"Found {len(grids)} grid(s): {', '.join(grids.keys())}")
     print()
 
@@ -202,57 +209,66 @@ def main():
         print(f"  {name}: {len(tickers)} tickers")
     print(f"\n  Total unique tickers: {len(all_tickers)}")
 
-    # Determine which tickers need a price update today
     date_cache = load_json(CACHE_FILE, {})
     info_cache = load_json(INFO_FILE,  {})
     today      = datetime.date.today().isoformat()
 
-    to_update = [t for t in sorted(all_tickers) if needs_price_update(t, date_cache)
-                 or not os.path.exists(os.path.join(DATA_DIR, f"{t}.json"))]
-    skipped   = [t for t in sorted(all_tickers) if t not in to_update]
+    # Download daily and weekly separately
+    for label, period, interval, suffix in INTERVALS:
+        print(f"\n── {label.upper()} ({period}, {interval}) ──────────────────")
 
-    print(f"\n  To download: {len(to_update)}   Already cached: {len(skipped)}")
-    if not to_update:
-        print("  All tickers up to date — nothing to download.")
-    else:
-        print()
-        # Download in chunks to avoid overwhelming Yahoo
+        to_update = [t for t in sorted(all_tickers)
+                     if needs_update(t, label, date_cache)]
+        skipped   = len(all_tickers) - len(to_update)
+
+        print(f"  To download: {len(to_update)}   Already cached: {skipped}")
+
+        if not to_update:
+            print("  All up to date.")
+            continue
+
+        # Bulk download in chunks
         all_ohlcv = {}
         for i in range(0, len(to_update), CHUNK_SIZE):
-            chunk = to_update[i: i + CHUNK_SIZE]
-            result = bulk_download(chunk)
+            chunk  = to_update[i: i + CHUNK_SIZE]
+            result = bulk_download(chunk, period, interval)
             all_ohlcv.update(result)
 
-        # Save each ticker's file
-        updated = []
-        failed  = []
+        updated, failed = [], []
         for ticker in to_update:
             if ticker not in all_ohlcv:
-                print(f"  WARNING: No data returned for {ticker}")
+                print(f"  WARNING: No {label} data for {ticker}")
                 failed.append(ticker)
                 continue
+
             rows = enrich_with_sma(all_ohlcv[ticker])
             info = fetch_info(ticker, info_cache)
             data = {"ticker": ticker, "info": info, "ohlcv": rows}
-            with open(os.path.join(DATA_DIR, f"{ticker}.json"), "w") as f:
+
+            fname = os.path.join(DATA_DIR, f"{ticker}_{suffix}.json")
+            with open(fname, "w") as f:
                 json.dump(data, f, separators=(",", ":"))
-            date_cache[ticker] = today
+
+            date_cache[cache_key(ticker, label)] = today
             updated.append(ticker)
 
-        # Persist caches
         save_json(CACHE_FILE, date_cache)
         save_json(INFO_FILE,  info_cache)
 
-        print(f"\n  Updated: {len(updated)}   Failed: {len(failed)}")
+        print(f"  Updated: {len(updated)}   Failed: {len(failed)}")
         if failed:
-            print(f"  Failed tickers: {', '.join(failed)}")
+            print(f"  Failed: {', '.join(failed)}")
 
     # Write manifests
-    print()
+    print("\n── MANIFESTS ──────────────────────────────────────")
     now = datetime.datetime.now().isoformat()
     for name, tickers in grid_tickers.items():
-        available = [t for t in tickers if os.path.exists(os.path.join(DATA_DIR, f"{t}.json"))]
-        manifest  = {"grid": name, "tickers": available, "generated": now}
+        # A ticker is available if both daily and weekly files exist
+        available = [
+            t for t in tickers
+            if os.path.exists(os.path.join(DATA_DIR, f"{t}_daily.json"))
+        ]
+        manifest = {"grid": name, "tickers": available, "generated": now}
         with open(os.path.join(DATA_DIR, f"manifest_{name}.json"), "w") as f:
             json.dump(manifest, f, indent=2)
         print(f"  manifest_{name}.json — {len(available)} tickers")

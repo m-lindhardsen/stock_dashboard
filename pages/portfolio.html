@@ -150,6 +150,30 @@
   .sort-btn.active { background: var(--accent); color: var(--bg); }
   .sort-btn:not(.active):hover { color: var(--text); background: var(--border); }
 
+  /* ── INTERVAL TOGGLE ── */
+  .interval-toggle {
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .interval-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: .65rem;
+    font-weight: 700;
+    background: transparent;
+    color: var(--dim);
+    border: none;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: background .12s, color .12s;
+    border-right: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .interval-btn:last-child { border-right: none; }
+  .interval-btn.active { background: var(--accent); color: var(--bg); }
+  .interval-btn:not(.active):hover { color: var(--text); background: var(--border); }
+
   /* ── EXPORT ── */
   .btn-export {
     font-family: 'Space Mono', monospace;
@@ -402,6 +426,10 @@
   <div id="nav-tabs"><!-- injected by JS --></div>
   <div id="meta-info">—</div>
   <div class="header-actions">
+    <div class="interval-toggle">
+      <button class="interval-btn active" data-interval="daily">Daily</button>
+      <button class="interval-btn"        data-interval="weekly">Weekly</button>
+    </div>
     <div class="col-toggle">
       <button class="col-btn active" data-cols="4">4</button>
       <button class="col-btn"        data-cols="2">2</button>
@@ -464,6 +492,8 @@ const PRICE_RATIO = 0.72;
 const PAD       = { top:12, right:8, bottom:18, left:62 };
 const TICK_W    = 3;
 const LS_KEY    = 'marketgrid_watchlist_v1';   // shared across all grids
+
+let currentInterval = 'daily';   // 'daily' | 'weekly'
 
 const C = {
   bg:'#141820', grid:'#1a2030', text:'#8896aa',
@@ -531,6 +561,35 @@ document.querySelectorAll('.col-btn').forEach(btn => {
     });
   });
 });
+
+// ─────────────────────────────────────────────
+// INTERVAL TOGGLE (Daily / Weekly)
+// ─────────────────────────────────────────────
+document.querySelectorAll('.interval-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (btn.dataset.interval === currentInterval) return;
+    document.querySelectorAll('.interval-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentInterval = btn.dataset.interval;
+    reloadAllCards();
+  });
+});
+
+async function reloadAllCards() {
+  const cards = [...document.querySelectorAll('.card[data-ticker]')];
+  await Promise.all(cards.map(async card => {
+    const ticker = card.dataset.ticker;
+    const canvas = card.querySelector('canvas');
+    if (!canvas) return;
+    try {
+      const data = await fetchJSON(DATA_PATH + ticker + `_${currentInterval}.json`);
+      canvas._ohlcv = data.ohlcv;
+      drawChart(canvas, data.ohlcv, CHART_H);
+    } catch(e) {
+      console.warn(`Could not load ${currentInterval} data for ${ticker}:`, e);
+    }
+  }));
+}
 
 // ─────────────────────────────────────────────
 // SORT
@@ -708,7 +767,7 @@ async function main() {
     // Load ticker data (shared pool)
     const datasets = await Promise.all(
       tickers.map(t =>
-        fetchJSON(DATA_PATH + t + '.json').catch(e => { console.warn(`Skip ${t}:`, e); return null; })
+        fetchJSON(DATA_PATH + t + '_daily.json').catch(e => { console.warn(`Skip ${t}:`, e); return null; })
       )
     );
 
