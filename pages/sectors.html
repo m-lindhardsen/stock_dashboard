@@ -710,9 +710,6 @@ function drawRatioChart(canvas, ratioOhlcv, H) {
   drawSMA('sma250',C.sma250); drawSMA('sma50',C.sma50); drawSMA('sma10',C.sma10);
 
   // Ratio close line with area fill
-  const lastClose = ratioOhlcv[ratioOhlcv.length-1].c;
-  const lineColor = lastClose >= 1.0 ? C.up : C.down;
-
   // Area fill under/over baseline
   ctx.beginPath();
   ctx.moveTo(px(0), py(ratioOhlcv[0].c));
@@ -720,13 +717,11 @@ function drawRatioChart(canvas, ratioOhlcv, H) {
   ctx.lineTo(px(n-1), baseline);
   ctx.lineTo(px(0), baseline);
   ctx.closePath();
-  ctx.fillStyle = lastClose >= 1.0
-    ? 'rgba(38,217,127,0.08)'
-    : 'rgba(240,79,94,0.08)';
+  ctx.fillStyle = 'rgba(255,255,255,0.06)';
   ctx.fill();
 
   // Ratio close line
-  ctx.strokeStyle=lineColor; ctx.lineWidth=1.5;
+  ctx.strokeStyle='rgba(255,255,255,0.85)'; ctx.lineWidth=1.5;
   ctx.beginPath();
   for(let i=0;i<n;i++){
     const x=px(i), y=py(ratioOhlcv[i].c);
