@@ -2803,5 +2803,15 @@
     "shortName": "State Street Consumer Discretio",
     "sector": "\u2014",
     "industry": "\u2014"
+  },
+  "BZ=F": {
+    "shortName": "Brent Crude Oil Last Day Financ",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "EURUSD=X": {
+    "shortName": "EUR/USD",
+    "sector": "\u2014",
+    "industry": "\u2014"
   }
 }
