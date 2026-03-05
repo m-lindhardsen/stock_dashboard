@@ -2813,5 +2813,230 @@
     "shortName": "EUR/USD",
     "sector": "\u2014",
     "industry": "\u2014"
+  },
+  "AUDUSD=X": {
+    "shortName": "AUD/USD",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "CL=F": {
+    "shortName": "Crude Oil Apr 26",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "EMB": {
+    "shortName": "iShares J.P. Morgan USD Emergin",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "GBPUSD=X": {
+    "shortName": "GBP/USD",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "GC=F": {
+    "shortName": "Gold Apr 26",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "GLD": {
+    "shortName": "SPDR Gold Shares",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "HG=F": {
+    "shortName": "Copper May 26",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "HYG": {
+    "shortName": "iShares iBoxx $ High Yield Corp",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "IEF": {
+    "shortName": "iShares 7-10 Year Treasury Bond",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "JNK": {
+    "shortName": "State Street SPDR Bloomberg Hig",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "KC=F": {
+    "shortName": "Coffee Mar 26",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "LQD": {
+    "shortName": "iShares iBoxx $ Investment Grad",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NG=F": {
+    "shortName": "Natural Gas Apr 26",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NZDUSD=X": {
+    "shortName": "NZD/USD",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "QQQ": {
+    "shortName": "Invesco QQQ Trust, Series 1",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "RB=F": {
+    "shortName": "RBOB Gasoline Apr 26",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "SI=F": {
+    "shortName": "Silver May 26",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "TLT": {
+    "shortName": "iShares 20+ Year Treasury Bond ",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "USDCAD=X": {
+    "shortName": "USD/CAD",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "USDCHF=X": {
+    "shortName": "USD/CHF",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "USDCNH=X": {
+    "shortName": "USD/CNH",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "USDJPY=X": {
+    "shortName": "USD/JPY",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "USDNOK=X": {
+    "shortName": "USD/NOK",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "USDSEK=X": {
+    "shortName": "USD/SEK",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "ZB=F": {
+    "shortName": "U.S. Treasury Bond Futures,Jun-",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "ZC=F": {
+    "shortName": "Corn Futures,May-2026",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "ZF=F": {
+    "shortName": "5-Year T-Note Futures,Jun-2026",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "ZN=F": {
+    "shortName": "10-Year T-Note Futures,Jun-2026",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "ZT=F": {
+    "shortName": "2-Year T-Note Futures,Jun-2026",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "ZW=F": {
+    "shortName": "Chicago SRW Wheat Futures,May-2",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "^AXJO": {
+    "shortName": "S&P/ASX 200 [XJO]",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "^BVSP": {
+    "shortName": "IBOVESPA",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "^FTSE": {
+    "shortName": "FTSE 100",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "^FVX": {
+    "shortName": "Treasury Yield 5 Years",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "^GDAXI": {
+    "shortName": "DAX                           P",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "^GSPC": {
+    "shortName": "S&P 500",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "^HSI": {
+    "shortName": "HANG SENG INDEX",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "^IRX": {
+    "shortName": "13 WEEK TREASURY BILL",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "^N225": {
+    "shortName": "Nikkei 225",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "^NDX": {
+    "shortName": "NASDAQ-100",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "^RUT": {
+    "shortName": "Russell 2000",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "^STOXX50E": {
+    "shortName": "EURO STOXX 50                 I",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "^TNX": {
+    "shortName": "CBOE Interest Rate 10 Year T No",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "^TYX": {
+    "shortName": "Treasury Yield 30 Years",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "^VIX": {
+    "shortName": "CBOE Volatility Index",
+    "sector": "\u2014",
+    "industry": "\u2014"
   }
 }
