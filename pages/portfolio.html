@@ -6,11 +6,12 @@
 <title>Market Grid</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,500;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 <style>
   :root {
     --bg:         #0d0f14;
     --surface:    #141820;
+    --surface2:   #1a2030;
     --border:     #1e2530;
     --muted:      #3a4252;
     --text:       #e2e8f0;
@@ -23,7 +24,9 @@
     --sma250:     #f97316;
     --vol:        rgba(100,140,255,0.30);
     --vol-border: rgba(100,140,255,0.65);
-    --radius:     6px;
+    --r-card:     10px;
+    --r-btn:      6px;
+    --r-pill:     999px;
     --gap:        14px;
     font-size: 14px;
   }
@@ -31,9 +34,10 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 400;
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
   }
 
   /* ── HEADER ── */
@@ -41,7 +45,7 @@
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 13px 22px;
+    padding: 12px 22px;
     border-bottom: 1px solid var(--border);
     background: var(--surface);
     position: sticky;
@@ -51,7 +55,7 @@
   }
   .logo {
     font-family: 'Space Mono', monospace;
-    font-size: .95rem;
+    font-size: .9rem;
     font-weight: 700;
     letter-spacing: .08em;
     color: var(--accent);
@@ -62,139 +66,90 @@
   .logo:hover { opacity: .8; }
 
   /* ── NAV TABS ── */
-  #nav-tabs {
-    display: flex;
-    gap: 4px;
-    flex: 1;
-    flex-wrap: wrap;
-  }
+  #nav-tabs { display: flex; gap: 4px; flex: 1; flex-wrap: wrap; }
   .nav-tab {
-    font-family: 'Space Mono', monospace;
-    font-size: .68rem;
-    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    font-size: .72rem;
+    font-weight: 600;
     letter-spacing: .04em;
     text-transform: uppercase;
     text-decoration: none;
     color: var(--dim);
     border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 4px 12px;
+    border-radius: var(--r-btn);
+    padding: 4px 13px;
     transition: all .13s;
     white-space: nowrap;
+    background: transparent;
   }
-  .nav-tab:hover { color: var(--text); border-color: var(--muted); }
-  .nav-tab.active {
-    background: var(--accent);
-    color: var(--bg);
-    border-color: var(--accent);
-  }
+  .nav-tab:hover { color: var(--text); border-color: var(--muted); background: var(--surface2); }
+  .nav-tab.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
 
   #meta-info {
-    font-size: .68rem;
+    font-size: .7rem;
+    font-weight: 400;
     color: var(--dim);
-    font-family: 'Space Mono', monospace;
     white-space: nowrap;
   }
-  .header-actions { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .header-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
   #watchlist-count {
     font-family: 'Space Mono', monospace;
-    font-size: .66rem;
+    font-size: .65rem;
     color: var(--sma10);
     white-space: nowrap;
   }
 
-  /* ── COLUMN TOGGLE ── */
-  .col-toggle {
+  /* ── SEGMENTED CONTROLS (shared by all toggles) ── */
+  .seg {
     display: flex;
+    background: var(--surface2);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: var(--r-btn);
     overflow: hidden;
+    padding: 2px;
+    gap: 2px;
   }
-  .col-btn {
-    font-family: 'Space Mono', monospace;
-    font-size: .65rem;
-    font-weight: 700;
+  .seg-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: .68rem;
+    font-weight: 600;
     background: transparent;
     color: var(--dim);
     border: none;
-    padding: 4px 10px;
+    border-radius: 4px;
+    padding: 3px 10px;
     cursor: pointer;
     transition: background .12s, color .12s;
-    border-right: 1px solid var(--border);
-  }
-  .col-btn:last-child { border-right: none; }
-  .col-btn.active { background: var(--accent); color: var(--bg); }
-  .col-btn:not(.active):hover { color: var(--text); background: var(--border); }
-
-  /* ── SORT TOGGLE ── */
-  .sort-toggle {
-    display: flex;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
-  .sort-btn {
-    font-family: 'Space Mono', monospace;
-    font-size: .65rem;
-    font-weight: 700;
-    background: transparent;
-    color: var(--dim);
-    border: none;
-    padding: 4px 10px;
-    cursor: pointer;
-    transition: background .12s, color .12s;
-    border-right: 1px solid var(--border);
     white-space: nowrap;
+    letter-spacing: .02em;
   }
-  .sort-btn:last-child { border-right: none; }
-  .sort-btn.active { background: var(--accent); color: var(--bg); }
-  .sort-btn:not(.active):hover { color: var(--text); background: var(--border); }
-
-  /* ── INTERVAL TOGGLE ── */
-  .interval-toggle {
-    display: flex;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
+  .seg-btn.active {
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: 0 1px 3px rgba(0,0,0,.4);
   }
-  .interval-btn {
-    font-family: 'Space Mono', monospace;
-    font-size: .65rem;
-    font-weight: 700;
-    background: transparent;
-    color: var(--dim);
-    border: none;
-    padding: 4px 10px;
-    cursor: pointer;
-    transition: background .12s, color .12s;
-    border-right: 1px solid var(--border);
-    white-space: nowrap;
-  }
-  .interval-btn:last-child { border-right: none; }
-  .interval-btn.active { background: var(--accent); color: var(--bg); }
-  .interval-btn:not(.active):hover { color: var(--text); background: var(--border); }
+  .seg-btn:not(.active):hover { color: var(--text); background: rgba(255,255,255,.04); }
 
   /* ── EXPORT ── */
   .btn-export {
-    font-family: 'Space Mono', monospace;
-    font-size: .65rem;
-    font-weight: 700;
-    letter-spacing: .05em;
+    font-family: 'Inter', sans-serif;
+    font-size: .68rem;
+    font-weight: 600;
     background: transparent;
     color: var(--accent);
-    border: 1px solid var(--accent);
-    border-radius: var(--radius);
-    padding: 4px 10px;
+    border: 1px solid rgba(74,240,176,.4);
+    border-radius: var(--r-btn);
+    padding: 4px 11px;
     cursor: pointer;
-    transition: background .12s, color .12s;
+    transition: background .12s, color .12s, border-color .12s;
     white-space: nowrap;
   }
-  .btn-export:hover { background: var(--accent); color: var(--bg); }
+  .btn-export:hover { background: var(--accent); color: var(--bg); border-color: var(--accent); }
 
   /* ── LEGEND ── */
   .legend {
     display: flex;
-    gap: 14px;
+    gap: 16px;
     padding: 7px 22px;
     border-bottom: 1px solid var(--border);
     background: var(--bg);
@@ -204,13 +159,13 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: .66rem;
+    font-size: .67rem;
+    font-weight: 400;
     color: var(--dim);
-    font-family: 'Space Mono', monospace;
   }
   .ls { width: 18px; height: 2px; border-radius: 1px; }
-  .ls.up    { background: var(--up);         width:7px; height:7px; border-radius:2px; }
-  .ls.down  { background: var(--down);       width:7px; height:7px; border-radius:2px; }
+  .ls.up    { background: var(--up);   width: 7px; height: 7px; border-radius: 3px; }
+  .ls.down  { background: var(--down); width: 7px; height: 7px; border-radius: 3px; }
   .ls.sma10  { background: var(--sma10);  }
   .ls.sma50  { background: var(--sma50);  }
   .ls.sma250 { background: var(--sma250); }
@@ -219,39 +174,49 @@
   /* ── FILTER BAR ── */
   #filter-bar {
     display: none;
-    gap: 7px;
-    padding: 8px 16px;
+    gap: 6px;
+    padding: 8px 18px;
     border-bottom: 1px solid var(--border);
     background: var(--surface);
     flex-wrap: wrap;
     align-items: center;
   }
   .filter-label {
-    font-family: 'Space Mono', monospace;
-    font-size: .6rem;
+    font-size: .65rem;
+    font-weight: 600;
     color: var(--dim);
-    letter-spacing: .08em;
+    letter-spacing: .07em;
     text-transform: uppercase;
     white-space: nowrap;
   }
-  .fdiv { width:1px; height:16px; background:var(--border); margin:0 2px; flex-shrink:0; }
+  .fdiv { width: 1px; height: 16px; background: var(--border); margin: 0 2px; flex-shrink: 0; }
   .filter-btn {
-    font-family: 'Space Mono', monospace;
-    font-size: .63rem;
-    background: transparent;
+    font-family: 'Inter', sans-serif;
+    font-size: .67rem;
+    font-weight: 500;
+    background: var(--surface2);
     color: var(--dim);
     border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 3px 8px;
+    border-radius: var(--r-pill);
+    padding: 3px 10px;
     cursor: pointer;
     transition: all .13s;
     white-space: nowrap;
   }
-  .filter-btn:hover { border-color: var(--muted); color: var(--text); }
-  .filter-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 700; }
-  .filter-btn.wl-btn { border-color: rgba(250,204,21,.35); color: var(--sma10); }
+  .filter-btn:hover { border-color: var(--muted); color: var(--text); background: var(--muted); }
+  .filter-btn.active {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+  .filter-btn.wl-btn {
+    border-color: rgba(250,204,21,.3);
+    color: var(--sma10);
+    background: rgba(250,204,21,.06);
+  }
   .filter-btn.wl-btn.active { background: var(--sma10); border-color: var(--sma10); color: var(--bg); }
-  #filter-count { font-family:'Space Mono',monospace; font-size:.6rem; color:var(--dim); margin-left:auto; white-space:nowrap; }
+  #filter-count { font-size: .65rem; color: var(--dim); margin-left: auto; white-space: nowrap; }
 
   /* ── GRID ── */
   #grid {
@@ -269,35 +234,40 @@
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: var(--r-card);
     overflow: hidden;
     display: flex;
     flex-direction: column;
     cursor: pointer;
     transition: border-color .15s, box-shadow .15s;
   }
-  .card:hover { border-color: var(--muted); box-shadow: 0 0 0 1px var(--muted); }
-  .card.in-watchlist { border-color: rgba(250,204,21,.32); }
-  .card.in-watchlist:hover { border-color: var(--sma10); box-shadow: 0 0 0 1px var(--sma10); }
+  .card:hover {
+    border-color: var(--muted);
+    box-shadow: 0 4px 20px rgba(0,0,0,.35);
+  }
+  .card.in-watchlist { border-color: rgba(250,204,21,.28); }
+  .card.in-watchlist:hover { border-color: var(--sma10); box-shadow: 0 4px 20px rgba(250,204,21,.08); }
 
   .card-header {
-    padding: 9px 11px 7px;
+    padding: 10px 12px 8px;
     border-bottom: 1px solid var(--border);
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
   }
-  .card-row1 { display:flex; align-items:center; gap:5px; }
+  .card-row1 { display: flex; align-items: center; gap: 6px; }
+
   .ticker-symbol {
     font-family: 'Space Mono', monospace;
     font-size: .9rem;
     font-weight: 700;
     color: var(--accent);
-    letter-spacing: .04em;
+    letter-spacing: .03em;
     flex-shrink: 0;
   }
   .company-name {
-    font-size: .68rem;
+    font-size: .7rem;
+    font-weight: 400;
     color: var(--dim);
     white-space: nowrap;
     overflow: hidden;
@@ -313,42 +283,54 @@
   }
   .last-price.up   { color: var(--up); }
   .last-price.down { color: var(--down); }
+
   .btn-watch {
-    background: transparent;
+    background: var(--surface2);
     border: 1px solid var(--border);
-    border-radius: 3px;
+    border-radius: var(--r-pill);
     color: var(--dim);
-    font-family: 'Space Mono', monospace;
-    font-size: .57rem;
-    font-weight: 700;
-    padding: 2px 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: .6rem;
+    font-weight: 600;
+    padding: 2px 8px;
     cursor: pointer;
     transition: all .13s;
     white-space: nowrap;
     flex-shrink: 0;
   }
-  .btn-watch:hover { border-color: var(--sma10); color: var(--sma10); }
-  .btn-watch.watched { background: rgba(250,204,21,.1); border-color: var(--sma10); color: var(--sma10); }
-  .card-row2 { display:flex; gap:5px; flex-wrap:wrap; }
-  .tag {
-    font-size: .58rem;
-    background: var(--border);
-    color: var(--dim);
-    border-radius: 3px;
-    padding: 1px 5px;
-    font-family: 'Space Mono', monospace;
-    white-space: nowrap;
+  .btn-watch:hover { border-color: var(--sma10); color: var(--sma10); background: rgba(250,204,21,.08); }
+  .btn-watch.watched {
+    background: rgba(250,204,21,.1);
+    border-color: rgba(250,204,21,.5);
+    color: var(--sma10);
   }
-  .chart-wrap { position:relative; flex:1; }
-  canvas { display:block; width:100% !important; }
+
+  .card-row2 { display: flex; gap: 4px; flex-wrap: wrap; }
+  .tag {
+    font-size: .6rem;
+    font-weight: 500;
+    background: var(--surface2);
+    color: var(--dim);
+    border-radius: var(--r-pill);
+    padding: 2px 7px;
+    white-space: nowrap;
+    border: 1px solid transparent;
+  }
+
+  .chart-wrap {
+    position: relative;
+    flex: 1;
+    padding: 4px 4px 0;
+    background: var(--surface);
+  }
+  canvas { display: block; width: 100% !important; border-radius: 4px; overflow: hidden; }
 
   .empty-state {
     display: none;
     text-align: center;
     padding: 60px 20px;
     color: var(--dim);
-    font-family: 'Space Mono', monospace;
-    font-size: .75rem;
+    font-size: .78rem;
     grid-column: 1 / -1;
   }
 
@@ -357,7 +339,6 @@
     text-align: center;
     padding: 80px 20px;
     color: var(--dim);
-    font-family: 'Space Mono', monospace;
     font-size: .8rem;
   }
   .spinner {
@@ -379,8 +360,8 @@
     inset: 0;
     z-index: 999;
     background: rgba(5,7,11,0.88);
-    backdrop-filter: blur(4px);
-    padding: 18px;
+    backdrop-filter: blur(6px);
+    padding: 20px;
     flex-direction: column;
   }
   #lightbox.open { display: flex; }
@@ -388,35 +369,44 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 11px 15px;
+    padding: 12px 16px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-bottom: none;
-    border-radius: var(--radius) var(--radius) 0 0;
+    border-radius: var(--r-card) var(--r-card) 0 0;
     flex-shrink: 0;
     flex-wrap: wrap;
   }
-  #lb-ticker { font-family:'Space Mono',monospace; font-size:1.05rem; font-weight:700; color:var(--accent); letter-spacing:.06em; }
-  #lb-name   { font-size:.78rem; color:var(--dim); flex:1; }
-  #lb-price  { font-family:'Space Mono',monospace; font-size:.96rem; font-weight:700; }
-  #lb-price.up { color:var(--up); } #lb-price.down { color:var(--down); }
-  #lb-tags   { display:flex; gap:5px; }
-  #lb-hint   { font-family:'Space Mono',monospace; font-size:.58rem; color:var(--muted); }
+  #lb-ticker { font-family: 'Space Mono', monospace; font-size: 1.05rem; font-weight: 700; color: var(--accent); letter-spacing: .05em; }
+  #lb-name   { font-size: .78rem; font-weight: 400; color: var(--dim); flex: 1; }
+  #lb-price  { font-family: 'Space Mono', monospace; font-size: .96rem; font-weight: 700; }
+  #lb-price.up { color: var(--up); } #lb-price.down { color: var(--down); }
+  #lb-tags   { display: flex; gap: 5px; }
+  #lb-hint   { font-size: .62rem; color: var(--muted); }
   #lb-close  {
-    background: transparent; border: 1px solid var(--muted); border-radius:4px;
-    color: var(--dim); font-family:'Space Mono',monospace; font-size:.68rem;
-    padding: 3px 9px; cursor:pointer; transition:all .12s; flex-shrink:0;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--r-btn);
+    color: var(--dim);
+    font-family: 'Inter', sans-serif;
+    font-size: .68rem;
+    font-weight: 500;
+    padding: 4px 11px;
+    cursor: pointer;
+    transition: all .12s;
+    flex-shrink: 0;
   }
-  #lb-close:hover { border-color:var(--text); color:var(--text); }
+  #lb-close:hover { border-color: var(--muted); color: var(--text); background: var(--muted); }
   #lb-canvas-wrap {
     flex: 1;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 0 0 var(--radius) var(--radius);
+    border-radius: 0 0 var(--r-card) var(--r-card);
     overflow: hidden;
     min-height: 0;
+    padding: 6px;
   }
-  #lb-canvas { display:block; width:100% !important; height:100% !important; }
+  #lb-canvas { display: block; width: 100% !important; height: 100% !important; border-radius: 4px; }
 </style>
 </head>
 <body>
@@ -426,17 +416,17 @@
   <div id="nav-tabs"><!-- injected by JS --></div>
   <div id="meta-info">—</div>
   <div class="header-actions">
-    <div class="interval-toggle">
-      <button class="interval-btn active" data-interval="daily">Daily</button>
-      <button class="interval-btn"        data-interval="weekly">Weekly</button>
+    <div class="seg">
+      <button class="seg-btn active" data-interval="daily">Daily</button>
+      <button class="seg-btn"        data-interval="weekly">Weekly</button>
     </div>
-    <div class="col-toggle">
-      <button class="col-btn active" data-cols="4">4</button>
-      <button class="col-btn"        data-cols="2">2</button>
+    <div class="seg">
+      <button class="seg-btn col-btn active" data-cols="4">4</button>
+      <button class="seg-btn col-btn"        data-cols="2">2</button>
     </div>
-    <div class="sort-toggle">
-      <button class="sort-btn active" data-sort="default">Default</button>
-      <button class="sort-btn"        data-sort="sector">Sector</button>
+    <div class="seg">
+      <button class="seg-btn sort-btn active" data-sort="default">Default</button>
+      <button class="seg-btn sort-btn"        data-sort="sector">Sector</button>
     </div>
     <span id="watchlist-count"></span>
     <button class="btn-export" id="btn-export">⬇ Export</button>
@@ -551,8 +541,7 @@ document.getElementById('btn-export').addEventListener('click', () => {
 document.querySelectorAll('.col-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.col-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const grid = document.getElementById('grid');
+    btn.classList.add('active');    const grid = document.getElementById('grid');
     btn.dataset.cols === '2' ? grid.classList.add('cols-2') : grid.classList.remove('cols-2');
     requestAnimationFrame(() => {
       document.querySelectorAll('.card canvas').forEach(c => {
@@ -565,10 +554,10 @@ document.querySelectorAll('.col-btn').forEach(btn => {
 // ─────────────────────────────────────────────
 // INTERVAL TOGGLE (Daily / Weekly)
 // ─────────────────────────────────────────────
-document.querySelectorAll('.interval-btn').forEach(btn => {
+document.querySelectorAll('.seg-btn[data-interval]').forEach(btn => {
   btn.addEventListener('click', () => {
     if (btn.dataset.interval === currentInterval) return;
-    document.querySelectorAll('.interval-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.seg-btn[data-interval]').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     currentInterval = btn.dataset.interval;
     reloadAllCards();
