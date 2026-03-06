@@ -682,48 +682,6 @@ function applyFilter() {
 }
 
 // ─────────────────────────────────────────────
-// LIGHTBOX
-// ─────────────────────────────────────────────
-const lb       = document.getElementById('lightbox');
-const lbCanvas = document.getElementById('lb-canvas');
-let   lbData   = null;
-
-function openLightbox(data) {
-  lbData = data;
-  const { ticker, info, ohlcv } = data;
-  const last = ohlcv[ohlcv.length-1], prev = ohlcv[ohlcv.length-2]||last;
-  const isUp = last.c >= prev.c;
-  document.getElementById('lb-ticker').textContent = ticker;
-  document.getElementById('lb-name').textContent   = info.shortName || '';
-  const pe = document.getElementById('lb-price');
-  pe.textContent = last.c.toFixed(2); pe.className = isUp ? 'up' : 'down';
-  const te = document.getElementById('lb-tags'); te.innerHTML = '';
-  if (info.sector)   te.innerHTML += `<span class="tag">${esc(info.sector)}</span>`;
-  if (info.industry) te.innerHTML += `<span class="tag">${esc(info.industry)}</span>`;
-  lb.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  requestAnimationFrame(() => {
-    const wrap = document.getElementById('lb-canvas-wrap');
-    drawChart(lbCanvas, ohlcv, wrap.clientHeight);
-  });
-}
-
-function closeLightbox() {
-  lb.classList.remove('open');
-  document.body.style.overflow = '';
-  lbData = null;
-}
-
-document.getElementById('lb-close').addEventListener('click', closeLightbox);
-lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-window.addEventListener('resize', () => {
-  if (!lbData) return;
-  const wrap = document.getElementById('lb-canvas-wrap');
-  drawChart(lbCanvas, lbData.ohlcv, wrap.clientHeight);
-});
-
-// ─────────────────────────────────────────────
 // FETCH + BOOTSTRAP
 // ─────────────────────────────────────────────
 async function fetchJSON(url) {

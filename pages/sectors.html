@@ -474,6 +474,22 @@ function currentRatioValue(etfOhlcv) {
 }
 
 // ── Crosshair ──────────────────────────────────
+// Redraw a card canvas respecting current chartMode
+function redrawCardCanvas(canvas) {
+  const card    = canvas.closest('[data-ticker]');
+  const ticker  = card ? card.dataset.ticker : null;
+  const dataset = allDatasets.find(d => d && d.ticker === ticker);
+  if (!dataset) return;
+  const isSPY    = ticker === SPY_TICKER;
+  const useRatio = chartMode === 'ratio' && !isSPY && spyOhlcv;
+  if (useRatio) {
+    const ratioData = buildRatioOhlcv(dataset.ohlcv, spyOhlcv);
+    drawRatioChart(canvas, ratioData, CHART_H);
+  } else {
+    drawChart(canvas, dataset.ohlcv, CHART_H);
+  }
+}
+
 function attachCrosshair(canvas) {
   canvas.addEventListener('mousemove', e => {
     const meta = canvas._chartMeta;
@@ -484,20 +500,20 @@ function attachCrosshair(canvas) {
     const i = Math.round((mx - PAD.left) / meta.slotW - 0.5);
     if (i < 0 || i >= meta.n) return;
     const bar = meta.data[i], x = meta.px(i);
-    drawChart(canvas, canvas._ohlcv, CHART_H);
+    redrawCardCanvas(canvas);
     const dpr = window.devicePixelRatio || 1;
     const ctx = canvas.getContext('2d'); ctx.scale(dpr, dpr);
     ctx.strokeStyle='rgba(255,255,255,0.25)'; ctx.lineWidth=1; ctx.setLineDash([3,3]);
-    ctx.beginPath(); ctx.moveTo(x,meta.priceY); ctx.lineTo(x,meta.dateY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x, meta.priceY); ctx.lineTo(x, meta.dateY); ctx.stroke();
     ctx.setLineDash([]);
-    const label=`${bar.t}  ${bar.c.toFixed(bar.c>=100?2:3)}`;
-    ctx.font=`10px 'Space Mono',monospace`;
-    const tw2=ctx.measureText(label).width+10;
-    const tx=Math.min(x+6,rect.width-PAD.right-tw2), ty=meta.priceY+10;
-    ctx.fillStyle='rgba(20,24,32,0.88)'; ctx.fillRect(tx-2,ty-11,tw2+4,16);
-    ctx.fillStyle='#e2e8f0'; ctx.fillText(label,tx+3,ty);
+    const label = `${bar.t}  ${bar.c.toFixed(bar.c>=100?2:3)}`;
+    ctx.font = `10px 'Space Mono',monospace`;
+    const tw2 = ctx.measureText(label).width + 10;
+    const tx = Math.min(x+6, rect.width - PAD.right - tw2), ty = meta.priceY + 10;
+    ctx.fillStyle = 'rgba(20,24,32,0.88)'; ctx.fillRect(tx-2, ty-11, tw2+4, 16);
+    ctx.fillStyle = '#e2e8f0'; ctx.fillText(label, tx+3, ty);
   });
-  canvas.addEventListener('mouseleave', () => drawChart(canvas, canvas._ohlcv, CHART_H));
+  canvas.addEventListener('mouseleave', () => redrawCardCanvas(canvas));
 }
 
 // ── Lightbox ───────────────────────────────────
