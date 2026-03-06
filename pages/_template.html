@@ -439,7 +439,7 @@
   <div class="legend-item"><div class="ls sma10"></div> SMA 10</div>
   <div class="legend-item"><div class="ls sma50"></div> SMA 50</div>
   <div class="legend-item"><div class="ls sma250"></div> SMA 250</div>
-  <div class="legend-item"><div class="ls vol"></div> Volume</div>
+  <div class="legend-item"><div class="ls" style="background:#a78bfa"></div> Price−SMA50</div>
 </div>
 
 <div id="filter-bar">
@@ -462,7 +462,7 @@
     <span id="lb-name"></span>
     <span id="lb-price"></span>
     <div id="lb-tags"></div>
-    <span id="lb-hint">ESC or click outside to close</span>
+    <span id="lb-hint">Drag to zoom · ESC to reset zoom · ESC again to close</span>
     <button id="lb-close">✕ Close</button>
   </div>
   <div id="lb-canvas-wrap">
@@ -478,18 +478,16 @@
 const GRID_NAME = location.pathname.split('/').pop().replace('.html','');
 const DATA_PATH = '../data/';
 const CHART_H   = 280;
-const PRICE_RATIO = 0.72;
-const PAD       = { top:12, right:8, bottom:18, left:62 };
+const PAD       = { top:12, right:22, bottom:18, left:62 };
 const TICK_W    = 3;
-const LS_KEY    = 'marketgrid_watchlist_v1';   // shared across all grids
+const LS_KEY    = 'marketgrid_watchlist_v1';
 
-let currentInterval = 'daily';   // 'daily' | 'weekly'
+let currentInterval = 'daily';
 
 const C = {
-  bg:'#141820', grid:'#1a2030', text:'#8896aa',
+  bg:'#141820', plotBg:'rgb(36,44,53)', grid:'rgba(255,255,255,0.07)', text:'#8896aa',
   up:'#26d97f', down:'#f04f5e',
   sma10:'#facc15', sma50:'#60a5fa', sma250:'#f97316',
-  vol:'rgba(100,140,255,0.30)', volEdge:'rgba(100,140,255,0.65)',
 };
 
 // ─────────────────────────────────────────────
@@ -573,6 +571,7 @@ async function reloadAllCards() {
     try {
       const data = await fetchJSON(DATA_PATH + ticker + `_${currentInterval}.json`);
       canvas._ohlcv = data.ohlcv;
+      canvas._H     = CHART_H;
       drawChart(canvas, data.ohlcv, CHART_H);
     } catch(e) {
       console.warn(`Could not load ${currentInterval} data for ${ticker}:`, e);
@@ -823,10 +822,12 @@ function buildCard(data, idx) {
 
   const wrap = document.createElement('div'); wrap.className = 'chart-wrap';
   const canvas = document.createElement('canvas');
-  canvas.height = CHART_H; canvas._ohlcv = ohlcv;
+  canvas.height = CHART_H;
+  canvas._ohlcv = ohlcv;
+  canvas._H     = CHART_H;
   wrap.appendChild(canvas); card.appendChild(wrap);
 
-  requestAnimationFrame(() => drawChart(canvas, ohlcv, CHART_H));
+  requestAnimationFrame(() => { drawChart(canvas, ohlcv, CHART_H); attachCrosshair(canvas); });
   return card;
 }
 
@@ -835,87 +836,433 @@ function esc(s) {
 }
 
 // ─────────────────────────────────────────────
-// CHART RENDERER — OHLC bars
+// CHART LAYOUT CONSTANTS
 // ─────────────────────────────────────────────
-function drawChart(canvas, ohlcv, H) {
+// Pane heights as fractions of total H
+const PANE_PRICE = 0.58;   // OHLC + SMAs
+const PANE_VOL   = 0.16;   // Volume
+const PANE_IND   = 0.16;   // Price−SMA50 indicator
+const PANE_DATE  = 0.10;   // Date axis
+
+// ─────────────────────────────────────────────
+// NICE NUMBER HELPER
+// ─────────────────────────────────────────────
+function niceStep(range, targetTicks) {
+  const rough = range / targetTicks;
+  const mag   = Math.pow(10, Math.floor(Math.log10(rough)));
+  const norm  = rough / mag;
+  let nice    = norm < 1.5 ? 1 : norm < 3 ? 2 : norm < 7 ? 5 : 10;
+  return nice * mag;
+}
+
+function niceTicks(lo, hi, targetTicks) {
+  const step  = niceStep(hi - lo, targetTicks);
+  const start = Math.ceil(lo / step) * step;
+  const ticks = [];
+  for (let v = start; v <= hi + step * 0.001; v = Math.round((v + step) * 1e8) / 1e8) {
+    if (v >= lo && v <= hi) ticks.push(v);
+  }
+  return ticks;
+}
+
+// ─────────────────────────────────────────────
+// DATE AXIS HELPERS
+// ─────────────────────────────────────────────
+function pickDateTicks(ohlcv, maxTicks) {
+  const n = ohlcv.length;
+  const ticks = [];
+  let lastYear = null, lastMonth = null;
+
+  for (let i = 0; i < n; i++) {
+    const d = new Date(ohlcv[i].t + 'T00:00:00');
+    const y = d.getFullYear(), m = d.getMonth();
+    if (n > 200) {
+      // Monthly or quarterly labels for long series
+      const interval = n > 600 ? 3 : 1;
+      if (m !== lastMonth && m % interval === 0) {
+        ticks.push({ i, d, label: m === 0 ? String(y) : d.toLocaleString('en',{month:'short'}) });
+        lastMonth = m;
+      }
+    } else {
+      // Weekly series — monthly labels
+      if (m !== lastMonth) {
+        ticks.push({ i, d, label: m === 0 ? String(y) : d.toLocaleString('en',{month:'short'}) });
+        lastMonth = m;
+      }
+    }
+  }
+  // Thin out if too many
+  while (ticks.length > maxTicks) {
+    ticks.splice(0, ticks.length, ...ticks.filter((_,i)=> i % 2 === 0));
+  }
+  return ticks;
+}
+
+// ─────────────────────────────────────────────
+// CORE CHART RENDERER
+// ─────────────────────────────────────────────
+function drawChart(canvas, ohlcv, H, zoomRange) {
   const dpr = window.devicePixelRatio || 1;
   const W   = canvas.offsetWidth;
-  if (!W || !H) return;
+  if (!W || !H || !ohlcv || !ohlcv.length) return;
   canvas.width  = W * dpr;
   canvas.height = H * dpr;
   const ctx = canvas.getContext('2d');
   ctx.scale(dpr, dpr);
 
-  const priceH      = Math.floor(H * PRICE_RATIO);
-  const innerW      = W - PAD.left - PAD.right;
-  const priceY      = PAD.top;
-  const priceBottom = priceY + priceH - PAD.bottom;
-  const volY        = priceY + priceH;
-  const volBottom   = volY + (H - priceH) - 4;
-  const n           = ohlcv.length;
-  const slotW       = innerW / n;
+  // Apply zoom slice
+  const data  = zoomRange
+    ? ohlcv.slice(zoomRange[0], zoomRange[1] + 1)
+    : ohlcv;
+  const n = data.length;
+  if (!n) return;
 
+  // Pane geometry
+  const pH  = Math.floor(H * PANE_PRICE);
+  const vH  = Math.floor(H * PANE_VOL);
+  const iH  = Math.floor(H * PANE_IND);
+  const dH  = H - pH - vH - iH;   // date axis
+
+  const priceY   = PAD.top;
+  const priceBot = priceY + pH - PAD.bottom;
+  const volY     = priceY + pH;
+  const volBot   = volY + vH - 4;
+  const indY     = volY + vH;
+  const indBot   = indY + iH - 4;
+  const dateY    = indY + iH;
+
+  const innerW = W - PAD.left - PAD.right;
+  const slotW  = innerW / n;
+
+  // Price range
   let pmin = Infinity, pmax = -Infinity;
-  ohlcv.forEach(r => {
-    pmin = Math.min(pmin,r.l); pmax = Math.max(pmax,r.h);
-    [r.sma10,r.sma50,r.sma250].forEach(v => { if(v!=null){pmin=Math.min(pmin,v);pmax=Math.max(pmax,v);} });
+  data.forEach(r => {
+    pmin = Math.min(pmin, r.l); pmax = Math.max(pmax, r.h);
+    [r.sma10, r.sma50, r.sma250].forEach(v => { if (v != null) { pmin = Math.min(pmin,v); pmax = Math.max(pmax,v); }});
   });
-  const pad5 = (pmax-pmin||1)*0.04;
-  const plo = pmin-pad5, phi = pmax+pad5, pspan = phi-plo;
-  const volMax = Math.max(...ohlcv.map(r=>r.v))||1;
+  const ppad  = (pmax - pmin || 1) * 0.04;
+  const plo   = pmin - ppad, phi = pmax + ppad, pspan = phi - plo;
 
-  const px = i => PAD.left + (i+0.5)*slotW;
-  const py = v => priceY + (priceBottom-priceY)*(1-(v-plo)/pspan);
-  const vy = v => volY   + (volBottom-volY)*(1-v/volMax);
+  // Volume range
+  const volMax = Math.max(...data.map(r => r.v)) || 1;
 
-  ctx.fillStyle = C.bg; ctx.fillRect(0,0,W,H);
+  // Indicator (price − sma50)
+  const indVals = data.map(r => (r.sma50 != null) ? r.c - r.sma50 : null);
+  const indNonNull = indVals.filter(v => v != null);
+  const indAbs = indNonNull.length ? Math.max(...indNonNull.map(Math.abs)) * 1.15 : 1;
+  const ilo = -indAbs, ihi = indAbs;
 
-  // Grid + labels
-  ctx.strokeStyle = C.grid; ctx.lineWidth = 1;
-  for (let i=0; i<=5; i++) {
-    const v = plo+pspan*i/5, y = py(v);
-    ctx.beginPath(); ctx.moveTo(PAD.left,y); ctx.lineTo(W-PAD.right,y); ctx.stroke();
-    ctx.fillStyle = C.text;
-    ctx.font = `10px 'Space Mono',monospace`; ctx.textAlign = 'right';
-    ctx.fillText(v.toFixed(v>=100?0:2), PAD.left-4, y+3);
+  // Coordinate helpers
+  const px  = i  => PAD.left + (i + 0.5) * slotW;
+  const py  = v  => priceY + (priceBot - priceY) * (1 - (v - plo) / pspan);
+  const vy  = v  => volY   + (volBot  - volY)  * (1 - v / volMax);
+  const iy  = v  => indY   + (indBot  - indY)  * (1 - (v - ilo) / (ihi - ilo));
+
+  // ── Background ──
+  ctx.fillStyle = C.plotBg;
+  ctx.fillRect(PAD.left, priceY, innerW, priceBot - priceY);
+  ctx.fillRect(PAD.left, volY,   innerW, volBot   - volY);
+  ctx.fillRect(PAD.left, indY,   innerW, indBot   - indY);
+  ctx.fillStyle = C.bg;
+  ctx.fillRect(0, 0, PAD.left, H);
+  ctx.fillRect(W - PAD.right, 0, PAD.right, H);
+  ctx.fillRect(0, dateY, W, dH + PAD.bottom);
+
+  // ── Price grid + nice Y labels ──
+  const pTicks = niceTicks(plo, phi, 5);
+  ctx.lineWidth = 1;
+  pTicks.forEach(v => {
+    const y = py(v);
+    ctx.strokeStyle = C.grid; ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(W - PAD.right, y); ctx.stroke();
+    ctx.fillStyle = C.text; ctx.font = `10px 'Space Mono',monospace`; ctx.textAlign = 'right';
+    const label = v >= 1000 ? v.toFixed(0) : v >= 100 ? v.toFixed(1) : v.toFixed(2);
+    ctx.fillText(label, PAD.left - 4, y + 3);
+  });
+
+  // Current price line
+  const lastClose = data[n-1].c;
+  const lastY = py(lastClose);
+  ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.lineWidth = 1;
+  ctx.setLineDash([3, 4]);
+  ctx.beginPath(); ctx.moveTo(PAD.left, lastY); ctx.lineTo(W - PAD.right, lastY); ctx.stroke();
+  ctx.setLineDash([]);
+  // Price label on right edge
+  const isLastUp = data[n-1].c >= (data[n-2]||data[n-1]).c;
+  ctx.fillStyle = isLastUp ? C.up : C.down;
+  ctx.font = `9px 'Space Mono',monospace`; ctx.textAlign = 'left';
+  ctx.fillText(lastClose.toFixed(lastClose >= 100 ? 1 : 2), W - PAD.right + 2, lastY + 3);
+
+  // ── Volume bars (colored) ──
+  for (let i = 0; i < n; i++) {
+    const r = data[i], x = px(i), bw = Math.max(1, slotW * 0.6);
+    const isUp = r.c >= r.o;
+    ctx.fillStyle = isUp ? 'rgba(38,217,127,0.35)' : 'rgba(240,79,94,0.35)';
+    ctx.fillRect(x - bw/2, vy(r.v), bw, volBot - vy(r.v));
   }
 
-  // Volume
-  for (let i=0; i<n; i++) {
-    const r=ohlcv[i], x=px(i), bw=Math.max(1,slotW*0.6);
-    ctx.fillStyle=C.vol; ctx.strokeStyle=C.volEdge; ctx.lineWidth=0.5;
-    ctx.fillRect(x-bw/2, vy(r.v), bw, volBottom-vy(r.v));
-  }
-
-  // SMAs
-  const drawSMA = (key,color) => {
-    ctx.strokeStyle=color; ctx.lineWidth=1.2; ctx.beginPath();
-    let go=false;
-    for(let i=0;i<n;i++){
-      const v=ohlcv[i][key]; if(v==null) continue;
-      go ? ctx.lineTo(px(i),py(v)) : (ctx.moveTo(px(i),py(v)),go=true);
+  // ── SMAs ──
+  const drawSMA = (key, color) => {
+    ctx.strokeStyle = color; ctx.lineWidth = 1.2; ctx.beginPath();
+    let go = false;
+    for (let i = 0; i < n; i++) {
+      const v = data[i][key]; if (v == null) continue;
+      go ? ctx.lineTo(px(i), py(v)) : (ctx.moveTo(px(i), py(v)), go = true);
     }
     ctx.stroke();
   };
-  drawSMA('sma250',C.sma250); drawSMA('sma50',C.sma50); drawSMA('sma10',C.sma10);
+  drawSMA('sma250', C.sma250); drawSMA('sma50', C.sma50); drawSMA('sma10', C.sma10);
 
-  // OHLC bars
-  const tw = Math.min(TICK_W, Math.max(1, slotW*0.35));
+  // ── OHLC bars ──
+  const tw = Math.min(TICK_W, Math.max(1, slotW * 0.35));
   ctx.lineWidth = 1;
-  for (let i=0; i<n; i++) {
-    const r=ohlcv[i], x=px(i);
+  for (let i = 0; i < n; i++) {
+    const r = data[i], x = px(i);
     ctx.strokeStyle = r.c >= r.o ? C.up : C.down;
     ctx.beginPath();
-    ctx.moveTo(x, py(r.h)); ctx.lineTo(x, py(r.l));   // high-low
-    ctx.moveTo(x-tw, py(r.o)); ctx.lineTo(x, py(r.o)); // open tick left
-    ctx.moveTo(x, py(r.c)); ctx.lineTo(x+tw, py(r.c)); // close tick right
+    ctx.moveTo(x, py(r.h)); ctx.lineTo(x, py(r.l));
+    ctx.moveTo(x - tw, py(r.o)); ctx.lineTo(x, py(r.o));
+    ctx.moveTo(x, py(r.c)); ctx.lineTo(x + tw, py(r.c));
     ctx.stroke();
   }
 
-  // Pane divider
-  ctx.strokeStyle=C.grid; ctx.lineWidth=1;
-  ctx.beginPath(); ctx.moveTo(PAD.left,volY); ctx.lineTo(W-PAD.right,volY); ctx.stroke();
+  // ── Pane dividers ──
+  ctx.strokeStyle = C.grid; ctx.lineWidth = 1;
+  [volY, indY].forEach(y => {
+    ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(W - PAD.right, y); ctx.stroke();
+  });
+
+  // ── Indicator: price − SMA50 ──
+  // Zero line
+  const zeroY = iy(0);
+  ctx.strokeStyle = 'rgba(255,255,255,0.25)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(PAD.left, zeroY); ctx.lineTo(W - PAD.right, zeroY); ctx.stroke();
+
+  // Indicator line
+  ctx.strokeStyle = '#a78bfa'; ctx.lineWidth = 1.3; ctx.beginPath();
+  let indGo = false;
+  for (let i = 0; i < n; i++) {
+    const v = indVals[i]; if (v == null) { indGo = false; continue; }
+    const y = iy(v);
+    indGo ? ctx.lineTo(px(i), y) : (ctx.moveTo(px(i), y), indGo = true);
+  }
+  ctx.stroke();
+
+  // Indicator label
+  ctx.fillStyle = C.text; ctx.font = `9px 'Space Mono',monospace`; ctx.textAlign = 'right';
+  ctx.fillText('P−50', PAD.left - 4, indY + 10);
+
+  // ── Date axis ──
+  const maxDateTicks = Math.floor(innerW / 45);
+  const dateTicks = pickDateTicks(data, maxDateTicks);
+  ctx.fillStyle = C.text; ctx.font = `9px 'Inter',sans-serif`; ctx.textAlign = 'center';
+  dateTicks.forEach(({ i, label }) => {
+    const x = px(i);
+    // Tick mark
+    ctx.strokeStyle = C.grid; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x, dateY); ctx.lineTo(x, dateY + 3); ctx.stroke();
+    // Label
+    ctx.fillStyle = C.text;
+    ctx.fillText(label, x, dateY + 12);
+  });
+
+  // Store geometry on canvas for crosshair/zoom use
+  canvas._chartMeta = { data, n, slotW, px, py, priceY, priceBot, volY, indY, indBot, dateY, innerW };
 }
+
+// ─────────────────────────────────────────────
+// CROSSHAIR (card canvases only)
+// ─────────────────────────────────────────────
+function attachCrosshair(canvas) {
+  canvas.addEventListener('mousemove', e => {
+    const meta = canvas._chartMeta;
+    if (!meta) return;
+    const rect = canvas.getBoundingClientRect();
+    const mx   = e.clientX - rect.left;
+    const my   = e.clientY - rect.top;
+    // Only show crosshair in chart area (above date axis)
+    if (mx < PAD.left || mx > rect.width - PAD.right) return;
+    if (my > meta.dateY) return;
+
+    const i = Math.round((mx - PAD.left) / meta.slotW - 0.5);
+    if (i < 0 || i >= meta.n) return;
+    const bar = meta.data[i];
+    const x   = meta.px(i);
+
+    // Redraw chart, then overlay crosshair
+    drawChart(canvas, canvas._ohlcv, canvas._H || parseInt(canvas.height / (window.devicePixelRatio||1)), canvas._zoomRange);
+
+    const dpr = window.devicePixelRatio || 1;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+
+    // Vertical line
+    ctx.strokeStyle = 'rgba(255,255,255,0.25)'; ctx.lineWidth = 1;
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath(); ctx.moveTo(x, meta.priceY); ctx.lineTo(x, meta.dateY); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Tooltip
+    const label = `${bar.t}  ${bar.c.toFixed(bar.c >= 100 ? 2 : 3)}`;
+    ctx.font = `10px 'Space Mono',monospace`;
+    const tw2 = ctx.measureText(label).width + 10;
+    const tx  = Math.min(x + 6, rect.width - PAD.right - tw2);
+    const ty  = meta.priceY + 10;
+    ctx.fillStyle = 'rgba(20,24,32,0.88)';
+    ctx.fillRect(tx - 2, ty - 11, tw2 + 4, 16);
+    ctx.fillStyle = '#e2e8f0';
+    ctx.fillText(label, tx + 3, ty);
+  });
+
+  canvas.addEventListener('mouseleave', () => {
+    drawChart(canvas, canvas._ohlcv, canvas._H || parseInt(canvas.height / (window.devicePixelRatio||1)), canvas._zoomRange);
+  });
+}
+
+// ─────────────────────────────────────────────
+// LIGHTBOX ZOOM (drag-to-select range)
+// ─────────────────────────────────────────────
+let lbZoom      = null;   // [startIdx, endIdx] or null
+let lbDragStart = null;   // canvas x when drag started
+
+function attachLightboxZoom(canvas) {
+  let dragging = false;
+  let startX   = null;
+  let overlayX = null;
+
+  function canvasX(e) {
+    return e.clientX - canvas.getBoundingClientRect().left;
+  }
+
+  canvas.addEventListener('mousedown', e => {
+    const meta = canvas._chartMeta;
+    if (!meta || e.button !== 0) return;
+    const cx = canvasX(e);
+    if (cx < PAD.left || cx > canvas.getBoundingClientRect().width - PAD.right) return;
+    dragging = true;
+    startX   = cx;
+    overlayX = cx;
+    canvas.style.cursor = 'col-resize';
+    e.preventDefault();
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    overlayX = canvasX(e);
+    const meta = canvas._chartMeta;
+    if (!meta) return;
+
+    // Redraw with drag overlay
+    const H = canvas._H || parseInt(canvas.height / (window.devicePixelRatio||1));
+    drawChart(canvas, canvas._ohlcv, H, lbZoom);
+
+    const dpr = window.devicePixelRatio || 1;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    const x1 = Math.min(startX, overlayX);
+    const x2 = Math.max(startX, overlayX);
+    ctx.fillStyle = 'rgba(167,139,250,0.12)';
+    ctx.fillRect(x1, meta.priceY, x2 - x1, meta.dateY - meta.priceY);
+    ctx.strokeStyle = 'rgba(167,139,250,0.6)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x1, meta.priceY); ctx.lineTo(x1, meta.dateY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x2, meta.priceY); ctx.lineTo(x2, meta.dateY); ctx.stroke();
+  });
+
+  window.addEventListener('mouseup', e => {
+    if (!dragging) return;
+    dragging = false;
+    canvas.style.cursor = '';
+    const meta = canvas._chartMeta;
+    if (!meta) return;
+    const x1 = Math.min(startX, canvasX(e));
+    const x2 = Math.max(startX, canvasX(e));
+    if (x2 - x1 < 8) return; // too small — ignore
+
+    // Convert pixel range to data indices
+    const fullData = canvas._ohlcv;
+    const baseStart = lbZoom ? lbZoom[0] : 0;
+    let i1 = Math.max(0, Math.floor((x1 - PAD.left) / meta.slotW));
+    let i2 = Math.min(meta.n - 1, Math.ceil((x2 - PAD.left) / meta.slotW));
+    if (i2 <= i1) return;
+
+    lbZoom = [baseStart + i1, baseStart + i2];
+    const H = canvas._H || parseInt(canvas.height / (window.devicePixelRatio||1));
+    drawChart(canvas, fullData, H, lbZoom);
+    canvas._zoomRange = lbZoom;
+  });
+
+  // Reset zoom: click on chart (no drag), or ESC
+  canvas.addEventListener('click', e => {
+    if (Math.abs(canvasX(e) - startX) > 4) return; // was a drag
+    if (!lbZoom) return;
+    lbZoom = null;
+    canvas._zoomRange = null;
+    const H = canvas._H || parseInt(canvas.height / (window.devicePixelRatio||1));
+    drawChart(canvas, canvas._ohlcv, H, null);
+  });
+}
+
+// ─────────────────────────────────────────────
+// LIGHTBOX
+// ─────────────────────────────────────────────
+const lb       = document.getElementById('lightbox');
+const lbCanvas = document.getElementById('lb-canvas');
+let   lbData   = null;
+
+// Attach zoom once
+attachLightboxZoom(lbCanvas);
+
+function openLightbox(data) {
+  lbData  = data;
+  lbZoom  = null;
+  lbCanvas._zoomRange = null;
+  const { ticker, info, ohlcv } = data;
+  const last = ohlcv[ohlcv.length-1], prev = ohlcv[ohlcv.length-2]||last;
+  const isUp = last.c >= prev.c;
+  document.getElementById('lb-ticker').textContent = ticker;
+  document.getElementById('lb-name').textContent   = info.shortName || '';
+  const pe = document.getElementById('lb-price');
+  pe.textContent = last.c.toFixed(2); pe.className = isUp ? 'up' : 'down';
+  const te = document.getElementById('lb-tags'); te.innerHTML = '';
+  if (info.sector)   te.innerHTML += `<span class="tag">${esc(info.sector)}</span>`;
+  if (info.industry) te.innerHTML += `<span class="tag">${esc(info.industry)}</span>`;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  requestAnimationFrame(() => {
+    const wrap = document.getElementById('lb-canvas-wrap');
+    const H    = wrap.clientHeight;
+    lbCanvas._ohlcv = ohlcv;
+    lbCanvas._H     = H;
+    drawChart(lbCanvas, ohlcv, H, null);
+  });
+}
+
+function closeLightbox() {
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+  lbData = null; lbZoom = null;
+}
+
+document.getElementById('lb-close').addEventListener('click', closeLightbox);
+lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (lbZoom) {
+      // First ESC resets zoom
+      lbZoom = null; lbCanvas._zoomRange = null;
+      const H = lbCanvas._H || parseInt(lbCanvas.height / (window.devicePixelRatio||1));
+      drawChart(lbCanvas, lbData.ohlcv, H, null);
+    } else {
+      closeLightbox();
+    }
+  }
+});
+window.addEventListener('resize', () => {
+  if (!lbData) return;
+  const wrap = document.getElementById('lb-canvas-wrap');
+  const H    = wrap.clientHeight;
+  lbCanvas._H = H;
+  drawChart(lbCanvas, lbData.ohlcv, H, lbZoom);
+});
 
 // ─────────────────────────────────────────────
 // RESIZE
