@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Market Grid — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="./css/theme.css"/>
+  <link rel="stylesheet" href="./css/layout.css"/>
+  <link rel="stylesheet" href="./css/components.css"/>
+</head>
+<body class="page-index">
+
+<header>
+  <span class="logo">MARKET<span>/</span>GRID</span>
+</header>
+
+<main>
+  <div class="hero">
+    <h1>Select a Dashboard</h1>
+    <p>Choose a chart grid to open. Each grid has its own ticker list and can be filtered by sector.</p>
+  </div>
+  <div id="status"><span class="spinner"></span> Loading grids…</div>
+  <div id="grid-cards" style="display:none"></div>
+</main>
+
+<footer>
+  Run <code>python download_data.py</code> to refresh data ·
+  Serve with <code>python -m http.server 8080</code>
+</footer>
+
+<script type="module">
+// Index page bootstrap — small enough to live inline.
+// Loads grids.json and each manifest, then builds navigation cards.
+async function main() {
+  const status = document.getElementById('status');
+  const cards  = document.getElementById('grid-cards');
+  const base   = './data/';
+
+  async function fetchJSON(url) {
+    const r = await fetch(url + '?_=' + Date.now());
+    if (!r.ok) throw new Error(url + ' not found');
+    return r.json();
+  }
+
+  try {
+    const gridsIndex = await fetchJSON(base + 'grids.json');
+    const manifests  = await Promise.all(
+      gridsIndex.grids.map(name =>
+        fetchJSON(base + `manifest_${name}.json`).catch(() => null)
+      )
+    );
+
+    status.style.display = 'none';
+    cards.style.display  = 'flex';
+
+    gridsIndex.grids.forEach((name, i) => {
+      const m       = manifests[i];
+      const count   = m ? m.tickers.length : 0;
+      const updated = m ? new Date(m.generated).toLocaleDateString() : '—';
+      // grid pages use query-string routing; sectors is its own page
+      const href = name === 'sectors'
+        ? `./pages/sectors.html`
+        : `./pages/grid.html?grid=${name}`;
+
+      const a = document.createElement('a');
+      a.className = 'grid-card';
+      a.href      = href;
+      a.innerHTML = `
+        <div class="grid-card-name">${name}</div>
+        <div class="grid-card-count">${count} tickers</div>
+        <div class="grid-card-updated">Updated ${updated}</div>
+        <div class="grid-card-arrow">Open grid →</div>`;
+      cards.appendChild(a);
+    });
+
+  } catch (e) {
+    status.innerHTML =
+      `⚠ ${e.message}<br><small>Run <code>python download_data.py</code> first.</small>`;
+  }
+}
+main();
+</script>
+</body>
+</html>

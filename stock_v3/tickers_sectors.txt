@@ -1,0 +1,15 @@
+# SPDR Sector ETFs + SPY benchmark
+# SPY is used as the benchmark for ratio charts
+
+SPY
+XLK
+XLF
+XLV
+XLE
+XLI
+XLY
+XLP
+XLU
+XLRE
+XLB
+XLC

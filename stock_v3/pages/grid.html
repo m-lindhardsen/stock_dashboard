@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Market Grid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/theme.css"/>
+  <link rel="stylesheet" href="../css/layout.css"/>
+  <link rel="stylesheet" href="../css/components.css"/>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="../index.html">MARKET<span>/</span>GRID</a>
+  <nav id="nav-tabs"><!-- injected by app.js --></nav>
+  <span id="meta-info">—</span>
+  <div class="header-actions">
+    <!-- Interval toggle -->
+    <div class="seg">
+      <button class="seg-btn active" data-interval="daily">Daily</button>
+      <button class="seg-btn"        data-interval="weekly">Weekly</button>
+    </div>
+    <!-- Column toggle -->
+    <div class="seg">
+      <button class="seg-btn col-btn active" data-cols="4">4</button>
+      <button class="seg-btn col-btn"        data-cols="2">2</button>
+    </div>
+    <!-- Sort toggle -->
+    <div class="seg">
+      <button class="seg-btn sort-btn active" data-sort="default">Default</button>
+      <button class="seg-btn sort-btn"        data-sort="sector">Sector</button>
+    </div>
+    <span id="watchlist-count"></span>
+    <button class="btn-export" id="btn-export">⬇ Export</button>
+  </div>
+</header>
+
+<!-- Chart legend -->
+<div class="legend">
+  <div class="legend-item"><div class="ls up"></div> Up</div>
+  <div class="legend-item"><div class="ls down"></div> Down</div>
+  <div class="legend-item"><div class="ls sma10"></div> SMA 10</div>
+  <div class="legend-item"><div class="ls sma50"></div> SMA 50</div>
+  <div class="legend-item"><div class="ls sma250"></div> SMA 250</div>
+  <div class="legend-item"><div class="ls" style="background:#a78bfa"></div> Price−SMA50</div>
+</div>
+
+<!-- Sector filter bar (shown after data loads) -->
+<div id="filter-bar">
+  <span class="filter-label">Sectors</span>
+  <button class="filter-btn active" data-sector="__all__">All</button>
+  <span class="fdiv" id="fdiv-start"></span>
+  <!-- sector pills injected here by grid.js -->
+  <span class="fdiv" id="fdiv-end"></span>
+  <button class="filter-btn wl-btn" data-sector="__watchlist__">★ Watchlist</button>
+  <span id="filter-count"></span>
+</div>
+
+<!-- Stock grid -->
+<div id="status"><span class="spinner"></span> Loading…</div>
+<div id="grid" style="display:none">
+  <div class="empty-state" id="empty-state">No stocks match the current filter.</div>
+</div>
+
+<!-- Lightbox overlay -->
+<div id="lightbox">
+  <div id="lb-header">
+    <span id="lb-ticker"></span>
+    <span id="lb-name"></span>
+    <span id="lb-price"></span>
+    <div  id="lb-tags"></div>
+    <span id="lb-hint">Drag to zoom · ESC to reset zoom · ESC again to close</span>
+    <button id="lb-close">✕ Close</button>
+  </div>
+  <div id="lb-canvas-wrap">
+    <canvas id="lb-canvas"></canvas>
+  </div>
+</div>
+
+<script type="module" src="../js/app.js"></script>
+</body>
+</html>

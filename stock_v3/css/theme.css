@@ -1,0 +1,65 @@
+/* =============================================================
+   theme.css — Design tokens (CSS custom properties)
+   :root        = dark theme (default)
+   body.light   = light theme overrides (scaffold for later)
+   All colors, radii, spacing and typography scale live here.
+   To add a new theme: add another body.X { } block below.
+   ============================================================= */
+
+:root {
+  /* ── Palette ── */
+  --bg:           #0d0f14;        /* Page background */
+  --surface:      #141820;        /* Cards, header, panels */
+  --surface2:     #1a2030;        /* Raised elements, segmented controls */
+  --border:       #1e2530;        /* Subtle borders */
+  --muted:        #3a4252;        /* Disabled/hover borders */
+  --text:         #e2e8f0;        /* Primary text */
+  --dim:          #8896aa;        /* Secondary text, labels */
+  --accent:       #4af0b0;        /* Brand colour, active states */
+
+  /* ── Semantic chart colours ── */
+  --up:           #26d97f;        /* Bullish / positive */
+  --down:         #f04f5e;        /* Bearish / negative */
+  --sma10:        #facc15;        /* SMA 10 line */
+  --sma50:        #60a5fa;        /* SMA 50 line */
+  --sma250:       #f97316;        /* SMA 250 line */
+  --ratio:        #a78bfa;        /* Ratio / indicator line */
+  --vol:          rgba(100,140,255,0.30);   /* Volume bar fill */
+  --vol-border:   rgba(100,140,255,0.65);  /* Volume bar stroke */
+
+  /* ── Chart canvas colours (used in chart.js) ── */
+  --chart-bg:     #141820;
+  --chart-plot:   rgb(36,44,53);
+  --chart-grid:   rgba(255,255,255,0.07);
+  --chart-text:   #8896aa;
+
+  /* ── Shape ── */
+  --r-card:       10px;           /* Card corner radius */
+  --r-btn:        6px;            /* Button corner radius */
+  --r-pill:       999px;          /* Pill/tag corner radius */
+
+  /* ── Spacing ── */
+  --gap:          14px;           /* Grid gap */
+
+  /* ── Typography base ── */
+  font-size: 14px;
+}
+
+/* ── Light theme scaffold (activate with <body class="light">) ──
+   Override every variable above with light-appropriate values.
+   Currently unused — placeholder for future implementation.    */
+body.light {
+  --bg:       #f4f6f9;
+  --surface:  #ffffff;
+  --surface2: #eef0f4;
+  --border:   #dde2ea;
+  --muted:    #b0bac8;
+  --text:     #1a2030;
+  --dim:      #637080;
+  --accent:   #00a878;
+
+  --chart-bg:   #ffffff;
+  --chart-plot: #f0f3f7;
+  --chart-grid: rgba(0,0,0,0.07);
+  --chart-text: #637080;
+}

@@ -1,0 +1,20 @@
+# Portfolio — current holdings
+# Add or remove tickers freely, one per line
+
+AOS
+ABT
+ABBV
+ACN
+ADBE
+AMD
+AES
+AFL
+A
+APD
+ABNB
+AKAM
+ALB
+ARE
+ALGN
+EURUSD=X
+BZ=F

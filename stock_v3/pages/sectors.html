@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Market Grid — Sectors</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/theme.css"/>
+  <link rel="stylesheet" href="../css/layout.css"/>
+  <link rel="stylesheet" href="../css/components.css"/>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="../index.html">MARKET<span>/</span>GRID</a>
+  <nav id="nav-tabs"><!-- injected by sectors-app.js --></nav>
+  <span id="meta-info">—</span>
+  <div class="header-actions">
+    <!-- Interval toggle -->
+    <div class="seg">
+      <button class="seg-btn active" data-interval="daily">Daily</button>
+      <button class="seg-btn"        data-interval="weekly">Weekly</button>
+    </div>
+    <!-- Price vs SPY ratio mode toggle -->
+    <div class="seg" id="mode-toggle">
+      <button class="seg-btn active" data-mode="price">Price</button>
+      <button class="seg-btn"        data-mode="ratio">vs SPY</button>
+    </div>
+    <!-- Column toggle -->
+    <div class="seg">
+      <button class="seg-btn col-btn active" data-cols="4">4</button>
+      <button class="seg-btn col-btn"        data-cols="2">2</button>
+    </div>
+  </div>
+</header>
+
+<!-- Dual legend: normal / ratio (toggled by JS) -->
+<div class="legend">
+  <div id="legend-normal">
+    <div class="legend-item"><div class="ls up"></div> Up</div>
+    <div class="legend-item"><div class="ls down"></div> Down</div>
+    <div class="legend-item"><div class="ls sma10"></div> SMA 10</div>
+    <div class="legend-item"><div class="ls sma50"></div> SMA 50</div>
+    <div class="legend-item"><div class="ls sma250"></div> SMA 250</div>
+    <div class="legend-item"><div class="ls vol"></div> Volume</div>
+  </div>
+  <div id="legend-ratio">
+    <div class="legend-item"><div class="ls ratio"></div> ETF / SPY ratio</div>
+    <div class="legend-item"><div class="ls sma10"></div> SMA 10</div>
+    <div class="legend-item"><div class="ls sma50"></div> SMA 50</div>
+    <div class="legend-item"><div class="ls sma250"></div> SMA 250</div>
+    <span class="ratio-note">Above 1.0 = outperforming SPY · SPY shows normal price chart</span>
+  </div>
+</div>
+
+<!-- Stock grid -->
+<div id="status"><span class="spinner"></span> Loading…</div>
+<div id="grid" style="display:none"></div>
+
+<!-- Lightbox overlay -->
+<div id="lightbox">
+  <div id="lb-header">
+    <span id="lb-ticker"></span>
+    <span id="lb-name"></span>
+    <span id="lb-price"></span>
+    <span id="lb-mode-label"></span>
+    <div  id="lb-tags"></div>
+    <span id="lb-hint">ESC or click outside to close</span>
+    <button id="lb-close">✕ Close</button>
+  </div>
+  <div id="lb-canvas-wrap">
+    <canvas id="lb-canvas"></canvas>
+  </div>
+</div>
+
+<script type="module" src="../js/sectors-app.js"></script>
+</body>
+</html>
