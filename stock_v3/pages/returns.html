@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Market Grid — Returns</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/theme.css"/>
+  <link rel="stylesheet" href="../css/layout.css"/>
+  <link rel="stylesheet" href="../css/components.css"/>
+  <style>
+    /* ── Period controls ── */
+    .returns-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .periods-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .period-block {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 220px;
+    }
+
+    .period-label {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    .period-label span {
+      font-family: 'Space Mono', monospace;
+      color: var(--accent);
+      margin-left: 4px;
+    }
+
+    /* Quick preset buttons */
+    .preset-row {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .preset-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: .62rem;
+      font-weight: 600;
+      background: var(--surface2);
+      color: var(--dim);
+      border: 1px solid var(--border);
+      border-radius: var(--r-pill);
+      padding: 2px 8px;
+      cursor: pointer;
+      transition: all .12s;
+      white-space: nowrap;
+    }
+    .preset-btn:hover  { border-color: var(--muted); color: var(--text); }
+    .preset-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+    /* Date inputs */
+    .date-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .date-sep { font-size: .65rem; color: var(--muted); }
+
+    input[type="date"] {
+      font-family: 'Space Mono', monospace;
+      font-size: .7rem;
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: var(--r-btn);
+      padding: 4px 8px;
+      cursor: pointer;
+      transition: border-color .12s;
+      color-scheme: dark;
+    }
+    input[type="date"]:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* ── Table wrapper ── */
+    .table-wrap {
+      overflow-x: auto;
+      padding: 0 0 32px;
+    }
+
+    /* ── Returns table ── */
+    #returns-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .78rem;
+    }
+
+    #returns-table thead th {
+      position: sticky;
+      top: 0;
+      background: var(--surface);
+      border-bottom: 2px solid var(--border);
+      padding: 10px 14px;
+      text-align: left;
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--dim);
+      white-space: nowrap;
+      user-select: none;
+      cursor: pointer;
+      transition: color .12s;
+      z-index: 10;
+    }
+    #returns-table thead th:hover { color: var(--text); }
+    #returns-table thead th.sort-asc::after  { content: ' ↑'; color: var(--accent); }
+    #returns-table thead th.sort-desc::after { content: ' ↓'; color: var(--accent); }
+
+    /* Numeric columns right-aligned */
+    #returns-table th.num,
+    #returns-table td.num { text-align: right; }
+
+    #returns-table tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background .1s;
+    }
+    #returns-table tbody tr:hover { background: var(--surface2); }
+
+    #returns-table td {
+      padding: 9px 14px;
+      white-space: nowrap;
+    }
+
+    /* Ticker cell */
+    .rt-ticker {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      color: var(--accent);
+      font-size: .82rem;
+    }
+
+    .rt-name {
+      color: var(--dim);
+      font-size: .72rem;
+      max-width: 180px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .rt-sector, .rt-industry {
+      color: var(--dim);
+      font-size: .7rem;
+    }
+
+    /* Return value cells */
+    .rt-return {
+      font-family: 'Space Mono', monospace;
+      font-size: .78rem;
+      font-weight: 700;
+    }
+    .rt-return.up   { color: var(--up); }
+    .rt-return.down { color: var(--down); }
+    .rt-return.flat { color: var(--dim); }
+
+    /* Period date range shown under column header */
+    .col-period {
+      font-family: 'Inter', sans-serif;
+      font-size: .58rem;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0;
+      text-transform: none;
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* ── Status / empty ── */
+    #table-status {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--dim);
+      font-size: .8rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="../index.html">MARKET<span>/</span>GRID</a>
+  <nav id="nav-tabs"><!-- injected by returns-app.js --></nav>
+  <span id="meta-info">—</span>
+  <div class="header-actions">
+    <!-- Grid selector -->
+    <div class="seg" id="grid-selector">
+      <button class="seg-btn active" data-grid="sp500">SP500</button>
+      <button class="seg-btn"        data-grid="candidates">Candidates</button>
+      <button class="seg-btn"        data-grid="portfolio">Portfolio</button>
+    </div>
+  </div>
+</header>
+
+<!-- Period controls -->
+<div class="returns-controls">
+  <div class="periods-row" id="periods-row">
+
+    <!-- Period 1 -->
+    <div class="period-block" data-period="0">
+      <div class="period-label">Period 1 <span id="p0-resolved"></span></div>
+      <div class="preset-row">
+        <button class="preset-btn active" data-period="0" data-preset="1w">1W</button>
+        <button class="preset-btn"        data-period="0" data-preset="1m">1M</button>
+        <button class="preset-btn"        data-period="0" data-preset="3m">3M</button>
+        <button class="preset-btn"        data-period="0" data-preset="6m">6M</button>
+        <button class="preset-btn"        data-period="0" data-preset="1y">1Y</button>
+        <button class="preset-btn"        data-period="0" data-preset="custom">Custom</button>
+      </div>
+      <div class="date-row" id="p0-dates" style="display:none">
+        <input type="date" id="p0-start"/>
+        <span class="date-sep">→</span>
+        <input type="date" id="p0-end"/>
+      </div>
+    </div>
+
+    <!-- Period 2 -->
+    <div class="period-block" data-period="1">
+      <div class="period-label">Period 2 <span id="p1-resolved"></span></div>
+      <div class="preset-row">
+        <button class="preset-btn"        data-period="1" data-preset="1w">1W</button>
+        <button class="preset-btn active" data-period="1" data-preset="1m">1M</button>
+        <button class="preset-btn"        data-period="1" data-preset="3m">3M</button>
+        <button class="preset-btn"        data-period="1" data-preset="6m">6M</button>
+        <button class="preset-btn"        data-period="1" data-preset="1y">1Y</button>
+        <button class="preset-btn"        data-period="1" data-preset="custom">Custom</button>
+      </div>
+      <div class="date-row" id="p1-dates" style="display:none">
+        <input type="date" id="p1-start"/>
+        <span class="date-sep">→</span>
+        <input type="date" id="p1-end"/>
+      </div>
+    </div>
+
+    <!-- Period 3 -->
+    <div class="period-block" data-period="2">
+      <div class="period-label">Period 3 <span id="p2-resolved"></span></div>
+      <div class="preset-row">
+        <button class="preset-btn"        data-period="2" data-preset="1w">1W</button>
+        <button class="preset-btn"        data-period="2" data-preset="1m">1M</button>
+        <button class="preset-btn active" data-period="2" data-preset="3m">3M</button>
+        <button class="preset-btn"        data-period="2" data-preset="6m">6M</button>
+        <button class="preset-btn"        data-period="2" data-preset="1y">1Y</button>
+        <button class="preset-btn"        data-period="2" data-preset="custom">Custom</button>
+      </div>
+      <div class="date-row" id="p2-dates" style="display:none">
+        <input type="date" id="p2-start"/>
+        <span class="date-sep">→</span>
+        <input type="date" id="p2-end"/>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Table -->
+<div id="table-status"><span class="spinner"></span> Loading…</div>
+<div class="table-wrap" id="table-wrap" style="display:none">
+  <table id="returns-table">
+    <thead>
+      <tr>
+        <th data-col="ticker">Ticker</th>
+        <th data-col="name">Name</th>
+        <th data-col="sector">Sector</th>
+        <th data-col="industry">Industry</th>
+        <th data-col="r0" class="num">Period 1<span class="col-period" id="th-p0"></span></th>
+        <th data-col="r1" class="num">Period 2<span class="col-period" id="th-p1"></span></th>
+        <th data-col="r2" class="num">Period 3<span class="col-period" id="th-p2"></span></th>
+      </tr>
+    </thead>
+    <tbody id="returns-tbody"></tbody>
+  </table>
+</div>
+
+<script type="module" src="../js/returns-app.js"></script>
+</body>
+</html>

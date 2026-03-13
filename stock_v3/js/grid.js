@@ -303,16 +303,24 @@ export function initExportButton() {
 export function buildNavTabs(grids, activeName) {
   const nav = document.getElementById('nav-tabs');
   if (!nav) return;
+
+  // Data grid tabs (sp500, candidates, portfolio, sectors)
   grids.forEach(name => {
     const a = document.createElement('a');
     a.className   = 'nav-tab' + (name === activeName ? ' active' : '');
-    // grid pages now live at pages/grid.html?grid=<name>
     a.href        = name === 'sectors'
-      ? `sectors.html`
+      ? 'sectors.html'
       : `grid.html?grid=${name}`;
     a.textContent = name.toUpperCase();
     nav.appendChild(a);
   });
+
+  // Returns tab — always shown on every page
+  const ret = document.createElement('a');
+  ret.className   = 'nav-tab' + (activeName === 'returns' ? ' active' : '');
+  ret.href        = 'returns.html';
+  ret.textContent = 'RETURNS';
+  nav.appendChild(ret);
 }
 
 // ── Resize handler ─────────────────────────────────────────────
