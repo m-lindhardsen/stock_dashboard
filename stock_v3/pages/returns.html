@@ -11,14 +11,15 @@
   <link rel="stylesheet" href="../css/layout.css"/>
   <link rel="stylesheet" href="../css/components.css"/>
   <style>
-    /* ── Period controls ── */
+
+    /* ── Controls bar ── */
     .returns-controls {
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
       display: flex;
       flex-direction: column;
       gap: 10px;
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--border);
-      background: var(--surface);
     }
 
     .periods-row {
@@ -28,33 +29,51 @@
       align-items: flex-start;
     }
 
+    /* Hide Period 3 block when bubble view is active */
+    body.bubble-active .period-block[data-period="2"] { display: none; }
+
     .period-block {
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      min-width: 220px;
+      gap: 5px;
+      min-width: 210px;
     }
 
     .period-label {
-      font-size: .65rem;
+      font-size: .63rem;
       font-weight: 700;
       letter-spacing: .07em;
       text-transform: uppercase;
       color: var(--dim);
-    }
-
-    .period-label span {
-      font-family: 'Space Mono', monospace;
-      color: var(--accent);
-      margin-left: 4px;
-    }
-
-    /* Quick preset buttons */
-    .preset-row {
       display: flex;
-      gap: 4px;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
     }
+
+    /* X / Y axis badge shown only in bubble mode */
+    .axis-badge {
+      display: none;
+      font-family: 'Space Mono', monospace;
+      font-size: .58rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: var(--r-pill);
+      background: var(--surface2);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+    body.bubble-active .axis-badge { display: inline; }
+
+    .period-resolved {
+      font-family: 'Space Mono', monospace;
+      font-size: .58rem;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .preset-row { display: flex; gap: 4px; flex-wrap: wrap; }
 
     .preset-btn {
       font-family: 'Inter', sans-serif;
@@ -72,45 +91,31 @@
     .preset-btn:hover  { border-color: var(--muted); color: var(--text); }
     .preset-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
 
-    /* Date inputs */
-    .date-row {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-    }
-
-    .date-sep { font-size: .65rem; color: var(--muted); }
+    .date-row { display: flex; gap: 6px; align-items: center; }
+    .date-sep  { font-size: .65rem; color: var(--muted); }
 
     input[type="date"] {
       font-family: 'Space Mono', monospace;
-      font-size: .7rem;
+      font-size: .68rem;
       background: var(--surface2);
       color: var(--text);
       border: 1px solid var(--border);
       border-radius: var(--r-btn);
-      padding: 4px 8px;
+      padding: 3px 7px;
       cursor: pointer;
       transition: border-color .12s;
       color-scheme: dark;
     }
-    input[type="date"]:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
+    input[type="date"]:focus { outline: none; border-color: var(--accent); }
 
-    /* ── Table wrapper ── */
-    .table-wrap {
-      overflow-x: auto;
-      padding: 0 0 32px;
-    }
+    /* ── TABLE ── */
+    .table-wrap { overflow-x: auto; padding: 0 0 32px; }
 
-    /* ── Returns table ── */
     #returns-table {
       width: 100%;
       border-collapse: collapse;
       font-size: .78rem;
     }
-
     #returns-table thead th {
       position: sticky;
       top: 0;
@@ -129,60 +134,29 @@
       transition: color .12s;
       z-index: 10;
     }
-    #returns-table thead th:hover { color: var(--text); }
+    #returns-table thead th:hover            { color: var(--text); }
     #returns-table thead th.sort-asc::after  { content: ' ↑'; color: var(--accent); }
     #returns-table thead th.sort-desc::after { content: ' ↓'; color: var(--accent); }
-
-    /* Numeric columns right-aligned */
     #returns-table th.num,
     #returns-table td.num { text-align: right; }
-
     #returns-table tbody tr {
       border-bottom: 1px solid var(--border);
       transition: background .1s;
     }
     #returns-table tbody tr:hover { background: var(--surface2); }
+    #returns-table td { padding: 9px 14px; white-space: nowrap; }
 
-    #returns-table td {
-      padding: 9px 14px;
-      white-space: nowrap;
-    }
-
-    /* Ticker cell */
-    .rt-ticker {
-      font-family: 'Space Mono', monospace;
-      font-weight: 700;
-      color: var(--accent);
-      font-size: .82rem;
-    }
-
-    .rt-name {
-      color: var(--dim);
-      font-size: .72rem;
-      max-width: 180px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .rt-sector, .rt-industry {
-      color: var(--dim);
-      font-size: .7rem;
-    }
-
-    /* Return value cells */
-    .rt-return {
-      font-family: 'Space Mono', monospace;
-      font-size: .78rem;
-      font-weight: 700;
-    }
-    .rt-return.up   { color: var(--up); }
-    .rt-return.down { color: var(--down); }
-    .rt-return.flat { color: var(--dim); }
-
-    /* Period date range shown under column header */
+    .rt-ticker   { font-family: 'Space Mono', monospace; font-weight: 700; color: var(--accent); font-size: .82rem; }
+    .rt-name     { color: var(--dim); font-size: .72rem; max-width: 180px; overflow: hidden; text-overflow: ellipsis; }
+    .rt-sector,
+    .rt-industry { color: var(--dim); font-size: .7rem; }
+    .rt-return             { font-family: 'Space Mono', monospace; font-size: .78rem; font-weight: 700; }
+    .rt-return.up          { color: var(--up); }
+    .rt-return.down        { color: var(--down); }
+    .rt-return.flat        { color: var(--dim); }
     .col-period {
       font-family: 'Inter', sans-serif;
-      font-size: .58rem;
+      font-size: .57rem;
       font-weight: 400;
       color: var(--muted);
       letter-spacing: 0;
@@ -191,38 +165,130 @@
       margin-top: 2px;
     }
 
-    /* ── Status / empty ── */
+    /* ── BUBBLE CHART ── */
+    .bubble-wrap {
+      position: relative;
+      padding: 16px 20px 4px;
+    }
+
+    #bubble-canvas {
+      display: block;
+      width: 100%;
+      border-radius: 6px;
+      cursor: crosshair;
+    }
+
+    #zoom-reset {
+      display: none;
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: .65rem;
+      font-weight: 600;
+      background: var(--surface2);
+      color: var(--dim);
+      border: 1px solid var(--border);
+      border-radius: var(--r-btn);
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: all .12s;
+      z-index: 10;
+    }
+    #zoom-reset:hover   { color: var(--text); border-color: var(--muted); }
+    #zoom-reset.visible { display: block; }
+
+    /* Sector colour legend */
+    #bubble-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      padding: 10px 20px 24px;
+    }
+    .bl-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .67rem;
+      color: var(--dim);
+      cursor: pointer;
+      user-select: none;
+      transition: color .12s, opacity .12s;
+    }
+    .bl-item:hover   { color: var(--text); }
+    .bl-item.faded   { opacity: .25; }
+    .bl-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── Tooltip ── */
+    #bubble-tooltip {
+      display: none;
+      position: fixed;
+      pointer-events: none;
+      background: rgba(12,16,24,0.94);
+      border: 1px solid var(--border);
+      border-radius: var(--r-btn);
+      padding: 9px 13px;
+      font-size: .72rem;
+      color: var(--text);
+      z-index: 500;
+      max-width: 230px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.55);
+    }
+    .tt-ticker  { font-family: 'Space Mono', monospace; font-weight: 700; color: var(--accent); font-size: .84rem; margin-bottom: 2px; }
+    .tt-name    { color: var(--dim); font-size: .67rem; margin-bottom: 7px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
+    .tt-row     { display: flex; justify-content: space-between; gap: 14px; margin-bottom: 2px; }
+    .tt-label   { color: var(--dim); font-size: .65rem; }
+    .tt-val     { font-family: 'Space Mono', monospace; font-size: .72rem; font-weight: 700; }
+    .tt-val.up  { color: var(--up); }
+    .tt-val.down{ color: var(--down); }
+    .tt-val.flat{ color: var(--dim); }
+    .tt-sector  { font-size: .62rem; color: var(--muted); margin-top: 6px; border-top: 1px solid var(--border); padding-top: 5px; }
+
+    /* ── Status ── */
     #table-status {
       text-align: center;
       padding: 60px 20px;
       color: var(--dim);
       font-size: .8rem;
     }
+
   </style>
 </head>
 <body>
 
 <header>
   <a class="logo" href="../index.html">MARKET<span>/</span>GRID</a>
-  <nav id="nav-tabs"><!-- injected by returns-app.js --></nav>
+  <nav id="nav-tabs"></nav>
   <span id="meta-info">—</span>
   <div class="header-actions">
-    <!-- Grid selector -->
     <div class="seg" id="grid-selector">
       <button class="seg-btn active" data-grid="sp500">SP500</button>
       <button class="seg-btn"        data-grid="candidates">Candidates</button>
       <button class="seg-btn"        data-grid="portfolio">Portfolio</button>
+    </div>
+    <div class="seg" id="view-toggle">
+      <button class="seg-btn active" data-view="table">Table</button>
+      <button class="seg-btn"        data-view="bubble">Bubble</button>
     </div>
   </div>
 </header>
 
 <!-- Period controls -->
 <div class="returns-controls">
-  <div class="periods-row" id="periods-row">
+  <div class="periods-row">
 
-    <!-- Period 1 -->
+    <!-- Period 1 → X axis in bubble mode -->
     <div class="period-block" data-period="0">
-      <div class="period-label">Period 1 <span id="p0-resolved"></span></div>
+      <div class="period-label">
+        Period 1
+        <span class="axis-badge">X</span>
+        <span class="period-resolved" id="p0-resolved"></span>
+      </div>
       <div class="preset-row">
         <button class="preset-btn active" data-period="0" data-preset="1w">1W</button>
         <button class="preset-btn"        data-period="0" data-preset="1m">1M</button>
@@ -238,9 +304,13 @@
       </div>
     </div>
 
-    <!-- Period 2 -->
+    <!-- Period 2 → Y axis in bubble mode -->
     <div class="period-block" data-period="1">
-      <div class="period-label">Period 2 <span id="p1-resolved"></span></div>
+      <div class="period-label">
+        Period 2
+        <span class="axis-badge">Y</span>
+        <span class="period-resolved" id="p1-resolved"></span>
+      </div>
       <div class="preset-row">
         <button class="preset-btn"        data-period="1" data-preset="1w">1W</button>
         <button class="preset-btn active" data-period="1" data-preset="1m">1M</button>
@@ -256,9 +326,12 @@
       </div>
     </div>
 
-    <!-- Period 3 -->
+    <!-- Period 3 — table only, hidden in bubble view -->
     <div class="period-block" data-period="2">
-      <div class="period-label">Period 3 <span id="p2-resolved"></span></div>
+      <div class="period-label">
+        Period 3
+        <span class="period-resolved" id="p2-resolved"></span>
+      </div>
       <div class="preset-row">
         <button class="preset-btn"        data-period="2" data-preset="1w">1W</button>
         <button class="preset-btn"        data-period="2" data-preset="1m">1M</button>
@@ -277,8 +350,10 @@
   </div>
 </div>
 
-<!-- Table -->
+<!-- Status -->
 <div id="table-status"><span class="spinner"></span> Loading…</div>
+
+<!-- TABLE view -->
 <div class="table-wrap" id="table-wrap" style="display:none">
   <table id="returns-table">
     <thead>
@@ -294,6 +369,30 @@
     </thead>
     <tbody id="returns-tbody"></tbody>
   </table>
+</div>
+
+<!-- BUBBLE view -->
+<div id="bubble-view" style="display:none">
+  <div class="bubble-wrap">
+    <canvas id="bubble-canvas" height="580"></canvas>
+    <button id="zoom-reset">✕ Reset zoom</button>
+  </div>
+  <div id="bubble-legend"></div>
+</div>
+
+<!-- Floating tooltip -->
+<div id="bubble-tooltip">
+  <div class="tt-ticker" id="tt-ticker"></div>
+  <div class="tt-name"   id="tt-name"></div>
+  <div class="tt-row">
+    <span class="tt-label" id="tt-xlabel"></span>
+    <span class="tt-val"   id="tt-xval"></span>
+  </div>
+  <div class="tt-row">
+    <span class="tt-label" id="tt-ylabel"></span>
+    <span class="tt-val"   id="tt-yval"></span>
+  </div>
+  <div class="tt-sector" id="tt-sector"></div>
 </div>
 
 <script type="module" src="../js/returns-app.js"></script>
