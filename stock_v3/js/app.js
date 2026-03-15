@@ -2,27 +2,35 @@
    app.js — Entry point for grid pages (grid.html?grid=<n>)
    Loads a single bundle file instead of one request per ticker.
    Bundle: data/{gridname}_{interval}_bundle.json
+
+   Optimised:
+     - grids.json + bundle fetch in parallel
+     - Cards built in idle-time chunks (no 500-card DOM thrash)
+     - Charts drawn lazily via IntersectionObserver (only when visible)
+     - DocumentFragment for batch DOM insert
    ============================================================= */
 
 import {
   fetchJSON, buildNavTabs, buildCard, buildSectorButtons,
   refreshWatchlistUI, applyFilter, initSortButtons,
   initColumnToggle, initExportButton, initResizeHandler, CHART_H,
+  initLazyChartObserver,
 } from './grid.js';
 
 import { openLightbox } from './lightbox.js';
 import { drawChart }    from './chart.js';
 
 // ── Resolve grid name from URL query string ────────────────────
-// e.g. pages/grid.html?grid=sp500  →  GRID_NAME = 'sp500'
 const params    = new URLSearchParams(location.search);
 const GRID_NAME = params.get('grid') || 'sp500';
 const DATA_PATH = '../data/';
 
 let currentInterval = 'daily';
 
+// How many cards to build per idle/rAF chunk before yielding
+const CARD_CHUNK = 60;
+
 // ── Interval toggle ────────────────────────────────────────────
-// Reloads the bundle for the new interval and redraws all cards.
 function initIntervalToggle() {
   document.querySelectorAll('.seg-btn[data-interval]').forEach(btn => {
     btn.addEventListener('click', async () => {
@@ -43,13 +51,23 @@ function initIntervalToggle() {
           if (!d || !canvas) return;
           canvas._ohlcv = d.ohlcv;
           canvas._H     = CHART_H;
-          drawChart(canvas, d.ohlcv, CHART_H);
+          canvas._dirty = true;          // mark for lazy redraw
+          // Only draw if currently visible
+          if (card.style.display !== 'none' && isElementInViewport(card)) {
+            drawChart(canvas, d.ohlcv, CHART_H);
+            canvas._dirty = false;
+          }
         });
       } catch (e) {
         console.warn('Could not load interval bundle:', e);
       }
     });
   });
+}
+
+function isElementInViewport(el) {
+  const r = el.getBoundingClientRect();
+  return r.bottom > 0 && r.top < window.innerHeight;
 }
 
 // ── Boot ───────────────────────────────────────────────────────
@@ -60,15 +78,16 @@ async function main() {
   document.title = `Market Grid — ${GRID_NAME.toUpperCase()}`;
 
   try {
-    // Nav tabs
-    const gridsIndex = await fetchJSON(DATA_PATH + 'grids.json')
-      .catch(() => ({ grids: [GRID_NAME] }));
-    buildNavTabs(gridsIndex.grids, GRID_NAME);
-
-    // Load the daily bundle — one request for all tickers
     status.innerHTML = `<span class="spinner"></span> Loading ${GRID_NAME.toUpperCase()}…`;
 
-    const bundle  = await fetchJSON(DATA_PATH + `${GRID_NAME}_daily_bundle.json`);
+    // Fetch grids.json and the bundle in parallel
+    const [gridsIndex, bundle] = await Promise.all([
+      fetchJSON(DATA_PATH + 'grids.json').catch(() => ({ grids: [GRID_NAME] })),
+      fetchJSON(DATA_PATH + `${GRID_NAME}_daily_bundle.json`),
+    ]);
+
+    buildNavTabs(gridsIndex.grids, GRID_NAME);
+
     const datasets = bundle.tickers || [];
     const updated  = bundle.generated
       ? new Date(bundle.generated).toLocaleString() : '—';
@@ -81,10 +100,25 @@ async function main() {
 
     buildSectorButtons(datasets);
 
+    // Build cards in chunks to avoid blocking the main thread.
+    // First chunk is synchronous so the user sees content immediately;
+    // remaining chunks are yielded via requestAnimationFrame.
     const emptyEl = document.getElementById('empty-state');
-    datasets.forEach((data, idx) => {
-      if (data) grid.insertBefore(buildCard(data, idx, openLightbox), emptyEl);
-    });
+
+    if (datasets.length <= CARD_CHUNK) {
+      // Small grid — build all at once
+      const frag = document.createDocumentFragment();
+      datasets.forEach((data, idx) => {
+        if (data) frag.appendChild(buildCard(data, idx, openLightbox));
+      });
+      grid.insertBefore(frag, emptyEl);
+    } else {
+      // Large grid — chunked insertion
+      await buildCardsChunked(datasets, grid, emptyEl);
+    }
+
+    // Start the IntersectionObserver that lazily draws charts
+    initLazyChartObserver();
 
     refreshWatchlistUI();
     applyFilter();
@@ -93,6 +127,30 @@ async function main() {
     status.innerHTML =
       `⚠ ${e.message}<br><small>Run <code>python download_data.py</code> first.</small>`;
   }
+}
+
+/**
+ * Insert cards in chunks of CARD_CHUNK, yielding to the browser
+ * between chunks so the page stays responsive.
+ */
+function buildCardsChunked(datasets, grid, emptyEl) {
+  return new Promise(resolve => {
+    let i = 0;
+    function nextChunk() {
+      const frag = document.createDocumentFragment();
+      const end  = Math.min(i + CARD_CHUNK, datasets.length);
+      for (; i < end; i++) {
+        if (datasets[i]) frag.appendChild(buildCard(datasets[i], i, openLightbox));
+      }
+      grid.insertBefore(frag, emptyEl);
+      if (i < datasets.length) {
+        requestAnimationFrame(nextChunk);
+      } else {
+        resolve();
+      }
+    }
+    nextChunk();
+  });
 }
 
 // ── Wire controls ──────────────────────────────────────────────

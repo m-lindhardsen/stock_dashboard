@@ -3,29 +3,26 @@
    Exports: drawChart, drawRatioChart, attachCrosshair,
             attachLightboxZoom
    No knowledge of page DOM outside a <canvas> element.
-   All configuration is in CHART_CONFIG at the top — change
-   colours, pane sizes, padding here and it affects everything.
+
+   Optimised over v1:
+     - OHLC bars batched by colour: 2 draw calls instead of N
+     - Volume bars batched by colour: 2 draw calls instead of N
+     - Offscreen buffer for crosshair (avoids full redraw per mousemove)
+     - pickDateTicks uses string slicing, no Date() construction
+     - Loop-based min/max (no spread/stack-overflow risk)
+     - Data-range scan is a single pass
    ============================================================= */
 
 // ── Configuration ─────────────────────────────────────────────
-// Edit this object to change chart appearance globally.
 
 export const CHART_CONFIG = {
-  // Canvas padding (pixels)
   pad: { top: 12, right: 22, bottom: 18, left: 62 },
-
-  // OHLC tick arm width (pixels, clamped to slot width)
   tickW: 3,
-
-  // Pane height fractions (must sum to ≤ 1.0)
   panes: {
-    price: 0.58,   // OHLC + SMAs
-    vol:   0.16,   // Volume bars
-    ind:   0.16,   // Price − SMA50 indicator
-    // Remainder (~0.10) goes to the date axis
+    price: 0.58,
+    vol:   0.16,
+    ind:   0.16,
   },
-
-  // Colours (canvas, not CSS — must be explicit values)
   colors: {
     bg:      '#141820',
     plotBg:  'rgb(36,44,53)',
@@ -36,7 +33,7 @@ export const CHART_CONFIG = {
     sma10:   '#facc15',
     sma50:   '#60a5fa',
     sma250:  '#f97316',
-    ratio:   '#a78bfa',           // Indicator / ratio line
+    ratio:   '#a78bfa',
     curPriceLine: 'rgba(255,255,255,0.35)',
     volUp:   'rgba(38,217,127,0.35)',
     volDown: 'rgba(240,79,94,0.35)',
@@ -52,12 +49,10 @@ export const CHART_CONFIG = {
   },
 };
 
-// Shorthand alias (internal use)
 const C   = CHART_CONFIG.colors;
 const PAD = CHART_CONFIG.pad;
 
 // ── Nice number helpers ────────────────────────────────────────
-// Produce rounded, human-friendly axis tick values.
 
 function niceStep(range, targetTicks) {
   const rough = range / targetTicks;
@@ -77,35 +72,38 @@ function niceTicks(lo, hi, targetTicks) {
   return ticks;
 }
 
-// ── Date axis helpers ──────────────────────────────────────────
-// Produces an array of { i, label } tick positions for the date axis.
-// Auto-selects monthly/quarterly labels based on series length,
-// then thins them down if too many ticks would overlap.
+// ── Date axis helpers (no Date() construction) ─────────────────
+// ohlcv[i].t is "YYYY-MM-DD". We extract year/month from substrings.
 
 function pickDateTicks(ohlcv, maxTicks) {
-  const n      = ohlcv.length;
-  const ticks  = [];
-  let lastMonth = null;
+  const n     = ohlcv.length;
+  const ticks = [];
+  let lastYM  = '';                       // "YYYY-MM" of previous tick
+
+  // Long daily series → quarterly; otherwise monthly
+  const interval = n > 600 ? 3 : 1;
+  const MONTHS   = ['Jan','Feb','Mar','Apr','May','Jun',
+                    'Jul','Aug','Sep','Oct','Nov','Dec'];
 
   for (let i = 0; i < n; i++) {
-    const d        = new Date(ohlcv[i].t + 'T00:00:00');
-    const y        = d.getFullYear();
-    const m        = d.getMonth();
-    // Long daily series → quarterly; otherwise monthly
-    const interval = n > 600 ? 3 : 1;
+    const t  = ohlcv[i].t;               // "YYYY-MM-DD"
+    const ym = t.substring(0, 7);        // "YYYY-MM"
+    if (ym === lastYM) continue;         // same month
+    lastYM = ym;
 
-    if (m !== lastMonth && m % interval === 0) {
-      const label = m === 0
-        ? String(y)
-        : d.toLocaleString('en', { month: 'short' });
-      ticks.push({ i, label });
-      lastMonth = m;
-    }
+    const m = parseInt(t.substring(5, 7), 10) - 1;   // 0-based month
+    if (m % interval !== 0) continue;
+
+    const label = m === 0 ? t.substring(0, 4) : MONTHS[m];
+    ticks.push({ i, label });
   }
 
-  // Thin until we fit within maxTicks
+  // Thin until we fit
   while (ticks.length > maxTicks) {
-    ticks.splice(0, ticks.length, ...ticks.filter((_, i) => i % 2 === 0));
+    const keep = [];
+    for (let i = 0; i < ticks.length; i += 2) keep.push(ticks[i]);
+    ticks.length = 0;
+    ticks.push(...keep);
   }
   return ticks;
 }
@@ -159,22 +157,36 @@ export function drawChart(canvas, ohlcv, H, zoomRange) {
   const innerW   = W - PAD.left - PAD.right;
   const slotW    = innerW / n;
 
-  // ── Data ranges ──
-  let pmin = Infinity, pmax = -Infinity;
-  data.forEach(r => {
-    pmin = Math.min(pmin, r.l); pmax = Math.max(pmax, r.h);
-    [r.sma10, r.sma50, r.sma250].forEach(v => {
-      if (v != null) { pmin = Math.min(pmin, v); pmax = Math.max(pmax, v); }
-    });
-  });
+  // ── Data ranges — single pass ──
+  let pmin = Infinity, pmax = -Infinity, volMax = 0;
+  for (let i = 0; i < n; i++) {
+    const r = data[i];
+    if (r.l < pmin) pmin = r.l;
+    if (r.h > pmax) pmax = r.h;
+    if (r.sma10  != null) { if (r.sma10  < pmin) pmin = r.sma10;  if (r.sma10  > pmax) pmax = r.sma10;  }
+    if (r.sma50  != null) { if (r.sma50  < pmin) pmin = r.sma50;  if (r.sma50  > pmax) pmax = r.sma50;  }
+    if (r.sma250 != null) { if (r.sma250 < pmin) pmin = r.sma250; if (r.sma250 > pmax) pmax = r.sma250; }
+    if (r.v > volMax) volMax = r.v;
+  }
+  if (!volMax) volMax = 1;
   const ppad  = (pmax - pmin || 1) * 0.04;
   const plo   = pmin - ppad, phi = pmax + ppad, pspan = phi - plo;
-  const volMax = Math.max(...data.map(r => r.v)) || 1;
 
   // Indicator: price − SMA50
-  const indVals  = data.map(r => r.sma50 != null ? r.c - r.sma50 : null);
-  const indNonNull = indVals.filter(v => v != null);
-  const indAbs   = (indNonNull.length ? Math.max(...indNonNull.map(Math.abs)) : 1) * 1.15;
+  const indVals  = new Array(n);
+  let indAbs = 0;
+  for (let i = 0; i < n; i++) {
+    const r = data[i];
+    if (r.sma50 != null) {
+      const v = r.c - r.sma50;
+      indVals[i] = v;
+      const a = v < 0 ? -v : v;
+      if (a > indAbs) indAbs = a;
+    } else {
+      indVals[i] = null;
+    }
+  }
+  indAbs = (indAbs || 1) * 1.15;
 
   // ── Coordinate transforms ──
   const px = i => PAD.left + (i + 0.5) * slotW;
@@ -187,7 +199,6 @@ export function drawChart(canvas, ohlcv, H, zoomRange) {
   ctx.fillRect(PAD.left, priceY, innerW, priceBot - priceY);
   ctx.fillRect(PAD.left, volY,   innerW, volBot   - volY);
   ctx.fillRect(PAD.left, indY,   innerW, indBot   - indY);
-  // Axis gutters (left, right, date row) stay dark
   ctx.fillStyle = C.bg;
   ctx.fillRect(0, 0, PAD.left, H);
   ctx.fillRect(W - PAD.right, 0, PAD.right, H);
@@ -218,12 +229,32 @@ export function drawChart(canvas, ohlcv, H, zoomRange) {
   ctx.textAlign = 'left';
   ctx.fillText(lastClose.toFixed(lastClose >= 100 ? 1 : 2), W - PAD.right + 2, lastY + 3);
 
-  // ── Volume bars (green/red by candle direction) ──
-  for (let i = 0; i < n; i++) {
-    const r  = data[i];
+  // ── Volume bars — batched by colour (2 draw calls, not N) ──
+  {
     const bw = Math.max(1, slotW * 0.6);
-    ctx.fillStyle = r.c >= r.o ? C.volUp : C.volDown;
-    ctx.fillRect(px(i) - bw / 2, vy(r.v), bw, volBot - vy(r.v));
+    const halfBw = bw / 2;
+    ctx.fillStyle = C.volUp;
+    ctx.beginPath();
+    for (let i = 0; i < n; i++) {
+      const r = data[i];
+      if (r.c >= r.o) {
+        const x = px(i) - halfBw;
+        const top = vy(r.v);
+        ctx.rect(x, top, bw, volBot - top);
+      }
+    }
+    ctx.fill();
+    ctx.fillStyle = C.volDown;
+    ctx.beginPath();
+    for (let i = 0; i < n; i++) {
+      const r = data[i];
+      if (r.c < r.o) {
+        const x = px(i) - halfBw;
+        const top = vy(r.v);
+        ctx.rect(x, top, bw, volBot - top);
+      }
+    }
+    ctx.fill();
   }
 
   // ── SMAs ──
@@ -240,16 +271,35 @@ export function drawChart(canvas, ohlcv, H, zoomRange) {
   drawSMA('sma50',  C.sma50);
   drawSMA('sma10',  C.sma10);
 
-  // ── OHLC bars ──
-  const tw = Math.min(CHART_CONFIG.tickW, Math.max(1, slotW * 0.35));
-  ctx.lineWidth = 1;
-  for (let i = 0; i < n; i++) {
-    const r = data[i];
-    ctx.strokeStyle = r.c >= r.o ? C.up : C.down;
+  // ── OHLC bars — batched by colour (2 draw calls, not N) ──
+  {
+    const tw = Math.min(CHART_CONFIG.tickW, Math.max(1, slotW * 0.35));
+    ctx.lineWidth = 1;
+
+    // Green (up) bars
+    ctx.strokeStyle = C.up;
     ctx.beginPath();
-    ctx.moveTo(px(i), py(r.h));      ctx.lineTo(px(i), py(r.l));    // wick
-    ctx.moveTo(px(i) - tw, py(r.o)); ctx.lineTo(px(i), py(r.o));    // open tick
-    ctx.moveTo(px(i), py(r.c));      ctx.lineTo(px(i) + tw, py(r.c)); // close tick
+    for (let i = 0; i < n; i++) {
+      const r = data[i];
+      if (r.c < r.o) continue;
+      const x = px(i);
+      ctx.moveTo(x, py(r.h));      ctx.lineTo(x, py(r.l));        // wick
+      ctx.moveTo(x - tw, py(r.o)); ctx.lineTo(x, py(r.o));        // open tick
+      ctx.moveTo(x, py(r.c));      ctx.lineTo(x + tw, py(r.c));   // close tick
+    }
+    ctx.stroke();
+
+    // Red (down) bars
+    ctx.strokeStyle = C.down;
+    ctx.beginPath();
+    for (let i = 0; i < n; i++) {
+      const r = data[i];
+      if (r.c >= r.o) continue;
+      const x = px(i);
+      ctx.moveTo(x, py(r.h));      ctx.lineTo(x, py(r.l));
+      ctx.moveTo(x - tw, py(r.o)); ctx.lineTo(x, py(r.o));
+      ctx.moveTo(x, py(r.c));      ctx.lineTo(x + tw, py(r.c));
+    }
     ctx.stroke();
   }
 
@@ -261,10 +311,8 @@ export function drawChart(canvas, ohlcv, H, zoomRange) {
 
   // ── Indicator pane: Price − SMA50 ──
   const zeroY = iy(0);
-  // Zero baseline
   ctx.strokeStyle = C.indZero; ctx.lineWidth = 1;
   ctx.beginPath(); ctx.moveTo(PAD.left, zeroY); ctx.lineTo(W - PAD.right, zeroY); ctx.stroke();
-  // Indicator line
   ctx.strokeStyle = C.ratio; ctx.lineWidth = 1.3; ctx.beginPath();
   let indGo = false;
   for (let i = 0; i < n; i++) {
@@ -272,7 +320,6 @@ export function drawChart(canvas, ohlcv, H, zoomRange) {
     indGo ? ctx.lineTo(px(i), iy(v)) : (ctx.moveTo(px(i), iy(v)), indGo = true);
   }
   ctx.stroke();
-  // Label
   ctx.fillStyle = C.text; ctx.font = `9px 'Space Mono',monospace`; ctx.textAlign = 'right';
   ctx.fillText('P−50', PAD.left - 4, indY + 10);
 
@@ -289,13 +336,40 @@ export function drawChart(canvas, ohlcv, H, zoomRange) {
 
   // ── Store geometry for crosshair / zoom ──
   canvas._chartMeta = { data, n, slotW, px, py, priceY, priceBot, volY, indY, indBot, dateY, innerW };
+
+  // ── Cache clean chart as offscreen bitmap for crosshair ──
+  _cacheBuffer(canvas);
 }
+
+// ── Offscreen buffer for crosshair ─────────────────────────────
+// After drawChart completes, we snapshot the canvas to an offscreen
+// buffer. The crosshair handler restores from this buffer instead
+// of calling the full drawChart() again on every mousemove.
+
+function _cacheBuffer(canvas) {
+  if (!canvas._buffer) {
+    canvas._buffer = document.createElement('canvas');
+  }
+  const buf = canvas._buffer;
+  buf.width  = canvas.width;
+  buf.height = canvas.height;
+  buf.getContext('2d').drawImage(canvas, 0, 0);
+}
+
+function _restoreBuffer(canvas) {
+  const buf = canvas._buffer;
+  if (!buf || buf.width !== canvas.width || buf.height !== canvas.height) return false;
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(1, 0, 0, 1, 0, 0);   // reset any scale
+  ctx.drawImage(buf, 0, 0);
+  return true;
+}
+
 
 // ── Ratio chart renderer ───────────────────────────────────────
 /**
  * drawRatioChart(canvas, ratioOhlcv, H)
  *   Renders ETF/SPY ratio as a line-area chart.
- *   Uses the same PAD and colours as drawChart.
  */
 export function drawRatioChart(canvas, ratioOhlcv, H) {
   const dpr = window.devicePixelRatio || 1;
@@ -314,14 +388,16 @@ export function drawRatioChart(canvas, ratioOhlcv, H) {
   const priceBot = dateY - 4;
   const slotW  = innerW / n;
 
-  // Price range
+  // Price range — single-pass loop
   let pmin = Infinity, pmax = -Infinity;
-  ratioOhlcv.forEach(r => {
-    pmin = Math.min(pmin, r.l); pmax = Math.max(pmax, r.h);
-    [r.sma10, r.sma50, r.sma250].forEach(v => {
-      if (v != null) { pmin = Math.min(pmin, v); pmax = Math.max(pmax, v); }
-    });
-  });
+  for (let i = 0; i < n; i++) {
+    const r = ratioOhlcv[i];
+    if (r.l < pmin) pmin = r.l;
+    if (r.h > pmax) pmax = r.h;
+    if (r.sma10  != null) { if (r.sma10  < pmin) pmin = r.sma10;  if (r.sma10  > pmax) pmax = r.sma10;  }
+    if (r.sma50  != null) { if (r.sma50  < pmin) pmin = r.sma50;  if (r.sma50  > pmax) pmax = r.sma50;  }
+    if (r.sma250 != null) { if (r.sma250 < pmin) pmin = r.sma250; if (r.sma250 > pmax) pmax = r.sma250; }
+  }
   const pad5  = (pmax - pmin || 1) * 0.05;
   const plo   = pmin - pad5, phi = pmax + pad5, pspan = phi - plo;
 
@@ -399,21 +475,20 @@ export function drawRatioChart(canvas, ratioOhlcv, H) {
 
   // Store meta for crosshair
   canvas._chartMeta = { data: ratioOhlcv, n, slotW, px, py, priceY, priceBot, dateY, innerW };
+
+  // Cache for crosshair
+  _cacheBuffer(canvas);
 }
 
 // ── Crosshair ──────────────────────────────────────────────────
 /**
  * attachCrosshair(canvas, getRedrawFn)
  *   canvas       – The card canvas element
- *   getRedrawFn  – Callback () => fn  that returns the correct
- *                  redraw function for the current chart mode.
- *                  This keeps chart.js decoupled from app state.
+ *   getRedrawFn  – Callback () => fn that returns the correct redraw
+ *                  function for the current chart mode.
  *
- * Usage (grid page):
- *   attachCrosshair(canvas, () => (c) => drawChart(c, c._ohlcv, CHART_H));
- *
- * Usage (sectors page):
- *   attachCrosshair(canvas, () => redrawCardCanvas);
+ * Optimised: uses offscreen buffer instead of full redraw per mousemove.
+ * Falls back to getRedrawFn if buffer is stale or missing.
  */
 export function attachCrosshair(canvas, getRedrawFn) {
   canvas.addEventListener('mousemove', e => {
@@ -429,11 +504,14 @@ export function attachCrosshair(canvas, getRedrawFn) {
     const bar = meta.data[i];
     const x   = meta.px(i);
 
-    // Redraw clean chart first, then overlay
-    getRedrawFn()(canvas);
+    // Restore clean chart from buffer (fast) or full redraw (fallback)
+    if (!_restoreBuffer(canvas)) {
+      getRedrawFn()(canvas);
+    }
 
     const dpr = window.devicePixelRatio || 1;
     const ctx = canvas.getContext('2d');
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.scale(dpr, dpr);
 
     // Vertical crosshair line
@@ -454,7 +532,10 @@ export function attachCrosshair(canvas, getRedrawFn) {
   });
 
   canvas.addEventListener('mouseleave', () => {
-    getRedrawFn()(canvas);
+    // Restore clean chart (no crosshair)
+    if (!_restoreBuffer(canvas)) {
+      getRedrawFn()(canvas);
+    }
   });
 }
 
@@ -463,16 +544,12 @@ export function attachCrosshair(canvas, getRedrawFn) {
  * attachLightboxZoom(canvas, onZoomChange)
  *   canvas        – The lightbox canvas element
  *   onZoomChange  – Callback (zoomRange | null) => void
- *                   Called when zoom is committed or reset.
- *
- * Zoom state is stored externally via the callback — this function
- * manages only drag UI and emits events.
  */
 export function attachLightboxZoom(canvas, onZoomChange) {
   let dragging = false;
   let startX   = null;
   let overlayX = null;
-  let currentZoom = null;   // tracks zoom passed back via callback
+  let currentZoom = null;
 
   const canvasX = e => e.clientX - canvas.getBoundingClientRect().left;
 
@@ -494,12 +571,15 @@ export function attachLightboxZoom(canvas, onZoomChange) {
     const meta = canvas._chartMeta;
     if (!meta) return;
 
-    // Redraw chart then show drag selection overlay
-    const H = canvas._H || Math.round(canvas.height / (window.devicePixelRatio || 1));
-    drawChart(canvas, canvas._ohlcv, H, currentZoom);
+    // Restore clean chart then overlay selection
+    if (!_restoreBuffer(canvas)) {
+      const H = canvas._H || Math.round(canvas.height / (window.devicePixelRatio || 1));
+      drawChart(canvas, canvas._ohlcv, H, currentZoom);
+    }
 
     const dpr = window.devicePixelRatio || 1;
     const ctx = canvas.getContext('2d');
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.scale(dpr, dpr);
     const x1 = Math.min(startX, overlayX);
     const x2 = Math.max(startX, overlayX);
@@ -518,9 +598,8 @@ export function attachLightboxZoom(canvas, onZoomChange) {
     if (!meta) return;
     const x1 = Math.min(startX, canvasX(e));
     const x2 = Math.max(startX, canvasX(e));
-    if (x2 - x1 < 8) return;   // too small to be intentional
+    if (x2 - x1 < 8) return;
 
-    // Convert pixel range → data indices (accounting for existing zoom offset)
     const baseStart = currentZoom ? currentZoom[0] : 0;
     const i1 = Math.max(0, Math.floor((x1 - PAD.left) / meta.slotW));
     const i2 = Math.min(meta.n - 1, Math.ceil((x2 - PAD.left) / meta.slotW));
@@ -530,7 +609,6 @@ export function attachLightboxZoom(canvas, onZoomChange) {
     onZoomChange(currentZoom);
   });
 
-  // Click without drag → reset zoom
   canvas.addEventListener('click', e => {
     if (Math.abs(canvasX(e) - startX) > 4) return;
     if (!currentZoom) return;
@@ -538,11 +616,9 @@ export function attachLightboxZoom(canvas, onZoomChange) {
     onZoomChange(null);
   });
 
-  // Allow external code to reset zoom (e.g. ESC key handler)
   canvas._resetZoom = () => {
     currentZoom = null;
     onZoomChange(null);
   };
-  // Allow external code to read current zoom
   canvas._getZoom = () => currentZoom;
 }
