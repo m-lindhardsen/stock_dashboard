@@ -198,6 +198,42 @@
     #zoom-reset:hover   { color: var(--text); border-color: var(--muted); }
     #zoom-reset.visible { display: block; }
 
+    #bubble-watchlist {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: .65rem;
+      font-weight: 600;
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid rgba(74,240,176,.4);
+      border-radius: var(--r-btn);
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: all .12s;
+      z-index: 10;
+    }
+    #bubble-watchlist:hover { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+    /* Nudge zoom-reset left when both buttons are visible */
+    #zoom-reset.visible { right: 148px; }
+
+    #bubble-save-feedback {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      font-family: 'Space Mono', monospace;
+      font-size: .65rem;
+      font-weight: 700;
+      color: var(--accent);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .3s;
+      z-index: 11;
+    }
+    #bubble-save-feedback.show { opacity: 1; }
+
     /* Sector colour legend */
     #bubble-legend {
       display: flex;
@@ -378,6 +414,8 @@
   <div class="bubble-wrap">
     <canvas id="bubble-canvas" height="580"></canvas>
     <button id="zoom-reset">✕ Reset zoom</button>
+    <button id="bubble-watchlist">★ Add to watchlist</button>
+    <span id="bubble-save-feedback"></span>
   </div>
   <div id="bubble-legend"></div>
 </div>

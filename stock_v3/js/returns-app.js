@@ -578,6 +578,58 @@ function buildBubbleLegend(sectors) {
   });
 }
 
+// ── Bubble watchlist ───────────────────────────────────────────
+// Adds all currently visible bubbles to the shared watchlist.
+// "Visible" = sector not hidden AND (if zoomed) within zoom window.
+
+const LS_KEY = 'marketgrid_watchlist_v1';
+
+function getVisibleTickers() {
+  const rows = canvas._rows;   // set by drawBubble() — already filtered by sector
+  if (!rows) return [];
+
+  // If zoomed, further filter to tickers inside the zoom window
+  if (bubbleZoom) {
+    const { xMin, xMax, yMin, yMax } = bubbleZoom;
+    return rows
+      .filter(r => r.r0 >= xMin && r.r0 <= xMax && r.r1 >= yMin && r.r1 <= yMax)
+      .map(r => r.ticker);
+  }
+  return rows.map(r => r.ticker);
+}
+
+function initBubbleWatchlist() {
+  const btn      = document.getElementById('bubble-watchlist');
+  const feedback = document.getElementById('bubble-save-feedback');
+  let   fadeTimer = null;
+
+  btn.addEventListener('click', () => {
+    const tickers = getVisibleTickers();
+
+    // Load existing watchlist, add new tickers, save back
+    let wl;
+    try { wl = new Set(JSON.parse(localStorage.getItem(LS_KEY)) || []); }
+    catch { wl = new Set(); }
+
+    const before = wl.size;
+    tickers.forEach(t => wl.add(t));
+    const added = wl.size - before;
+
+    localStorage.setItem(LS_KEY, JSON.stringify([...wl]));
+
+    // Show feedback
+    feedback.textContent = added > 0
+      ? `✓ ${added} ticker${added === 1 ? '' : 's'} added`
+      : tickers.length === 0
+        ? '— nothing visible'
+        : '— already in watchlist';
+
+    feedback.classList.add('show');
+    clearTimeout(fadeTimer);
+    fadeTimer = setTimeout(() => feedback.classList.remove('show'), 2200);
+  });
+}
+
 // ── Resize ─────────────────────────────────────────────────────
 function initResizeHandler() {
   let timer;
@@ -605,6 +657,7 @@ async function main() {
   initSortableHeaders();
   initBubbleHover();
   initBubbleZoom();
+  initBubbleWatchlist();
   initResizeHandler();
 
   await loadGrid();
