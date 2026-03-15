@@ -927,7 +927,7 @@
   "MSFT_daily": "2026-03-15",
   "MSI_daily": "2026-03-15",
   "MTB_daily": "2026-03-15",
-  "MTCH_daily": "2026-03-12",
+  "MTCH_daily": "2026-03-15",
   "MTD_daily": "2026-03-15",
   "MU_daily": "2026-03-15",
   "NCLH_daily": "2026-03-15",
@@ -3782,5 +3782,9 @@
   "YOU_weekly": "2026-03-15",
   "ZD_weekly": "2026-03-15",
   "ZION_weekly": "2026-03-15",
-  "ZWS_weekly": "2026-03-15"
+  "ZWS_weekly": "2026-03-15",
+  "BF-B_daily": "2026-03-15",
+  "BRK-B_daily": "2026-03-15",
+  "BF-B_weekly": "2026-03-15",
+  "BRK-B_weekly": "2026-03-15"
 }

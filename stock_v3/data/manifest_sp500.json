@@ -62,6 +62,7 @@
     "BAC",
     "BAX",
     "BDX",
+    "BRK-B",
     "BBY",
     "TECH",
     "BIIB",
@@ -76,6 +77,7 @@
     "AVGO",
     "BR",
     "BRO",
+    "BF-B",
     "BLDR",
     "BG",
     "BXP",
@@ -499,5 +501,5 @@
     "ZBH",
     "ZTS"
   ],
-  "generated": "2026-03-15T14:44:58.593978"
+  "generated": "2026-03-15T16:05:12.046312"
 }

@@ -8018,5 +8018,15 @@
     "shortName": "Zurn Elkay Water Solutions Corp",
     "sector": "Industrials",
     "industry": "Pollution & Treatment Controls"
+  },
+  "BF-B": {
+    "shortName": "Brown Forman Inc",
+    "sector": "Consumer Defensive",
+    "industry": "Beverages - Wineries & Distilleries"
+  },
+  "BRK-B": {
+    "shortName": "Berkshire Hathaway Inc. New",
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified"
   }
 }

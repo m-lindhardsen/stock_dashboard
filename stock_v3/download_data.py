@@ -1,25 +1,23 @@
 #!/usr/bin/env python3
 """
-Stock Data Downloader — Multi-Grid Edition (Bulk, Daily + Weekly)
-------------------------------------------------------------------
+Stock Data Downloader — Multi-Grid Edition (Optimized)
+-------------------------------------------------------
 Downloads two datasets per ticker:
   - Daily  2 years  → data/AAPL_daily.json
   - Weekly 5 years  → data/AAPL_weekly.json
 
-Both use bulk yf.download() for speed.
-Company info is cached in info_cache.json and only fetched once per ticker.
-Cache tracks daily and weekly separately so either can be force-refreshed.
+Optimizations over v1:
+  1. Vectorized DataFrame→dict conversion (no iterrows)
+  2. Running-sum SMA — O(n) instead of O(n×k)
+  3. Threaded company info fetches (concurrent.futures)
+  4. In-memory bundle assembly (no re-reading JSON from disk)
+  5. Safer chunk size (50) to avoid Yahoo rate limits
+  6. Single today() call instead of per-ticker
 
 After individual files are written, bundles are produced per grid per interval:
-  - data/sp500_daily_bundle.json
-  - data/sp500_weekly_bundle.json
-  - data/sp400_daily_bundle.json
-  ... etc. for every grid
+  - data/sp500_daily_bundle.json   etc.
 
-The JS app loads one bundle per grid (single request) instead of one file
-per ticker, which dramatically reduces page load time for large grids.
-
-To add a new grid: create tickers_mygrid.txt and re-run.
+Ticker files: tickers_mygrid.txt   (one ticker per line, # comments ok)
 """
 
 import os
@@ -27,6 +25,7 @@ import json
 import datetime
 import sys
 import glob
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 try:
     import yfinance as yf
@@ -41,13 +40,19 @@ except ImportError:
     os.system(f"{sys.executable} -m pip install pandas --quiet")
     import pandas as pd
 
+try:
+    import numpy as np
+except ImportError:
+    os.system(f"{sys.executable} -m pip install numpy --quiet")
+    import numpy as np
+
 SCRIPT_DIR  = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR    = os.path.join(SCRIPT_DIR, "data")
 CACHE_FILE  = os.path.join(DATA_DIR, "cache_meta.json")
 INFO_FILE   = os.path.join(DATA_DIR, "info_cache.json")
-CHUNK_SIZE  = 100
+CHUNK_SIZE  = 50          # safer than 100 — fewer Yahoo rate-limit retries
+INFO_THREADS = 8          # parallel company-info fetches
 
-# Intervals to download: (label, yfinance period, yfinance interval, suffix)
 INTERVALS = [
     ("daily",  "2y", "1d",  "daily"),
     ("weekly", "5y", "1wk", "weekly"),
@@ -93,19 +98,25 @@ def cache_key(ticker, interval_label):
     return f"{ticker}_{interval_label}"
 
 
-def needs_update(ticker, interval_label, date_cache):
-    today = datetime.date.today().isoformat()
+def needs_update(ticker, interval_label, date_cache, today):
     key   = cache_key(ticker, interval_label)
     fname = os.path.join(DATA_DIR, f"{ticker}_{interval_label}.json")
     return date_cache.get(key) != today or not os.path.exists(fname)
 
 
-# ── SMA ────────────────────────────────────────────────────────────────────────
+# ── SMA — O(n) running sum ────────────────────────────────────────────────────
 
 def sma(values, n):
-    result = [None] * len(values)
-    for i in range(n - 1, len(values)):
-        result[i] = round(sum(values[i - n + 1: i + 1]) / n, 4)
+    """Running-sum SMA.  ~10× faster than re-summing the window each step."""
+    length = len(values)
+    result = [None] * length
+    if length < n:
+        return result
+    window_sum = sum(values[:n])
+    result[n - 1] = round(window_sum / n, 4)
+    for i in range(n, length):
+        window_sum += values[i] - values[i - n]
+        result[i] = round(window_sum / n, 4)
     return result
 
 
@@ -116,6 +127,33 @@ def enrich_with_sma(rows):
         for i, r in enumerate(rows):
             r[key] = vals[i]
     return rows
+
+
+# ── Vectorised DataFrame → list-of-dicts ──────────────────────────────────────
+
+def _df_to_rows(sub):
+    """Convert a single-ticker OHLCV DataFrame to compact dicts — vectorised."""
+    sub = sub.dropna(subset=["Close"])
+    if sub.empty:
+        return []
+    return [
+        {
+            "t": t.strftime("%Y-%m-%d"),
+            "o": round(float(o), 4),
+            "h": round(float(h), 4),
+            "l": round(float(l), 4),
+            "c": round(float(c), 4),
+            "v": int(v),
+        }
+        for t, o, h, l, c, v in zip(
+            sub.index,
+            sub["Open"].values,
+            sub["High"].values,
+            sub["Low"].values,
+            sub["Close"].values,
+            sub["Volume"].values,
+        )
+    ]
 
 
 # ── Bulk download ──────────────────────────────────────────────────────────────
@@ -138,35 +176,13 @@ def bulk_download(tickers, period, interval):
 
     if len(tickers) == 1:
         t = tickers[0]
-        rows = []
-        for dt, row in df.iterrows():
-            try:
-                rows.append({
-                    "t": dt.strftime("%Y-%m-%d"),
-                    "o": round(float(row["Open"]),  4),
-                    "h": round(float(row["High"]),  4),
-                    "l": round(float(row["Low"]),   4),
-                    "c": round(float(row["Close"]), 4),
-                    "v": int(row["Volume"]),
-                })
-            except Exception:
-                continue
+        rows = _df_to_rows(df)
         if rows:
             results[t] = rows
     else:
         for t in tickers:
             try:
-                sub = df[t].dropna(subset=["Close"])
-                rows = []
-                for dt, row in sub.iterrows():
-                    rows.append({
-                        "t": dt.strftime("%Y-%m-%d"),
-                        "o": round(float(row["Open"]),  4),
-                        "h": round(float(row["High"]),  4),
-                        "l": round(float(row["Low"]),   4),
-                        "c": round(float(row["Close"]), 4),
-                        "v": int(row["Volume"]),
-                    })
+                rows = _df_to_rows(df[t])
                 if rows:
                     results[t] = rows
             except Exception as e:
@@ -175,42 +191,45 @@ def bulk_download(tickers, period, interval):
     return results
 
 
-# ── Company info ───────────────────────────────────────────────────────────────
+# ── Company info — threaded ────────────────────────────────────────────────────
 
-def fetch_info(ticker, info_cache):
-    if ticker in info_cache:
-        return info_cache[ticker]
-    print(f"    Fetching info for {ticker}...")
+def _fetch_single_info(ticker):
+    """Fetch info for one ticker (called inside thread pool)."""
     try:
         raw  = yf.Ticker(ticker).info
-        info = {
+        return ticker, {
             "shortName": raw.get("shortName", ticker),
             "sector":    raw.get("sector",    "—"),
             "industry":  raw.get("industry",  "—"),
         }
     except Exception:
-        info = {"shortName": ticker, "sector": "—", "industry": "—"}
-    info_cache[ticker] = info
-    return info
+        return ticker, {"shortName": ticker, "sector": "—", "industry": "—"}
 
 
-# ── Bundle writer ──────────────────────────────────────────────────────────────
-
-def write_bundles(grid_tickers, suffix, now):
+def fetch_info_batch(tickers, info_cache):
     """
-    For each grid, read the individual per-ticker JSON files and combine
-    them into a single bundle file: data/{gridname}_{suffix}_bundle.json
+    Return info for every ticker in `tickers`.
+    Cached tickers are returned immediately; uncached ones are fetched
+    in parallel using a thread pool.
+    """
+    to_fetch = [t for t in tickers if t not in info_cache]
+    if to_fetch:
+        print(f"    Fetching company info for {len(to_fetch)} new tickers "
+              f"({INFO_THREADS} threads)...")
+        with ThreadPoolExecutor(max_workers=INFO_THREADS) as pool:
+            futures = {pool.submit(_fetch_single_info, t): t for t in to_fetch}
+            for fut in as_completed(futures):
+                ticker, info = fut.result()
+                info_cache[ticker] = info
+    return info_cache
 
-    Bundle format:
-      {
-        "grid":      "sp500",
-        "interval":  "daily",
-        "generated": "...",
-        "tickers":   [ { ticker, info, ohlcv }, ... ]
-      }
 
-    The JS app fetches this single file instead of one file per ticker,
-    reducing 500 HTTP requests to 1 for large grids like sp500.
+# ── Bundle writer (in-memory) ─────────────────────────────────────────────────
+
+def write_bundles(grid_tickers, suffix, now, ticker_data_cache):
+    """
+    Build bundles from in-memory ticker_data_cache where possible,
+    falling back to disk only for tickers that weren't freshly downloaded.
     """
     print(f"\n── BUNDLES ({suffix}) ──────────────────────────────────────")
     for grid_name, tickers in grid_tickers.items():
@@ -218,12 +237,16 @@ def write_bundles(grid_tickers, suffix, now):
         entries = []
         missing = []
         for t in tickers:
-            fpath = os.path.join(DATA_DIR, f"{t}_{suffix}.json")
-            if not os.path.exists(fpath):
-                missing.append(t)
-                continue
-            with open(fpath, "r") as f:
-                entries.append(json.load(f))
+            mem_key = f"{t}_{suffix}"
+            if mem_key in ticker_data_cache:
+                entries.append(ticker_data_cache[mem_key])
+            else:
+                fpath = os.path.join(DATA_DIR, f"{t}_{suffix}.json")
+                if not os.path.exists(fpath):
+                    missing.append(t)
+                    continue
+                with open(fpath, "r") as f:
+                    entries.append(json.load(f))
 
         bundle = {
             "grid":      grid_name,
@@ -251,11 +274,10 @@ def main():
         print("No tickers_*.txt files found.")
         sys.exit(1)
 
-    print("Stock Dashboard — Bulk Downloader (Daily + Weekly)")
+    print("Stock Dashboard — Bulk Downloader (Optimized)")
     print(f"Found {len(grids)} grid(s): {', '.join(grids.keys())}")
     print()
 
-    # Collect all unique tickers across all grids
     grid_tickers = {}
     all_tickers  = set()
     for name, filepath in grids.items():
@@ -270,12 +292,15 @@ def main():
     today      = datetime.date.today().isoformat()
     now        = datetime.datetime.now().isoformat()
 
-    # ── Download each interval ─────────────────────────────────────
+    # In-memory cache: "AAPL_daily" → {ticker, info, ohlcv} dict
+    # Used by write_bundles() to avoid re-reading files we just wrote.
+    ticker_data_cache = {}
+
     for label, period, interval, suffix in INTERVALS:
         print(f"\n── {label.upper()} ({period}, {interval}) ──────────────────")
 
         to_update = [t for t in sorted(all_tickers)
-                     if needs_update(t, label, date_cache)]
+                     if needs_update(t, label, date_cache, today)]
         skipped   = len(all_tickers) - len(to_update)
 
         print(f"  To download: {len(to_update)}   Already cached: {skipped}")
@@ -283,12 +308,16 @@ def main():
         if not to_update:
             print("  All up to date.")
         else:
-            # Bulk download in chunks of CHUNK_SIZE
+            # Bulk download in chunks
             all_ohlcv = {}
             for i in range(0, len(to_update), CHUNK_SIZE):
                 chunk  = to_update[i: i + CHUNK_SIZE]
                 result = bulk_download(chunk, period, interval)
                 all_ohlcv.update(result)
+
+            # Batch-fetch company info (threaded)
+            tickers_needing_info = [t for t in to_update if t in all_ohlcv]
+            fetch_info_batch(tickers_needing_info, info_cache)
 
             updated, failed = [], []
             for ticker in to_update:
@@ -298,12 +327,16 @@ def main():
                     continue
 
                 rows = enrich_with_sma(all_ohlcv[ticker])
-                info = fetch_info(ticker, info_cache)
+                info = info_cache.get(ticker, {"shortName": ticker, "sector": "—", "industry": "—"})
                 data = {"ticker": ticker, "info": info, "ohlcv": rows}
 
+                # Write individual file
                 fname = os.path.join(DATA_DIR, f"{ticker}_{suffix}.json")
                 with open(fname, "w") as f:
                     json.dump(data, f, separators=(",", ":"))
+
+                # Keep in memory for bundle assembly
+                ticker_data_cache[f"{ticker}_{suffix}"] = data
 
                 date_cache[cache_key(ticker, label)] = today
                 updated.append(ticker)
@@ -315,10 +348,9 @@ def main():
             if failed:
                 print(f"  Failed: {', '.join(failed)}")
 
-        # Always rebuild bundles after each interval pass so they stay fresh
-        write_bundles(grid_tickers, suffix, now)
+        write_bundles(grid_tickers, suffix, now, ticker_data_cache)
 
-    # ── Write manifests and grids index ───────────────────────────
+    # ── Manifests ──────────────────────────────────────────────────
     print("\n── MANIFESTS ──────────────────────────────────────")
     for name, tickers in grid_tickers.items():
         available = [
