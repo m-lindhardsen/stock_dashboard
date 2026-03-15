@@ -3038,5 +3038,4985 @@
     "shortName": "CBOE Volatility Index",
     "sector": "\u2014",
     "industry": "\u2014"
+  },
+  "AA": {
+    "shortName": "Alcoa Corporation",
+    "sector": "Basic Materials",
+    "industry": "Aluminum"
+  },
+  "AAL": {
+    "shortName": "American Airlines Group, Inc.",
+    "sector": "Industrials",
+    "industry": "Airlines"
+  },
+  "AAMI": {
+    "shortName": "Acadian Asset Management Inc.",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "AAON": {
+    "shortName": "AAON, Inc.",
+    "sector": "Industrials",
+    "industry": "Building Products & Equipment"
+  },
+  "AAP": {
+    "shortName": "Advance Auto Parts Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "AAT": {
+    "shortName": "American Assets Trust, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Diversified"
+  },
+  "ABCB": {
+    "shortName": "Ameris Bancorp",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "ABG": {
+    "shortName": "Asbury Automotive Group Inc",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto & Truck Dealerships"
+  },
+  "ABM": {
+    "shortName": "ABM Industries Incorporated",
+    "sector": "Industrials",
+    "industry": "Specialty Business Services"
+  },
+  "ABR": {
+    "shortName": "Arbor Realty Trust",
+    "sector": "Real Estate",
+    "industry": "REIT - Mortgage"
+  },
+  "ACA": {
+    "shortName": "Arcosa, Inc.",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "ACAD": {
+    "shortName": "ACADIA Pharmaceuticals Inc.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "ACHC": {
+    "shortName": "Acadia Healthcare Company, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Care Facilities"
+  },
+  "ACI": {
+    "shortName": "Albertsons Companies, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Grocery Stores"
+  },
+  "ACIW": {
+    "shortName": "ACI Worldwide, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Infrastructure"
+  },
+  "ACLS": {
+    "shortName": "Axcelis Technologies, Inc.",
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment & Materials"
+  },
+  "ACM": {
+    "shortName": "AECOM",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "ACMR": {
+    "shortName": "ACM Research, Inc.",
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment & Materials"
+  },
+  "ACT": {
+    "shortName": "Enact Holdings, Inc.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Specialty"
+  },
+  "ADAM": {
+    "shortName": "Adamas Trust, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Mortgage"
+  },
+  "ADC": {
+    "shortName": "Agree Realty Corporation",
+    "sector": "Real Estate",
+    "industry": "REIT - Retail"
+  },
+  "ADEA": {
+    "shortName": "Adeia Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "ADMA": {
+    "shortName": "ADMA Biologics Inc",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "ADNT": {
+    "shortName": "Adient plc",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "ADT": {
+    "shortName": "ADT Inc.",
+    "sector": "Industrials",
+    "industry": "Security & Protection Services"
+  },
+  "ADUS": {
+    "shortName": "Addus HomeCare Corporation",
+    "sector": "Healthcare",
+    "industry": "Medical Care Facilities"
+  },
+  "AEIS": {
+    "shortName": "Advanced Energy Industries, Inc",
+    "sector": "Industrials",
+    "industry": "Electrical Equipment & Parts"
+  },
+  "AEO": {
+    "shortName": "American Eagle Outfitters, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Retail"
+  },
+  "AESI": {
+    "shortName": "Atlas Energy Solutions Inc.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "AFG": {
+    "shortName": "American Financial Group, Inc.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty"
+  },
+  "AGCO": {
+    "shortName": "AGCO Corporation",
+    "sector": "Industrials",
+    "industry": "Farm & Heavy Construction Machinery"
+  },
+  "AGO": {
+    "shortName": "Assured Guaranty Ltd.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Specialty"
+  },
+  "AGYS": {
+    "shortName": "Agilysys, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "AHCO": {
+    "shortName": "AdaptHealth Corp.",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "AHH": {
+    "shortName": "Armada Hoffler Properties, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Diversified"
+  },
+  "AHR": {
+    "shortName": "American Healthcare REIT, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Healthcare Facilities"
+  },
+  "AIN": {
+    "shortName": "Albany International Corporatio",
+    "sector": "Consumer Cyclical",
+    "industry": "Textile Manufacturing"
+  },
+  "AIR": {
+    "shortName": "AAR Corp.",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "AIT": {
+    "shortName": "Applied Industrial Technologies",
+    "sector": "Industrials",
+    "industry": "Industrial Distribution"
+  },
+  "AKR": {
+    "shortName": "Acadia Realty Trust",
+    "sector": "Real Estate",
+    "industry": "REIT - Retail"
+  },
+  "AL": {
+    "shortName": "Air Lease Corporation",
+    "sector": "Industrials",
+    "industry": "Rental & Leasing Services"
+  },
+  "ALEX": {
+    "shortName": "Alexander & Baldwin, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Retail"
+  },
+  "ALG": {
+    "shortName": "Alamo Group, Inc.",
+    "sector": "Industrials",
+    "industry": "Farm & Heavy Construction Machinery"
+  },
+  "ALGM": {
+    "shortName": "Allegro MicroSystems, Inc.",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  "ALGT": {
+    "shortName": "Allegiant Travel Company",
+    "sector": "Industrials",
+    "industry": "Airlines"
+  },
+  "ALK": {
+    "shortName": "Alaska Air Group, Inc.",
+    "sector": "Industrials",
+    "industry": "Airlines"
+  },
+  "ALKS": {
+    "shortName": "Alkermes plc",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "ALLY": {
+    "shortName": "Ally Financial Inc.",
+    "sector": "Financial Services",
+    "industry": "Credit Services"
+  },
+  "ALRM": {
+    "shortName": "Alarm.com Holdings, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "ALV": {
+    "shortName": "Autoliv, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "AM": {
+    "shortName": "Antero Midstream Corporation",
+    "sector": "Energy",
+    "industry": "Oil & Gas Midstream"
+  },
+  "AMG": {
+    "shortName": "Affiliated Managers Group, Inc.",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "AMH": {
+    "shortName": "American Homes 4 Rent",
+    "sector": "Real Estate",
+    "industry": "REIT - Residential"
+  },
+  "AMKR": {
+    "shortName": "Amkor Technology, Inc.",
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment & Materials"
+  },
+  "AMN": {
+    "shortName": "AMN Healthcare Services Inc",
+    "sector": "Healthcare",
+    "industry": "Medical Care Facilities"
+  },
+  "AMPH": {
+    "shortName": "Amphastar Pharmaceuticals, Inc.",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "AMR": {
+    "shortName": "Alpha Metallurgical Resources, ",
+    "sector": "Basic Materials",
+    "industry": "Coking Coal"
+  },
+  "AMRX": {
+    "shortName": "Amneal Pharmaceuticals, Inc.",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "AMSF": {
+    "shortName": "AMERISAFE, Inc.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Specialty"
+  },
+  "AMTM": {
+    "shortName": "Amentum Holdings, Inc.",
+    "sector": "Industrials",
+    "industry": "Specialty Business Services"
+  },
+  "AMWD": {
+    "shortName": "American Woodmark Corporation",
+    "sector": "Consumer Cyclical",
+    "industry": "Furnishings, Fixtures & Appliances"
+  },
+  "AN": {
+    "shortName": "AutoNation, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto & Truck Dealerships"
+  },
+  "ANDE": {
+    "shortName": "The Andersons, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Food Distribution"
+  },
+  "ANF": {
+    "shortName": "Abercrombie & Fitch Company",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Retail"
+  },
+  "ANGI": {
+    "shortName": "Angi Inc.",
+    "sector": "Communication Services",
+    "industry": "Internet Content & Information"
+  },
+  "ANIP": {
+    "shortName": "ANI Pharmaceuticals, Inc.",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "AORT": {
+    "shortName": "Artivion, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "AOSL": {
+    "shortName": "Alpha and Omega Semiconductor L",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  "APAM": {
+    "shortName": "Artisan Partners Asset Manageme",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "APG": {
+    "shortName": "APi Group Corporation",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "APLE": {
+    "shortName": "Apple Hospitality REIT, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Hotel & Motel"
+  },
+  "APLS": {
+    "shortName": "Apellis Pharmaceuticals, Inc.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "APOG": {
+    "shortName": "Apogee Enterprises, Inc.",
+    "sector": "Industrials",
+    "industry": "Building Products & Equipment"
+  },
+  "APPF": {
+    "shortName": "AppFolio, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "AR": {
+    "shortName": "Antero Resources Corporation",
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P"
+  },
+  "ARCB": {
+    "shortName": "ArcBest Corporation",
+    "sector": "Industrials",
+    "industry": "Trucking"
+  },
+  "ARI": {
+    "shortName": "Apollo Commercial Real Estate F",
+    "sector": "Real Estate",
+    "industry": "REIT - Mortgage"
+  },
+  "ARLO": {
+    "shortName": "Arlo Technologies, Inc.",
+    "sector": "Industrials",
+    "industry": "Building Products & Equipment"
+  },
+  "ARMK": {
+    "shortName": "Aramark",
+    "sector": "Industrials",
+    "industry": "Specialty Business Services"
+  },
+  "AROC": {
+    "shortName": "Archrock, Inc.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "ARR": {
+    "shortName": "ARMOUR Residential REIT, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Mortgage"
+  },
+  "ARW": {
+    "shortName": "Arrow Electronics, Inc.",
+    "sector": "Technology",
+    "industry": "Electronics & Computer Distribution"
+  },
+  "ARWR": {
+    "shortName": "Arrowhead Pharmaceuticals, Inc.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "ASB": {
+    "shortName": "Associated Banc-Corp",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "ASGN": {
+    "shortName": "ASGN Incorporated",
+    "sector": "Technology",
+    "industry": "Information Technology Services"
+  },
+  "ASH": {
+    "shortName": "Ashland Inc.",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "ASO": {
+    "shortName": "Academy Sports and Outdoors, In",
+    "sector": "Consumer Cyclical",
+    "industry": "Specialty Retail"
+  },
+  "ASTE": {
+    "shortName": "Astec Industries, Inc.",
+    "sector": "Industrials",
+    "industry": "Farm & Heavy Construction Machinery"
+  },
+  "ASTH": {
+    "shortName": "Astrana Health Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Care Facilities"
+  },
+  "ATEN": {
+    "shortName": "A10 Networks, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Infrastructure"
+  },
+  "ATGE": {
+    "shortName": "Adtalem Global Education Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Education & Training Services"
+  },
+  "ATI": {
+    "shortName": "ATI Inc.",
+    "sector": "Industrials",
+    "industry": "Metal Fabrication"
+  },
+  "ATR": {
+    "shortName": "AptarGroup, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies"
+  },
+  "AUB": {
+    "shortName": "Atlantic Union Bankshares Corpo",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "AVA": {
+    "shortName": "Avista Corporation",
+    "sector": "Utilities",
+    "industry": "Utilities - Diversified"
+  },
+  "AVAV": {
+    "shortName": "AeroVironment, Inc.",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "AVNS": {
+    "shortName": "Avanos Medical, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "AVNT": {
+    "shortName": "Avient Corporation",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "AVT": {
+    "shortName": "Avnet, Inc.",
+    "sector": "Technology",
+    "industry": "Electronics & Computer Distribution"
+  },
+  "AVTR": {
+    "shortName": "Avantor, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies"
+  },
+  "AWI": {
+    "shortName": "Armstrong World Industries Inc",
+    "sector": "Industrials",
+    "industry": "Building Products & Equipment"
+  },
+  "AWR": {
+    "shortName": "American States Water Company",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Water"
+  },
+  "AX": {
+    "shortName": "Axos Financial, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "AXL": {
+    "shortName": "American Axle & Manufacturing H",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "AXTA": {
+    "shortName": "Axalta Coating Systems Ltd.",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "AYI": {
+    "shortName": "Acuity Inc.",
+    "sector": "Industrials",
+    "industry": "Electrical Equipment & Parts"
+  },
+  "AZTA": {
+    "shortName": "Azenta, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies"
+  },
+  "AZZ": {
+    "shortName": "AZZ Inc.",
+    "sector": "Industrials",
+    "industry": "Specialty Business Services"
+  },
+  "BAH": {
+    "shortName": "Booz Allen Hamilton Holding Cor",
+    "sector": "Industrials",
+    "industry": "Consulting Services"
+  },
+  "BANC": {
+    "shortName": "Banc of California, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "BANF": {
+    "shortName": "BancFirst Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "BANR": {
+    "shortName": "Banner Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "BBT": {
+    "shortName": "Beacon Financial Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "BBWI": {
+    "shortName": "Bath & Body Works, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Specialty Retail"
+  },
+  "BC": {
+    "shortName": "Brunswick Corporation",
+    "sector": "Consumer Cyclical",
+    "industry": "Recreational Vehicles"
+  },
+  "BCC": {
+    "shortName": "Boise Cascade, L.L.C.",
+    "sector": "Basic Materials",
+    "industry": "Lumber & Wood Production"
+  },
+  "BCO": {
+    "shortName": "Brinks Company (The)",
+    "sector": "Industrials",
+    "industry": "Security & Protection Services"
+  },
+  "BCPC": {
+    "shortName": "Balchem Corporation",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "BDC": {
+    "shortName": "Belden Inc",
+    "sector": "Technology",
+    "industry": "Communication Equipment"
+  },
+  "BFH": {
+    "shortName": "Bread Financial Holdings, Inc.",
+    "sector": "Financial Services",
+    "industry": "Credit Services"
+  },
+  "BFS": {
+    "shortName": "Saul Centers, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Retail"
+  },
+  "BGC": {
+    "shortName": "BGC Group, Inc.",
+    "sector": "Financial Services",
+    "industry": "Capital Markets"
+  },
+  "BHE": {
+    "shortName": "Benchmark Electronics, Inc.",
+    "sector": "Technology",
+    "industry": "Electronic Components"
+  },
+  "BHF": {
+    "shortName": "Brighthouse Financial, Inc.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Life"
+  },
+  "BILL": {
+    "shortName": "BILL Holdings, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "BIO": {
+    "shortName": "Bio-Rad Laboratories, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "BJ": {
+    "shortName": "BJ's Wholesale Club Holdings, I",
+    "sector": "Consumer Defensive",
+    "industry": "Discount Stores"
+  },
+  "BJRI": {
+    "shortName": "BJ's Restaurants, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Restaurants"
+  },
+  "BKE": {
+    "shortName": "Buckle, Inc. (The)",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Retail"
+  },
+  "BKH": {
+    "shortName": "Black Hills Corporation",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Gas"
+  },
+  "BKU": {
+    "shortName": "BankUnited, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "BL": {
+    "shortName": "BlackLine, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "BLD": {
+    "shortName": "TopBuild Corp.",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "BLFS": {
+    "shortName": "BioLife Solutions, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies"
+  },
+  "BLKB": {
+    "shortName": "Blackbaud, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "BLMN": {
+    "shortName": "Bloomin' Brands, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Restaurants"
+  },
+  "BMI": {
+    "shortName": "Badger Meter, Inc.",
+    "sector": "Technology",
+    "industry": "Scientific & Technical Instruments"
+  },
+  "BMRN": {
+    "shortName": "BioMarin Pharmaceutical Inc.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "BOH": {
+    "shortName": "Bank of Hawaii Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "BOOT": {
+    "shortName": "Boot Barn Holdings, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Retail"
+  },
+  "BOX": {
+    "shortName": "Box, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Infrastructure"
+  },
+  "BRBR": {
+    "shortName": "BellRing Brands, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Packaged Foods"
+  },
+  "BRC": {
+    "shortName": "Brady Corporation",
+    "sector": "Industrials",
+    "industry": "Security & Protection Services"
+  },
+  "BRKR": {
+    "shortName": "Bruker Corporation",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "BROS": {
+    "shortName": "Dutch Bros Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Restaurants"
+  },
+  "BRX": {
+    "shortName": "Brixmor Property Group Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Retail"
+  },
+  "BSY": {
+    "shortName": "Bentley Systems, Incorporated",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "BTSG": {
+    "shortName": "BrightSpring Health Services, I",
+    "sector": "Healthcare",
+    "industry": "Health Information Services"
+  },
+  "BTU": {
+    "shortName": "Peabody Energy Corporation",
+    "sector": "Energy",
+    "industry": "Thermal Coal"
+  },
+  "BURL": {
+    "shortName": "Burlington Stores, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Retail"
+  },
+  "BWA": {
+    "shortName": "BorgWarner Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "BWXT": {
+    "shortName": "BWX Technologies, Inc.",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "BXMT": {
+    "shortName": "Blackstone Mortgage Trust, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Mortgage"
+  },
+  "BYD": {
+    "shortName": "Boyd Gaming Corporation",
+    "sector": "Consumer Cyclical",
+    "industry": "Resorts & Casinos"
+  },
+  "CABO": {
+    "shortName": "Cable One, Inc.",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "CACI": {
+    "shortName": "CACI International, Inc.",
+    "sector": "Technology",
+    "industry": "Information Technology Services"
+  },
+  "CAKE": {
+    "shortName": "The Cheesecake Factory Incorpor",
+    "sector": "Consumer Cyclical",
+    "industry": "Restaurants"
+  },
+  "CALM": {
+    "shortName": "Cal-Maine Foods, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Farm Products"
+  },
+  "CALX": {
+    "shortName": "Calix, Inc",
+    "sector": "Technology",
+    "industry": "Software - Infrastructure"
+  },
+  "CAR": {
+    "shortName": "Avis Budget Group, Inc.",
+    "sector": "Industrials",
+    "industry": "Rental & Leasing Services"
+  },
+  "CARG": {
+    "shortName": "CarGurus, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto & Truck Dealerships"
+  },
+  "CARS": {
+    "shortName": "Cars.com Inc.",
+    "sector": "Communication Services",
+    "industry": "Internet Content & Information"
+  },
+  "CART": {
+    "shortName": "Maplebear Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Internet Retail"
+  },
+  "CASH": {
+    "shortName": "Pathward Financial, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "CASY": {
+    "shortName": "Caseys General Stores, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Specialty Retail"
+  },
+  "CATY": {
+    "shortName": "Cathay General Bancorp",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "CAVA": {
+    "shortName": "CAVA Group, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Restaurants"
+  },
+  "CBRL": {
+    "shortName": "Cracker Barrel Old Country Stor",
+    "sector": "Consumer Cyclical",
+    "industry": "Restaurants"
+  },
+  "CBSH": {
+    "shortName": "Commerce Bancshares, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "CBT": {
+    "shortName": "Cabot Corporation",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "CBU": {
+    "shortName": "Community Financial System, Inc",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "CC": {
+    "shortName": "Chemours Company (The)",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "CCK": {
+    "shortName": "Crown Holdings, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Packaging & Containers"
+  },
+  "CCOI": {
+    "shortName": "Cogent Communications Holdings,",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "CCS": {
+    "shortName": "Century Communities, Inc.",
+    "sector": "Real Estate",
+    "industry": "Real Estate - Development"
+  },
+  "CDP": {
+    "shortName": "COPT Defense Properties",
+    "sector": "Real Estate",
+    "industry": "REIT - Office"
+  },
+  "CE": {
+    "shortName": "Celanese Corporation",
+    "sector": "Basic Materials",
+    "industry": "Chemicals"
+  },
+  "CELH": {
+    "shortName": "Celsius Holdings, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Beverages - Non-Alcoholic"
+  },
+  "CENT": {
+    "shortName": "Central Garden & Pet Company",
+    "sector": "Consumer Defensive",
+    "industry": "Packaged Foods"
+  },
+  "CENTA": {
+    "shortName": "Central Garden & Pet Company",
+    "sector": "Consumer Defensive",
+    "industry": "Packaged Foods"
+  },
+  "CENX": {
+    "shortName": "Century Aluminum Company",
+    "sector": "Basic Materials",
+    "industry": "Aluminum"
+  },
+  "CERT": {
+    "shortName": "Certara, Inc.",
+    "sector": "Healthcare",
+    "industry": "Health Information Services"
+  },
+  "CFFN": {
+    "shortName": "Capitol Federal Financial, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "CFR": {
+    "shortName": "Cullen/Frost Bankers, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "CG": {
+    "shortName": "The Carlyle Group Inc.",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "CGNX": {
+    "shortName": "Cognex Corporation",
+    "sector": "Technology",
+    "industry": "Scientific & Technical Instruments"
+  },
+  "CHCO": {
+    "shortName": "City Holding Company",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "CHDN": {
+    "shortName": "Churchill Downs, Incorporated",
+    "sector": "Consumer Cyclical",
+    "industry": "Gambling"
+  },
+  "CHE": {
+    "shortName": "Chemed Corp",
+    "sector": "Healthcare",
+    "industry": "Medical Care Facilities"
+  },
+  "CHEF": {
+    "shortName": "The Chefs' Warehouse, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Food Distribution"
+  },
+  "CHH": {
+    "shortName": "Choice Hotels International, In",
+    "sector": "Consumer Cyclical",
+    "industry": "Lodging"
+  },
+  "CHRD": {
+    "shortName": "Chord Energy Corporation",
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P"
+  },
+  "CHWY": {
+    "shortName": "Chewy, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Internet Retail"
+  },
+  "CLB": {
+    "shortName": "Core Laboratories Inc.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "CLF": {
+    "shortName": "Cleveland-Cliffs Inc.",
+    "sector": "Basic Materials",
+    "industry": "Steel"
+  },
+  "CLH": {
+    "shortName": "Clean Harbors, Inc.",
+    "sector": "Industrials",
+    "industry": "Waste Management"
+  },
+  "CLSK": {
+    "shortName": "CleanSpark, Inc.",
+    "sector": "Financial Services",
+    "industry": "Capital Markets"
+  },
+  "CMC": {
+    "shortName": "Commercial Metals Company",
+    "sector": "Basic Materials",
+    "industry": "Steel"
+  },
+  "CNH": {
+    "shortName": "CNH Industrial N.V.",
+    "sector": "Industrials",
+    "industry": "Farm & Heavy Construction Machinery"
+  },
+  "CNK": {
+    "shortName": "Cinemark Holdings Inc Cinemark ",
+    "sector": "Communication Services",
+    "industry": "Entertainment"
+  },
+  "CNM": {
+    "shortName": "Core & Main, Inc.",
+    "sector": "Industrials",
+    "industry": "Industrial Distribution"
+  },
+  "CNMD": {
+    "shortName": "CONMED Corporation",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "CNO": {
+    "shortName": "CNO Financial Group, Inc.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Life"
+  },
+  "CNR": {
+    "shortName": "Core Natural Resources, Inc.",
+    "sector": "Energy",
+    "industry": "Thermal Coal"
+  },
+  "CNS": {
+    "shortName": "Cohen & Steers Inc",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "CNX": {
+    "shortName": "CNX Resources Corporation",
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P"
+  },
+  "CNXC": {
+    "shortName": "Concentrix Corporation",
+    "sector": "Technology",
+    "industry": "Information Technology Services"
+  },
+  "CNXN": {
+    "shortName": "PC Connection, Inc.",
+    "sector": "Technology",
+    "industry": "Electronics & Computer Distribution"
+  },
+  "COHR": {
+    "shortName": "Coherent Corp.",
+    "sector": "Technology",
+    "industry": "Scientific & Technical Instruments"
+  },
+  "COHU": {
+    "shortName": "Cohu, Inc.",
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment & Materials"
+  },
+  "COKE": {
+    "shortName": "Coca-Cola Consolidated, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Beverages - Non-Alcoholic"
+  },
+  "COLB": {
+    "shortName": "Columbia Banking System, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "COLL": {
+    "shortName": "Collegium Pharmaceutical, Inc.",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "COLM": {
+    "shortName": "Columbia Sportswear Company",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Manufacturing"
+  },
+  "CON": {
+    "shortName": "Concentra Group Holdings Parent",
+    "sector": "Healthcare",
+    "industry": "Medical Care Facilities"
+  },
+  "CORT": {
+    "shortName": "Corcept Therapeutics Incorporat",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "COTY": {
+    "shortName": "Coty Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Household & Personal Products"
+  },
+  "CPF": {
+    "shortName": "Central Pacific Financial Corp ",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "CPK": {
+    "shortName": "Chesapeake Utilities Corporatio",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Gas"
+  },
+  "CPRI": {
+    "shortName": "Capri Holdings Limited",
+    "sector": "Consumer Cyclical",
+    "industry": "Luxury Goods"
+  },
+  "CPRX": {
+    "shortName": "Catalyst Pharmaceuticals, Inc.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "CR": {
+    "shortName": "Crane Company",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "CRBG": {
+    "shortName": "Corebridge Financial Inc.",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "CRC": {
+    "shortName": "California Resources Corporatio",
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P"
+  },
+  "CRGY": {
+    "shortName": "Crescent Energy Company",
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P"
+  },
+  "CRI": {
+    "shortName": "Carter's, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Retail"
+  },
+  "CRK": {
+    "shortName": "Comstock Resources, Inc.",
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P"
+  },
+  "CROX": {
+    "shortName": "Crocs, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Footwear & Accessories"
+  },
+  "CRS": {
+    "shortName": "Carpenter Technology Corporatio",
+    "sector": "Industrials",
+    "industry": "Metal Fabrication"
+  },
+  "CRSR": {
+    "shortName": "Corsair Gaming, Inc.",
+    "sector": "Technology",
+    "industry": "Computer Hardware"
+  },
+  "CRUS": {
+    "shortName": "Cirrus Logic, Inc.",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  "CRVL": {
+    "shortName": "CorVel Corp.",
+    "sector": "Financial Services",
+    "industry": "Insurance Brokers"
+  },
+  "CSGS": {
+    "shortName": "CSG Systems International, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Infrastructure"
+  },
+  "CSL": {
+    "shortName": "Carlisle Companies Incorporated",
+    "sector": "Industrials",
+    "industry": "Building Products & Equipment"
+  },
+  "CSR": {
+    "shortName": "D/B/A Centerspace",
+    "sector": "Real Estate",
+    "industry": "REIT - Residential"
+  },
+  "CSW": {
+    "shortName": "CSW Industrials, Inc.",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "CTKB": {
+    "shortName": "Cytek Biosciences, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "CTRE": {
+    "shortName": "CareTrust REIT, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Healthcare Facilities"
+  },
+  "CTS": {
+    "shortName": "CTS Corporation",
+    "sector": "Technology",
+    "industry": "Electronic Components"
+  },
+  "CUBE": {
+    "shortName": "CubeSmart",
+    "sector": "Real Estate",
+    "industry": "REIT - Industrial"
+  },
+  "CUBI": {
+    "shortName": "Customers Bancorp, Inc",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "CURB": {
+    "shortName": "Curbline Properties Corp.",
+    "sector": "Real Estate",
+    "industry": "REIT - Retail"
+  },
+  "CUZ": {
+    "shortName": "Cousins Properties Incorporated",
+    "sector": "Real Estate",
+    "industry": "REIT - Office"
+  },
+  "CVBF": {
+    "shortName": "CVB Financial Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "CVCO": {
+    "shortName": "Cavco Industries, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Residential Construction"
+  },
+  "CVI": {
+    "shortName": "CVR Energy Inc.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Refining & Marketing"
+  },
+  "CVLT": {
+    "shortName": "Commvault Systems, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "CW": {
+    "shortName": "Curtiss-Wright Corporation",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "CWEN": {
+    "shortName": "Clearway Energy, Inc.",
+    "sector": "Utilities",
+    "industry": "Utilities - Renewable"
+  },
+  "CWK": {
+    "shortName": "Cushman & Wakefield Ltd.",
+    "sector": "Real Estate",
+    "industry": "Real Estate Services"
+  },
+  "CWST": {
+    "shortName": "Casella Waste Systems, Inc.",
+    "sector": "Industrials",
+    "industry": "Waste Management"
+  },
+  "CWT": {
+    "shortName": "California Water Service Group",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Water"
+  },
+  "CXM": {
+    "shortName": "Sprinklr, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "CXT": {
+    "shortName": "Crane NXT, Co.",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "CXW": {
+    "shortName": "CoreCivic, Inc.",
+    "sector": "Industrials",
+    "industry": "Security & Protection Services"
+  },
+  "CYTK": {
+    "shortName": "Cytokinetics, Incorporated",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "CZR": {
+    "shortName": "Caesars Entertainment, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Resorts & Casinos"
+  },
+  "DAN": {
+    "shortName": "Dana Incorporated",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "DAR": {
+    "shortName": "Darling Ingredients Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Packaged Foods"
+  },
+  "DBX": {
+    "shortName": "Dropbox, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Infrastructure"
+  },
+  "DCI": {
+    "shortName": "Donaldson Company, Inc.",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "DCOM": {
+    "shortName": "Dime Community Bancshares, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "DEA": {
+    "shortName": "Easterly Government Properties,",
+    "sector": "Real Estate",
+    "industry": "REIT - Office"
+  },
+  "DEI": {
+    "shortName": "Douglas Emmett, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Office"
+  },
+  "DFH": {
+    "shortName": "Dream Finders Homes, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Residential Construction"
+  },
+  "DFIN": {
+    "shortName": "Donnelley Financial Solutions, ",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "DGII": {
+    "shortName": "Digi International Inc.",
+    "sector": "Technology",
+    "industry": "Communication Equipment"
+  },
+  "DINO": {
+    "shortName": "HF Sinclair Corporation",
+    "sector": "Energy",
+    "industry": "Oil & Gas Refining & Marketing"
+  },
+  "DIOD": {
+    "shortName": "Diodes Incorporated",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  "DKS": {
+    "shortName": "Dick's Sporting Goods Inc",
+    "sector": "Consumer Cyclical",
+    "industry": "Specialty Retail"
+  },
+  "DLB": {
+    "shortName": "Dolby Laboratories",
+    "sector": "Industrials",
+    "industry": "Specialty Business Services"
+  },
+  "DLX": {
+    "shortName": "Deluxe Corporation",
+    "sector": "Industrials",
+    "industry": "Conglomerates"
+  },
+  "DNOW": {
+    "shortName": "DNOW Inc.",
+    "sector": "Industrials",
+    "industry": "Industrial Distribution"
+  },
+  "DOCN": {
+    "shortName": "DigitalOcean Holdings, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Infrastructure"
+  },
+  "DOCS": {
+    "shortName": "Doximity, Inc.",
+    "sector": "Healthcare",
+    "industry": "Health Information Services"
+  },
+  "DOCU": {
+    "shortName": "DocuSign, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "DORM": {
+    "shortName": "Dorman Products, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "DRH": {
+    "shortName": "Diamondrock Hospitality Company",
+    "sector": "Real Estate",
+    "industry": "REIT - Hotel & Motel"
+  },
+  "DT": {
+    "shortName": "Dynatrace, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "DTM": {
+    "shortName": "DT Midstream, Inc.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Midstream"
+  },
+  "DUOL": {
+    "shortName": "Duolingo, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "DV": {
+    "shortName": "DoubleVerify Holdings, Inc.",
+    "sector": "Communication Services",
+    "industry": "Advertising Agencies"
+  },
+  "DXC": {
+    "shortName": "DXC Technology Company",
+    "sector": "Technology",
+    "industry": "Information Technology Services"
+  },
+  "DXPE": {
+    "shortName": "DXP Enterprises, Inc.",
+    "sector": "Industrials",
+    "industry": "Industrial Distribution"
+  },
+  "DY": {
+    "shortName": "Dycom Industries, Inc.",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "EAT": {
+    "shortName": "Brinker International, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Restaurants"
+  },
+  "ECG": {
+    "shortName": "Everus Construction Group, Inc.",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "ECPG": {
+    "shortName": "Encore Capital Group Inc",
+    "sector": "Financial Services",
+    "industry": "Credit Services"
+  },
+  "EEFT": {
+    "shortName": "Euronet Worldwide, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Infrastructure"
+  },
+  "EFC": {
+    "shortName": "Ellington Financial Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Mortgage"
+  },
+  "EGBN": {
+    "shortName": "Eagle Bancorp, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "EGP": {
+    "shortName": "EastGroup Properties, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Industrial"
+  },
+  "EHC": {
+    "shortName": "Encompass Health Corporation",
+    "sector": "Healthcare",
+    "industry": "Medical Care Facilities"
+  },
+  "EIG": {
+    "shortName": "Employers Holdings Inc",
+    "sector": "Financial Services",
+    "industry": "Insurance - Specialty"
+  },
+  "ELAN": {
+    "shortName": "Elanco Animal Health Incorporat",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "ELF": {
+    "shortName": "e.l.f. Beauty, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Household & Personal Products"
+  },
+  "ELS": {
+    "shortName": "Equity Lifestyle Properties, In",
+    "sector": "Real Estate",
+    "industry": "REIT - Residential"
+  },
+  "EMBC": {
+    "shortName": "Embecta Corp.",
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies"
+  },
+  "EMN": {
+    "shortName": "Eastman Chemical Company",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "ENOV": {
+    "shortName": "Enovis Corporation",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "ENPH": {
+    "shortName": "Enphase Energy, Inc.",
+    "sector": "Technology",
+    "industry": "Solar"
+  },
+  "ENR": {
+    "shortName": "Energizer Holdings, Inc.",
+    "sector": "Industrials",
+    "industry": "Electrical Equipment & Parts"
+  },
+  "ENS": {
+    "shortName": "EnerSys",
+    "sector": "Industrials",
+    "industry": "Electrical Equipment & Parts"
+  },
+  "ENSG": {
+    "shortName": "The Ensign Group, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Care Facilities"
+  },
+  "ENTG": {
+    "shortName": "Entegris, Inc.",
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment & Materials"
+  },
+  "ENVA": {
+    "shortName": "Enova International, Inc.",
+    "sector": "Financial Services",
+    "industry": "Credit Services"
+  },
+  "EPAC": {
+    "shortName": "Enerpac Tool Group Corp.",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "EPC": {
+    "shortName": "Edgewell Personal Care Company",
+    "sector": "Consumer Defensive",
+    "industry": "Household & Personal Products"
+  },
+  "EPR": {
+    "shortName": "EPR Properties",
+    "sector": "Real Estate",
+    "industry": "REIT - Specialty"
+  },
+  "EPRT": {
+    "shortName": "Essential Properties Realty Tru",
+    "sector": "Real Estate",
+    "industry": "REIT - Retail"
+  },
+  "EQH": {
+    "shortName": "Equitable Holdings, Inc.",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "ESAB": {
+    "shortName": "ESAB Corporation",
+    "sector": "Industrials",
+    "industry": "Metal Fabrication"
+  },
+  "ESE": {
+    "shortName": "ESCO Technologies Inc.",
+    "sector": "Technology",
+    "industry": "Scientific & Technical Instruments"
+  },
+  "ESI": {
+    "shortName": "Element Solutions Inc.",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "ESNT": {
+    "shortName": "Essent Group Ltd.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Specialty"
+  },
+  "ETD": {
+    "shortName": "Ethan Allen Interiors Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Furnishings, Fixtures & Appliances"
+  },
+  "ETSY": {
+    "shortName": "Etsy, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Internet Retail"
+  },
+  "EVR": {
+    "shortName": "Evercore Inc.",
+    "sector": "Financial Services",
+    "industry": "Capital Markets"
+  },
+  "EVTC": {
+    "shortName": "Evertec, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Infrastructure"
+  },
+  "EWBC": {
+    "shortName": "East West Bancorp, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "EXEL": {
+    "shortName": "Exelixis, Inc.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "EXLS": {
+    "shortName": "ExlService Holdings, Inc.",
+    "sector": "Technology",
+    "industry": "Information Technology Services"
+  },
+  "EXP": {
+    "shortName": "Eagle Materials Inc",
+    "sector": "Basic Materials",
+    "industry": "Building Materials"
+  },
+  "EXPI": {
+    "shortName": "eXp World Holdings, Inc.",
+    "sector": "Real Estate",
+    "industry": "Real Estate Services"
+  },
+  "EXPO": {
+    "shortName": "Exponent, Inc.",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "EXTR": {
+    "shortName": "Extreme Networks, Inc.",
+    "sector": "Technology",
+    "industry": "Communication Equipment"
+  },
+  "EYE": {
+    "shortName": "National Vision Holdings, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Specialty Retail"
+  },
+  "EZPW": {
+    "shortName": "EZCORP, Inc.",
+    "sector": "Financial Services",
+    "industry": "Credit Services"
+  },
+  "FAF": {
+    "shortName": "First American Corporation (New",
+    "sector": "Financial Services",
+    "industry": "Insurance - Specialty"
+  },
+  "FBIN": {
+    "shortName": "Fortune Brands Innovations, Inc",
+    "sector": "Industrials",
+    "industry": "Building Products & Equipment"
+  },
+  "FBK": {
+    "shortName": "FB Financial Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "FBNC": {
+    "shortName": "First Bancorp",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "FBP": {
+    "shortName": "First BanCorp. New",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "FBRT": {
+    "shortName": "Franklin BSP Realty Trust, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Mortgage"
+  },
+  "FCF": {
+    "shortName": "First",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "FCFS": {
+    "shortName": "FirstCash Holdings, Inc.",
+    "sector": "Financial Services",
+    "industry": "Credit Services"
+  },
+  "FCN": {
+    "shortName": "FTI Consulting, Inc.",
+    "sector": "Industrials",
+    "industry": "Consulting Services"
+  },
+  "FCPT": {
+    "shortName": "Four Corners Property Trust, In",
+    "sector": "Real Estate",
+    "industry": "REIT - Retail"
+  },
+  "FDP": {
+    "shortName": "Fresh Del Monte Produce, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Farm Products"
+  },
+  "FELE": {
+    "shortName": "Franklin Electric Co., Inc.",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "FFBC": {
+    "shortName": "First Financial Bancorp.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "FFIN": {
+    "shortName": "First Financial Bankshares, Inc",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "FHB": {
+    "shortName": "First Hawaiian, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "FHI": {
+    "shortName": "Federated Hermes, Inc.",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "FHN": {
+    "shortName": "First Horizon Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "FIBK": {
+    "shortName": "First Interstate BancSystem, In",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "FIVE": {
+    "shortName": "Five Below, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Specialty Retail"
+  },
+  "FIZZ": {
+    "shortName": "National Beverage Corp.",
+    "sector": "Consumer Defensive",
+    "industry": "Beverages - Non-Alcoholic"
+  },
+  "FLEX": {
+    "shortName": "Flex Ltd.",
+    "sector": "Technology",
+    "industry": "Electronic Components"
+  },
+  "FLG": {
+    "shortName": "Flagstar Bank, N.A.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "FLO": {
+    "shortName": "Flowers Foods, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Packaged Foods"
+  },
+  "FLR": {
+    "shortName": "Fluor Corporation",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "FLS": {
+    "shortName": "Flowserve Corporation",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "FMC": {
+    "shortName": "FMC Corporation",
+    "sector": "Basic Materials",
+    "industry": "Agricultural Inputs"
+  },
+  "FN": {
+    "shortName": "Fabrinet",
+    "sector": "Technology",
+    "industry": "Electronic Components"
+  },
+  "FNB": {
+    "shortName": "F.N.B. Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "FND": {
+    "shortName": "Floor & Decor Holdings, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Home Improvement Retail"
+  },
+  "FNF": {
+    "shortName": "Fidelity National Financial, In",
+    "sector": "Financial Services",
+    "industry": "Insurance - Specialty"
+  },
+  "FORM": {
+    "shortName": "FormFactor, Inc.",
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment & Materials"
+  },
+  "FOUR": {
+    "shortName": "Shift4 Payments, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Infrastructure"
+  },
+  "FOXF": {
+    "shortName": "Fox Factory Holding Corp.",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "FR": {
+    "shortName": "First Industrial Realty Trust, ",
+    "sector": "Real Estate",
+    "industry": "REIT - Industrial"
+  },
+  "FRPT": {
+    "shortName": "Freshpet, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Packaged Foods"
+  },
+  "FSS": {
+    "shortName": "Federal Signal Corporation",
+    "sector": "Industrials",
+    "industry": "Pollution & Treatment Controls"
+  },
+  "FTDR": {
+    "shortName": "frontdoor, inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Personal Services"
+  },
+  "FTI": {
+    "shortName": "TechnipFMC plc",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "FTRE": {
+    "shortName": "Fortrea Holdings Inc.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "FUL": {
+    "shortName": "H. B. Fuller Company",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "FULT": {
+    "shortName": "Fulton Financial Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "FUN": {
+    "shortName": "Six Flags Entertainment Corpora",
+    "sector": "Consumer Cyclical",
+    "industry": "Leisure"
+  },
+  "FWRD": {
+    "shortName": "Forward Air Corporation",
+    "sector": "Industrials",
+    "industry": "Integrated Freight & Logistics"
+  },
+  "G": {
+    "shortName": "Genpact Limited",
+    "sector": "Technology",
+    "industry": "Information Technology Services"
+  },
+  "GAP": {
+    "shortName": "Gap, Inc. (The)",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Retail"
+  },
+  "GATX": {
+    "shortName": "GATX Corporation",
+    "sector": "Industrials",
+    "industry": "Rental & Leasing Services"
+  },
+  "GBCI": {
+    "shortName": "Glacier Bancorp, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "GBX": {
+    "shortName": "Greenbrier Companies, Inc. (The",
+    "sector": "Industrials",
+    "industry": "Railroads"
+  },
+  "GDEN": {
+    "shortName": "Golden Entertainment, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Resorts & Casinos"
+  },
+  "GDYN": {
+    "shortName": "Grid Dynamics Holdings, Inc.",
+    "sector": "Technology",
+    "industry": "Information Technology Services"
+  },
+  "GEF": {
+    "shortName": "Greif Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Packaging & Containers"
+  },
+  "GEO": {
+    "shortName": "Geo Group Inc (The) REIT",
+    "sector": "Industrials",
+    "industry": "Security & Protection Services"
+  },
+  "GFF": {
+    "shortName": "Griffon Corporation",
+    "sector": "Industrials",
+    "industry": "Building Products & Equipment"
+  },
+  "GGG": {
+    "shortName": "Graco Inc.",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "GHC": {
+    "shortName": "Graham Holdings Company",
+    "sector": "Consumer Defensive",
+    "industry": "Education & Training Services"
+  },
+  "GIII": {
+    "shortName": "G-III Apparel Group, LTD.",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Manufacturing"
+  },
+  "GKOS": {
+    "shortName": "Glaukos Corporation",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "GLPI": {
+    "shortName": "Gaming and Leisure Properties, ",
+    "sector": "Real Estate",
+    "industry": "REIT - Specialty"
+  },
+  "GME": {
+    "shortName": "GameStop Corporation",
+    "sector": "Consumer Cyclical",
+    "industry": "Specialty Retail"
+  },
+  "GMED": {
+    "shortName": "Globus Medical, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "GNL": {
+    "shortName": "Global Net Lease, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Diversified"
+  },
+  "GNTX": {
+    "shortName": "Gentex Corporation",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "GNW": {
+    "shortName": "Genworth Financial Inc",
+    "sector": "Financial Services",
+    "industry": "Insurance - Life"
+  },
+  "GO": {
+    "shortName": "Grocery Outlet Holding Corp.",
+    "sector": "Consumer Defensive",
+    "industry": "Grocery Stores"
+  },
+  "GOGO": {
+    "shortName": "Gogo Inc.",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "GOLF": {
+    "shortName": "Acushnet Holdings Corp.",
+    "sector": "Consumer Cyclical",
+    "industry": "Leisure"
+  },
+  "GPI": {
+    "shortName": "Group 1 Automotive, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto & Truck Dealerships"
+  },
+  "GPK": {
+    "shortName": "Graphic Packaging Holding Compa",
+    "sector": "Consumer Cyclical",
+    "industry": "Packaging & Containers"
+  },
+  "GRBK": {
+    "shortName": "Green Brick Partners, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Residential Construction"
+  },
+  "GSHD": {
+    "shortName": "Goosehead Insurance, Inc.",
+    "sector": "Financial Services",
+    "industry": "Insurance Brokers"
+  },
+  "GT": {
+    "shortName": "The Goodyear Tire & Rubber Comp",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "GTES": {
+    "shortName": "Gates Industrial Corporation pl",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "GTLS": {
+    "shortName": "Chart Industries, Inc.",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "GTM": {
+    "shortName": "ZoomInfo Technologies Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "GTY": {
+    "shortName": "Getty Realty Corporation",
+    "sector": "Real Estate",
+    "industry": "REIT - Retail"
+  },
+  "GVA": {
+    "shortName": "Granite Construction Incorporat",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "GWRE": {
+    "shortName": "Guidewire Software, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "GXO": {
+    "shortName": "GXO Logistics, Inc.",
+    "sector": "Industrials",
+    "industry": "Integrated Freight & Logistics"
+  },
+  "H": {
+    "shortName": "Hyatt Hotels Corporation",
+    "sector": "Consumer Cyclical",
+    "industry": "Lodging"
+  },
+  "HAE": {
+    "shortName": "Haemonetics Corporation",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "HAFC": {
+    "shortName": "Hanmi Financial Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "HALO": {
+    "shortName": "Halozyme Therapeutics, Inc.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "HASI": {
+    "shortName": "HA Sustainable Infrastructure C",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "HAYW": {
+    "shortName": "Hayward Holdings, Inc.",
+    "sector": "Industrials",
+    "industry": "Electrical Equipment & Parts"
+  },
+  "HCC": {
+    "shortName": "Warrior Met Coal, Inc.",
+    "sector": "Basic Materials",
+    "industry": "Coking Coal"
+  },
+  "HCI": {
+    "shortName": "HCI Group, Inc.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty"
+  },
+  "HCSG": {
+    "shortName": "Healthcare Services Group, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Care Facilities"
+  },
+  "HE": {
+    "shortName": "Hawaiian Electric Industries, I",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Electric"
+  },
+  "HFWA": {
+    "shortName": "Heritage Financial Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "HGV": {
+    "shortName": "Hilton Grand Vacations Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Resorts & Casinos"
+  },
+  "HIMS": {
+    "shortName": "Hims & Hers Health, Inc.",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "HIW": {
+    "shortName": "Highwoods Properties, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Office"
+  },
+  "HL": {
+    "shortName": "Hecla Mining Company",
+    "sector": "Basic Materials",
+    "industry": "Other Precious Metals & Mining"
+  },
+  "HLI": {
+    "shortName": "Houlihan Lokey, Inc.",
+    "sector": "Financial Services",
+    "industry": "Capital Markets"
+  },
+  "HLIT": {
+    "shortName": "Harmonic Inc.",
+    "sector": "Technology",
+    "industry": "Communication Equipment"
+  },
+  "HLNE": {
+    "shortName": "Hamilton Lane Incorporated",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "HLX": {
+    "shortName": "Helix Energy Solutions Group, I",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "HMN": {
+    "shortName": "Horace Mann Educators Corporati",
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty"
+  },
+  "HNI": {
+    "shortName": "HNI Corporation",
+    "sector": "Consumer Cyclical",
+    "industry": "Furnishings, Fixtures & Appliances"
+  },
+  "HOG": {
+    "shortName": "Harley-Davidson, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Recreational Vehicles"
+  },
+  "HOMB": {
+    "shortName": "Home BancShares, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "HOPE": {
+    "shortName": "Hope Bancorp, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "HP": {
+    "shortName": "Helmerich & Payne, Inc.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Drilling"
+  },
+  "HQY": {
+    "shortName": "HealthEquity, Inc.",
+    "sector": "Healthcare",
+    "industry": "Health Information Services"
+  },
+  "HR": {
+    "shortName": "Healthcare Realty Trust Incorpo",
+    "sector": "Real Estate",
+    "industry": "REIT - Healthcare Facilities"
+  },
+  "HRB": {
+    "shortName": "H&R Block, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Personal Services"
+  },
+  "HRMY": {
+    "shortName": "Harmony Biosciences Holdings, I",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "HSTM": {
+    "shortName": "HealthStream, Inc.",
+    "sector": "Healthcare",
+    "industry": "Health Information Services"
+  },
+  "HTH": {
+    "shortName": "Hilltop Holdings Inc.",
+    "sector": "Financial Services",
+    "industry": "Financial Conglomerates"
+  },
+  "HTLD": {
+    "shortName": "Heartland Express, Inc.",
+    "sector": "Industrials",
+    "industry": "Trucking"
+  },
+  "HTO": {
+    "shortName": "H2O America",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Water"
+  },
+  "HTZ": {
+    "shortName": "Hertz Global Holdings, Inc",
+    "sector": "Industrials",
+    "industry": "Rental & Leasing Services"
+  },
+  "HUBG": {
+    "shortName": "Hub Group, Inc.",
+    "sector": "Industrials",
+    "industry": "Integrated Freight & Logistics"
+  },
+  "HWC": {
+    "shortName": "Hancock Whitney Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "HWKN": {
+    "shortName": "Hawkins, Inc.",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "HXL": {
+    "shortName": "Hexcel Corporation",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "HZO": {
+    "shortName": "MarineMax, Inc.  (FL)",
+    "sector": "Consumer Cyclical",
+    "industry": "Specialty Retail"
+  },
+  "IAC": {
+    "shortName": "IAC Inc.",
+    "sector": "Communication Services",
+    "industry": "Internet Content & Information"
+  },
+  "IART": {
+    "shortName": "Integra LifeSciences Holdings C",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "IBOC": {
+    "shortName": "International Bancshares Corpor",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "IBP": {
+    "shortName": "Installed Building Products, In",
+    "sector": "Consumer Cyclical",
+    "industry": "Residential Construction"
+  },
+  "ICHR": {
+    "shortName": "Ichor Holdings",
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment & Materials"
+  },
+  "ICUI": {
+    "shortName": "ICU Medical, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies"
+  },
+  "IDA": {
+    "shortName": "IDACORP, Inc.",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Electric"
+  },
+  "IDCC": {
+    "shortName": "InterDigital, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "IIIN": {
+    "shortName": "Insteel Industries, Inc.",
+    "sector": "Industrials",
+    "industry": "Metal Fabrication"
+  },
+  "IIPR": {
+    "shortName": "Innovative Industrial Propertie",
+    "sector": "Real Estate",
+    "industry": "REIT - Industrial"
+  },
+  "ILMN": {
+    "shortName": "Illumina, Inc.",
+    "sector": "Healthcare",
+    "industry": "Diagnostics & Research"
+  },
+  "INDB": {
+    "shortName": "Independent Bank Corp.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "INDV": {
+    "shortName": "Indivior Pharmaceuticals, Inc.",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "INGR": {
+    "shortName": "Ingredion Incorporated",
+    "sector": "Consumer Defensive",
+    "industry": "Packaged Foods"
+  },
+  "INN": {
+    "shortName": "Summit Hotel Properties, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Hotel & Motel"
+  },
+  "INSP": {
+    "shortName": "Inspire Medical Systems, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "INSW": {
+    "shortName": "International Seaways, Inc.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Midstream"
+  },
+  "INVA": {
+    "shortName": "Innoviva, Inc.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "INVX": {
+    "shortName": "Innovex International, Inc.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "IOSP": {
+    "shortName": "Innospec Inc.",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "IPAR": {
+    "shortName": "Interparfums, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Household & Personal Products"
+  },
+  "IPGP": {
+    "shortName": "IPG Photonics Corporation",
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment & Materials"
+  },
+  "IRDM": {
+    "shortName": "Iridium Communications Inc",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "IRT": {
+    "shortName": "Independence Realty Trust, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Residential"
+  },
+  "ITGR": {
+    "shortName": "Integer Holdings Corporation",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "ITRI": {
+    "shortName": "Itron, Inc.",
+    "sector": "Technology",
+    "industry": "Scientific & Technical Instruments"
+  },
+  "ITT": {
+    "shortName": "ITT Inc.",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "JAZZ": {
+    "shortName": "Jazz Pharmaceuticals plc",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "JBGS": {
+    "shortName": "JBG SMITH Properties",
+    "sector": "Real Estate",
+    "industry": "REIT - Office"
+  },
+  "JBLU": {
+    "shortName": "JetBlue Airways Corporation",
+    "sector": "Industrials",
+    "industry": "Airlines"
+  },
+  "JBSS": {
+    "shortName": "John B. Sanfilippo & Son, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Packaged Foods"
+  },
+  "JBTM": {
+    "shortName": "JBT Marel Corporation",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "JEF": {
+    "shortName": "Jefferies Financial Group Inc.",
+    "sector": "Financial Services",
+    "industry": "Capital Markets"
+  },
+  "JHG": {
+    "shortName": "Janus Henderson Group plc",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "JJSF": {
+    "shortName": "J & J Snack Foods Corp.",
+    "sector": "Consumer Defensive",
+    "industry": "Packaged Foods"
+  },
+  "JLL": {
+    "shortName": "Jones Lang LaSalle Incorporated",
+    "sector": "Real Estate",
+    "industry": "Real Estate Services"
+  },
+  "JOE": {
+    "shortName": "St. Joe Company (The)",
+    "sector": "Real Estate",
+    "industry": "Real Estate - Diversified"
+  },
+  "JXN": {
+    "shortName": "Jackson Financial Inc.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Life"
+  },
+  "KAI": {
+    "shortName": "Kadant Inc",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "KALU": {
+    "shortName": "Kaiser Aluminum Corporation",
+    "sector": "Basic Materials",
+    "industry": "Aluminum"
+  },
+  "KBH": {
+    "shortName": "KB Home",
+    "sector": "Consumer Cyclical",
+    "industry": "Residential Construction"
+  },
+  "KBR": {
+    "shortName": "KBR, Inc.",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "KD": {
+    "shortName": "Kyndryl Holdings, Inc.",
+    "sector": "Technology",
+    "industry": "Information Technology Services"
+  },
+  "KEX": {
+    "shortName": "Kirby Corporation",
+    "sector": "Industrials",
+    "industry": "Marine Shipping"
+  },
+  "KFY": {
+    "shortName": "Korn Ferry",
+    "sector": "Industrials",
+    "industry": "Staffing & Employment Services"
+  },
+  "KGS": {
+    "shortName": "Kodiak Gas Services, Inc.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "KLIC": {
+    "shortName": "Kulicke and Soffa Industries, I",
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment & Materials"
+  },
+  "KMPR": {
+    "shortName": "Kemper Corporation",
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty"
+  },
+  "KMT": {
+    "shortName": "Kennametal Inc.",
+    "sector": "Industrials",
+    "industry": "Tools & Accessories"
+  },
+  "KMX": {
+    "shortName": "CarMax Inc",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto & Truck Dealerships"
+  },
+  "KN": {
+    "shortName": "Knowles Corporation",
+    "sector": "Technology",
+    "industry": "Electronic Components"
+  },
+  "KNF": {
+    "shortName": "Knife Riv Holding Co.",
+    "sector": "Basic Materials",
+    "industry": "Building Materials"
+  },
+  "KNSL": {
+    "shortName": "Kinsale Capital Group, Inc.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty"
+  },
+  "KNTK": {
+    "shortName": "Kinetik Holdings Inc.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Midstream"
+  },
+  "KNX": {
+    "shortName": "Knight-Swift Transportation Hol",
+    "sector": "Industrials",
+    "industry": "Trucking"
+  },
+  "KOP": {
+    "shortName": "Koppers Holdings Inc.",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "KRC": {
+    "shortName": "Kilroy Realty Corporation",
+    "sector": "Real Estate",
+    "industry": "REIT - Office"
+  },
+  "KREF": {
+    "shortName": "KKR Real Estate Finance Trust I",
+    "sector": "Real Estate",
+    "industry": "REIT - Mortgage"
+  },
+  "KRG": {
+    "shortName": "Kite Realty Group Trust",
+    "sector": "Real Estate",
+    "industry": "REIT - Retail"
+  },
+  "KRYS": {
+    "shortName": "Krystal Biotech, Inc.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "KSS": {
+    "shortName": "Kohl's Corporation",
+    "sector": "Consumer Cyclical",
+    "industry": "Department Stores"
+  },
+  "KTB": {
+    "shortName": "Kontoor Brands, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Manufacturing"
+  },
+  "KTOS": {
+    "shortName": "Kratos Defense & Security Solut",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "KW": {
+    "shortName": "Kennedy-Wilson Holdings Inc.",
+    "sector": "Real Estate",
+    "industry": "Real Estate Services"
+  },
+  "KWR": {
+    "shortName": "Quaker Houghton",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "LAD": {
+    "shortName": "Lithia Motors, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto & Truck Dealerships"
+  },
+  "LAMR": {
+    "shortName": "Lamar Advertising Company",
+    "sector": "Real Estate",
+    "industry": "REIT - Specialty"
+  },
+  "LBRT": {
+    "shortName": "Liberty Energy Inc.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "LCII": {
+    "shortName": "LCI Industries",
+    "sector": "Consumer Cyclical",
+    "industry": "Recreational Vehicles"
+  },
+  "LEA": {
+    "shortName": "Lear Corporation",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "LECO": {
+    "shortName": "Lincoln Electric Holdings, Inc.",
+    "sector": "Industrials",
+    "industry": "Tools & Accessories"
+  },
+  "LEG": {
+    "shortName": "Leggett & Platt, Incorporated",
+    "sector": "Consumer Cyclical",
+    "industry": "Furnishings, Fixtures & Appliances"
+  },
+  "LFUS": {
+    "shortName": "Littelfuse, Inc.",
+    "sector": "Technology",
+    "industry": "Electronic Components"
+  },
+  "LGIH": {
+    "shortName": "LGI Homes, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Residential Construction"
+  },
+  "LGND": {
+    "shortName": "Ligand Pharmaceuticals Incorpor",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "LITE": {
+    "shortName": "Lumentum Holdings Inc.",
+    "sector": "Technology",
+    "industry": "Communication Equipment"
+  },
+  "LIVN": {
+    "shortName": "LivaNova PLC",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "LKFN": {
+    "shortName": "Lakeland Financial Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "LKQ": {
+    "shortName": "LKQ Corporation",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "LMAT": {
+    "shortName": "LeMaitre Vascular, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies"
+  },
+  "LNC": {
+    "shortName": "Lincoln National Corporation",
+    "sector": "Financial Services",
+    "industry": "Insurance - Life"
+  },
+  "LNN": {
+    "shortName": "Lindsay Corporation",
+    "sector": "Industrials",
+    "industry": "Farm & Heavy Construction Machinery"
+  },
+  "LNTH": {
+    "shortName": "Lantheus Holdings, Inc.",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "LOPE": {
+    "shortName": "Grand Canyon Education, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Education & Training Services"
+  },
+  "LPG": {
+    "shortName": "Dorian LPG Ltd.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Midstream"
+  },
+  "LPX": {
+    "shortName": "Louisiana-Pacific Corporation",
+    "sector": "Industrials",
+    "industry": "Building Products & Equipment"
+  },
+  "LQDT": {
+    "shortName": "Liquidity Services, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Internet Retail"
+  },
+  "LRN": {
+    "shortName": "Stride, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Education & Training Services"
+  },
+  "LSCC": {
+    "shortName": "Lattice Semiconductor Corporati",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  "LSTR": {
+    "shortName": "Landstar System, Inc.",
+    "sector": "Industrials",
+    "industry": "Integrated Freight & Logistics"
+  },
+  "LTC": {
+    "shortName": "LTC Properties, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Healthcare Facilities"
+  },
+  "LUMN": {
+    "shortName": "Lumen Technologies, Inc.",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "LXP": {
+    "shortName": "LXP Industrial Trust",
+    "sector": "Real Estate",
+    "industry": "REIT - Industrial"
+  },
+  "LZ": {
+    "shortName": "LegalZoom.com, Inc.",
+    "sector": "Industrials",
+    "industry": "Specialty Business Services"
+  },
+  "LZB": {
+    "shortName": "La-Z-Boy Incorporated",
+    "sector": "Consumer Cyclical",
+    "industry": "Furnishings, Fixtures & Appliances"
+  },
+  "M": {
+    "shortName": "Macy's Inc",
+    "sector": "Consumer Cyclical",
+    "industry": "Department Stores"
+  },
+  "MAC": {
+    "shortName": "Macerich Company (The)",
+    "sector": "Real Estate",
+    "industry": "REIT - Retail"
+  },
+  "MAN": {
+    "shortName": "ManpowerGroup",
+    "sector": "Industrials",
+    "industry": "Staffing & Employment Services"
+  },
+  "MANH": {
+    "shortName": "Manhattan Associates, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "MARA": {
+    "shortName": "MARA Holdings, Inc.",
+    "sector": "Financial Services",
+    "industry": "Capital Markets"
+  },
+  "MASI": {
+    "shortName": "Masimo Corporation",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "MAT": {
+    "shortName": "Mattel, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Leisure"
+  },
+  "MATW": {
+    "shortName": "Matthews International Corporat",
+    "sector": "Industrials",
+    "industry": "Conglomerates"
+  },
+  "MATX": {
+    "shortName": "Matson, Inc.",
+    "sector": "Industrials",
+    "industry": "Marine Shipping"
+  },
+  "MBC": {
+    "shortName": "MasterBrand, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Furnishings, Fixtures & Appliances"
+  },
+  "MBIN": {
+    "shortName": "Merchants Bancorp",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "MC": {
+    "shortName": "Moelis & Company",
+    "sector": "Financial Services",
+    "industry": "Capital Markets"
+  },
+  "MCRI": {
+    "shortName": "Monarch Casino & Resort, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Resorts & Casinos"
+  },
+  "MCW": {
+    "shortName": "Mister Car Wash, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto & Truck Dealerships"
+  },
+  "MCY": {
+    "shortName": "Mercury General Corporation",
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty"
+  },
+  "MD": {
+    "shortName": "Pediatrix Medical Group, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Care Facilities"
+  },
+  "MDU": {
+    "shortName": "MDU Resources Group, Inc.",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Gas"
+  },
+  "MEDP": {
+    "shortName": "Medpace Holdings, Inc.",
+    "sector": "Healthcare",
+    "industry": "Diagnostics & Research"
+  },
+  "MGEE": {
+    "shortName": "MGE Energy Inc.",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Electric"
+  },
+  "MGY": {
+    "shortName": "Magnolia Oil & Gas Corporation",
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P"
+  },
+  "MHK": {
+    "shortName": "Mohawk Industries, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Furnishings, Fixtures & Appliances"
+  },
+  "MHO": {
+    "shortName": "M/I Homes, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Residential Construction"
+  },
+  "MIDD": {
+    "shortName": "MIDD",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MIR": {
+    "shortName": "MIR",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MKSI": {
+    "shortName": "MKSI",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MKTX": {
+    "shortName": "MKTX",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MLI": {
+    "shortName": "MLI",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MLKN": {
+    "shortName": "MLKN",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MMI": {
+    "shortName": "MMI",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MMS": {
+    "shortName": "MMS",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MMSI": {
+    "shortName": "MMSI",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MNRO": {
+    "shortName": "MNRO",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MODG": {
+    "shortName": "MODG",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MORN": {
+    "shortName": "MORN",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MP": {
+    "shortName": "MP",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MPT": {
+    "shortName": "MPT",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MRCY": {
+    "shortName": "MRCY",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MRTN": {
+    "shortName": "MRTN",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MSA": {
+    "shortName": "MSA",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MSEX": {
+    "shortName": "MSEX",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MSGS": {
+    "shortName": "MSGS",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MSM": {
+    "shortName": "MSM",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MTDR": {
+    "shortName": "MTDR",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MTG": {
+    "shortName": "MTG",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MTH": {
+    "shortName": "MTH",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MTN": {
+    "shortName": "MTN",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MTRN": {
+    "shortName": "MTRN",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MTSI": {
+    "shortName": "MTSI",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MTUS": {
+    "shortName": "MTUS",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MTX": {
+    "shortName": "MTX",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MTZ": {
+    "shortName": "MTZ",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MUR": {
+    "shortName": "MUR",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MUSA": {
+    "shortName": "MUSA",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MWA": {
+    "shortName": "MWA",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MXL": {
+    "shortName": "MXL",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MYGN": {
+    "shortName": "MYGN",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MYRG": {
+    "shortName": "MYRG",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MZTI": {
+    "shortName": "MZTI",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NABL": {
+    "shortName": "NABL",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NATL": {
+    "shortName": "NATL",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NAVI": {
+    "shortName": "NAVI",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NBHC": {
+    "shortName": "NBHC",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NBIX": {
+    "shortName": "NBIX",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NBTB": {
+    "shortName": "NBTB",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NE": {
+    "shortName": "NE",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NEO": {
+    "shortName": "NEO",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NEOG": {
+    "shortName": "NEOG",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NEU": {
+    "shortName": "NEU",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NFG": {
+    "shortName": "NFG",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NGVT": {
+    "shortName": "NGVT",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NHC": {
+    "shortName": "NHC",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NJR": {
+    "shortName": "NJR",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NLY": {
+    "shortName": "NLY",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NMIH": {
+    "shortName": "NMIH",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NNN": {
+    "shortName": "NNN",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NOG": {
+    "shortName": "NOG",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NOV": {
+    "shortName": "NOV",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NOVT": {
+    "shortName": "NOVT",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NPK": {
+    "shortName": "NPK",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NPO": {
+    "shortName": "NPO",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NSA": {
+    "shortName": "NSA",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NSIT": {
+    "shortName": "NSIT",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NSP": {
+    "shortName": "NSP",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NTCT": {
+    "shortName": "NTCT",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NTNX": {
+    "shortName": "NTNX",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NVRI": {
+    "shortName": "NVRI",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NVST": {
+    "shortName": "NVST",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NVT": {
+    "shortName": "NVT",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NWBI": {
+    "shortName": "NWBI",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NWE": {
+    "shortName": "NWE",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NWL": {
+    "shortName": "NWL",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NWN": {
+    "shortName": "NWN",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NX": {
+    "shortName": "NX",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NXRT": {
+    "shortName": "NXRT",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NXST": {
+    "shortName": "NXST",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NXT": {
+    "shortName": "NXT",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "NYT": {
+    "shortName": "NYT",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OC": {
+    "shortName": "OC",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OFG": {
+    "shortName": "OFG",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OGE": {
+    "shortName": "OGE",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OGN": {
+    "shortName": "OGN",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OGS": {
+    "shortName": "OGS",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OHI": {
+    "shortName": "OHI",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OI": {
+    "shortName": "OI",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OII": {
+    "shortName": "OII",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OKTA": {
+    "shortName": "OKTA",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OLED": {
+    "shortName": "OLED",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OLLI": {
+    "shortName": "OLLI",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OLN": {
+    "shortName": "OLN",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OMCL": {
+    "shortName": "OMCL",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "ONB": {
+    "shortName": "ONB",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "ONTO": {
+    "shortName": "ONTO",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OPCH": {
+    "shortName": "OPCH",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "ORA": {
+    "shortName": "ORA",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "ORI": {
+    "shortName": "ORI",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OSIS": {
+    "shortName": "OSIS",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OSK": {
+    "shortName": "OSK",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OSW": {
+    "shortName": "OSW",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OTTR": {
+    "shortName": "OTTR",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OUT": {
+    "shortName": "OUT",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OVV": {
+    "shortName": "OVV",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OXM": {
+    "shortName": "OXM",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "OZK": {
+    "shortName": "OZK",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PAG": {
+    "shortName": "PAG",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PAHC": {
+    "shortName": "PAHC",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PARR": {
+    "shortName": "PARR",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PATH": {
+    "shortName": "PATH",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PATK": {
+    "shortName": "PATK",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PAYO": {
+    "shortName": "PAYO",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PB": {
+    "shortName": "PB",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PBF": {
+    "shortName": "PBF",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PBH": {
+    "shortName": "PBH",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PBI": {
+    "shortName": "PBI",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PCRX": {
+    "shortName": "PCRX",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PCTY": {
+    "shortName": "PCTY",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PDFS": {
+    "shortName": "PDFS",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PEB": {
+    "shortName": "PEB",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PECO": {
+    "shortName": "PECO",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PEGA": {
+    "shortName": "PEGA",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PEN": {
+    "shortName": "PEN",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PENG": {
+    "shortName": "PENG",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PENN": {
+    "shortName": "PENN",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PFBC": {
+    "shortName": "PFBC",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PFGC": {
+    "shortName": "PFGC",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PFS": {
+    "shortName": "PFS",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PGNY": {
+    "shortName": "PGNY",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PHIN": {
+    "shortName": "PHIN",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PI": {
+    "shortName": "PI",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PII": {
+    "shortName": "PII",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PINS": {
+    "shortName": "PINS",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PIPR": {
+    "shortName": "PIPR",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PJT": {
+    "shortName": "PJT",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PK": {
+    "shortName": "PK",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PLAB": {
+    "shortName": "PLAB",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PLAY": {
+    "shortName": "PLAY",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PLMR": {
+    "shortName": "PLMR",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PLNT": {
+    "shortName": "PLNT",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PLUS": {
+    "shortName": "PLUS",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PLXS": {
+    "shortName": "PLXS",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PMT": {
+    "shortName": "PMT",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PNFP": {
+    "shortName": "PNFP",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "POR": {
+    "shortName": "POR",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "POST": {
+    "shortName": "POST",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "POWI": {
+    "shortName": "POWI",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "POWL": {
+    "shortName": "POWL",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PPC": {
+    "shortName": "PPC",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PR": {
+    "shortName": "PR",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PRA": {
+    "shortName": "PRA",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PRAA": {
+    "shortName": "PRAA",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PRDO": {
+    "shortName": "PRDO",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PRG": {
+    "shortName": "PRG",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PRGO": {
+    "shortName": "PRGO",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PRGS": {
+    "shortName": "PRGS",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PRI": {
+    "shortName": "PRI",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PRIM": {
+    "shortName": "PRIM",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PRK": {
+    "shortName": "PRK",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PRKS": {
+    "shortName": "PRKS",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PRLB": {
+    "shortName": "PRLB",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PRSU": {
+    "shortName": "Pursuit Attractions and Hospita",
+    "sector": "Consumer Cyclical",
+    "industry": "Travel Services"
+  },
+  "PRVA": {
+    "shortName": "Privia Health Group, Inc.",
+    "sector": "Healthcare",
+    "industry": "Health Information Services"
+  },
+  "PSMT": {
+    "shortName": "PriceSmart, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Discount Stores"
+  },
+  "PSN": {
+    "shortName": "Parsons Corporation",
+    "sector": "Technology",
+    "industry": "Information Technology Services"
+  },
+  "PSTG": {
+    "shortName": "Everpure, Inc.",
+    "sector": "Technology",
+    "industry": "Computer Hardware"
+  },
+  "PTCT": {
+    "shortName": "PTC Therapeutics, Inc.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "PTEN": {
+    "shortName": "Patterson-UTI Energy, Inc.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Drilling"
+  },
+  "PTGX": {
+    "shortName": "Protagonist Therapeutics, Inc.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "PVH": {
+    "shortName": "PVH Corp.",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Manufacturing"
+  },
+  "PZZA": {
+    "shortName": "Papa John's International, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Restaurants"
+  },
+  "QDEL": {
+    "shortName": "QuidelOrtho Corporation",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "QLYS": {
+    "shortName": "Qualys, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Infrastructure"
+  },
+  "QNST": {
+    "shortName": "QuinStreet, Inc.",
+    "sector": "Communication Services",
+    "industry": "Advertising Agencies"
+  },
+  "QRVO": {
+    "shortName": "Qorvo, Inc.",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  "QTWO": {
+    "shortName": "Q2 Holdings, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "R": {
+    "shortName": "Ryder System, Inc.",
+    "sector": "Industrials",
+    "industry": "Rental & Leasing Services"
+  },
+  "RAMP": {
+    "shortName": "LiveRamp Holdings, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Infrastructure"
+  },
+  "RBA": {
+    "shortName": "RB Global, Inc.",
+    "sector": "Industrials",
+    "industry": "Specialty Business Services"
+  },
+  "RBC": {
+    "shortName": "RBC Bearings Incorporated",
+    "sector": "Industrials",
+    "industry": "Tools & Accessories"
+  },
+  "RCUS": {
+    "shortName": "Arcus Biosciences, Inc.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "RDN": {
+    "shortName": "Radian Group Inc.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Specialty"
+  },
+  "RDNT": {
+    "shortName": "RadNet, Inc.",
+    "sector": "Healthcare",
+    "industry": "Diagnostics & Research"
+  },
+  "RES": {
+    "shortName": "RPC, Inc.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "REX": {
+    "shortName": "REX American Resources Corporat",
+    "sector": "Basic Materials",
+    "industry": "Chemicals"
+  },
+  "REXR": {
+    "shortName": "Rexford Industrial Realty, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Industrial"
+  },
+  "REYN": {
+    "shortName": "Reynolds Consumer Products Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Packaging & Containers"
+  },
+  "REZI": {
+    "shortName": "Resideo Technologies, Inc.",
+    "sector": "Industrials",
+    "industry": "Industrial Distribution"
+  },
+  "RGA": {
+    "shortName": "Reinsurance Group of America, I",
+    "sector": "Financial Services",
+    "industry": "Insurance - Reinsurance"
+  },
+  "RGEN": {
+    "shortName": "Repligen Corporation",
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies"
+  },
+  "RGLD": {
+    "shortName": "Royal Gold, Inc.",
+    "sector": "Basic Materials",
+    "industry": "Gold"
+  },
+  "RH": {
+    "shortName": "RH",
+    "sector": "Consumer Cyclical",
+    "industry": "Specialty Retail"
+  },
+  "RHI": {
+    "shortName": "Robert Half Inc.",
+    "sector": "Industrials",
+    "industry": "Staffing & Employment Services"
+  },
+  "RHP": {
+    "shortName": "Ryman Hospitality Properties, I",
+    "sector": "Real Estate",
+    "industry": "REIT - Hotel & Motel"
+  },
+  "RLI": {
+    "shortName": "RLI Corp.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty"
+  },
+  "RMBS": {
+    "shortName": "Rambus, Inc.",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  "RNG": {
+    "shortName": "Ringcentral, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "RNR": {
+    "shortName": "RenaissanceRe Holdings Ltd.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Reinsurance"
+  },
+  "RNST": {
+    "shortName": "Renasant Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "ROCK": {
+    "shortName": "Gibraltar Industries, Inc.",
+    "sector": "Industrials",
+    "industry": "Building Products & Equipment"
+  },
+  "ROG": {
+    "shortName": "Rogers Corporation",
+    "sector": "Technology",
+    "industry": "Electronic Components"
+  },
+  "ROIV": {
+    "shortName": "Roivant Sciences Ltd.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "RPM": {
+    "shortName": "RPM International Inc.",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "RRC": {
+    "shortName": "Range Resources Corporation",
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P"
+  },
+  "RRR": {
+    "shortName": "Red Rock Resorts, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Resorts & Casinos"
+  },
+  "RRX": {
+    "shortName": "Regal Rexnord Corporation",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "RS": {
+    "shortName": "Reliance, Inc.",
+    "sector": "Basic Materials",
+    "industry": "Steel"
+  },
+  "RUN": {
+    "shortName": "Sunrun Inc.",
+    "sector": "Technology",
+    "industry": "Solar"
+  },
+  "RUSHA": {
+    "shortName": "Rush Enterprises, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto & Truck Dealerships"
+  },
+  "RWT": {
+    "shortName": "Redwood Trust, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Mortgage"
+  },
+  "RXO": {
+    "shortName": "RXO, Inc.",
+    "sector": "Industrials",
+    "industry": "Trucking"
+  },
+  "RYAN": {
+    "shortName": "Ryan Specialty Holdings, Inc.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Specialty"
+  },
+  "RYN": {
+    "shortName": "Rayonier Inc. REIT",
+    "sector": "Real Estate",
+    "industry": "REIT - Specialty"
+  },
+  "SABR": {
+    "shortName": "Sabre Corporation",
+    "sector": "Technology",
+    "industry": "Software - Infrastructure"
+  },
+  "SAFE": {
+    "shortName": "Safehold Inc. New",
+    "sector": "Real Estate",
+    "industry": "REIT - Diversified"
+  },
+  "SAFT": {
+    "shortName": "Safety Insurance Group, Inc.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty"
+  },
+  "SAH": {
+    "shortName": "Sonic Automotive, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto & Truck Dealerships"
+  },
+  "SAIA": {
+    "shortName": "Saia, Inc.",
+    "sector": "Industrials",
+    "industry": "Trucking"
+  },
+  "SAIC": {
+    "shortName": "Science Applications Internatio",
+    "sector": "Technology",
+    "industry": "Information Technology Services"
+  },
+  "SAM": {
+    "shortName": "Boston Beer Company, Inc. (The)",
+    "sector": "Consumer Defensive",
+    "industry": "Beverages - Brewers"
+  },
+  "SANM": {
+    "shortName": "Sanmina Corporation",
+    "sector": "Technology",
+    "industry": "Electronic Components"
+  },
+  "SARO": {
+    "shortName": "StandardAero, Inc.",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "SATS": {
+    "shortName": "EchoStar Corporation",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "SBCF": {
+    "shortName": "Seacoast Banking Corporation of",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "SBH": {
+    "shortName": "Sally Beauty Holdings, Inc. (Na",
+    "sector": "Consumer Cyclical",
+    "industry": "Specialty Retail"
+  },
+  "SBRA": {
+    "shortName": "Sabra Health Care REIT, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Healthcare Facilities"
+  },
+  "SBSI": {
+    "shortName": "Southside Bancshares, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "SCHL": {
+    "shortName": "Scholastic Corporation",
+    "sector": "Communication Services",
+    "industry": "Publishing"
+  },
+  "SCI": {
+    "shortName": "Service Corporation Internation",
+    "sector": "Consumer Cyclical",
+    "industry": "Personal Services"
+  },
+  "SCL": {
+    "shortName": "Stepan Company",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "SCSC": {
+    "shortName": "ScanSource, Inc.",
+    "sector": "Technology",
+    "industry": "Electronics & Computer Distribution"
+  },
+  "SDGR": {
+    "shortName": "Schrodinger, Inc.",
+    "sector": "Healthcare",
+    "industry": "Health Information Services"
+  },
+  "SEDG": {
+    "shortName": "SolarEdge Technologies, Inc.",
+    "sector": "Technology",
+    "industry": "Solar"
+  },
+  "SEE": {
+    "shortName": "Sealed Air Corporation",
+    "sector": "Consumer Cyclical",
+    "industry": "Packaging & Containers"
+  },
+  "SEIC": {
+    "shortName": "SEI Investments Company",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "SEM": {
+    "shortName": "Select Medical Holdings Corpora",
+    "sector": "Healthcare",
+    "industry": "Medical Care Facilities"
+  },
+  "SEZL": {
+    "shortName": "Sezzle Inc.",
+    "sector": "Financial Services",
+    "industry": "Credit Services"
+  },
+  "SF": {
+    "shortName": "Stifel Financial Corporation",
+    "sector": "Financial Services",
+    "industry": "Capital Markets"
+  },
+  "SFBS": {
+    "shortName": "ServisFirst Bancshares, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "SFM": {
+    "shortName": "Sprouts Farmers Market, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Grocery Stores"
+  },
+  "SFNC": {
+    "shortName": "Simmons First National Corporat",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "SGI": {
+    "shortName": "Somnigroup International Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Furnishings, Fixtures & Appliances"
+  },
+  "SHAK": {
+    "shortName": "Shake Shack, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Restaurants"
+  },
+  "SHC": {
+    "shortName": "Sotera Health Company",
+    "sector": "Healthcare",
+    "industry": "Diagnostics & Research"
+  },
+  "SHEN": {
+    "shortName": "Shenandoah Telecommunications C",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "SHO": {
+    "shortName": "Sunstone Hotel Investors, Inc. ",
+    "sector": "Real Estate",
+    "industry": "REIT - Hotel & Motel"
+  },
+  "SHOO": {
+    "shortName": "Steven Madden, Ltd.",
+    "sector": "Consumer Cyclical",
+    "industry": "Footwear & Accessories"
+  },
+  "SIG": {
+    "shortName": "Signet Jewelers Limited",
+    "sector": "Consumer Cyclical",
+    "industry": "Luxury Goods"
+  },
+  "SIGI": {
+    "shortName": "Selective Insurance Group, Inc.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty"
+  },
+  "SITM": {
+    "shortName": "SiTime Corporation",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  "SKT": {
+    "shortName": "Tanger Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Retail"
+  },
+  "SKY": {
+    "shortName": "Champion Homes, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Residential Construction"
+  },
+  "SKYW": {
+    "shortName": "SkyWest, Inc.",
+    "sector": "Industrials",
+    "industry": "Airlines"
+  },
+  "SLAB": {
+    "shortName": "Silicon Laboratories, Inc.",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  "SLG": {
+    "shortName": "SL Green Realty Corp",
+    "sector": "Real Estate",
+    "industry": "REIT - Office"
+  },
+  "SLGN": {
+    "shortName": "Silgan Holdings Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Packaging & Containers"
+  },
+  "SLM": {
+    "shortName": "SLM Corporation",
+    "sector": "Financial Services",
+    "industry": "Credit Services"
+  },
+  "SLVM": {
+    "shortName": "Sylvamo Corporation",
+    "sector": "Basic Materials",
+    "industry": "Paper & Paper Products"
+  },
+  "SM": {
+    "shortName": "SM Energy Company",
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P"
+  },
+  "SMG": {
+    "shortName": "Scotts Miracle-Gro Company (The",
+    "sector": "Basic Materials",
+    "industry": "Agricultural Inputs"
+  },
+  "SMP": {
+    "shortName": "Standard Motor Products, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "SMPL": {
+    "shortName": "The Simply Good Foods Company",
+    "sector": "Consumer Defensive",
+    "industry": "Packaged Foods"
+  },
+  "SMTC": {
+    "shortName": "Semtech Corporation",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  "SNCY": {
+    "shortName": "Sun Country Airlines Holdings, ",
+    "sector": "Industrials",
+    "industry": "Airlines"
+  },
+  "SNDR": {
+    "shortName": "Schneider National, Inc.",
+    "sector": "Industrials",
+    "industry": "Trucking"
+  },
+  "SNEX": {
+    "shortName": "StoneX Group Inc.",
+    "sector": "Financial Services",
+    "industry": "Capital Markets"
+  },
+  "SNX": {
+    "shortName": "TD SYNNEX Corporation",
+    "sector": "Technology",
+    "industry": "Electronics & Computer Distribution"
+  },
+  "SON": {
+    "shortName": "Sonoco Products Company",
+    "sector": "Consumer Cyclical",
+    "industry": "Packaging & Containers"
+  },
+  "SONO": {
+    "shortName": "Sonos, Inc.",
+    "sector": "Technology",
+    "industry": "Consumer Electronics"
+  },
+  "SPNT": {
+    "shortName": "SiriusPoint Ltd.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Reinsurance"
+  },
+  "SPSC": {
+    "shortName": "SPS Commerce, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "SPXC": {
+    "shortName": "SPX Technologies, Inc.",
+    "sector": "Industrials",
+    "industry": "Building Products & Equipment"
+  },
+  "SR": {
+    "shortName": "Spire Inc.",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Gas"
+  },
+  "SRPT": {
+    "shortName": "Sarepta Therapeutics, Inc.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "SSB": {
+    "shortName": "SouthState Bank Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "SSD": {
+    "shortName": "Simpson Manufacturing Company, ",
+    "sector": "Basic Materials",
+    "industry": "Lumber & Wood Production"
+  },
+  "SSTK": {
+    "shortName": "Shutterstock, Inc.",
+    "sector": "Communication Services",
+    "industry": "Internet Content & Information"
+  },
+  "ST": {
+    "shortName": "Sensata Technologies Holding pl",
+    "sector": "Technology",
+    "industry": "Scientific & Technical Instruments"
+  },
+  "STAA": {
+    "shortName": "STAAR Surgical Company",
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies"
+  },
+  "STAG": {
+    "shortName": "Stag Industrial, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Industrial"
+  },
+  "STBA": {
+    "shortName": "S&T Bancorp, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "STC": {
+    "shortName": "Stewart Information Services Co",
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty"
+  },
+  "STEL": {
+    "shortName": "Stellar Bancorp, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "STEP": {
+    "shortName": "StepStone Group Inc.",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "STRA": {
+    "shortName": "Strategic Education, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Education & Training Services"
+  },
+  "STRL": {
+    "shortName": "Sterling Infrastructure, Inc.",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "STWD": {
+    "shortName": "STARWOOD PROPERTY TRUST, INC. S",
+    "sector": "Real Estate",
+    "industry": "REIT - Mortgage"
+  },
+  "SUPN": {
+    "shortName": "Supernus Pharmaceuticals, Inc.",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "SWX": {
+    "shortName": "Southwest Gas Holdings, Inc.",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Gas"
+  },
+  "SXC": {
+    "shortName": "SunCoke Energy, Inc.",
+    "sector": "Basic Materials",
+    "industry": "Coking Coal"
+  },
+  "SXI": {
+    "shortName": "Standex International Corporati",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "SXT": {
+    "shortName": "Sensient Technologies Corporati",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "SYNA": {
+    "shortName": "Synaptics Incorporated",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  "TALO": {
+    "shortName": "Talos Energy, Inc.",
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P"
+  },
+  "TBBK": {
+    "shortName": "The Bancorp, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "TCBI": {
+    "shortName": "Texas Capital Bancshares, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "TDC": {
+    "shortName": "Teradata Corporation",
+    "sector": "Technology",
+    "industry": "Software - Infrastructure"
+  },
+  "TDS": {
+    "shortName": "Telephone and Data Systems, Inc",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "TDW": {
+    "shortName": "Tidewater Inc.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "TEX": {
+    "shortName": "Terex Corporation",
+    "sector": "Industrials",
+    "industry": "Farm & Heavy Construction Machinery"
+  },
+  "TFIN": {
+    "shortName": "Triumph Financial, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "TFX": {
+    "shortName": "Teleflex Incorporated",
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies"
+  },
+  "TGNA": {
+    "shortName": "TEGNA Inc",
+    "sector": "Communication Services",
+    "industry": "Broadcasting"
+  },
+  "TGTX": {
+    "shortName": "TG Therapeutics, Inc.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "THC": {
+    "shortName": "Tenet Healthcare Corporation",
+    "sector": "Healthcare",
+    "industry": "Medical Care Facilities"
+  },
+  "THG": {
+    "shortName": "Hanover Insurance Group Inc",
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty"
+  },
+  "THO": {
+    "shortName": "Thor Industries, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Recreational Vehicles"
+  },
+  "THRM": {
+    "shortName": "Gentherm Inc",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "TILE": {
+    "shortName": "Interface, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Furnishings, Fixtures & Appliances"
+  },
+  "TKR": {
+    "shortName": "Timken Company (The)",
+    "sector": "Industrials",
+    "industry": "Tools & Accessories"
+  },
+  "TLN": {
+    "shortName": "Talen Energy Corporation",
+    "sector": "Utilities",
+    "industry": "Utilities - Independent Power Producers"
+  },
+  "TMDX": {
+    "shortName": "TransMedics Group, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "TMHC": {
+    "shortName": "Taylor Morrison Home Corporatio",
+    "sector": "Consumer Cyclical",
+    "industry": "Residential Construction"
+  },
+  "TMP": {
+    "shortName": "Tompkins Financial Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "TNC": {
+    "shortName": "Tennant Company",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "TNDM": {
+    "shortName": "Tandem Diabetes Care, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "TNL": {
+    "shortName": "Travel   Leisure Co.",
+    "sector": "Consumer Cyclical",
+    "industry": "Travel Services"
+  },
+  "TOL": {
+    "shortName": "Toll Brothers, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Residential Construction"
+  },
+  "TPH": {
+    "shortName": "Tri Pointe Homes, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Residential Construction"
+  },
+  "TR": {
+    "shortName": "Tootsie Roll Industries, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Confectioners"
+  },
+  "TREX": {
+    "shortName": "Trex Company, Inc.",
+    "sector": "Industrials",
+    "industry": "Building Products & Equipment"
+  },
+  "TRIP": {
+    "shortName": "TripAdvisor, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Travel Services"
+  },
+  "TRMK": {
+    "shortName": "Trustmark Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "TRN": {
+    "shortName": "Trinity Industries, Inc.",
+    "sector": "Industrials",
+    "industry": "Railroads"
+  },
+  "TRNO": {
+    "shortName": "Terreno Realty Corporation",
+    "sector": "Real Estate",
+    "industry": "REIT - Industrial"
+  },
+  "TRST": {
+    "shortName": "TrustCo Bank Corp NY",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "TRU": {
+    "shortName": "TransUnion",
+    "sector": "Financial Services",
+    "industry": "Financial Data & Stock Exchanges"
+  },
+  "TRUP": {
+    "shortName": "Trupanion, Inc.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty"
+  },
+  "TTC": {
+    "shortName": "Toro Company (The)",
+    "sector": "Industrials",
+    "industry": "Tools & Accessories"
+  },
+  "TTEK": {
+    "shortName": "Tetra Tech, Inc.",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "TTMI": {
+    "shortName": "TTM Technologies, Inc.",
+    "sector": "Technology",
+    "industry": "Electronic Components"
+  },
+  "TWI": {
+    "shortName": "Titan International, Inc. (DE)",
+    "sector": "Industrials",
+    "industry": "Farm & Heavy Construction Machinery"
+  },
+  "TWLO": {
+    "shortName": "Twilio Inc.",
+    "sector": "Technology",
+    "industry": "Software - Infrastructure"
+  },
+  "TWO": {
+    "shortName": "Two Harbors Investment Corp",
+    "sector": "Real Estate",
+    "industry": "REIT - Mortgage"
+  },
+  "TXNM": {
+    "shortName": "TXNM Energy, Inc.",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Electric"
+  },
+  "TXRH": {
+    "shortName": "Texas Roadhouse, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Restaurants"
+  },
+  "UA": {
+    "shortName": "Under Armour, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Manufacturing"
+  },
+  "UAA": {
+    "shortName": "Under Armour, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Manufacturing"
+  },
+  "UBSI": {
+    "shortName": "United Bankshares, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "UCB": {
+    "shortName": "United Community Banks, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "UCTT": {
+    "shortName": "Ultra Clean Holdings, Inc.",
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment & Materials"
+  },
+  "UE": {
+    "shortName": "Urban Edge Properties",
+    "sector": "Real Estate",
+    "industry": "REIT - Retail"
+  },
+  "UFCS": {
+    "shortName": "United Fire Group, Inc",
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty"
+  },
+  "UFPI": {
+    "shortName": "UFP Industries, Inc.",
+    "sector": "Basic Materials",
+    "industry": "Lumber & Wood Production"
+  },
+  "UFPT": {
+    "shortName": "UFP Technologies, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "UGI": {
+    "shortName": "UGI Corporation",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Gas"
+  },
+  "UHT": {
+    "shortName": "Universal Health Realty Income ",
+    "sector": "Real Estate",
+    "industry": "REIT - Healthcare Facilities"
+  },
+  "ULS": {
+    "shortName": "UL Solutions Inc.",
+    "sector": "Industrials",
+    "industry": "Specialty Business Services"
+  },
+  "UMBF": {
+    "shortName": "UMB Financial Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "UNF": {
+    "shortName": "Unifirst Corporation",
+    "sector": "Industrials",
+    "industry": "Specialty Business Services"
+  },
+  "UNFI": {
+    "shortName": "United Natural Foods, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Food Distribution"
+  },
+  "UNIT": {
+    "shortName": "Uniti Group Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Specialty"
+  },
+  "UNM": {
+    "shortName": "Unum Group",
+    "sector": "Financial Services",
+    "industry": "Insurance - Life"
+  },
+  "UPBD": {
+    "shortName": "Upbound Group, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "UPWK": {
+    "shortName": "Upwork Inc.",
+    "sector": "Communication Services",
+    "industry": "Internet Content & Information"
+  },
+  "URBN": {
+    "shortName": "Urban Outfitters, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Retail"
+  },
+  "USFD": {
+    "shortName": "US Foods Holding Corp.",
+    "sector": "Consumer Defensive",
+    "industry": "Food Distribution"
+  },
+  "USPH": {
+    "shortName": "U.S. Physical Therapy, Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Care Facilities"
+  },
+  "UTHR": {
+    "shortName": "United Therapeutics Corporation",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "UTL": {
+    "shortName": "UNITIL Corporation",
+    "sector": "Utilities",
+    "industry": "Utilities - Diversified"
+  },
+  "UVV": {
+    "shortName": "Universal Corporation",
+    "sector": "Consumer Defensive",
+    "industry": "Tobacco"
+  },
+  "VAC": {
+    "shortName": "Marriott Vacations Worldwide Co",
+    "sector": "Consumer Cyclical",
+    "industry": "Resorts & Casinos"
+  },
+  "VAL": {
+    "shortName": "Valaris Limited",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "VC": {
+    "shortName": "Visteon Corporation",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "VCEL": {
+    "shortName": "Vericel Corporation",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "VCTR": {
+    "shortName": "Victory Capital Holdings, Inc. ",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "VCYT": {
+    "shortName": "Veracyte, Inc.",
+    "sector": "Healthcare",
+    "industry": "Diagnostics & Research"
+  },
+  "VECO": {
+    "shortName": "Veeco Instruments Inc.",
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment & Materials"
+  },
+  "VFC": {
+    "shortName": "V.F. Corporation",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Manufacturing"
+  },
+  "VIAV": {
+    "shortName": "Viavi Solutions Inc.",
+    "sector": "Technology",
+    "industry": "Communication Equipment"
+  },
+  "VICR": {
+    "shortName": "Vicor Corporation",
+    "sector": "Technology",
+    "industry": "Electronic Components"
+  },
+  "VIR": {
+    "shortName": "Vir Biotechnology, Inc.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "VIRT": {
+    "shortName": "Virtu Financial, Inc.",
+    "sector": "Financial Services",
+    "industry": "Capital Markets"
+  },
+  "VITL": {
+    "shortName": "Vital Farms, Inc.",
+    "sector": "Consumer Defensive",
+    "industry": "Farm Products"
+  },
+  "VLY": {
+    "shortName": "Valley National Bancorp",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "VMI": {
+    "shortName": "Valmont Industries, Inc.",
+    "sector": "Industrials",
+    "industry": "Conglomerates"
+  },
+  "VNO": {
+    "shortName": "Vornado Realty Trust",
+    "sector": "Real Estate",
+    "industry": "REIT - Office"
+  },
+  "VNOM": {
+    "shortName": "Viper Energy, Inc.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Midstream"
+  },
+  "VNT": {
+    "shortName": "Vontier Corporation",
+    "sector": "Technology",
+    "industry": "Scientific & Technical Instruments"
+  },
+  "VOYA": {
+    "shortName": "Voya Financial, Inc.",
+    "sector": "Financial Services",
+    "industry": "Financial Conglomerates"
+  },
+  "VRE": {
+    "shortName": "Veris Residential, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Residential"
+  },
+  "VRRM": {
+    "shortName": "Verra Mobility Corporation",
+    "sector": "Technology",
+    "industry": "Information Technology Services"
+  },
+  "VRTS": {
+    "shortName": "Virtus Investment Partners, Inc",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "VSAT": {
+    "shortName": "ViaSat, Inc.",
+    "sector": "Technology",
+    "industry": "Communication Equipment"
+  },
+  "VSCO": {
+    "shortName": "Victorias Secret & Co.",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Retail"
+  },
+  "VSH": {
+    "shortName": "Vishay Intertechnology, Inc.",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  "VSTS": {
+    "shortName": "Vestis Corporation",
+    "sector": "Industrials",
+    "industry": "Rental & Leasing Services"
+  },
+  "VTOL": {
+    "shortName": "Bristow Group, Inc.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "VVV": {
+    "shortName": "Valvoline Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto & Truck Dealerships"
+  },
+  "VYX": {
+    "shortName": "NCR Voyix Corporation",
+    "sector": "Technology",
+    "industry": "Information Technology Services"
+  },
+  "WABC": {
+    "shortName": "Westamerica Bancorporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "WAFD": {
+    "shortName": "WaFd, Inc.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "WAL": {
+    "shortName": "Western Alliance Bancorporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "WAY": {
+    "shortName": "Waystar Holding Corp.",
+    "sector": "Healthcare",
+    "industry": "Health Information Services"
+  },
+  "WBS": {
+    "shortName": "Webster Financial Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "WCC": {
+    "shortName": "WESCO International, Inc.",
+    "sector": "Industrials",
+    "industry": "Industrial Distribution"
+  },
+  "WD": {
+    "shortName": "Walker & Dunlop, Inc",
+    "sector": "Financial Services",
+    "industry": "Mortgage Finance"
+  },
+  "WDFC": {
+    "shortName": "WD-40 Company",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "WEN": {
+    "shortName": "Wendy's Company (The)",
+    "sector": "Consumer Cyclical",
+    "industry": "Restaurants"
+  },
+  "WERN": {
+    "shortName": "Werner Enterprises, Inc.",
+    "sector": "Industrials",
+    "industry": "Trucking"
+  },
+  "WEX": {
+    "shortName": "WEX Inc.",
+    "sector": "Technology",
+    "industry": "Software - Infrastructure"
+  },
+  "WFRD": {
+    "shortName": "Weatherford International plc",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "WGO": {
+    "shortName": "Winnebago Industries, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Recreational Vehicles"
+  },
+  "WH": {
+    "shortName": "Wyndham Hotels & Resorts, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Lodging"
+  },
+  "WHD": {
+    "shortName": "Cactus, Inc. Class A Common Sto",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "WHR": {
+    "shortName": "Whirlpool Corporation",
+    "sector": "Consumer Cyclical",
+    "industry": "Furnishings, Fixtures & Appliances"
+  },
+  "WINA": {
+    "shortName": "Winmark Corporation",
+    "sector": "Consumer Cyclical",
+    "industry": "Specialty Retail"
+  },
+  "WING": {
+    "shortName": "Wingstop Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Restaurants"
+  },
+  "WKC": {
+    "shortName": "World Kinect Corporation",
+    "sector": "Energy",
+    "industry": "Oil & Gas Refining & Marketing"
+  },
+  "WLK": {
+    "shortName": "Westlake Corporation",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "WLY": {
+    "shortName": "John Wiley & Sons, Inc.",
+    "sector": "Communication Services",
+    "industry": "Publishing"
+  },
+  "WMG": {
+    "shortName": "Warner Music Group Corp.",
+    "sector": "Communication Services",
+    "industry": "Entertainment"
+  },
+  "WMS": {
+    "shortName": "Advanced Drainage Systems, Inc.",
+    "sector": "Industrials",
+    "industry": "Building Products & Equipment"
+  },
+  "WOR": {
+    "shortName": "Worthington Enterprises, Inc.",
+    "sector": "Industrials",
+    "industry": "Metal Fabrication"
+  },
+  "WPC": {
+    "shortName": "W. P. Carey Inc. REIT",
+    "sector": "Real Estate",
+    "industry": "REIT - Diversified"
+  },
+  "WRLD": {
+    "shortName": "World Acceptance Corporation",
+    "sector": "Financial Services",
+    "industry": "Credit Services"
+  },
+  "WS": {
+    "shortName": "Worthington Steel, Inc.",
+    "sector": "Basic Materials",
+    "industry": "Steel"
+  },
+  "WSC": {
+    "shortName": "WillScot Holdings Corporation",
+    "sector": "Industrials",
+    "industry": "Rental & Leasing Services"
+  },
+  "WSFS": {
+    "shortName": "WSFS Financial Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "WSO": {
+    "shortName": "Watsco, Inc.",
+    "sector": "Industrials",
+    "industry": "Industrial Distribution"
+  },
+  "WSR": {
+    "shortName": "Whitestone REIT",
+    "sector": "Real Estate",
+    "industry": "REIT - Retail"
+  },
+  "WT": {
+    "shortName": "WisdomTree, Inc.",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "WTFC": {
+    "shortName": "Wintrust Financial Corporation",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "WTRG": {
+    "shortName": "Essential Utilities, Inc.",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Water"
+  },
+  "WTS": {
+    "shortName": "Watts Water Technologies, Inc.",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "WU": {
+    "shortName": "Western Union Company (The)",
+    "sector": "Financial Services",
+    "industry": "Credit Services"
+  },
+  "WWD": {
+    "shortName": "Woodward, Inc.",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "WWW": {
+    "shortName": "Wolverine World Wide, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Footwear & Accessories"
+  },
+  "XHR": {
+    "shortName": "Xenia Hotels & Resorts, Inc.",
+    "sector": "Real Estate",
+    "industry": "REIT - Hotel & Motel"
+  },
+  "XNCR": {
+    "shortName": "Xencor, Inc.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "XPEL": {
+    "shortName": "XPEL, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "XPO": {
+    "shortName": "XPO, Inc.",
+    "sector": "Industrials",
+    "industry": "Trucking"
+  },
+  "XRAY": {
+    "shortName": "DENTSPLY SIRONA Inc.",
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies"
+  },
+  "YELP": {
+    "shortName": "Yelp Inc.",
+    "sector": "Communication Services",
+    "industry": "Internet Content & Information"
+  },
+  "YETI": {
+    "shortName": "YETI Holdings, Inc.",
+    "sector": "Consumer Cyclical",
+    "industry": "Leisure"
+  },
+  "YOU": {
+    "shortName": "Clear Secure, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "ZD": {
+    "shortName": "Ziff Davis, Inc.",
+    "sector": "Communication Services",
+    "industry": "Advertising Agencies"
+  },
+  "ZION": {
+    "shortName": "Zions Bancorporation N.A.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "ZWS": {
+    "shortName": "Zurn Elkay Water Solutions Corp",
+    "sector": "Industrials",
+    "industry": "Pollution & Treatment Controls"
   }
 }

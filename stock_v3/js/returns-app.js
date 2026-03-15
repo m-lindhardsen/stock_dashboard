@@ -1,8 +1,9 @@
 /* =============================================================
    returns-app.js — Returns table + bubble chart
+   Loads data from bundles: data/{gridname}_daily_bundle.json
    Table:  Period 1 / 2 / 3, sortable columns
-   Bubble: Period 1 = X, Period 2 = Y, sector-coloured bubbles,
-           drag-to-zoom box, hover tooltip, legend filter
+   Bubble: Period 1 = X axis, Period 2 = Y axis,
+           sector-coloured bubbles, drag-to-zoom, hover tooltip
    ============================================================= */
 
 import { fetchJSON, buildNavTabs } from './grid.js';
@@ -11,18 +12,15 @@ import { fetchJSON, buildNavTabs } from './grid.js';
 const DATA_PATH = '../data/';
 const GRID_NAME = 'returns';
 
-// Canvas drawing padding (px)
-const PAD = { top: 30, right: 30, bottom: 48, left: 60 };
-const BUBBLE_R = 6;   // fixed bubble radius
+const PAD      = { top: 30, right: 30, bottom: 48, left: 60 };
+const BUBBLE_R = 6;
 
-// Sector colour palette — cycles if more sectors than colours
 const SECTOR_COLORS = [
   '#4af0b0', '#60a5fa', '#f97316', '#facc15', '#f04f5e',
   '#a78bfa', '#34d399', '#fb7185', '#38bdf8', '#e879f9',
   '#4ade80', '#fbbf24',
 ];
 
-// Preset period definitions
 const PRESETS = {
   '1w': () => ({ start: daysAgo(7),    end: today() }),
   '1m': () => ({ start: monthsAgo(1),  end: today() }),
@@ -33,7 +31,7 @@ const PRESETS = {
 
 // ── State ──────────────────────────────────────────────────────
 let currentGrid = 'sp500';
-let currentView = 'table';   // 'table' | 'bubble'
+let currentView = 'table';
 let datasets    = [];
 
 const periods = [
@@ -42,32 +40,22 @@ const periods = [
   { preset: '3m', startDate: null, endDate: null },
 ];
 
-// Table sort
 let sortCol = 'ticker';
 let sortDir = 'asc';
 
-// Bubble zoom: null = full view, otherwise { xMin, xMax, yMin, yMax }
-let bubbleZoom = null;
-
-// Sector legend filter: null = all visible, otherwise Set of hidden sectors
+let bubbleZoom    = null;
 let hiddenSectors = new Set();
-
-// Sector → colour map (built when data loads)
 let sectorColorMap = {};
 
 // ── Date helpers ───────────────────────────────────────────────
-function today() {
-  const d = new Date(); d.setHours(0,0,0,0); return d;
-}
+function today()      { const d = new Date(); d.setHours(0,0,0,0); return d; }
 function daysAgo(n)   { const d = today(); d.setDate(d.getDate() - n); return d; }
 function monthsAgo(n) { const d = today(); d.setMonth(d.getMonth() - n); return d; }
 function toISODate(d) { return d.toISOString().slice(0, 10); }
 function fmtShort(iso) {
-  const d = new Date(iso + 'T00:00:00');
-  return d.toLocaleString('en', { day: 'numeric', month: 'short' });
+  return new Date(iso + 'T00:00:00').toLocaleString('en', { day: 'numeric', month: 'short' });
 }
 
-// Binary search: last index where ohlcv[i].t <= targetISO
 function closestIdx(ohlcv, targetISO) {
   let lo = 0, hi = ohlcv.length - 1, best = 0;
   while (lo <= hi) {
@@ -97,7 +85,7 @@ function resolvePeriod(idx) {
   return { startISO: toISODate(start), endISO: toISODate(end) };
 }
 
-// ── Computed rows (shared between table and bubble) ─────────────
+// ── Computed rows ──────────────────────────────────────────────
 function buildRows() {
   const r = [0, 1, 2].map(resolvePeriod);
   return datasets.map(d => ({
@@ -121,8 +109,8 @@ function initPeriodControls() {
         .forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       periods[pIdx].preset = preset;
-      const dateRow = document.getElementById(`p${pIdx}-dates`);
-      dateRow.style.display = preset === 'custom' ? 'flex' : 'none';
+      document.getElementById(`p${pIdx}-dates`).style.display =
+        preset === 'custom' ? 'flex' : 'none';
       if (preset !== 'custom') refresh();
     });
   });
@@ -153,13 +141,9 @@ function initViewToggle() {
       .forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     currentView = btn.dataset.view;
-
-    // Toggle body class for CSS (hides Period 3 block in bubble mode)
     document.body.classList.toggle('bubble-active', currentView === 'bubble');
-
     document.getElementById('table-wrap').style.display  = currentView === 'table'  ? 'block' : 'none';
     document.getElementById('bubble-view').style.display = currentView === 'bubble' ? 'block' : 'none';
-
     if (currentView === 'bubble') drawBubble();
     else                          rebuildTable();
   });
@@ -178,22 +162,21 @@ function initGridSelector() {
   });
 }
 
-// ── Refresh (called after any period change) ───────────────────
 function refresh() {
   updateResolvedLabels();
-  if (currentView === 'table')  rebuildTable();
-  else                          drawBubble();
+  if (currentView === 'table') rebuildTable();
+  else                         drawBubble();
 }
 
 function updateResolvedLabels() {
   [0, 1, 2].forEach(i => {
-    const r   = resolvePeriod(i);
-    const el  = document.getElementById(`p${i}-resolved`);
+    const r  = resolvePeriod(i);
+    const el = document.getElementById(`p${i}-resolved`);
     if (el && r) el.textContent = `${r.startISO} → ${r.endISO}`;
   });
 }
 
-// ── Data loading ───────────────────────────────────────────────
+// ── Data loading — reads from bundle ──────────────────────────
 async function loadGrid() {
   const status    = document.getElementById('table-status');
   const tableWrap = document.getElementById('table-wrap');
@@ -205,23 +188,21 @@ async function loadGrid() {
   bubbleV.style.display   = 'none';
 
   try {
-    const manifest = await fetchJSON(DATA_PATH + `manifest_${currentGrid}.json`);
-    const tickers  = manifest.tickers || [];
-    const updated  = manifest.generated
-      ? new Date(manifest.generated).toLocaleString() : '—';
-    document.getElementById('meta-info').textContent =
-      `${tickers.length} tickers · ${updated}`;
+    const bundle  = await fetchJSON(DATA_PATH + `${currentGrid}_daily_bundle.json`);
+    const updated = bundle.generated
+      ? new Date(bundle.generated).toLocaleString() : '—';
 
-    datasets = (await Promise.all(
-      tickers.map(t => fetchJSON(DATA_PATH + t + '_daily.json').catch(() => null))
-    )).filter(Boolean);
+    datasets = bundle.tickers || [];
+    document.getElementById('meta-info').textContent =
+      `${datasets.length} tickers · ${updated}`;
 
     // Build sector colour map
     const sectors = [...new Set(datasets.map(d => d.info?.sector || '—'))].sort();
     sectorColorMap = {};
-    sectors.forEach((s, i) => { sectorColorMap[s] = SECTOR_COLORS[i % SECTOR_COLORS.length]; });
+    sectors.forEach((s, i) => {
+      sectorColorMap[s] = SECTOR_COLORS[i % SECTOR_COLORS.length];
+    });
     hiddenSectors = new Set();
-
     buildBubbleLegend(sectors);
 
     status.style.display = 'none';
@@ -243,16 +224,12 @@ async function loadGrid() {
 // ── TABLE ──────────────────────────────────────────────────────
 function rebuildTable() {
   const resolved = [0, 1, 2].map(resolvePeriod);
-
-  // Update column header date sub-labels
   resolved.forEach((r, i) => {
     const el = document.getElementById(`th-p${i}`);
     if (el) el.textContent = r ? `${fmtShort(r.startISO)} → ${fmtShort(r.endISO)}` : '';
   });
 
-  let rows = buildRows();
-  rows = sortRows(rows);
-
+  let rows = sortRows(buildRows());
   const tbody = document.getElementById('returns-tbody');
   tbody.innerHTML = '';
   rows.forEach(row => tbody.appendChild(buildRow(row)));
@@ -320,7 +297,6 @@ function drawBubble() {
   canvas.height = H * dpr;
   ctx.scale(dpr, dpr);
 
-  // Gather visible points
   const rows = buildRows().filter(r =>
     r.r0 != null && r.r1 != null && !hiddenSectors.has(r.sector)
   );
@@ -333,7 +309,6 @@ function drawBubble() {
     return;
   }
 
-  // Data range — use zoom if active, otherwise fit all points with padding
   let xMin, xMax, yMin, yMax;
   if (bubbleZoom) {
     ({ xMin, xMax, yMin, yMax } = bubbleZoom);
@@ -342,10 +317,8 @@ function drawBubble() {
     xMax = Math.max(...rows.map(r => r.r0));
     yMin = Math.min(...rows.map(r => r.r1));
     yMax = Math.max(...rows.map(r => r.r1));
-    // Always include zero in both axes
     xMin = Math.min(xMin, 0); xMax = Math.max(xMax, 0);
     yMin = Math.min(yMin, 0); yMax = Math.max(yMax, 0);
-    // Add 10% padding
     const xPad = (xMax - xMin || 2) * 0.10;
     const yPad = (yMax - yMin || 2) * 0.10;
     xMin -= xPad; xMax += xPad;
@@ -354,113 +327,95 @@ function drawBubble() {
 
   const innerW = W - PAD.left - PAD.right;
   const innerH = H - PAD.top  - PAD.bottom;
-
   const toX = v => PAD.left + (v - xMin) / (xMax - xMin) * innerW;
   const toY = v => PAD.top  + (1 - (v - yMin) / (yMax - yMin)) * innerH;
 
-  // ── Background ──
+  // Background
   ctx.fillStyle = '#141820';
   ctx.fillRect(0, 0, W, H);
   ctx.fillStyle = 'rgb(36,44,53)';
   ctx.fillRect(PAD.left, PAD.top, innerW, innerH);
 
-  // ── Grid lines ──
+  // Grid lines
   ctx.strokeStyle = 'rgba(255,255,255,0.06)';
   ctx.lineWidth = 1;
-
-  // X grid
   niceAxisTicks(xMin, xMax, 6).forEach(v => {
     const x = toX(v);
     ctx.beginPath(); ctx.moveTo(x, PAD.top); ctx.lineTo(x, PAD.top + innerH); ctx.stroke();
   });
-  // Y grid
   niceAxisTicks(yMin, yMax, 6).forEach(v => {
     const y = toY(v);
     ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(PAD.left + innerW, y); ctx.stroke();
   });
 
-  // ── Zero lines (quadrant dividers) ──
-  const x0 = toX(0);
-  const y0 = toY(0);
-
+  // Zero lines — quadrant dividers
+  const x0 = toX(0), y0 = toY(0);
+  ctx.strokeStyle = 'rgba(255,255,255,0.22)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 4]);
   if (x0 >= PAD.left && x0 <= PAD.left + innerW) {
-    ctx.strokeStyle = 'rgba(255,255,255,0.22)';
-    ctx.lineWidth = 1;
-    ctx.setLineDash([4, 4]);
     ctx.beginPath(); ctx.moveTo(x0, PAD.top); ctx.lineTo(x0, PAD.top + innerH); ctx.stroke();
-    ctx.setLineDash([]);
   }
   if (y0 >= PAD.top && y0 <= PAD.top + innerH) {
-    ctx.strokeStyle = 'rgba(255,255,255,0.22)';
-    ctx.lineWidth = 1;
-    ctx.setLineDash([4, 4]);
     ctx.beginPath(); ctx.moveTo(PAD.left, y0); ctx.lineTo(PAD.left + innerW, y0); ctx.stroke();
-    ctx.setLineDash([]);
   }
+  ctx.setLineDash([]);
 
-  // ── Axis tick labels ──
+  // Axis tick labels
   ctx.fillStyle = '#8896aa';
   ctx.font = `10px 'Space Mono',monospace`;
-
-  // X axis labels
   ctx.textAlign = 'center';
   niceAxisTicks(xMin, xMax, 6).forEach(v => {
     ctx.fillText(fmtPct(v), toX(v), PAD.top + innerH + 16);
   });
-
-  // Y axis labels
   ctx.textAlign = 'right';
   niceAxisTicks(yMin, yMax, 6).forEach(v => {
     ctx.fillText(fmtPct(v), PAD.left - 6, toY(v) + 3);
   });
 
-  // ── Axis titles ──
-  const r0 = resolvePeriod(0), r1 = resolvePeriod(1);
+  // Axis titles
+  const r0res = resolvePeriod(0), r1res = resolvePeriod(1);
   ctx.fillStyle = '#8896aa';
   ctx.font = `9px 'Inter',sans-serif`;
   ctx.textAlign = 'center';
-  if (r0) ctx.fillText(
-    `Period 1 return  (${fmtShort(r0.startISO)} → ${fmtShort(r0.endISO)})`,
+  if (r0res) ctx.fillText(
+    `Period 1  (${fmtShort(r0res.startISO)} → ${fmtShort(r0res.endISO)})`,
     PAD.left + innerW / 2, PAD.top + innerH + 38
   );
   ctx.save();
   ctx.translate(14, PAD.top + innerH / 2);
   ctx.rotate(-Math.PI / 2);
-  if (r1) ctx.fillText(
-    `Period 2 return  (${fmtShort(r1.startISO)} → ${fmtShort(r1.endISO)})`,
+  if (r1res) ctx.fillText(
+    `Period 2  (${fmtShort(r1res.startISO)} → ${fmtShort(r1res.endISO)})`,
     0, 0
   );
   ctx.restore();
 
-  // ── Bubbles ──
+  // Bubbles
   rows.forEach(row => {
     const x   = toX(row.r0);
     const y   = toY(row.r1);
     const col = sectorColorMap[row.sector] || '#8896aa';
-
-    // Clip to plot area
     if (x < PAD.left - BUBBLE_R || x > PAD.left + innerW + BUBBLE_R) return;
     if (y < PAD.top  - BUBBLE_R || y > PAD.top  + innerH + BUBBLE_R) return;
-
     ctx.beginPath();
     ctx.arc(x, y, BUBBLE_R, 0, Math.PI * 2);
-    ctx.fillStyle = col + 'cc';   // slight transparency
+    ctx.fillStyle   = col + 'cc';
     ctx.fill();
     ctx.strokeStyle = col;
-    ctx.lineWidth = 1.2;
+    ctx.lineWidth   = 1.2;
     ctx.stroke();
   });
 
-  // Store for hit-testing
-  canvas._rows  = rows;
-  canvas._toX   = toX;
-  canvas._toY   = toY;
-  canvas._xMin  = xMin; canvas._xMax = xMax;
-  canvas._yMin  = yMin; canvas._yMax = yMax;
+  // Store geometry for hit-testing and zoom
+  canvas._rows   = rows;
+  canvas._toX    = toX;
+  canvas._toY    = toY;
+  canvas._xMin   = xMin; canvas._xMax = xMax;
+  canvas._yMin   = yMin; canvas._yMax = yMax;
   canvas._innerW = innerW; canvas._innerH = innerH;
 }
 
-// ── Axis tick helper ───────────────────────────────────────────
 function niceAxisTicks(lo, hi, target) {
   const range = hi - lo || 1;
   const rough = range / target;
@@ -490,91 +445,76 @@ function initBubbleHover() {
     const rows = canvas._rows;
     if (!rows) return;
 
-    // Hit-test: find closest bubble within radius
     let best = null, bestDist = BUBBLE_R * 2.5;
     rows.forEach(row => {
-      const x = canvas._toX(row.r0);
-      const y = canvas._toY(row.r1);
-      const d = Math.hypot(mx - x, my - y);
+      const d = Math.hypot(mx - canvas._toX(row.r0), my - canvas._toY(row.r1));
       if (d < bestDist) { bestDist = d; best = row; }
     });
 
     if (best) {
-      const r0 = best.r0, r1 = best.r1;
       document.getElementById('tt-ticker').textContent = best.ticker;
       document.getElementById('tt-name').textContent   = best.name;
 
-      const r0Res = resolvePeriod(0), r1Res = resolvePeriod(1);
+      const r0res = resolvePeriod(0), r1res = resolvePeriod(1);
       document.getElementById('tt-xlabel').textContent =
-        r0Res ? `P1 (${fmtShort(r0Res.startISO)}→${fmtShort(r0Res.endISO)})` : 'Period 1';
+        r0res ? `P1 (${fmtShort(r0res.startISO)}→${fmtShort(r0res.endISO)})` : 'Period 1';
       document.getElementById('tt-ylabel').textContent =
-        r1Res ? `P2 (${fmtShort(r1Res.startISO)}→${fmtShort(r1Res.endISO)})` : 'Period 2';
+        r1res ? `P2 (${fmtShort(r1res.startISO)}→${fmtShort(r1res.endISO)})` : 'Period 2';
 
       const xEl = document.getElementById('tt-xval');
-      xEl.textContent = (r0 > 0 ? '+' : '') + r0.toFixed(2) + '%';
-      xEl.className   = 'tt-val ' + (r0 > 0.05 ? 'up' : r0 < -0.05 ? 'down' : 'flat');
+      xEl.textContent = (best.r0 > 0 ? '+' : '') + best.r0.toFixed(2) + '%';
+      xEl.className   = 'tt-val ' + (best.r0 > 0.05 ? 'up' : best.r0 < -0.05 ? 'down' : 'flat');
 
       const yEl = document.getElementById('tt-yval');
-      yEl.textContent = (r1 > 0 ? '+' : '') + r1.toFixed(2) + '%';
-      yEl.className   = 'tt-val ' + (r1 > 0.05 ? 'up' : r1 < -0.05 ? 'down' : 'flat');
+      yEl.textContent = (best.r1 > 0 ? '+' : '') + best.r1.toFixed(2) + '%';
+      yEl.className   = 'tt-val ' + (best.r1 > 0.05 ? 'up' : best.r1 < -0.05 ? 'down' : 'flat');
 
       document.getElementById('tt-sector').textContent = `${best.sector} · ${best.industry}`;
 
-      const tt = tooltip;
-      tt.style.display = 'block';
-      // Keep tooltip inside viewport
-      const ttW = 230, ttH = 120;
+      const ttW = 230, ttH = 130;
       const left = e.clientX + 14 + ttW > window.innerWidth  ? e.clientX - ttW - 14 : e.clientX + 14;
       const top  = e.clientY + 14 + ttH > window.innerHeight ? e.clientY - ttH - 14 : e.clientY + 14;
-      tt.style.left = left + 'px';
-      tt.style.top  = top  + 'px';
+      tooltip.style.cssText = `display:block;left:${left}px;top:${top}px`;
       canvas.style.cursor = 'pointer';
     } else {
       tooltip.style.display = 'none';
-      canvas.style.cursor = 'crosshair';
+      canvas.style.cursor   = 'crosshair';
     }
   });
 
-  canvas.addEventListener('mouseleave', () => {
-    tooltip.style.display = 'none';
-  });
+  canvas.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
 }
 
 // ── Bubble drag-to-zoom ────────────────────────────────────────
 function initBubbleZoom() {
   let dragging = false;
-  let startX, startY, currX, currY;
+  let startX, startY;
 
-  const canvasCoords = e => {
-    const rect = canvas.getBoundingClientRect();
-    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  const coords = e => {
+    const r = canvas.getBoundingClientRect();
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
   };
 
   canvas.addEventListener('mousedown', e => {
     if (e.button !== 0) return;
-    const { x, y } = canvasCoords(e);
-    // Only start drag inside plot area
+    const { x, y } = coords(e);
+    const H = parseInt(canvas.getAttribute('height')) || 580;
     if (x < PAD.left || x > canvas.offsetWidth - PAD.right) return;
-    if (y < PAD.top  || y > (parseInt(canvas.getAttribute('height')) || 580) - PAD.bottom) return;
+    if (y < PAD.top  || y > H - PAD.bottom) return;
     dragging = true;
-    startX = currX = x;
-    startY = currY = y;
+    startX   = x; startY = y;
     canvas.style.cursor = 'col-resize';
     e.preventDefault();
   });
 
   window.addEventListener('mousemove', e => {
     if (!dragging) return;
-    const { x, y } = canvasCoords(e);
-    currX = x; currY = y;
-
-    // Redraw chart then overlay selection rectangle
+    const { x, y } = coords(e);
     drawBubble();
     const dpr = window.devicePixelRatio || 1;
-    ctx.save();
-    ctx.scale(dpr, dpr);
-    const rx = Math.min(startX, currX), ry = Math.min(startY, currY);
-    const rw = Math.abs(currX - startX), rh = Math.abs(currY - startY);
+    ctx.save(); ctx.scale(dpr, dpr);
+    const rx = Math.min(startX, x), ry = Math.min(startY, y);
+    const rw = Math.abs(x - startX),  rh = Math.abs(y - startY);
     ctx.fillStyle   = 'rgba(167,139,250,0.10)';
     ctx.strokeStyle = 'rgba(167,139,250,0.7)';
     ctx.lineWidth   = 1;
@@ -587,36 +527,29 @@ function initBubbleZoom() {
     if (!dragging) return;
     dragging = false;
     canvas.style.cursor = 'crosshair';
-
-    const { x, y } = canvasCoords(e);
+    const { x, y } = coords(e);
     const x1 = Math.min(startX, x), x2 = Math.max(startX, x);
     const y1 = Math.min(startY, y), y2 = Math.max(startY, y);
-
-    // Ignore tiny drags (likely clicks)
     if (x2 - x1 < 8 || y2 - y1 < 8) return;
 
-    // Convert pixel box → data coordinates
     const { _xMin, _xMax, _yMin, _yMax, _innerW, _innerH } = canvas;
-    const toDataX = px => _xMin + (px - PAD.left) / _innerW * (_xMax - _xMin);
-    const toDataY = py => _yMax - (py - PAD.top)  / _innerH * (_yMax - _yMin);
+    const toDataX = px => _xMin + (px - PAD.left)  / _innerW * (_xMax - _xMin);
+    const toDataY = py => _yMax - (py - PAD.top)   / _innerH * (_yMax - _yMin);
 
     bubbleZoom = {
       xMin: toDataX(x1), xMax: toDataX(x2),
-      yMin: toDataY(y2), yMax: toDataY(y1),   // y is flipped
+      yMin: toDataY(y2), yMax: toDataY(y1),
     };
-
     drawBubble();
     document.getElementById('zoom-reset').classList.add('visible');
   });
 
-  // Reset zoom button
   document.getElementById('zoom-reset').addEventListener('click', () => {
     bubbleZoom = null;
     drawBubble();
     document.getElementById('zoom-reset').classList.remove('visible');
   });
 
-  // ESC also resets zoom
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && bubbleZoom && currentView === 'bubble') {
       bubbleZoom = null;
@@ -645,14 +578,12 @@ function buildBubbleLegend(sectors) {
   });
 }
 
-// ── Resize handler ────────────────────────────────────────────
+// ── Resize ─────────────────────────────────────────────────────
 function initResizeHandler() {
   let timer;
   window.addEventListener('resize', () => {
     clearTimeout(timer);
-    timer = setTimeout(() => {
-      if (currentView === 'bubble') drawBubble();
-    }, 150);
+    timer = setTimeout(() => { if (currentView === 'bubble') drawBubble(); }, 150);
   });
 }
 

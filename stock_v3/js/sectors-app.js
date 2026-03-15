@@ -1,10 +1,7 @@
 /* =============================================================
    sectors-app.js — Entry point for sectors.html
-   Extends the base grid system with:
-     - Price vs SPY ratio mode toggle
-     - SPY benchmark card (pinned first)
-     - Ratio OHLCV builder
-     - Mode-aware crosshair and lightbox
+   Loads a single bundle instead of one request per ticker.
+   Bundle: data/sectors_{interval}_bundle.json
    ============================================================= */
 
 import {
@@ -13,7 +10,7 @@ import {
 } from './grid.js';
 
 import { drawChart, drawRatioChart, attachCrosshair } from './chart.js';
-import { openLightboxWithMode, closeLightbox }         from './lightbox.js';
+import { openLightboxWithMode }                        from './lightbox.js';
 
 // ── Constants ──────────────────────────────────────────────────
 const GRID_NAME  = 'sectors';
@@ -27,10 +24,6 @@ let spyOhlcv        = null;
 let allDatasets     = [];
 
 // ── Ratio OHLCV builder ────────────────────────────────────────
-/**
- * buildRatioOhlcv(etfOhlcv, spyOhlcv)
- * Aligns dates, computes OHLC ratios, then adds SMAs on the ratio close.
- */
 function buildRatioOhlcv(etfOhlcv, refOhlcv) {
   const spyMap = new Map(refOhlcv.map(r => [r.t, r]));
   const rows   = [];
@@ -39,7 +32,6 @@ function buildRatioOhlcv(etfOhlcv, refOhlcv) {
     if (!s || s.c === 0) continue;
     rows.push({ t: r.t, o: r.o/s.o, h: r.h/s.h, l: r.l/s.l, c: r.c/s.c, v: r.v });
   }
-  // Compute SMAs on the ratio close
   const closes = rows.map(r => r.c);
   const smaFn  = (vals, n) => {
     const res = new Array(vals.length).fill(null);
@@ -52,7 +44,6 @@ function buildRatioOhlcv(etfOhlcv, refOhlcv) {
   return rows;
 }
 
-// ── Current ratio value (for badge label) ─────────────────────
 function currentRatioValue(etfOhlcv) {
   if (!spyOhlcv?.length || !etfOhlcv.length) return null;
   const last    = etfOhlcv[etfOhlcv.length - 1];
@@ -61,8 +52,7 @@ function currentRatioValue(etfOhlcv) {
   return (last.c / spyLast.c).toFixed(4);
 }
 
-// ── Mode-aware card redraw ─────────────────────────────────────
-// Used by crosshair as the redraw callback — keeps chart.js stateless.
+// ── Mode-aware card redraw (used by crosshair callback) ────────
 function redrawCardCanvas(canvas) {
   const card    = canvas.closest('[data-ticker]');
   const ticker  = card?.dataset.ticker;
@@ -88,7 +78,6 @@ function redrawAllCards() {
     const isSPY    = ticker === SPY_TICKER;
     const useRatio = chartMode === 'ratio' && !isSPY && spyOhlcv;
 
-    // Show/hide ratio badge
     const badge = card.querySelector('.ratio-badge');
     if (badge) badge.style.display = (chartMode === 'ratio' && !isSPY) ? 'inline' : 'none';
 
@@ -100,14 +89,13 @@ function redrawAllCards() {
   });
 }
 
-// ── Build sector card ──────────────────────────────────────────
+// ── Build card ─────────────────────────────────────────────────
 function buildCard(data, idx) {
   const { ticker, info, ohlcv } = data;
   const last  = ohlcv[ohlcv.length - 1];
   const prev  = ohlcv[ohlcv.length - 2] || last;
   const isUp  = last.c >= prev.c;
   const isSPY = ticker === SPY_TICKER;
-  const w     = false;  // watchlist state applied later via refreshWatchlistUI
   const ratio = isSPY ? null : currentRatioValue(ohlcv);
 
   const card = document.createElement('div');
@@ -115,7 +103,6 @@ function buildCard(data, idx) {
   card.dataset.ticker = ticker;
   card.dataset.index  = idx;
 
-  // Open lightbox with mode-awareness
   card.addEventListener('click', () => {
     const isSPYCard = ticker === SPY_TICKER;
     const useRatio  = chartMode === 'ratio' && !isSPYCard && spyOhlcv;
@@ -136,8 +123,7 @@ function buildCard(data, idx) {
     <span class="last-price ${isUp ? 'up' : 'down'}">${last.c.toFixed(2)}</span>
     ${!isSPY && ratio
       ? `<span class="ratio-badge" style="display:none">${ratio}×</span>` : ''}
-    <button class="btn-watch" title="Add to watchlist"
-            data-ticker="${ticker}">+</button>`;
+    <button class="btn-watch" title="Add to watchlist" data-ticker="${ticker}">+</button>`;
   row1.querySelector('.btn-watch')
     .addEventListener('click', e => toggleWatch(ticker, e));
 
@@ -159,7 +145,6 @@ function buildCard(data, idx) {
 
   requestAnimationFrame(() => {
     drawChart(canvas, ohlcv, CHART_H);
-    // Pass redrawCardCanvas as the crosshair's redraw callback
     attachCrosshair(canvas, () => redrawCardCanvas);
   });
 
@@ -171,20 +156,28 @@ function initIntervalToggle() {
   document.querySelectorAll('.seg-btn[data-interval]').forEach(btn => {
     btn.addEventListener('click', async () => {
       if (btn.dataset.interval === currentInterval) return;
-      document.querySelectorAll('.seg-btn[data-interval]').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.seg-btn[data-interval]')
+        .forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       currentInterval = btn.dataset.interval;
 
-      // Reload all datasets for new interval
-      const tickers = allDatasets.map(d => d.ticker);
-      const newSets = await Promise.all(
-        tickers.map(t =>
-          fetchJSON(DATA_PATH + t + `_${currentInterval}.json`).catch(() => null)
-        )
-      );
-      allDatasets = newSets.filter(Boolean);
-      spyOhlcv    = allDatasets.find(d => d.ticker === SPY_TICKER)?.ohlcv || null;
-      redrawAllCards();
+      try {
+        const bundle = await fetchJSON(
+          DATA_PATH + `sectors_${currentInterval}_bundle.json`
+        );
+        allDatasets = bundle.tickers || [];
+        spyOhlcv    = allDatasets.find(d => d.ticker === SPY_TICKER)?.ohlcv || null;
+        // Update each card's canvas data then redraw
+        allDatasets.forEach(d => {
+          const card   = document.querySelector(`.card[data-ticker="${d.ticker}"]`);
+          const canvas = card?.querySelector('canvas');
+          if (!canvas) return;
+          canvas._ohlcv = d.ohlcv;
+        });
+        redrawAllCards();
+      } catch (e) {
+        console.warn('Could not load interval bundle:', e);
+      }
     });
   });
 }
@@ -199,7 +192,6 @@ function initModeToggle() {
       b.classList.toggle('active',       b.dataset.mode === chartMode && chartMode === 'price');
       b.classList.toggle('ratio-active', b.dataset.mode === chartMode && chartMode === 'ratio');
     });
-    // Switch legend
     document.getElementById('legend-normal').style.display = chartMode === 'price' ? 'flex' : 'none';
     document.getElementById('legend-ratio').style.display  = chartMode === 'ratio' ? 'flex' : 'none';
     redrawAllCards();
@@ -216,22 +208,17 @@ async function main() {
       .catch(() => ({ grids: ['sectors'] }));
     buildNavTabs(gridsIndex.grids, GRID_NAME);
 
-    const manifest = await fetchJSON(DATA_PATH + 'manifest_sectors.json');
-    const tickers  = manifest.tickers || [];
-    const updated  = manifest.generated
-      ? new Date(manifest.generated).toLocaleString() : '—';
-    document.getElementById('meta-info').textContent = `${tickers.length} ETFs · ${updated}`;
+    status.innerHTML = `<span class="spinner"></span> Loading sectors…`;
 
-    status.innerHTML = `<span class="spinner"></span> Loading ${tickers.length} tickers…`;
+    // Single bundle request
+    const bundle  = await fetchJSON(DATA_PATH + 'sectors_daily_bundle.json');
+    const datasets = bundle.tickers || [];
+    const updated  = bundle.generated
+      ? new Date(bundle.generated).toLocaleString() : '—';
 
-    const datasets = await Promise.all(
-      tickers.map(t =>
-        fetchJSON(DATA_PATH + t + '_daily.json')
-          .catch(e => { console.warn(`Skip ${t}:`, e); return null; })
-      )
-    );
+    document.getElementById('meta-info').textContent = `${datasets.length} ETFs · ${updated}`;
 
-    allDatasets = datasets.filter(Boolean);
+    allDatasets = datasets;
     spyOhlcv    = allDatasets.find(d => d.ticker === SPY_TICKER)?.ohlcv || null;
 
     status.style.display = 'none';

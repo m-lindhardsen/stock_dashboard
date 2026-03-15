@@ -10,6 +10,15 @@ Both use bulk yf.download() for speed.
 Company info is cached in info_cache.json and only fetched once per ticker.
 Cache tracks daily and weekly separately so either can be force-refreshed.
 
+After individual files are written, bundles are produced per grid per interval:
+  - data/sp500_daily_bundle.json
+  - data/sp500_weekly_bundle.json
+  - data/sp400_daily_bundle.json
+  ... etc. for every grid
+
+The JS app loads one bundle per grid (single request) instead of one file
+per ticker, which dramatically reduces page load time for large grids.
+
 To add a new grid: create tickers_mygrid.txt and re-run.
 """
 
@@ -38,9 +47,9 @@ CACHE_FILE  = os.path.join(DATA_DIR, "cache_meta.json")
 INFO_FILE   = os.path.join(DATA_DIR, "info_cache.json")
 CHUNK_SIZE  = 100
 
-# Intervals to download: (label, yfinance period, yfinance interval, filename suffix)
+# Intervals to download: (label, yfinance period, yfinance interval, suffix)
 INTERVALS = [
-    ("daily",  "2y", "1d", "daily"),
+    ("daily",  "2y", "1d",  "daily"),
     ("weekly", "5y", "1wk", "weekly"),
 ]
 
@@ -185,6 +194,53 @@ def fetch_info(ticker, info_cache):
     return info
 
 
+# ── Bundle writer ──────────────────────────────────────────────────────────────
+
+def write_bundles(grid_tickers, suffix, now):
+    """
+    For each grid, read the individual per-ticker JSON files and combine
+    them into a single bundle file: data/{gridname}_{suffix}_bundle.json
+
+    Bundle format:
+      {
+        "grid":      "sp500",
+        "interval":  "daily",
+        "generated": "...",
+        "tickers":   [ { ticker, info, ohlcv }, ... ]
+      }
+
+    The JS app fetches this single file instead of one file per ticker,
+    reducing 500 HTTP requests to 1 for large grids like sp500.
+    """
+    print(f"\n── BUNDLES ({suffix}) ──────────────────────────────────────")
+    for grid_name, tickers in grid_tickers.items():
+        bundle_path = os.path.join(DATA_DIR, f"{grid_name}_{suffix}_bundle.json")
+        entries = []
+        missing = []
+        for t in tickers:
+            fpath = os.path.join(DATA_DIR, f"{t}_{suffix}.json")
+            if not os.path.exists(fpath):
+                missing.append(t)
+                continue
+            with open(fpath, "r") as f:
+                entries.append(json.load(f))
+
+        bundle = {
+            "grid":      grid_name,
+            "interval":  suffix,
+            "generated": now,
+            "tickers":   entries,
+        }
+        with open(bundle_path, "w") as f:
+            json.dump(bundle, f, separators=(",", ":"))
+
+        size_kb = os.path.getsize(bundle_path) // 1024
+        msg = f"  {grid_name}_{suffix}_bundle.json — {len(entries)} tickers, {size_kb} KB"
+        if missing:
+            msg += f"  ({len(missing)} missing)"
+        print(msg)
+
+
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 def main():
@@ -199,7 +255,7 @@ def main():
     print(f"Found {len(grids)} grid(s): {', '.join(grids.keys())}")
     print()
 
-    # Collect all unique tickers
+    # Collect all unique tickers across all grids
     grid_tickers = {}
     all_tickers  = set()
     for name, filepath in grids.items():
@@ -212,8 +268,9 @@ def main():
     date_cache = load_json(CACHE_FILE, {})
     info_cache = load_json(INFO_FILE,  {})
     today      = datetime.date.today().isoformat()
+    now        = datetime.datetime.now().isoformat()
 
-    # Download daily and weekly separately
+    # ── Download each interval ─────────────────────────────────────
     for label, period, interval, suffix in INTERVALS:
         print(f"\n── {label.upper()} ({period}, {interval}) ──────────────────")
 
@@ -225,45 +282,45 @@ def main():
 
         if not to_update:
             print("  All up to date.")
-            continue
+        else:
+            # Bulk download in chunks of CHUNK_SIZE
+            all_ohlcv = {}
+            for i in range(0, len(to_update), CHUNK_SIZE):
+                chunk  = to_update[i: i + CHUNK_SIZE]
+                result = bulk_download(chunk, period, interval)
+                all_ohlcv.update(result)
 
-        # Bulk download in chunks
-        all_ohlcv = {}
-        for i in range(0, len(to_update), CHUNK_SIZE):
-            chunk  = to_update[i: i + CHUNK_SIZE]
-            result = bulk_download(chunk, period, interval)
-            all_ohlcv.update(result)
+            updated, failed = [], []
+            for ticker in to_update:
+                if ticker not in all_ohlcv:
+                    print(f"  WARNING: No {label} data for {ticker}")
+                    failed.append(ticker)
+                    continue
 
-        updated, failed = [], []
-        for ticker in to_update:
-            if ticker not in all_ohlcv:
-                print(f"  WARNING: No {label} data for {ticker}")
-                failed.append(ticker)
-                continue
+                rows = enrich_with_sma(all_ohlcv[ticker])
+                info = fetch_info(ticker, info_cache)
+                data = {"ticker": ticker, "info": info, "ohlcv": rows}
 
-            rows = enrich_with_sma(all_ohlcv[ticker])
-            info = fetch_info(ticker, info_cache)
-            data = {"ticker": ticker, "info": info, "ohlcv": rows}
+                fname = os.path.join(DATA_DIR, f"{ticker}_{suffix}.json")
+                with open(fname, "w") as f:
+                    json.dump(data, f, separators=(",", ":"))
 
-            fname = os.path.join(DATA_DIR, f"{ticker}_{suffix}.json")
-            with open(fname, "w") as f:
-                json.dump(data, f, separators=(",", ":"))
+                date_cache[cache_key(ticker, label)] = today
+                updated.append(ticker)
 
-            date_cache[cache_key(ticker, label)] = today
-            updated.append(ticker)
+            save_json(CACHE_FILE, date_cache)
+            save_json(INFO_FILE,  info_cache)
 
-        save_json(CACHE_FILE, date_cache)
-        save_json(INFO_FILE,  info_cache)
+            print(f"  Updated: {len(updated)}   Failed: {len(failed)}")
+            if failed:
+                print(f"  Failed: {', '.join(failed)}")
 
-        print(f"  Updated: {len(updated)}   Failed: {len(failed)}")
-        if failed:
-            print(f"  Failed: {', '.join(failed)}")
+        # Always rebuild bundles after each interval pass so they stay fresh
+        write_bundles(grid_tickers, suffix, now)
 
-    # Write manifests
+    # ── Write manifests and grids index ───────────────────────────
     print("\n── MANIFESTS ──────────────────────────────────────")
-    now = datetime.datetime.now().isoformat()
     for name, tickers in grid_tickers.items():
-        # A ticker is available if both daily and weekly files exist
         available = [
             t for t in tickers
             if os.path.exists(os.path.join(DATA_DIR, f"{t}_daily.json"))
