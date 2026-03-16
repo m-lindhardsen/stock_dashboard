@@ -364,19 +364,6 @@ export function initExportButton() {
   });
 }
 
-export function initClearButton() {
-  const btn = document.getElementById('btn-clear-watchlist');
-  if (!btn) return;
-  btn.addEventListener('click', () => {
-    if (!watchlist.size) { alert('Watchlist is already empty.'); return; }
-    if (!confirm(`Remove all ${watchlist.size} stock${watchlist.size > 1 ? 's' : ''} from your watchlist?`)) return;
-    watchlist.clear();
-    saveWatchlist(watchlist);
-    refreshWatchlistUI();
-    applyFilter();
-  });
-}
-
 // ── Nav tabs ───────────────────────────────────────────────────
 
 export function buildNavTabs(grids, activeName) {
