@@ -13,7 +13,7 @@
 import {
   fetchJSON, buildNavTabs, buildCard, buildSectorButtons,
   refreshWatchlistUI, applyFilter, initSortButtons,
-  initColumnToggle, initExportButton, initResizeHandler, CHART_H,
+  initColumnToggle, initExportButton, initClearButton, initResizeHandler, CHART_H,
   initLazyChartObserver,
 } from './grid.js';
 
@@ -158,6 +158,7 @@ initColumnToggle();
 initSortButtons();
 initIntervalToggle();
 initExportButton();
+initClearButton();
 initResizeHandler();
 
 main();
