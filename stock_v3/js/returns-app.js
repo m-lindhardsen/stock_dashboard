@@ -578,11 +578,10 @@ function buildBubbleLegend(sectors) {
   });
 }
 
-// ── Bubble watchlist ───────────────────────────────────────────
-// Adds all currently visible bubbles to the shared watchlist.
+// ── Bubble clipboard copy ──────────────────────────────────────
+// Copies all currently visible tickers to the clipboard as a
+// comma-separated string.
 // "Visible" = sector not hidden AND (if zoomed) within zoom window.
-
-const LS_KEY = 'marketgrid_watchlist_v1';
 
 function getVisibleTickers() {
   const rows = canvas._rows;   // set by drawBubble() — already filtered by sector
@@ -603,26 +602,33 @@ function initBubbleWatchlist() {
   const feedback = document.getElementById('bubble-save-feedback');
   let   fadeTimer = null;
 
-  btn.addEventListener('click', () => {
+  btn.addEventListener('click', async () => {
     const tickers = getVisibleTickers();
 
-    // Load existing watchlist, add new tickers, save back
-    let wl;
-    try { wl = new Set(JSON.parse(localStorage.getItem(LS_KEY)) || []); }
-    catch { wl = new Set(); }
+    if (tickers.length === 0) {
+      feedback.textContent = '— nothing visible';
+      feedback.classList.add('show');
+      clearTimeout(fadeTimer);
+      fadeTimer = setTimeout(() => feedback.classList.remove('show'), 2200);
+      return;
+    }
 
-    const before = wl.size;
-    tickers.forEach(t => wl.add(t));
-    const added = wl.size - before;
+    const text = tickers.join(', ');
 
-    localStorage.setItem(LS_KEY, JSON.stringify([...wl]));
-
-    // Show feedback
-    feedback.textContent = added > 0
-      ? `✓ ${added} ticker${added === 1 ? '' : 's'} added`
-      : tickers.length === 0
-        ? '— nothing visible'
-        : '— already in watchlist';
+    try {
+      await navigator.clipboard.writeText(text);
+      feedback.textContent = `✓ ${tickers.length} ticker${tickers.length === 1 ? '' : 's'} copied`;
+    } catch {
+      // Fallback for browsers that block clipboard access
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      feedback.textContent = `✓ ${tickers.length} ticker${tickers.length === 1 ? '' : 's'} copied`;
+    }
 
     feedback.classList.add('show');
     clearTimeout(fadeTimer);
