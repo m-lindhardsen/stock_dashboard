@@ -30,9 +30,10 @@ const PRESETS = {
 };
 
 // ── State ──────────────────────────────────────────────────────
-let currentGrid = 'sp500';
-let currentView = 'table';
-let datasets    = [];
+let selectedGrids = new Set(['sp500']);   // multi-select
+let currentView   = 'table';
+let datasets      = [];
+let showTickers   = false;
 
 const periods = [
   { preset: '1w', startDate: null, endDate: null },
@@ -149,16 +150,28 @@ function initViewToggle() {
   });
 }
 
-// ── Grid selector ──────────────────────────────────────────────
+// ── Grid selector (multi-select checkboxes) ────────────────────
 function initGridSelector() {
-  document.getElementById('grid-selector').addEventListener('click', async e => {
-    const btn = e.target.closest('.seg-btn');
-    if (!btn || btn.dataset.grid === currentGrid) return;
-    document.querySelectorAll('#grid-selector .seg-btn')
-      .forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentGrid = btn.dataset.grid;
-    await loadGrid();
+  const container = document.getElementById('grid-selector');
+
+  // Convert existing seg-btns to checkbox-style toggles
+  container.querySelectorAll('.seg-btn').forEach(btn => {
+    const grid = btn.dataset.grid;
+    if (selectedGrids.has(grid)) btn.classList.add('active');
+    else btn.classList.remove('active');
+
+    btn.addEventListener('click', async () => {
+      if (selectedGrids.has(grid)) {
+        // Don't allow deselecting the last grid
+        if (selectedGrids.size === 1) return;
+        selectedGrids.delete(grid);
+        btn.classList.remove('active');
+      } else {
+        selectedGrids.add(grid);
+        btn.classList.add('active');
+      }
+      await loadGrid();
+    });
   });
 }
 
@@ -176,23 +189,36 @@ function updateResolvedLabels() {
   });
 }
 
-// ── Data loading — reads from bundle ──────────────────────────
+// ── Data loading — loads all selected grids in parallel ────────
 async function loadGrid() {
   const status    = document.getElementById('table-status');
   const tableWrap = document.getElementById('table-wrap');
   const bubbleV   = document.getElementById('bubble-view');
 
   status.style.display    = 'block';
-  status.innerHTML        = `<span class="spinner"></span> Loading ${currentGrid}…`;
+  status.innerHTML        = `<span class="spinner"></span> Loading…`;
   tableWrap.style.display = 'none';
   bubbleV.style.display   = 'none';
 
   try {
-    const bundle  = await fetchJSON(DATA_PATH + `${currentGrid}_daily_bundle.json`);
-    const updated = bundle.generated
-      ? new Date(bundle.generated).toLocaleString() : '—';
+    const grids   = [...selectedGrids];
+    const bundles = await Promise.all(
+      grids.map(g => fetchJSON(DATA_PATH + `${g}_daily_bundle.json`))
+    );
 
-    datasets = bundle.tickers || [];
+    // Merge tickers; deduplicate by ticker symbol (last-one-wins per grid)
+    const tickerMap = new Map();
+    bundles.forEach(bundle => {
+      (bundle.tickers || []).forEach(d => tickerMap.set(d.ticker, d));
+    });
+    datasets = [...tickerMap.values()];
+
+    const latest = bundles
+      .map(b => b.generated ? new Date(b.generated) : null)
+      .filter(Boolean)
+      .sort((a, b) => b - a)[0];
+    const updated = latest ? latest.toLocaleString() : '—';
+
     document.getElementById('meta-info').textContent =
       `${datasets.length} tickers · ${updated}`;
 
@@ -406,6 +432,23 @@ function drawBubble() {
     ctx.lineWidth   = 1.2;
     ctx.stroke();
   });
+
+  // Ticker labels (when enabled)
+  if (showTickers) {
+    ctx.font      = `700 9px 'Space Mono',monospace`;
+    ctx.textAlign = 'left';
+    rows.forEach(row => {
+      const x = toX(row.r0);
+      const y = toY(row.r1);
+      if (x < PAD.left - BUBBLE_R || x > PAD.left + innerW + BUBBLE_R) return;
+      if (y < PAD.top  - BUBBLE_R || y > PAD.top  + innerH + BUBBLE_R) return;
+      const col = sectorColorMap[row.sector] || '#8896aa';
+      ctx.fillStyle = col;
+      ctx.globalAlpha = 0.92;
+      ctx.fillText(row.ticker, x + BUBBLE_R + 3, y + 3);
+      ctx.globalAlpha = 1;
+    });
+  }
 
   // Store geometry for hit-testing and zoom
   canvas._rows   = rows;
@@ -636,6 +679,17 @@ function initBubbleWatchlist() {
   });
 }
 
+// ── Ticker label toggle ────────────────────────────────────────
+function initTickerLabels() {
+  const btn = document.getElementById('ticker-labels-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    showTickers = !showTickers;
+    btn.classList.toggle('active', showTickers);
+    if (currentView === 'bubble') drawBubble();
+  });
+}
+
 // ── Resize ─────────────────────────────────────────────────────
 function initResizeHandler() {
   let timer;
@@ -664,6 +718,7 @@ async function main() {
   initBubbleHover();
   initBubbleZoom();
   initBubbleWatchlist();
+  initTickerLabels();
   initResizeHandler();
 
   await loadGrid();
