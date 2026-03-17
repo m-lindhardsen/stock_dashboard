@@ -1,65 +1,76 @@
 /* =============================================================
    theme.css — Design tokens (CSS custom properties)
-   :root        = dark theme (default)
-   body.light   = light theme overrides (scaffold for later)
+   Nordic Studio Design System
+   :root        = warm light theme (default)
+   body.dark    = dark theme overrides
    All colors, radii, spacing and typography scale live here.
    To add a new theme: add another body.X { } block below.
    ============================================================= */
 
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+
 :root {
   /* ── Palette ── */
-  --bg:           #0d0f14;        /* Page background */
-  --surface:      #141820;        /* Cards, header, panels */
-  --surface2:     #1a2030;        /* Raised elements, segmented controls */
-  --border:       #1e2530;        /* Subtle borders */
-  --muted:        #3a4252;        /* Disabled/hover borders */
-  --text:         #e2e8f0;        /* Primary text */
-  --dim:          #8896aa;        /* Secondary text, labels */
-  --accent:       #3992ce;        /* Brand colour, active states 4af0b0 */ 
+  --bg:           #F7F3EC;        /* Warm parchment — page background */
+  --surface:      #FDFAF4;        /* Slightly lighter — cards, panels */
+  --surface2:     #F0EBE1;        /* Raised elements, segmented controls */
+  --border:       #DDD5C4;        /* Warm light border */
+  --muted:        #C4B89E;        /* Disabled/hover borders */
+  --text:         #1A1410;        /* Near-black — headings, primary text */
+  --dim:          #6B5C4A;        /* Body copy, secondary/label text */
+  --accent:       #9A7F5A;        /* Earthy gold — brand colour, active states */
 
   /* ── Semantic chart colours ── */
-  --up:           #26d97f;        /* Bullish / positive */
-  --down:         #f04f5e;        /* Bearish / negative */
-  --sma10:        #facc15;        /* SMA 10 line */
-  --sma50:        #60a5fa;        /* SMA 50 line */
-  --sma250:       #f97316;        /* SMA 250 line */
-  --ratio:        #a78bfa;        /* Ratio / indicator line */
-  --vol:          rgba(100,140,255,0.30);   /* Volume bar fill */
-  --vol-border:   rgba(100,140,255,0.65);  /* Volume bar stroke */
+  --up:           #4A7C59;        /* Bullish / positive — muted forest green */
+  --down:         #9B3A3A;        /* Bearish / negative — muted terracotta */
+  --sma10:        #B89A50;        /* SMA 10 line — warm gold */
+  --sma50:        #7A8FA6;        /* SMA 50 line — cool slate */
+  --sma250:       #A0714A;        /* SMA 250 line — burnt sienna */
+  --ratio:        #8878A8;        /* Ratio / indicator line — muted mauve */
+  --vol:          rgba(154,127,90,0.18);   /* Volume bar fill */
+  --vol-border:   rgba(154,127,90,0.50);  /* Volume bar stroke */
 
   /* ── Chart canvas colours (used in chart.js) ── */
-  --chart-bg:     #141820;
-  --chart-plot:   rgb(36,44,53);
-  --chart-grid:   rgba(255,255,255,0.07);
-  --chart-text:   #8896aa;
+  --chart-bg:     #FDFAF4;
+  --chart-plot:   #F7F3EC;
+  --chart-grid:   rgba(221,213,196,0.6);
+  --chart-text:   #9A7F5A;
 
   /* ── Shape ── */
-  --r-card:       10px;           /* Card corner radius */
-  --r-btn:        6px;            /* Button corner radius */
-  --r-pill:       999px;          /* Pill/tag corner radius */
+  --r-card:       18px;           /* Card corner radius */
+  --r-btn:        100px;          /* Button corner radius — pill */
+  --r-pill:       100px;          /* Pill/tag corner radius */
 
   /* ── Spacing ── */
-  --gap:          14px;           /* Grid gap */
+  --gap:          16px;           /* Grid gap */
 
   /* ── Typography base ── */
   font-size: 14px;
 }
 
-/* ── Light theme scaffold (activate with <body class="light">) ──
-   Override every variable above with light-appropriate values.
-   Currently unused — placeholder for future implementation.    */
-body.light {
-  --bg:       #f4f6f9;
-  --surface:  #ffffff;
-  --surface2: #eef0f4;
-  --border:   #dde2ea;
-  --muted:    #b0bac8;
-  --text:     #1a2030;
-  --dim:      #637080;
-  --accent:   #00a878;
+/* ── Dark theme (activate with <body class="dark">) ──
+   Override every variable above with dark-appropriate values. */
+body.dark {
+  --bg:           #1A1410;
+  --surface:      #221D17;
+  --surface2:     #2A231B;
+  --border:       #342C22;
+  --muted:        #4A3F30;
+  --text:         #F0EBE1;
+  --dim:          #9A8570;
+  --accent:       #B89A50;
 
-  --chart-bg:   #ffffff;
-  --chart-plot: #f0f3f7;
-  --chart-grid: rgba(0,0,0,0.07);
-  --chart-text: #637080;
+  --up:           #6AAF80;
+  --down:         #C96464;
+  --sma10:        #D4B060;
+  --sma50:        #90AAC0;
+  --sma250:       #C08860;
+  --ratio:        #A898C8;
+  --vol:          rgba(184,154,80,0.20);
+  --vol-border:   rgba(184,154,80,0.50);
+
+  --chart-bg:     #221D17;
+  --chart-plot:   #2A231B;
+  --chart-grid:   rgba(52,44,34,0.8);
+  --chart-text:   #9A8570;
 }
