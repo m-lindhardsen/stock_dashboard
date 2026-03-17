@@ -1,7 +1,6 @@
 /* =============================================================
    layout.css — Structural layout: page skeleton, header,
    grid, cards, filter bar, lightbox, status.
-   Nordic Studio Design System
    No colours here — all colours come from theme.css variables.
    ============================================================= */
 
@@ -11,8 +10,8 @@
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Jost', system-ui, sans-serif;
-  font-weight: 300;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 400;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
@@ -21,12 +20,10 @@ body {
 header {
   display: flex;
   align-items: center;
-  gap: 18px;
-  padding: 18px 48px;
-  border-bottom: 1px solid rgba(154,127,90,0.18);
-  background: rgba(247,243,236,0.88);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  gap: 14px;
+  padding: 12px 22px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
   position: sticky;
   top: 0;
   z-index: 200;
@@ -34,47 +31,42 @@ header {
 }
 
 .logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.15rem;
-  font-weight: 400;
-  letter-spacing: .06em;
-  color: var(--text);
+  font-family: 'Space Mono', monospace;
+  font-size: .9rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: var(--accent);
   text-decoration: none;
   flex-shrink: 0;
-  transition: opacity .2s;
+  transition: opacity .13s;
 }
-.logo span { color: var(--accent); font-weight: 300; }
-.logo:hover { opacity: .7; }
+.logo span { color: var(--dim); font-weight: 400; }
+.logo:hover { opacity: .8; }
 
 /* Nav tabs (injected by JS) */
-#nav-tabs { display: flex; gap: 6px; flex: 1; flex-wrap: wrap; }
+#nav-tabs { display: flex; gap: 4px; flex: 1; flex-wrap: wrap; }
 
 #meta-info {
-  font-family: 'Jost', sans-serif;
-  font-size: .68rem;
+  font-size: .7rem;
   font-weight: 400;
-  letter-spacing: .06em;
-  text-transform: uppercase;
   color: var(--dim);
   white-space: nowrap;
 }
 
-.header-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.header-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
 
 #watchlist-count {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: .78rem;
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum";
-  color: var(--accent);
+  font-family: 'Space Mono', monospace;
+  font-size: .65rem;
+  color: var(--sma10);
   white-space: nowrap;
 }
 
 /* ── LEGEND BAR ── */
 .legend {
   display: flex;
-  gap: 20px;
-  padding: 10px 48px;
+  gap: 16px;
+  padding: 7px 22px;
   border-bottom: 1px solid var(--border);
   background: var(--bg);
   flex-wrap: wrap;
@@ -84,20 +76,17 @@ header {
 .legend-item {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-family: 'Jost', sans-serif;
-  font-size: .64rem;
+  gap: 5px;
+  font-size: .67rem;
   font-weight: 400;
-  letter-spacing: .08em;
-  text-transform: uppercase;
   color: var(--dim);
 }
 
 /* ── FILTER BAR ── */
 #filter-bar {
   display: none;   /* shown by JS once sector data loads */
-  gap: 8px;
-  padding: 10px 48px;
+  gap: 6px;
+  padding: 8px 18px;
   border-bottom: 1px solid var(--border);
   background: var(--surface);
   flex-wrap: wrap;
@@ -105,11 +94,10 @@ header {
 }
 
 .filter-label {
-  font-family: 'Jost', sans-serif;
-  font-size: .62rem;
-  font-weight: 400;
-  letter-spacing: .12em;
+  font-size: .65rem;
+  font-weight: 600;
   color: var(--dim);
+  letter-spacing: .07em;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -119,15 +107,12 @@ header {
   width: 1px;
   height: 16px;
   background: var(--border);
-  margin: 0 4px;
+  margin: 0 2px;
   flex-shrink: 0;
 }
 
 #filter-count {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: .78rem;
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum";
+  font-size: .65rem;
   color: var(--dim);
   margin-left: auto;
   white-space: nowrap;
@@ -138,9 +123,7 @@ header {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--gap);
-  padding: var(--gap) 48px 48px;
-  max-width: 1400px;
-  margin: 0 auto;
+  padding: var(--gap) 16px 32px;
 }
 #grid.cols-2       { grid-template-columns: repeat(2, 1fr); }
 @media(max-width:1100px){ #grid:not(.cols-2){ grid-template-columns: repeat(3,1fr); } }
@@ -149,51 +132,49 @@ header {
 
 /* ── STOCK CARD ── */
 .card {
-  background: rgba(253,250,244,0.85);
-  border: 1px solid rgba(221,213,196,0.7);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: var(--r-card);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  box-shadow: 0 2px 14px rgba(154,127,90,0.07);
-  transition: border-color .25s, box-shadow .25s, transform .25s;
+  transition: border-color .15s, box-shadow .15s;
 }
 .card:hover {
-  border-color: var(--accent);
-  box-shadow: 0 8px 28px rgba(154,127,90,0.13);
-  transform: translateY(-2px);
+  border-color: var(--muted);
+  box-shadow: 0 4px 20px rgba(0,0,0,.35);
 }
 
 /* Watchlist highlight */
-.card.in-watchlist { border-color: rgba(184,154,80,0.35); }
+.card.in-watchlist { border-color: rgba(250,204,21,.28); }
 .card.in-watchlist:hover {
   border-color: var(--sma10);
-  box-shadow: 0 8px 28px rgba(184,154,80,0.12);
+  box-shadow: 0 4px 20px rgba(250,204,21,.08);
 }
 
 /* SPY benchmark card (sectors page) */
-.card.spy-card { border-color: rgba(154,127,90,0.3); }
+.card.spy-card { border-color: rgba(74,240,176,.22); }
 .card.spy-card:hover {
   border-color: var(--accent);
-  box-shadow: 0 8px 28px rgba(154,127,90,0.14);
+  box-shadow: 0 4px 20px rgba(74,240,176,.08);
 }
 
 .card-header {
-  padding: 14px 16px 10px;
+  padding: 10px 12px 8px;
   border-bottom: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
-.card-row1 { display: flex; align-items: center; gap: 8px; }
-.card-row2 { display: flex; gap: 5px; flex-wrap: wrap; }
+.card-row1 { display: flex; align-items: center; gap: 6px; }
+.card-row2 { display: flex; gap: 4px; flex-wrap: wrap; }
 
 /* Chart canvas wrapper inside card */
 .chart-wrap {
   position: relative;
   flex: 1;
-  padding: 6px 6px 0;
+  padding: 4px 4px 0;
   background: var(--surface);
 }
 
@@ -201,25 +182,18 @@ header {
 .empty-state {
   display: none;
   text-align: center;
-  padding: 80px 20px;
+  padding: 60px 20px;
   color: var(--dim);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
-  font-weight: 300;
-  font-style: italic;
+  font-size: .78rem;
   grid-column: 1 / -1;
 }
 
 /* ── STATUS / LOADING ── */
 #status {
   text-align: center;
-  padding: 100px 20px;
+  padding: 80px 20px;
   color: var(--dim);
-  font-family: 'Jost', sans-serif;
-  font-size: .75rem;
-  font-weight: 400;
-  letter-spacing: .1em;
-  text-transform: uppercase;
+  font-size: .8rem;
 }
 
 /* ── LIGHTBOX OVERLAY ── */
@@ -228,10 +202,9 @@ header {
   position: fixed;
   inset: 0;
   z-index: 999;
-  background: rgba(26,20,16,0.72);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 24px 48px;
+  background: rgba(5,7,11,0.88);
+  backdrop-filter: blur(6px);
+  padding: 20px;
   flex-direction: column;
 }
 #lightbox.open { display: flex; }
@@ -239,15 +212,14 @@ header {
 #lb-header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px 20px;
+  gap: 10px;
+  padding: 12px 16px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-bottom: none;
   border-radius: var(--r-card) var(--r-card) 0 0;
   flex-shrink: 0;
   flex-wrap: wrap;
-  box-shadow: 0 -4px 24px rgba(154,127,90,0.06);
 }
 
 #lb-canvas-wrap {
@@ -257,20 +229,20 @@ header {
   border-radius: 0 0 var(--r-card) var(--r-card);
   overflow: hidden;
   min-height: 0;
-  padding: 8px;
+  padding: 6px;
 }
 
 /* Canvas elements */
 canvas {
   display: block;
   width: 100% !important;
-  border-radius: 10px;
+  border-radius: 4px;
   overflow: hidden;
 }
 #lb-canvas {
   width: 100% !important;
   height: 100% !important;
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 /* ── INDEX PAGE (landing) ── */
@@ -285,52 +257,23 @@ body.page-index {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 80px 48px;
-  gap: 56px;
-  position: relative;
-  overflow: hidden;
+  padding: 60px 24px;
+  gap: 48px;
 }
 
-/* Decorative atmospheric blobs */
-.page-index main::before,
-.page-index main::after {
-  content: '';
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  filter: blur(88px);
-  opacity: .14;
-}
-.page-index main::before {
-  width: 480px; height: 480px;
-  background: #9A7F5A;
-  top: -120px; right: -100px;
-}
-.page-index main::after {
-  width: 360px; height: 360px;
-  background: #DDD5C4;
-  bottom: -80px; left: -60px;
-}
-
-.hero { text-align: center; position: relative; z-index: 1; }
+.hero { text-align: center; }
 .hero h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.8rem;
-  font-weight: 300;
+  font-size: 1.5rem;
+  font-weight: 700;
   letter-spacing: -.01em;
   color: var(--text);
-  margin-bottom: 14px;
-  line-height: 1.15;
+  margin-bottom: 10px;
 }
-.hero h1 em { font-style: italic; color: var(--accent); }
 .hero p {
   color: var(--dim);
-  font-family: 'Jost', sans-serif;
-  font-size: .88rem;
-  font-weight: 300;
-  max-width: 440px;
-  line-height: 1.85;
-  margin: 0 auto;
+  font-size: .9rem;
+  max-width: 420px;
+  line-height: 1.6;
 }
 
 #grid-cards {
@@ -338,39 +281,32 @@ body.page-index {
   flex-wrap: wrap;
   gap: 16px;
   justify-content: center;
-  max-width: 960px;
-  position: relative;
-  z-index: 1;
+  max-width: 900px;
 }
 
 .grid-card {
-  background: rgba(253,250,244,0.85);
-  border: 1px solid rgba(221,213,196,0.7);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: var(--r-card);
-  padding: 28px 32px;
-  min-width: 200px;
+  padding: 24px 28px;
+  min-width: 190px;
   text-decoration: none;
   color: inherit;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  box-shadow: 0 2px 14px rgba(154,127,90,0.07);
-  transition: border-color .25s, box-shadow .25s, transform .25s;
+  gap: 6px;
+  transition: border-color .15s, box-shadow .15s, transform .15s;
 }
 .grid-card:hover {
   border-color: var(--accent);
-  box-shadow: 0 8px 32px rgba(154,127,90,0.14);
+  box-shadow: 0 8px 32px rgba(0,0,0,.4);
   transform: translateY(-2px);
 }
 
 footer {
   text-align: center;
-  padding: 22px 48px;
-  font-family: 'Jost', sans-serif;
-  font-size: .62rem;
-  font-weight: 400;
-  letter-spacing: .1em;
-  text-transform: uppercase;
+  padding: 18px;
+  font-size: .65rem;
   color: var(--muted);
   border-top: 1px solid var(--border);
 }
