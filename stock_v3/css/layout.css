@@ -1,6 +1,7 @@
 /* =============================================================
    layout.css — Structural layout: page skeleton, header,
    grid, cards, filter bar, lightbox, status.
+   Trading Routine Layout system — clean professional structure.
    No colours here — all colours come from theme.css variables.
    ============================================================= */
 
@@ -10,20 +11,33 @@
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Segoe UI', 'Inter', system-ui, Arial, sans-serif;
+  font-size: 13px;
   font-weight: 400;
+  line-height: 1.5;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
 
+/* ── PAGE WRAPPER ── */
+.page {
+  max-width: 1100px;
+  margin: 30px auto;
+  background: var(--surface);
+  border-radius: var(--r-card);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
 /* ── HEADER ── */
 header {
+  background: #0f172a;             /* Navy — trading routine primary header */
+  color: #fff;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  justify-content: space-between;
   gap: 14px;
-  padding: 12px 22px;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface);
+  padding: 28px 36px 22px;
   position: sticky;
   top: 0;
   z-index: 200;
@@ -31,25 +45,25 @@ header {
 }
 
 .logo {
-  font-family: 'Space Mono', monospace;
-  font-size: .9rem;
+  font-family: 'Space Mono', 'Segoe UI', monospace;
+  font-size: 22px;
   font-weight: 700;
-  letter-spacing: .08em;
-  color: var(--accent);
+  letter-spacing: 0.3px;
+  color: #fff;
   text-decoration: none;
   flex-shrink: 0;
   transition: opacity .13s;
 }
-.logo span { color: var(--dim); font-weight: 400; }
+.logo span { color: #94a3b8; font-weight: 400; }
 .logo:hover { opacity: .8; }
 
 /* Nav tabs (injected by JS) */
 #nav-tabs { display: flex; gap: 4px; flex: 1; flex-wrap: wrap; }
 
 #meta-info {
-  font-size: .7rem;
-  font-weight: 400;
-  color: var(--dim);
+  text-align: right;
+  font-size: 11px;
+  color: #64748b;
   white-space: nowrap;
 }
 
@@ -60,6 +74,32 @@ header {
   font-size: .65rem;
   color: var(--sma10);
   white-space: nowrap;
+}
+
+/* ── PRINCIPLE BAR ──
+   Full-width highlight strip below header (trading routine pattern). */
+.principle-bar {
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 36px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.principle-bar span { opacity: 0.8; font-weight: 400; }
+
+/* ── SECTION LABEL BAR ── */
+.section-label {
+  background: var(--surface2);
+  border-left: 4px solid var(--accent);
+  padding: 8px 36px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--dim);
 }
 
 /* ── LEGEND BAR ── */
@@ -94,10 +134,10 @@ header {
 }
 
 .filter-label {
-  font-size: .65rem;
-  font-weight: 600;
+  font-size: 10px;
+  font-weight: 700;
   color: var(--dim);
-  letter-spacing: .07em;
+  letter-spacing: 1px;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -139,25 +179,26 @@ header {
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  transition: border-color .15s, box-shadow .15s;
+  transition: border-color .15s, box-shadow .15s, transform .15s;
 }
 .card:hover {
-  border-color: var(--muted);
-  box-shadow: 0 4px 20px rgba(0,0,0,.35);
+  border-color: var(--accent);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  transform: translateY(-1px);
 }
 
 /* Watchlist highlight */
-.card.in-watchlist { border-color: rgba(250,204,21,.28); }
+.card.in-watchlist { border-color: rgba(245,158,11,.35); }
 .card.in-watchlist:hover {
   border-color: var(--sma10);
-  box-shadow: 0 4px 20px rgba(250,204,21,.08);
+  box-shadow: 0 4px 20px rgba(245,158,11,.12);
 }
 
 /* SPY benchmark card (sectors page) */
-.card.spy-card { border-color: rgba(74,240,176,.22); }
+.card.spy-card { border-color: rgba(14,165,233,.30); }
 .card.spy-card:hover {
   border-color: var(--accent);
-  box-shadow: 0 4px 20px rgba(74,240,176,.08);
+  box-shadow: 0 4px 20px rgba(14,165,233,.12);
 }
 
 .card-header {
@@ -202,7 +243,7 @@ header {
   position: fixed;
   inset: 0;
   z-index: 999;
-  background: rgba(5,7,11,0.88);
+  background: rgba(15,23,42,0.80);
   backdrop-filter: blur(6px);
   padding: 20px;
   flex-direction: column;
@@ -263,9 +304,9 @@ body.page-index {
 
 .hero { text-align: center; }
 .hero h1 {
-  font-size: 1.5rem;
+  font-size: 22px;
   font-weight: 700;
-  letter-spacing: -.01em;
+  letter-spacing: -0.01em;
   color: var(--text);
   margin-bottom: 10px;
 }
@@ -299,14 +340,54 @@ body.page-index {
 }
 .grid-card:hover {
   border-color: var(--accent);
-  box-shadow: 0 8px 32px rgba(0,0,0,.4);
+  box-shadow: 0 8px 32px rgba(0,0,0,.10);
   transform: translateY(-2px);
 }
 
+/* ── DIVIDER ── */
+.divider {
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── FOOTER / LEGEND BAR ── */
 footer {
-  text-align: center;
-  padding: 18px;
-  font-size: .65rem;
-  color: var(--muted);
-  border-top: 1px solid var(--border);
+  background: #0f172a;
+  padding: 14px 36px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-size: 10px;
+  color: #64748b;
+  border-top: none;
+}
+.legend-label {
+  font-size: 10px;
+  color: #64748b;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-right: 6px;
+}
+.legend-items {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 800px) {
+  header { padding: 18px 20px 14px; }
+  .section-label { padding: 8px 20px; }
+  .principle-bar { padding: 10px 20px; }
+  footer { padding: 14px 20px; }
+}
+
+/* ── PRINT OPTIMIZATION ── */
+@media print {
+  body { background: #fff; font-size: 11px; }
+  .page { box-shadow: none; margin: 0; border-radius: 0; }
+  header { position: static; }
+  #lightbox { display: none !important; }
 }

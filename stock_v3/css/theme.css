@@ -1,37 +1,50 @@
 /* =============================================================
    theme.css — Design tokens (CSS custom properties)
-   :root        = dark theme (default)
-   body.light   = light theme overrides (scaffold for later)
-   All colors, radii, spacing and typography scale live here.
-   To add a new theme: add another body.X { } block below.
+   Trading Routine Layout system — light professional palette
+   :root        = light theme (default)
+   body.dark    = dark theme overrides
    ============================================================= */
 
 :root {
   /* ── Palette ── */
-  --bg:           #0d0f14;        /* Page background */
-  --surface:      #141820;        /* Cards, header, panels */
-  --surface2:     #1a2030;        /* Raised elements, segmented controls */
-  --border:       #1e2530;        /* Subtle borders */
-  --muted:        #3a4252;        /* Disabled/hover borders */
-  --text:         #e2e8f0;        /* Primary text */
-  --dim:          #8896aa;        /* Secondary text, labels */
-  --accent:       #3992ce;        /* Brand colour, active states 4af0b0 */ 
+  --bg:           #f4f5f7;        /* Page background */
+  --surface:      #ffffff;        /* Cards, header, panels */
+  --surface2:     #f1f5f9;        /* Raised elements, segmented controls */
+  --border:       #e2e8f0;        /* Subtle borders */
+  --muted:        #b0bac8;        /* Disabled/hover borders */
+  --text:         #1e293b;        /* Primary text */
+  --dim:          #64748b;        /* Secondary text, labels */
+  --accent:       #0ea5e9;        /* Brand colour, active states */
 
   /* ── Semantic chart colours ── */
-  --up:           #26d97f;        /* Bullish / positive */
-  --down:         #f04f5e;        /* Bearish / negative */
-  --sma10:        #facc15;        /* SMA 10 line */
-  --sma50:        #60a5fa;        /* SMA 50 line */
-  --sma250:       #f97316;        /* SMA 250 line */
-  --ratio:        #a78bfa;        /* Ratio / indicator line */
-  --vol:          rgba(100,140,255,0.30);   /* Volume bar fill */
-  --vol-border:   rgba(100,140,255,0.65);  /* Volume bar stroke */
+  --up:           #22c55e;        /* Bullish / positive */
+  --down:         #ef4444;        /* Bearish / negative */
+  --sma10:        #f59e0b;        /* SMA 10 line — amber */
+  --sma50:        #1d4ed8;        /* SMA 50 line — blue */
+  --sma250:       #7c3aed;        /* SMA 250 line — purple */
+  --ratio:        #7c3aed;        /* Ratio / indicator line */
+  --vol:          rgba(14,165,233,0.18);   /* Volume bar fill */
+  --vol-border:   rgba(14,165,233,0.50);  /* Volume bar stroke */
 
   /* ── Chart canvas colours (used in chart.js) ── */
-  --chart-bg:     #141820;
-  --chart-plot:   rgb(36,44,53);
-  --chart-grid:   rgba(255,255,255,0.07);
-  --chart-text:   #8896aa;
+  --chart-bg:     #ffffff;
+  --chart-plot:   #f8fafc;
+  --chart-grid:   rgba(0,0,0,0.06);
+  --chart-text:   #64748b;
+
+  /* ── Trading Routine status colours ── */
+  --status-blue:     #dbeafe;
+  --status-blue-fg:  #1e40af;
+  --status-green:    #dcfce7;
+  --status-green-fg: #166534;
+  --status-amber:    #fef3c7;
+  --status-amber-fg: #92400e;
+  --status-red:      #fee2e2;
+  --status-red-fg:   #991b1b;
+  --status-purple:   #ede9fe;
+  --status-purple-fg:#7c3aed;
+  --status-slate:    #f1f5f9;
+  --status-slate-fg: #475569;
 
   /* ── Shape ── */
   --r-card:       10px;           /* Card corner radius */
@@ -45,21 +58,42 @@
   font-size: 14px;
 }
 
-/* ── Light theme scaffold (activate with <body class="light">) ──
-   Override every variable above with light-appropriate values.
-   Currently unused — placeholder for future implementation.    */
-body.light {
-  --bg:       #f4f6f9;
-  --surface:  #ffffff;
-  --surface2: #eef0f4;
-  --border:   #dde2ea;
-  --muted:    #b0bac8;
-  --text:     #1a2030;
-  --dim:      #637080;
-  --accent:   #00a878;
+/* ── Dark theme (activate with <body class="dark">) ──
+   Full dark variant using the original terminal-style palette.  */
+body.dark {
+  --bg:           #0d0f14;
+  --surface:      #141820;
+  --surface2:     #1a2030;
+  --border:       #1e2530;
+  --muted:        #3a4252;
+  --text:         #e2e8f0;
+  --dim:          #8896aa;
+  --accent:       #0ea5e9;
 
-  --chart-bg:   #ffffff;
-  --chart-plot: #f0f3f7;
-  --chart-grid: rgba(0,0,0,0.07);
-  --chart-text: #637080;
+  --up:           #26d97f;
+  --down:         #f04f5e;
+  --sma10:        #facc15;
+  --sma50:        #60a5fa;
+  --sma250:       #f97316;
+  --ratio:        #a78bfa;
+  --vol:          rgba(100,140,255,0.30);
+  --vol-border:   rgba(100,140,255,0.65);
+
+  --chart-bg:     #141820;
+  --chart-plot:   rgb(36,44,53);
+  --chart-grid:   rgba(255,255,255,0.07);
+  --chart-text:   #8896aa;
+
+  --status-blue:     #1e3a5f;
+  --status-blue-fg:  #93c5fd;
+  --status-green:    #14532d;
+  --status-green-fg: #86efac;
+  --status-amber:    #451a03;
+  --status-amber-fg: #fcd34d;
+  --status-red:      #450a0a;
+  --status-red-fg:   #fca5a5;
+  --status-purple:   #2e1065;
+  --status-purple-fg:#c4b5fd;
+  --status-slate:    #1a2030;
+  --status-slate-fg: #94a3b8;
 }
