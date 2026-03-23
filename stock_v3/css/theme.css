@@ -7,7 +7,7 @@
 
 :root {
   /* ── Palette ── */
-  --bg:           #f4f5f7;        /* Page background */
+  --bg:           #E8F0E0;        /* Page background */
   --surface:      #ffffff;        /* Cards, header, panels */
   --surface2:     #f1f5f9;        /* Raised elements, segmented controls */
   --border:       #e2e8f0;        /* Subtle borders */
