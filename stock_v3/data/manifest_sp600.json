@@ -148,6 +148,7 @@
     "CVCO",
     "CVI",
     "CWEN",
+    "CWEN-A",
     "CWK",
     "CWST",
     "CWT",
@@ -344,6 +345,7 @@
     "MMSI",
     "MNRO",
     "MODG",
+    "MOG-A",
     "MPT",
     "MRCY",
     "MRP",
@@ -602,5 +604,5 @@
     "ZD",
     "ZWS"
   ],
-  "generated": "2026-03-15T16:05:12.046312"
+  "generated": "2026-03-23T11:43:49.988775"
 }

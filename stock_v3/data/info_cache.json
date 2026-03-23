@@ -8028,5 +8028,15 @@
     "shortName": "Berkshire Hathaway Inc. New",
     "sector": "Financial Services",
     "industry": "Insurance - Diversified"
+  },
+  "MOG-A": {
+    "shortName": "Moog Inc.",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "CWEN-A": {
+    "shortName": "Clearway Energy, Inc.",
+    "sector": "Utilities",
+    "industry": "Utilities - Renewable"
   }
 }
