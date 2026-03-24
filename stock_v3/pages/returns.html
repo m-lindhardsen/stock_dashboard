@@ -12,6 +12,31 @@
   <link rel="stylesheet" href="../css/components.css"/>
   <style>
 
+    /* ── Ticker labels toggle ── */
+    #ticker-labels-toggle {
+      font-family: 'Inter', sans-serif;
+      font-size: .65rem;
+      font-weight: 600;
+      background: var(--surface2);
+      color: var(--dim);
+      border: 1px solid var(--border);
+      border-radius: var(--r-btn);
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: all .12s;
+      white-space: nowrap;
+    }
+    #ticker-labels-toggle:hover  { color: var(--text); border-color: var(--muted); }
+    #ticker-labels-toggle.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+    /* Grid selector — multi-select: each btn toggles independently */
+    #grid-selector .seg-btn { border-radius: var(--r-btn); }
+    #grid-selector .seg-btn.active {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
     /* ── Controls bar ── */
     .returns-controls {
       padding: 12px 20px;
@@ -165,51 +190,7 @@
       margin-top: 2px;
     }
 
-    /* ── Bubble axis selectors ── */
-    .bubble-axis-bar {
-      display: flex;
-      gap: 20px;
-      align-items: flex-end;
-      flex-wrap: wrap;
-      padding: 10px 20px 0;
-    }
-
-    .axis-selector {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .axis-label {
-      font-size: .63rem;
-      font-weight: 700;
-      letter-spacing: .07em;
-      text-transform: uppercase;
-      color: var(--dim);
-    }
-
-    .axis-date-block {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    select {
-      font-family: 'Inter', sans-serif;
-      font-size: .72rem;
-      background: var(--surface2);
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: var(--r-btn);
-      padding: 4px 8px;
-      cursor: pointer;
-      transition: border-color .12s;
-      min-width: 200px;
-      color-scheme: dark;
-    }
-    select:focus { outline: none; border-color: var(--accent); }
-
-    /* ── Bubble chart ── */
+    /* ── BUBBLE CHART ── */
     .bubble-wrap {
       position: relative;
       padding: 16px 20px 4px;
@@ -357,7 +338,7 @@
       <button class="seg-btn active" data-view="table">Table</button>
       <button class="seg-btn"        data-view="bubble">Bubble</button>
     </div>
-    <button class="btn-clear-wl" id="btn-clear-wl" title="Empty watchlist">★ Clear</button>
+    <button id="ticker-labels-toggle" title="Show ticker labels on bubble chart">Aa Labels</button>
   </div>
 </header>
 
@@ -456,30 +437,10 @@
 
 <!-- BUBBLE view -->
 <div id="bubble-view" style="display:none">
-  <!-- Axis selectors -->
-  <div class="bubble-axis-bar">
-    <div class="axis-selector">
-      <span class="axis-label">X axis</span>
-      <select id="x-axis-select"></select>
-    </div>
-    <div class="axis-selector">
-      <span class="axis-label">Y axis</span>
-      <select id="y-axis-select"></select>
-    </div>
-    <!-- SMA change date pickers (shown only when relevant metric selected) -->
-    <div class="axis-date-block" id="sma-change-dates" style="display:none">
-      <span class="axis-label">SMA change range</span>
-      <div class="date-row">
-        <input type="date" id="sma-start"/>
-        <span class="date-sep">→</span>
-        <input type="date" id="sma-end"/>
-      </div>
-    </div>
-  </div>
   <div class="bubble-wrap">
     <canvas id="bubble-canvas" height="580"></canvas>
     <button id="zoom-reset">✕ Reset zoom</button>
-    <button id="bubble-watchlist">★ Add to watchlist</button>
+    <button id="bubble-watchlist">⎘ Copy to clipboard</button>
     <span id="bubble-save-feedback"></span>
   </div>
   <div id="bubble-legend"></div>

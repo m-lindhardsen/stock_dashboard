@@ -6,7 +6,7 @@
            sector-coloured bubbles, drag-to-zoom, hover tooltip
    ============================================================= */
 
-import { fetchJSON, buildNavTabs, initClearWatchlistButton } from './grid.js';
+import { fetchJSON, buildNavTabs } from './grid.js';
 
 // ── Constants ──────────────────────────────────────────────────
 const DATA_PATH = '../data/';
@@ -30,9 +30,10 @@ const PRESETS = {
 };
 
 // ── State ──────────────────────────────────────────────────────
-let currentGrid = 'sp500';
-let currentView = 'table';
-let datasets    = [];
+let selectedGrids = new Set(['sp500']);   // multi-select
+let currentView   = 'table';
+let datasets      = [];
+let showTickers   = false;
 
 const periods = [
   { preset: '1w', startDate: null, endDate: null },
@@ -85,97 +86,6 @@ function resolvePeriod(idx) {
   return { startISO: toISODate(start), endISO: toISODate(end) };
 }
 
-// ── Bubble axis metric config ──────────────────────────────────
-// To add a new bubble metric: add one entry here. Nothing else changes.
-// source: 'period0'|'period1' = use period date range from controls
-//         'computed'          = call fn(ohlcv) directly
-//         'sma_change'        = uses smaChangeDates state
-
-const BUBBLE_METRICS = [
-  { key: 'period0',    label: 'Period 1 return',         source: 'period0',    fmt: 'pct' },
-  { key: 'period1',    label: 'Period 2 return',         source: 'period1',    fmt: 'pct' },
-  { key: 'period2',    label: 'Period 3 return',         source: 'period2',    fmt: 'pct' },
-  { key: 'pct_sma50',  label: '% from SMA 50 (current)', source: 'computed',   fmt: 'pct',
-    fn: ohlcv => calcPctFromSma(ohlcv, 50) },
-  { key: 'sma_change', label: 'Change in % from SMA 50', source: 'sma_change', fmt: 'pct' },
-];
-
-// Which metric is selected for each axis
-let bubbleAxisX = 'period0';
-let bubbleAxisY = 'period1';
-
-// Date range for the SMA change metric
-const smaChangeDates = { startISO: null, endISO: null };
-
-// ── SMA helpers ────────────────────────────────────────────────
-
-// Compute SMA(n) at a specific bar index
-function smaAt(ohlcv, idx, n) {
-  if (idx < n - 1) return null;
-  let sum = 0;
-  for (let i = idx - n + 1; i <= idx; i++) sum += ohlcv[i].c;
-  return sum / n;
-}
-
-// % distance from SMA(n) at a specific bar index
-function pctFromSmaAt(ohlcv, idx, n) {
-  const s = smaAt(ohlcv, idx, n);
-  if (s == null || s === 0) return null;
-  return (ohlcv[idx].c - s) / s * 100;
-}
-
-// % from SMA(n) using the latest bar
-function calcPctFromSma(ohlcv, n) {
-  if (!ohlcv || ohlcv.length < n) return null;
-  return pctFromSmaAt(ohlcv, ohlcv.length - 1, n);
-}
-
-// Change in % from SMA 50 between two dates
-function calcSmaChange(ohlcv, startISO, endISO) {
-  if (!ohlcv || ohlcv.length < 50) return null;
-  const iS = closestIdx(ohlcv, startISO);
-  const iE = closestIdx(ohlcv, endISO);
-  if (iS === iE) return null;
-  const pS = pctFromSmaAt(ohlcv, iS, 50);
-  const pE = pctFromSmaAt(ohlcv, iE, 50);
-  if (pS == null || pE == null) return null;
-  return pE - pS;
-}
-
-// Resolve a single metric value for a dataset
-function resolveMetric(metricKey, d) {
-  const m = BUBBLE_METRICS.find(m => m.key === metricKey);
-  if (!m) return null;
-
-  if (m.source === 'period0' || m.source === 'period1' || m.source === 'period2') {
-    const idx = m.source === 'period0' ? 0 : m.source === 'period1' ? 1 : 2;
-    const r   = resolvePeriod(idx);
-    return r ? calcReturn(d.ohlcv, r.startISO, r.endISO) : null;
-  }
-  if (m.source === 'computed') return m.fn(d.ohlcv);
-  if (m.source === 'sma_change') {
-    const { startISO, endISO } = smaChangeDates;
-    if (!startISO || !endISO) return null;
-    return calcSmaChange(d.ohlcv, startISO, endISO);
-  }
-  return null;
-}
-
-// Metric label including date context where relevant
-function metricLabel(metricKey) {
-  const m = BUBBLE_METRICS.find(m => m.key === metricKey);
-  if (!m) return metricKey;
-  if (m.source === 'period0' || m.source === 'period1' || m.source === 'period2') {
-    const idx = m.source === 'period0' ? 0 : m.source === 'period1' ? 1 : 2;
-    const r   = resolvePeriod(idx);
-    return r ? `${m.label} (${fmtShort(r.startISO)}→${fmtShort(r.endISO)})` : m.label;
-  }
-  if (m.source === 'sma_change' && smaChangeDates.startISO && smaChangeDates.endISO) {
-    return `${m.label} (${fmtShort(smaChangeDates.startISO)}→${fmtShort(smaChangeDates.endISO)})`;
-  }
-  return m.label;
-}
-
 // ── Computed rows ──────────────────────────────────────────────
 function buildRows() {
   const r = [0, 1, 2].map(resolvePeriod);
@@ -187,17 +97,7 @@ function buildRows() {
     r0: r[0] ? calcReturn(d.ohlcv, r[0].startISO, r[0].endISO) : null,
     r1: r[1] ? calcReturn(d.ohlcv, r[1].startISO, r[1].endISO) : null,
     r2: r[2] ? calcReturn(d.ohlcv, r[2].startISO, r[2].endISO) : null,
-    // Bubble axis values — computed on demand
-    _d: d,   // keep reference for resolveMetric
   }));
-}
-
-// Get X and Y values for a row in the bubble chart
-function getBubbleXY(row) {
-  return {
-    x: resolveMetric(bubbleAxisX, row._d),
-    y: resolveMetric(bubbleAxisY, row._d),
-  };
 }
 
 // ── Period controls ────────────────────────────────────────────
@@ -250,16 +150,28 @@ function initViewToggle() {
   });
 }
 
-// ── Grid selector ──────────────────────────────────────────────
+// ── Grid selector (multi-select checkboxes) ────────────────────
 function initGridSelector() {
-  document.getElementById('grid-selector').addEventListener('click', async e => {
-    const btn = e.target.closest('.seg-btn');
-    if (!btn || btn.dataset.grid === currentGrid) return;
-    document.querySelectorAll('#grid-selector .seg-btn')
-      .forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentGrid = btn.dataset.grid;
-    await loadGrid();
+  const container = document.getElementById('grid-selector');
+
+  // Convert existing seg-btns to checkbox-style toggles
+  container.querySelectorAll('.seg-btn').forEach(btn => {
+    const grid = btn.dataset.grid;
+    if (selectedGrids.has(grid)) btn.classList.add('active');
+    else btn.classList.remove('active');
+
+    btn.addEventListener('click', async () => {
+      if (selectedGrids.has(grid)) {
+        // Don't allow deselecting the last grid
+        if (selectedGrids.size === 1) return;
+        selectedGrids.delete(grid);
+        btn.classList.remove('active');
+      } else {
+        selectedGrids.add(grid);
+        btn.classList.add('active');
+      }
+      await loadGrid();
+    });
   });
 }
 
@@ -277,23 +189,36 @@ function updateResolvedLabels() {
   });
 }
 
-// ── Data loading — reads from bundle ──────────────────────────
+// ── Data loading — loads all selected grids in parallel ────────
 async function loadGrid() {
   const status    = document.getElementById('table-status');
   const tableWrap = document.getElementById('table-wrap');
   const bubbleV   = document.getElementById('bubble-view');
 
   status.style.display    = 'block';
-  status.innerHTML        = `<span class="spinner"></span> Loading ${currentGrid}…`;
+  status.innerHTML        = `<span class="spinner"></span> Loading…`;
   tableWrap.style.display = 'none';
   bubbleV.style.display   = 'none';
 
   try {
-    const bundle  = await fetchJSON(DATA_PATH + `${currentGrid}_daily_bundle.json`);
-    const updated = bundle.generated
-      ? new Date(bundle.generated).toLocaleString() : '—';
+    const grids   = [...selectedGrids];
+    const bundles = await Promise.all(
+      grids.map(g => fetchJSON(DATA_PATH + `${g}_daily_bundle.json`))
+    );
 
-    datasets = bundle.tickers || [];
+    // Merge tickers; deduplicate by ticker symbol (last-one-wins per grid)
+    const tickerMap = new Map();
+    bundles.forEach(bundle => {
+      (bundle.tickers || []).forEach(d => tickerMap.set(d.ticker, d));
+    });
+    datasets = [...tickerMap.values()];
+
+    const latest = bundles
+      .map(b => b.generated ? new Date(b.generated) : null)
+      .filter(Boolean)
+      .sort((a, b) => b - a)[0];
+    const updated = latest ? latest.toLocaleString() : '—';
+
     document.getElementById('meta-info').textContent =
       `${datasets.length} tickers · ${updated}`;
 
@@ -398,10 +323,9 @@ function drawBubble() {
   canvas.height = H * dpr;
   ctx.scale(dpr, dpr);
 
-  const rows = buildRows().filter(r => {
-    const { x, y } = getBubbleXY(r);
-    return x != null && y != null && !hiddenSectors.has(r.sector);
-  });
+  const rows = buildRows().filter(r =>
+    r.r0 != null && r.r1 != null && !hiddenSectors.has(r.sector)
+  );
 
   if (!rows.length) {
     ctx.fillStyle = '#8896aa';
@@ -415,10 +339,10 @@ function drawBubble() {
   if (bubbleZoom) {
     ({ xMin, xMax, yMin, yMax } = bubbleZoom);
   } else {
-    const xs = rows.map(r => getBubbleXY(r).x);
-    const ys = rows.map(r => getBubbleXY(r).y);
-    xMin = Math.min(...xs); xMax = Math.max(...xs);
-    yMin = Math.min(...ys); yMax = Math.max(...ys);
+    xMin = Math.min(...rows.map(r => r.r0));
+    xMax = Math.max(...rows.map(r => r.r0));
+    yMin = Math.min(...rows.map(r => r.r1));
+    yMax = Math.max(...rows.map(r => r.r1));
     xMin = Math.min(xMin, 0); xMax = Math.max(xMax, 0);
     yMin = Math.min(yMin, 0); yMax = Math.max(yMax, 0);
     const xPad = (xMax - xMin || 2) * 0.10;
@@ -476,27 +400,32 @@ function drawBubble() {
   });
 
   // Axis titles
+  const r0res = resolvePeriod(0), r1res = resolvePeriod(1);
   ctx.fillStyle = '#8896aa';
   ctx.font = `9px 'Inter',sans-serif`;
   ctx.textAlign = 'center';
-  ctx.fillText(metricLabel(bubbleAxisX), PAD.left + innerW / 2, PAD.top + innerH + 38);
+  if (r0res) ctx.fillText(
+    `Period 1  (${fmtShort(r0res.startISO)} → ${fmtShort(r0res.endISO)})`,
+    PAD.left + innerW / 2, PAD.top + innerH + 38
+  );
   ctx.save();
   ctx.translate(14, PAD.top + innerH / 2);
   ctx.rotate(-Math.PI / 2);
-  ctx.fillText(metricLabel(bubbleAxisY), 0, 0);
+  if (r1res) ctx.fillText(
+    `Period 2  (${fmtShort(r1res.startISO)} → ${fmtShort(r1res.endISO)})`,
+    0, 0
+  );
   ctx.restore();
 
   // Bubbles
   rows.forEach(row => {
-    const { x, y } = getBubbleXY(row);
-    if (x == null || y == null) return;
-    const px  = toX(x);
-    const py  = toY(y);
+    const x   = toX(row.r0);
+    const y   = toY(row.r1);
     const col = sectorColorMap[row.sector] || '#8896aa';
-    if (px < PAD.left - BUBBLE_R || px > PAD.left + innerW + BUBBLE_R) return;
-    if (py < PAD.top  - BUBBLE_R || py > PAD.top  + innerH + BUBBLE_R) return;
+    if (x < PAD.left - BUBBLE_R || x > PAD.left + innerW + BUBBLE_R) return;
+    if (y < PAD.top  - BUBBLE_R || y > PAD.top  + innerH + BUBBLE_R) return;
     ctx.beginPath();
-    ctx.arc(px, py, BUBBLE_R, 0, Math.PI * 2);
+    ctx.arc(x, y, BUBBLE_R, 0, Math.PI * 2);
     ctx.fillStyle   = col + 'cc';
     ctx.fill();
     ctx.strokeStyle = col;
@@ -504,11 +433,24 @@ function drawBubble() {
     ctx.stroke();
   });
 
-  // Store geometry — attach xy to each row for hit-testing
-  rows.forEach(row => {
-    const { x, y } = getBubbleXY(row);
-    row._bx = x; row._by = y;
-  });
+  // Ticker labels (when enabled)
+  if (showTickers) {
+    ctx.font      = `700 9px 'Space Mono',monospace`;
+    ctx.textAlign = 'left';
+    rows.forEach(row => {
+      const x = toX(row.r0);
+      const y = toY(row.r1);
+      if (x < PAD.left - BUBBLE_R || x > PAD.left + innerW + BUBBLE_R) return;
+      if (y < PAD.top  - BUBBLE_R || y > PAD.top  + innerH + BUBBLE_R) return;
+      const col = sectorColorMap[row.sector] || '#8896aa';
+      ctx.fillStyle = col;
+      ctx.globalAlpha = 0.92;
+      ctx.fillText(row.ticker, x + BUBBLE_R + 3, y + 3);
+      ctx.globalAlpha = 1;
+    });
+  }
+
+  // Store geometry for hit-testing and zoom
   canvas._rows   = rows;
   canvas._toX    = toX;
   canvas._toY    = toY;
@@ -536,64 +478,6 @@ function fmtPct(v) {
   return (v >= 0 ? '+' : '') + v.toFixed(1) + '%';
 }
 
-// ── Axis selectors ─────────────────────────────────────────────
-function initAxisSelectors() {
-  const xSel = document.getElementById('x-axis-select');
-  const ySel = document.getElementById('y-axis-select');
-  if (!xSel || !ySel) return;
-
-  // Populate both dropdowns from BUBBLE_METRICS
-  BUBBLE_METRICS.forEach(m => {
-    xSel.appendChild(Object.assign(document.createElement('option'), { value: m.key, textContent: m.label }));
-    ySel.appendChild(Object.assign(document.createElement('option'), { value: m.key, textContent: m.label }));
-  });
-
-  // Set defaults
-  xSel.value = bubbleAxisX;
-  ySel.value = bubbleAxisY;
-
-  const updateSmaDates = () => {
-    const needs = bubbleAxisX === 'sma_change' || bubbleAxisY === 'sma_change';
-    document.getElementById('sma-change-dates').style.display = needs ? 'flex' : 'none';
-  };
-
-  xSel.addEventListener('change', () => {
-    bubbleAxisX = xSel.value;
-    bubbleZoom  = null;
-    document.getElementById('zoom-reset').classList.remove('visible');
-    updateSmaDates();
-    if (currentView === 'bubble') drawBubble();
-  });
-
-  ySel.addEventListener('change', () => {
-    bubbleAxisY = ySel.value;
-    bubbleZoom  = null;
-    document.getElementById('zoom-reset').classList.remove('visible');
-    updateSmaDates();
-    if (currentView === 'bubble') drawBubble();
-  });
-
-  // SMA change date inputs
-  const smaStart = document.getElementById('sma-start');
-  const smaEnd   = document.getElementById('sma-end');
-  if (smaStart && smaEnd) {
-    // Default to 3 months ago → today
-    smaStart.value = toISODate(monthsAgo(3));
-    smaEnd.value   = toISODate(today());
-    smaChangeDates.startISO = smaStart.value;
-    smaChangeDates.endISO   = smaEnd.value;
-
-    const onSmaChange = () => {
-      if (!smaStart.value || !smaEnd.value) return;
-      smaChangeDates.startISO = smaStart.value;
-      smaChangeDates.endISO   = smaEnd.value;
-      if (currentView === 'bubble') drawBubble();
-    };
-    smaStart.addEventListener('change', onSmaChange);
-    smaEnd.addEventListener('change', onSmaChange);
-  }
-}
-
 // ── Bubble hover tooltip ───────────────────────────────────────
 function initBubbleHover() {
   canvas.addEventListener('mousemove', e => {
@@ -606,8 +490,7 @@ function initBubbleHover() {
 
     let best = null, bestDist = BUBBLE_R * 2.5;
     rows.forEach(row => {
-      if (row._bx == null || row._by == null) return;
-      const d = Math.hypot(mx - canvas._toX(row._bx), my - canvas._toY(row._by));
+      const d = Math.hypot(mx - canvas._toX(row.r0), my - canvas._toY(row.r1));
       if (d < bestDist) { bestDist = d; best = row; }
     });
 
@@ -615,17 +498,19 @@ function initBubbleHover() {
       document.getElementById('tt-ticker').textContent = best.ticker;
       document.getElementById('tt-name').textContent   = best.name;
 
-      document.getElementById('tt-xlabel').textContent = metricLabel(bubbleAxisX);
-      document.getElementById('tt-ylabel').textContent = metricLabel(bubbleAxisY);
+      const r0res = resolvePeriod(0), r1res = resolvePeriod(1);
+      document.getElementById('tt-xlabel').textContent =
+        r0res ? `P1 (${fmtShort(r0res.startISO)}→${fmtShort(r0res.endISO)})` : 'Period 1';
+      document.getElementById('tt-ylabel').textContent =
+        r1res ? `P2 (${fmtShort(r1res.startISO)}→${fmtShort(r1res.endISO)})` : 'Period 2';
 
-      const xv = best._bx, yv = best._by;
       const xEl = document.getElementById('tt-xval');
-      xEl.textContent = xv != null ? (xv > 0 ? '+' : '') + xv.toFixed(2) + '%' : '—';
-      xEl.className   = 'tt-val ' + (xv > 0.05 ? 'up' : xv < -0.05 ? 'down' : 'flat');
+      xEl.textContent = (best.r0 > 0 ? '+' : '') + best.r0.toFixed(2) + '%';
+      xEl.className   = 'tt-val ' + (best.r0 > 0.05 ? 'up' : best.r0 < -0.05 ? 'down' : 'flat');
 
       const yEl = document.getElementById('tt-yval');
-      yEl.textContent = yv != null ? (yv > 0 ? '+' : '') + yv.toFixed(2) + '%' : '—';
-      yEl.className   = 'tt-val ' + (yv > 0.05 ? 'up' : yv < -0.05 ? 'down' : 'flat');
+      yEl.textContent = (best.r1 > 0 ? '+' : '') + best.r1.toFixed(2) + '%';
+      yEl.className   = 'tt-val ' + (best.r1 > 0.05 ? 'up' : best.r1 < -0.05 ? 'down' : 'flat');
 
       document.getElementById('tt-sector').textContent = `${best.sector} · ${best.industry}`;
 
@@ -736,11 +621,10 @@ function buildBubbleLegend(sectors) {
   });
 }
 
-// ── Bubble watchlist ───────────────────────────────────────────
-// Adds all currently visible bubbles to the shared watchlist.
+// ── Bubble clipboard copy ──────────────────────────────────────
+// Copies all currently visible tickers to the clipboard as a
+// comma-separated string.
 // "Visible" = sector not hidden AND (if zoomed) within zoom window.
-
-const LS_KEY = 'marketgrid_watchlist_v1';
 
 function getVisibleTickers() {
   const rows = canvas._rows;   // set by drawBubble() — already filtered by sector
@@ -761,30 +645,48 @@ function initBubbleWatchlist() {
   const feedback = document.getElementById('bubble-save-feedback');
   let   fadeTimer = null;
 
-  btn.addEventListener('click', () => {
+  btn.addEventListener('click', async () => {
     const tickers = getVisibleTickers();
 
-    // Load existing watchlist, add new tickers, save back
-    let wl;
-    try { wl = new Set(JSON.parse(localStorage.getItem(LS_KEY)) || []); }
-    catch { wl = new Set(); }
+    if (tickers.length === 0) {
+      feedback.textContent = '— nothing visible';
+      feedback.classList.add('show');
+      clearTimeout(fadeTimer);
+      fadeTimer = setTimeout(() => feedback.classList.remove('show'), 2200);
+      return;
+    }
 
-    const before = wl.size;
-    tickers.forEach(t => wl.add(t));
-    const added = wl.size - before;
+    const text = tickers.join(', ');
 
-    localStorage.setItem(LS_KEY, JSON.stringify([...wl]));
-
-    // Show feedback
-    feedback.textContent = added > 0
-      ? `✓ ${added} ticker${added === 1 ? '' : 's'} added`
-      : tickers.length === 0
-        ? '— nothing visible'
-        : '— already in watchlist';
+    try {
+      await navigator.clipboard.writeText(text);
+      feedback.textContent = `✓ ${tickers.length} ticker${tickers.length === 1 ? '' : 's'} copied`;
+    } catch {
+      // Fallback for browsers that block clipboard access
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      feedback.textContent = `✓ ${tickers.length} ticker${tickers.length === 1 ? '' : 's'} copied`;
+    }
 
     feedback.classList.add('show');
     clearTimeout(fadeTimer);
     fadeTimer = setTimeout(() => feedback.classList.remove('show'), 2200);
+  });
+}
+
+// ── Ticker label toggle ────────────────────────────────────────
+function initTickerLabels() {
+  const btn = document.getElementById('ticker-labels-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    showTickers = !showTickers;
+    btn.classList.toggle('active', showTickers);
+    if (currentView === 'bubble') drawBubble();
   });
 }
 
@@ -813,11 +715,10 @@ async function main() {
   initViewToggle();
   initPeriodControls();
   initSortableHeaders();
-  initAxisSelectors();
   initBubbleHover();
   initBubbleZoom();
   initBubbleWatchlist();
-  initClearWatchlistButton();
+  initTickerLabels();
   initResizeHandler();
 
   await loadGrid();
