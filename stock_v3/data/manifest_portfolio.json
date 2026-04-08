@@ -2,22 +2,14 @@
   "grid": "portfolio",
   "tickers": [
     "AOS",
-    "ABT",
-    "ABBV",
-    "ACN",
-    "ADBE",
-    "AMD",
-    "AES",
-    "AFL",
-    "A",
-    "APD",
-    "ABNB",
-    "AKAM",
-    "ALB",
-    "ARE",
-    "ALGN",
-    "EURUSD=X",
-    "BZ=F"
+    "FLY",
+    "AMTM",
+    "ALHC",
+    "LWLG",
+    "FSLY",
+    "STX",
+    "TER",
+    "ICHR"
   ],
-  "generated": "2026-03-23T11:43:49.988775"
+  "generated": "2026-04-08T09:06:35.451855"
 }

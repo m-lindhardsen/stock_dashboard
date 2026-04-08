@@ -8038,5 +8038,2775 @@
     "shortName": "Clearway Energy, Inc.",
     "sector": "Utilities",
     "industry": "Utilities - Renewable"
+  },
+  "AAL.L": {
+    "shortName": "ANGLO AMERICAN PLC ORD USD0.623",
+    "sector": "Basic Materials",
+    "industry": "Other Industrial Metals & Mining"
+  },
+  "ABI.BR": {
+    "shortName": "AB INBEV",
+    "sector": "Consumer Defensive",
+    "industry": "Beverages - Brewers"
+  },
+  "ABN.AS": {
+    "shortName": "ABN AMRO BANK N.V.",
+    "sector": "Financial Services",
+    "industry": "Banks - Diversified"
+  },
+  "ABVX.PA": {
+    "shortName": "ABIVAX",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "AC.PA": {
+    "shortName": "ACCOR",
+    "sector": "Consumer Cyclical",
+    "industry": "Lodging"
+  },
+  "ABBN.SW": {
+    "shortName": "ABBN.SW",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "ABDN.L": {
+    "shortName": "ABDN.L",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "AALB.AS": {
+    "shortName": "AALB.AS",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "AAK.ST": {
+    "shortName": "AAK.ST",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "ABF.L": {
+    "shortName": "ABF.L",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "AAF.L": {
+    "shortName": "AIRTEL AFRICA PLC ORD USD0.50",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "ACA.PA": {
+    "shortName": "CREDIT AGRICOLE",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "ACS.MC": {
+    "shortName": "ACS,ACTIVIDADES DE CONSTRUCCION",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "ADEN.SW": {
+    "shortName": "ADECCO N",
+    "sector": "Industrials",
+    "industry": "Staffing & Employment Services"
+  },
+  "ACLN.SW": {
+    "shortName": "ACCELLERON N",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "ADM.L": {
+    "shortName": "ADMIRAL GROUP PLC ORD 0.1P",
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty"
+  },
+  "ACP.WA": {
+    "shortName": "ASSECOPOL",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "AD.AS": {
+    "shortName": "KONINKLIJKE AHOLD DELHAIZE N.V.",
+    "sector": "Consumer Defensive",
+    "industry": "Grocery Stores"
+  },
+  "ADP.PA": {
+    "shortName": "ADP",
+    "sector": "Industrials",
+    "industry": "Airports & Air Services"
+  },
+  "ACKB.BR": {
+    "shortName": "ACKERMANS V.HAAREN",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "ADYEN.AS": {
+    "shortName": "ADYEN",
+    "sector": "Technology",
+    "industry": "Software - Infrastructure"
+  },
+  "AENA.MC": {
+    "shortName": "AENA, S.M.E., S.A.",
+    "sector": "Industrials",
+    "industry": "Airports & Air Services"
+  },
+  "ADS.DE": {
+    "shortName": "adidas AG                     N",
+    "sector": "Consumer Cyclical",
+    "industry": "Footwear & Accessories"
+  },
+  "AED.BR": {
+    "shortName": "AEDIFICA",
+    "sector": "Real Estate",
+    "industry": "REIT - Healthcare Facilities"
+  },
+  "AGN.AS": {
+    "shortName": "AEGON",
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified"
+  },
+  "AG1.DE": {
+    "shortName": "AUTO1 Group SE                I",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto & Truck Dealerships"
+  },
+  "AI.PA": {
+    "shortName": "AIR LIQUIDE",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "AKE.PA": {
+    "shortName": "ARKEMA",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "AIXA.DE": {
+    "shortName": "AIXTRON SE                    N",
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment & Materials"
+  },
+  "AGS.BR": {
+    "shortName": "AGEAS",
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified"
+  },
+  "AIR.PA": {
+    "shortName": "AIRBUS SE",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "AKZA.AS": {
+    "shortName": "AKZO NOBEL",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "AKRBP.OL": {
+    "shortName": "AKER BP",
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P"
+  },
+  "ALFA.ST": {
+    "shortName": "Alfa Laval AB",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "ALC.SW": {
+    "shortName": "ALCON N",
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies"
+  },
+  "ALE.WA": {
+    "shortName": "ALLEGRO",
+    "sector": "Consumer Cyclical",
+    "industry": "Internet Retail"
+  },
+  "ALHC": {
+    "shortName": "Alignment Healthcare, Inc.",
+    "sector": "Healthcare",
+    "industry": "Healthcare Plans"
+  },
+  "ALLFG.AS": {
+    "shortName": "ALLFUNDS GROUP PLC",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "ALO.PA": {
+    "shortName": "ALSTOM",
+    "sector": "Industrials",
+    "industry": "Railroads"
+  },
+  "ALLN.SW": {
+    "shortName": "ALLREAL N",
+    "sector": "Real Estate",
+    "industry": "Real Estate Services"
+  },
+  "AMS.MC": {
+    "shortName": "AMADEUS IT GROUP, S.A.",
+    "sector": "Technology",
+    "industry": "Information Technology Services"
+  },
+  "ALV.DE": {
+    "shortName": "Allianz SE                    v",
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified"
+  },
+  "AM.PA": {
+    "shortName": "DASSAULT AVIATION",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "AMUN.PA": {
+    "shortName": "AMUNDI",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "ALSYDB.CO": {
+    "shortName": "AL Sydbank A/S",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "A2A.MI": {
+    "shortName": "A2A",
+    "sector": "Utilities",
+    "industry": "Utilities - Diversified"
+  },
+  "AMV0.DE": {
+    "shortName": "AUMOVIO SE                    N",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "ANA.MC": {
+    "shortName": "ACCIONA, S.A.",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "ARCAD.AS": {
+    "shortName": "ARCADIS",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "ANDR.VI": {
+    "shortName": "Andritz AG",
+    "sector": "Industrials",
+    "industry": "Industrial Distribution"
+  },
+  "ANTO.L": {
+    "shortName": "ANTOFAGASTA PLC ORD 5P",
+    "sector": "Basic Materials",
+    "industry": "Copper"
+  },
+  "ARGX.BR": {
+    "shortName": "ARGENX SE",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "ASM.AS": {
+    "shortName": "ASM International N.V.",
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment & Materials"
+  },
+  "ASML.AS": {
+    "shortName": "ASML HOLDING",
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment & Materials"
+  },
+  "AVOL.SW": {
+    "shortName": "AVOLTA N",
+    "sector": "Consumer Cyclical",
+    "industry": "Specialty Retail"
+  },
+  "ASRNL.AS": {
+    "shortName": "ASR NEDERLAND",
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified"
+  },
+  "AXFO.ST": {
+    "shortName": "Axfood AB",
+    "sector": "Consumer Defensive",
+    "industry": "Grocery Stores"
+  },
+  "AV.L": {
+    "shortName": "AVIVA PLC ORD 32 17/19P",
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified"
+  },
+  "AUTO.L": {
+    "shortName": "AUTOTRADER GROUP PLC ORD 1P",
+    "sector": "Communication Services",
+    "industry": "Internet Content & Information"
+  },
+  "AZA.ST": {
+    "shortName": "Avanza Bank Holding AB",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "AYV.PA": {
+    "shortName": "AYVENS",
+    "sector": "Industrials",
+    "industry": "Rental & Leasing Services"
+  },
+  "BA.L": {
+    "shortName": "BAE SYSTEMS PLC ORD 2.5P",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "BAB.L": {
+    "shortName": "BABCOCK INTERNATIONAL GROUP PLC",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "BAER.SW": {
+    "shortName": "JULIUS BAER N",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "BAKKA.OL": {
+    "shortName": "BAKKAFROST",
+    "sector": "Consumer Defensive",
+    "industry": "Farm Products"
+  },
+  "AZM.MI": {
+    "shortName": "AZIMUT",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "BARC.L": {
+    "shortName": "BARCLAYS PLC ORD 25P",
+    "sector": "Financial Services",
+    "industry": "Banks - Diversified"
+  },
+  "AZN.L": {
+    "shortName": "ASTRAZENECA PLC ORD SHS $0.25",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - General"
+  },
+  "BAMI.MI": {
+    "shortName": "BANCO BPM",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "BARN.SW": {
+    "shortName": "BARRY CALLEBAUT N",
+    "sector": "Consumer Defensive",
+    "industry": "Confectioners"
+  },
+  "BAVA.CO": {
+    "shortName": "Bavarian Nordic A/S",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "BAS.DE": {
+    "shortName": "BASF SE                       N",
+    "sector": "Basic Materials",
+    "industry": "Chemicals"
+  },
+  "BATS.L": {
+    "shortName": "BRITISH AMERICAN TOBACCO PLC OR",
+    "sector": "Consumer Defensive",
+    "industry": "Tobacco"
+  },
+  "BBOX.L": {
+    "shortName": "TRITAX BIG BOX REIT PLC ORD 1P",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "BAYN.DE": {
+    "shortName": "Bayer AG                      N",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - General"
+  },
+  "BBY.L": {
+    "shortName": "BALFOUR BEATTY PLC ORD 50P",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "BBVA.MC": {
+    "shortName": "BANCO BILBAO VIZCAYA ARGENTARIA",
+    "sector": "Financial Services",
+    "industry": "Banks - Diversified"
+  },
+  "BC.MI": {
+    "shortName": "BRUNELLO CUCINELLI",
+    "sector": "Consumer Cyclical",
+    "industry": "Luxury Goods"
+  },
+  "BCP.LS": {
+    "shortName": "B.C.P.-BCO COMERCIAL PORTUGUES",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "BCVN.SW": {
+    "shortName": "BC VAUD N",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "BEAN.SW": {
+    "shortName": "BELIMO N",
+    "sector": "Industrials",
+    "industry": "Building Products & Equipment"
+  },
+  "BESI.AS": {
+    "shortName": "BE Semiconductor Industries N.V",
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment & Materials"
+  },
+  "BEI.DE": {
+    "shortName": "BEIERSDORF AG                 I",
+    "sector": "Consumer Defensive",
+    "industry": "Household & Personal Products"
+  },
+  "BC8.DE": {
+    "shortName": "BECHTLE AG                    I",
+    "sector": "Technology",
+    "industry": "Information Technology Services"
+  },
+  "BEZ.L": {
+    "shortName": "BEAZLEY PLC ORD 5P",
+    "sector": "Financial Services",
+    "industry": "Insurance - Specialty"
+  },
+  "BG.VI": {
+    "shortName": "BAWAG Group AG",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "BFT.WA": {
+    "shortName": "BENEFIT",
+    "sector": "Consumer Cyclical",
+    "industry": "Leisure"
+  },
+  "BGEO.L": {
+    "shortName": "LION FINANCE GROUP PLC ORD 1P",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "BGN.MI": {
+    "shortName": "BANCA GENERALI",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "BIM.PA": {
+    "shortName": "BIOMERIEUX",
+    "sector": "Healthcare",
+    "industry": "Diagnostics & Research"
+  },
+  "BIRG.IR": {
+    "shortName": "BANK OF IRELAND GROUP PLC",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "BKG.L": {
+    "shortName": "BERKELEY GROUP HOLDINGS (THE) P",
+    "sector": "Consumer Cyclical",
+    "industry": "Residential Construction"
+  },
+  "BKT.MC": {
+    "shortName": "BANKINTER, S.A.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "BME.L": {
+    "shortName": "B&M EUROPEAN VALUE RETAIL S.A. ",
+    "sector": "Consumer Defensive",
+    "industry": "Discount Stores"
+  },
+  "BKW.SW": {
+    "shortName": "BKW N",
+    "sector": "Utilities",
+    "industry": "Utilities - Renewable"
+  },
+  "BMW.DE": {
+    "shortName": "BAYERISCHE MOTOREN WERKE AG   S",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Manufacturers"
+  },
+  "BLND.L": {
+    "shortName": "BRITISH LAND COMPANY PLC ORD 25",
+    "sector": "Real Estate",
+    "industry": "REIT - Diversified"
+  },
+  "BMED.MI": {
+    "shortName": "BANCA MEDIOLANUM",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "BMPS.MI": {
+    "shortName": "BANCA MONTE PASCHI SIENA",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "BN.PA": {
+    "shortName": "DANONE",
+    "sector": "Consumer Defensive",
+    "industry": "Packaged Foods"
+  },
+  "BNP.PA": {
+    "shortName": "BNP PARIBAS ACT.A",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "BNR.DE": {
+    "shortName": "Brenntag SE                   N",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "BNZL.L": {
+    "shortName": "BUNZL PLC ORD 32 1/7P",
+    "sector": "Consumer Defensive",
+    "industry": "Food Distribution"
+  },
+  "BOL.PA": {
+    "shortName": "BOLLORE SE",
+    "sector": "Communication Services",
+    "industry": "Entertainment"
+  },
+  "BOL.ST": {
+    "shortName": "Boliden AB",
+    "sector": "Basic Materials",
+    "industry": "Other Industrial Metals & Mining"
+  },
+  "BP.L": {
+    "shortName": "BP PLC $0.25",
+    "sector": "Energy",
+    "industry": "Oil & Gas Integrated"
+  },
+  "BPE.MI": {
+    "shortName": "BPER BANCA",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "BPT.L": {
+    "shortName": "BRIDGEPOINT GROUP PLC ORD GBP0.",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "BTRW.L": {
+    "shortName": "BARRATT REDROW PLC ORD 10P",
+    "sector": "Consumer Cyclical",
+    "industry": "Residential Construction"
+  },
+  "BUCN.SW": {
+    "shortName": "BUCHER N",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "BVI.PA": {
+    "shortName": "BUREAU VERITAS",
+    "sector": "Industrials",
+    "industry": "Consulting Services"
+  },
+  "BRBY.L": {
+    "shortName": "BURBERRY GROUP PLC ORD 0.05P",
+    "sector": "Consumer Cyclical",
+    "industry": "Luxury Goods"
+  },
+  "BWY.L": {
+    "shortName": "BELLWAY PLC ORD 12.5P",
+    "sector": "Consumer Cyclical",
+    "industry": "Residential Construction"
+  },
+  "BYG.L": {
+    "shortName": "BIG YELLOW GROUP PLC ORD 10P",
+    "sector": "Real Estate",
+    "industry": "REIT - Industrial"
+  },
+  "BZU.MI": {
+    "shortName": "BUZZI",
+    "sector": "Basic Materials",
+    "industry": "Building Materials"
+  },
+  "CABK.MC": {
+    "shortName": "CAIXABANK, S.A.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "CA.PA": {
+    "shortName": "CARREFOUR",
+    "sector": "Consumer Defensive",
+    "industry": "Grocery Stores"
+  },
+  "CAMX.ST": {
+    "shortName": "Camurus AB",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "CBK.DE": {
+    "shortName": "Commerzbank AG                I",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "CAP.PA": {
+    "shortName": "CAPGEMINI",
+    "sector": "Technology",
+    "industry": "Information Technology Services"
+  },
+  "CAST.ST": {
+    "shortName": "Castellum AB",
+    "sector": "Real Estate",
+    "industry": "Real Estate - Development"
+  },
+  "CCL.L": {
+    "shortName": "CARNIVAL PLC ORD USD 1.66",
+    "sector": "Consumer Cyclical",
+    "industry": "Travel Services"
+  },
+  "CCH.L": {
+    "shortName": "COCA-COLA HBC AG ORD CHF6.70 (C",
+    "sector": "Consumer Defensive",
+    "industry": "Beverages - Non-Alcoholic"
+  },
+  "CDI.PA": {
+    "shortName": "CHRISTIAN DIOR",
+    "sector": "Consumer Cyclical",
+    "industry": "Luxury Goods"
+  },
+  "CFR.SW": {
+    "shortName": "RICHEMONT N",
+    "sector": "Consumer Cyclical",
+    "industry": "Luxury Goods"
+  },
+  "CDR.WA": {
+    "shortName": "CDPROJEKT",
+    "sector": "Communication Services",
+    "industry": "Electronic Gaming & Multimedia"
+  },
+  "CMBN.SW": {
+    "shortName": "CEMBRA MONEY BANK N",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "CNA.L": {
+    "shortName": "CENTRICA PLC ORD 6 14/81P",
+    "sector": "Utilities",
+    "industry": "Utilities - Independent Power Producers"
+  },
+  "CLNX.MC": {
+    "shortName": "CELLNEX TELECOM, S.A.",
+    "sector": "Real Estate",
+    "industry": "Real Estate Services"
+  },
+  "COFB.BR": {
+    "shortName": "COFINIMMO",
+    "sector": "Real Estate",
+    "industry": "REIT - Healthcare Facilities"
+  },
+  "CON.DE": {
+    "shortName": "CONTINENTAL AG                I",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "CPG.L": {
+    "shortName": "COMPASS GROUP PLC ORD 11 1/20P",
+    "sector": "Consumer Cyclical",
+    "industry": "Restaurants"
+  },
+  "CPR.MI": {
+    "shortName": "CAMPARI",
+    "sector": "Consumer Defensive",
+    "industry": "Beverages - Wineries & Distilleries"
+  },
+  "COV.PA": {
+    "shortName": "COVIVIO",
+    "sector": "Real Estate",
+    "industry": "REIT - Diversified"
+  },
+  "CRDA.L": {
+    "shortName": "CRODA INTERNATIONAL PLC ORD 10.",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "CS.PA": {
+    "shortName": "AXA",
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified"
+  },
+  "CTEC.L": {
+    "shortName": "CONVATEC GROUP PLC ORD 10P",
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies"
+  },
+  "CSG.AS": {
+    "shortName": "CSG N.V.",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "CVC.AS": {
+    "shortName": "CVC CAPITAL",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "DB1.DE": {
+    "shortName": "DEUTSCHE BOERSE AG            N",
+    "sector": "Financial Services",
+    "industry": "Financial Data & Stock Exchanges"
+  },
+  "CWK.L": {
+    "shortName": "CRANSWICK PLC ORD 10P",
+    "sector": "Consumer Defensive",
+    "industry": "Packaged Foods"
+  },
+  "DANSKE.CO": {
+    "shortName": "Danske Bank A/S",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "DBK.DE": {
+    "shortName": "DEUTSCHE BANK AG              N",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "DG.PA": {
+    "shortName": "VINCI",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "DEMANT.CO": {
+    "shortName": "Demant A/S",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "DGE.L": {
+    "shortName": "DIAGEO PLC ORD 28 101/108P",
+    "sector": "Consumer Defensive",
+    "industry": "Beverages - Wineries & Distilleries"
+  },
+  "DCC.L": {
+    "shortName": "DCC PLC ORD EUR0.25 (CDI)",
+    "sector": "Energy",
+    "industry": "Oil & Gas Refining & Marketing"
+  },
+  "DHER.DE": {
+    "shortName": "Delivery Hero SE              N",
+    "sector": "Consumer Cyclical",
+    "industry": "Internet Retail"
+  },
+  "DHL.DE": {
+    "shortName": "DEUTSCHE POST AG              N",
+    "sector": "Industrials",
+    "industry": "Integrated Freight & Logistics"
+  },
+  "DIE.BR": {
+    "shortName": "D'IETEREN GROUP",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto & Truck Dealerships"
+  },
+  "DNB.OL": {
+    "shortName": "DNB BANK ASA",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "DKSH.SW": {
+    "shortName": "DKSH N",
+    "sector": "Industrials",
+    "industry": "Consulting Services"
+  },
+  "DIM.PA": {
+    "shortName": "SARTORIUS STED BIO",
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies"
+  },
+  "DLG.MI": {
+    "shortName": "DE'LONGHI",
+    "sector": "Consumer Cyclical",
+    "industry": "Furnishings, Fixtures & Appliances"
+  },
+  "DLN.L": {
+    "shortName": "DERWENT LONDON PLC ORD 5P",
+    "sector": "Real Estate",
+    "industry": "REIT - Office"
+  },
+  "DNP.WA": {
+    "shortName": "DINOPL",
+    "sector": "Consumer Defensive",
+    "industry": "Grocery Stores"
+  },
+  "DPLM.L": {
+    "shortName": "DIPLOMA PLC ORD 5P",
+    "sector": "Industrials",
+    "industry": "Industrial Distribution"
+  },
+  "DSY.PA": {
+    "shortName": "DASSAULT SYSTEMES",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "DSFIR.AS": {
+    "shortName": "DSM FIRMENICH AG",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "DRX.L": {
+    "shortName": "DRAX GROUP PLC ORD 11 16/29P",
+    "sector": "Utilities",
+    "industry": "Utilities - Renewable"
+  },
+  "DSV.CO": {
+    "shortName": "DSV A/S",
+    "sector": "Industrials",
+    "industry": "Integrated Freight & Logistics"
+  },
+  "DTG.DE": {
+    "shortName": "Daimler Truck Holding AG      N",
+    "sector": "Industrials",
+    "industry": "Farm & Heavy Construction Machinery"
+  },
+  "EBS.VI": {
+    "shortName": "Erste Group Bank AG",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "DTE.DE": {
+    "shortName": "DEUTSCHE TELEKOM AG           N",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "EDEN.PA": {
+    "shortName": "EDENRED",
+    "sector": "Financial Services",
+    "industry": "Credit Services"
+  },
+  "EL.PA": {
+    "shortName": "ESSILORLUXOTTICA",
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies"
+  },
+  "EDPR.LS": {
+    "shortName": "EDP RENOVAVEIS",
+    "sector": "Utilities",
+    "industry": "Utilities - Renewable"
+  },
+  "EDP.LS": {
+    "shortName": "EDP, SA",
+    "sector": "Utilities",
+    "industry": "Utilities - Diversified"
+  },
+  "ELE.MC": {
+    "shortName": "ENDESA,S.A.",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Electric"
+  },
+  "ELI.BR": {
+    "shortName": "ELIA GROUP",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Electric"
+  },
+  "ELIS.PA": {
+    "shortName": "ELIS",
+    "sector": "Industrials",
+    "industry": "Specialty Business Services"
+  },
+  "ELISA.HE": {
+    "shortName": "Elisa Corporation",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "EMG.L": {
+    "shortName": "MAN GROUP PLC ORD USD0.03428571",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "ENEL.MI": {
+    "shortName": "ENEL",
+    "sector": "Utilities",
+    "industry": "Utilities - Diversified"
+  },
+  "EN.PA": {
+    "shortName": "BOUYGUES",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "EMSN.SW": {
+    "shortName": "EMS-CHEMIE N",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "ENR.DE": {
+    "shortName": "Siemens Energy AG             N",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "ENG.MC": {
+    "shortName": "ENAGAS,S.A.",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Gas"
+  },
+  "ENGI.PA": {
+    "shortName": "ENGIE",
+    "sector": "Utilities",
+    "industry": "Utilities - Diversified"
+  },
+  "ENT.L": {
+    "shortName": "ENTAIN PLC ORD EUR0.01",
+    "sector": "Consumer Cyclical",
+    "industry": "Gambling"
+  },
+  "ENI.MI": {
+    "shortName": "ENI",
+    "sector": "Energy",
+    "industry": "Oil & Gas Integrated"
+  },
+  "EQNR.OL": {
+    "shortName": "EQUINOR",
+    "sector": "Energy",
+    "industry": "Oil & Gas Integrated"
+  },
+  "EOAN.DE": {
+    "shortName": "E.ON SE                       N",
+    "sector": "Utilities",
+    "industry": "Utilities - Diversified"
+  },
+  "ENX.PA": {
+    "shortName": "EURONEXT",
+    "sector": "Financial Services",
+    "industry": "Financial Data & Stock Exchanges"
+  },
+  "EVK.DE": {
+    "shortName": "Evonik Industries AG          N",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "ERF.PA": {
+    "shortName": "EUROFINS SCIENT.",
+    "sector": "Healthcare",
+    "industry": "Diagnostics & Research"
+  },
+  "EQT.ST": {
+    "shortName": "EQT AB",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "EVO.ST": {
+    "shortName": "Evolution AB",
+    "sector": "Consumer Cyclical",
+    "industry": "Gambling"
+  },
+  "EVD.DE": {
+    "shortName": "CTS Eventim AG & Co. KGaA     I",
+    "sector": "Communication Services",
+    "industry": "Entertainment"
+  },
+  "EXO.AS": {
+    "shortName": "EXOR",
+    "sector": "Industrials",
+    "industry": "Farm & Heavy Construction Machinery"
+  },
+  "EZJ.L": {
+    "shortName": "EASYJET PLC ORD 27 2/7P",
+    "sector": "Industrials",
+    "industry": "Airlines"
+  },
+  "EXPN.L": {
+    "shortName": "EXPERIAN PLC ORD USD0.10",
+    "sector": "Industrials",
+    "industry": "Consulting Services"
+  },
+  "FER.MC": {
+    "shortName": "FERROVIAL SE",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "FDJU.PA": {
+    "shortName": "FDJ UNITED",
+    "sector": "Consumer Cyclical",
+    "industry": "Gambling"
+  },
+  "FGR.PA": {
+    "shortName": "EIFFAGE",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "FHZN.SW": {
+    "shortName": "FLUGHAFEN ZUERICH N",
+    "sector": "Industrials",
+    "industry": "Airports & Air Services"
+  },
+  "FBK.MI": {
+    "shortName": "FINECOBANK",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "FME.DE": {
+    "shortName": "Fresenius Medical Care AG     I",
+    "sector": "Healthcare",
+    "industry": "Medical Care Facilities"
+  },
+  "FLS.CO": {
+    "shortName": "FLSmidth & Co. A/S",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "FNTN.DE": {
+    "shortName": "freenet AG                    N",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "FPE3.DE": {
+    "shortName": "FUCHS SE                      N",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "FR.PA": {
+    "shortName": "VALEO",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "FRA.DE": {
+    "shortName": "Fraport AG Ffm.Airport.Ser.AG I",
+    "sector": "Industrials",
+    "industry": "Airports & Air Services"
+  },
+  "FORTUM.HE": {
+    "shortName": "Fortum Corporation",
+    "sector": "Utilities",
+    "industry": "Utilities - Renewable"
+  },
+  "FRE.DE": {
+    "shortName": "Fresenius SE & Co. KGaA       I",
+    "sector": "Healthcare",
+    "industry": "Medical Care Facilities"
+  },
+  "FRO.OL": {
+    "shortName": "FRONTLINE PLC",
+    "sector": "Energy",
+    "industry": "Oil & Gas Midstream"
+  },
+  "FRES.L": {
+    "shortName": "FRESNILLO PLC ORD USD0.50",
+    "sector": "Basic Materials",
+    "industry": "Other Precious Metals & Mining"
+  },
+  "FSLY": {
+    "shortName": "Fastly, Inc.",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "FTK.DE": {
+    "shortName": "flatexDEGIRO SE               N",
+    "sector": "Financial Services",
+    "industry": "Capital Markets"
+  },
+  "G1A.DE": {
+    "shortName": "GEA Group AG                  I",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "G24.DE": {
+    "shortName": "Scout24 SE                    N",
+    "sector": "Communication Services",
+    "industry": "Internet Content & Information"
+  },
+  "GALD.SW": {
+    "shortName": "GALDERMA GROUP N",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "G.MI": {
+    "shortName": "GENERALI",
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified"
+  },
+  "GALP.LS": {
+    "shortName": "GALP ENERGIA-NOM",
+    "sector": "Energy",
+    "industry": "Oil & Gas Integrated"
+  },
+  "GALE.SW": {
+    "shortName": "GALENICA N",
+    "sector": "Healthcare",
+    "industry": "Medical Distribution"
+  },
+  "GET.PA": {
+    "shortName": "GETLINK SE",
+    "sector": "Industrials",
+    "industry": "Railroads"
+  },
+  "GBF.DE": {
+    "shortName": "Bilfinger SE                  I",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "GEBN.SW": {
+    "shortName": "GEBERIT N",
+    "sector": "Industrials",
+    "industry": "Building Products & Equipment"
+  },
+  "GBLB.BR": {
+    "shortName": "GBL",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "GAW.L": {
+    "shortName": "GAMES WORKSHOP GROUP PLC ORD 5P",
+    "sector": "Consumer Cyclical",
+    "industry": "Leisure"
+  },
+  "GF.SW": {
+    "shortName": "GEORG FISCHER N",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "GFC.PA": {
+    "shortName": "GECINA",
+    "sector": "Real Estate",
+    "industry": "REIT - Office"
+  },
+  "GIVN.SW": {
+    "shortName": "GIVAUDAN N",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "GJF.OL": {
+    "shortName": "GJENSIDIGE FORSIKRING",
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty"
+  },
+  "GLE.PA": {
+    "shortName": "SOCIETE GENERALE",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "GMAB.CO": {
+    "shortName": "Genmab A/S",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "GLEN.L": {
+    "shortName": "GLENCORE PLC ORD USD0.01",
+    "sector": "Basic Materials",
+    "industry": "Other Industrial Metals & Mining"
+  },
+  "GRF.MC": {
+    "shortName": "GRIFOLS S.A.",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - General"
+  },
+  "GSK.L": {
+    "shortName": "GSK PLC ORD 31 1/4P",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - General"
+  },
+  "GTT.PA": {
+    "shortName": "GAZTRANSPORT & TECHNIGAZ",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "HEI.DE": {
+    "shortName": "Heidelberg Materials AG       I",
+    "sector": "Basic Materials",
+    "industry": "Building Materials"
+  },
+  "HAG.DE": {
+    "shortName": "HENSOLDT AG                   I",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "HEIA.AS": {
+    "shortName": "HEINEKEN",
+    "sector": "Consumer Defensive",
+    "industry": "Beverages - Brewers"
+  },
+  "HBAN.SW": {
+    "shortName": "HELVETIA BALOISE HOLDING N",
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified"
+  },
+  "HEIO.AS": {
+    "shortName": "HEINEKEN HOLDING",
+    "sector": "Consumer Defensive",
+    "industry": "Beverages - Brewers"
+  },
+  "HEN3.DE": {
+    "shortName": "Henkel AG & Co. KGaA          I",
+    "sector": "Consumer Defensive",
+    "industry": "Household & Personal Products"
+  },
+  "HER.MI": {
+    "shortName": "HERA",
+    "sector": "Utilities",
+    "industry": "Utilities - Diversified"
+  },
+  "HIAB.HE": {
+    "shortName": "Hiab Oyj",
+    "sector": "Industrials",
+    "industry": "Farm & Heavy Construction Machinery"
+  },
+  "HLMA.L": {
+    "shortName": "HALMA PLC ORD 10P",
+    "sector": "Industrials",
+    "industry": "Conglomerates"
+  },
+  "HNR1.DE": {
+    "shortName": "HANNOVER RUECK SE NA O.N.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Reinsurance"
+  },
+  "HLN.L": {
+    "shortName": "HALEON PLC ORD GBP0.01",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "HO.PA": {
+    "shortName": "THALES",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "HIK.L": {
+    "shortName": "HIKMA PHARMACEUTICALS PLC ORD S",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "HOLN.SW": {
+    "shortName": "HOLCIM N",
+    "sector": "Basic Materials",
+    "industry": "Building Materials"
+  },
+  "HOT.DE": {
+    "shortName": "HOCHTIEF AG                   I",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "HOC.L": {
+    "shortName": "HOCHSCHILD MINING PLC ORD 1P",
+    "sector": "Basic Materials",
+    "industry": "Other Precious Metals & Mining"
+  },
+  "HSX.L": {
+    "shortName": "HISCOX LTD ORD 6.5P (DI)",
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty"
+  },
+  "HUH1V.HE": {
+    "shortName": "Huhtam\u00e4ki Oyj",
+    "sector": "Consumer Cyclical",
+    "industry": "Packaging & Containers"
+  },
+  "HUBN.SW": {
+    "shortName": "HUBER+SUHNER N",
+    "sector": "Technology",
+    "industry": "Communication Equipment"
+  },
+  "HSBA.L": {
+    "shortName": "HSBC HOLDINGS PLC ORD $0.50 (UK",
+    "sector": "Financial Services",
+    "industry": "Banks - Diversified"
+  },
+  "IBE.MC": {
+    "shortName": "ACCIONES IBERDROLA",
+    "sector": "Utilities",
+    "industry": "Utilities - Diversified"
+  },
+  "ICG.L": {
+    "shortName": "ICG PLC ORD 26 1/4P",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "IAG.L": {
+    "shortName": "INTERNATIONAL CONSOLIDATED AIRL",
+    "sector": "Industrials",
+    "industry": "Airlines"
+  },
+  "HWDN.L": {
+    "shortName": "HOWDEN JOINERY GROUP PLC ORD 10",
+    "sector": "Consumer Cyclical",
+    "industry": "Furnishings, Fixtures & Appliances"
+  },
+  "IHG.L": {
+    "shortName": "INTERCONTINENTAL HOTELS GROUP P",
+    "sector": "Consumer Cyclical",
+    "industry": "Lodging"
+  },
+  "IG.MI": {
+    "shortName": "ITALGAS",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Gas"
+  },
+  "IGG.L": {
+    "shortName": "IG GROUP HOLDINGS PLC ORD 0.005",
+    "sector": "Financial Services",
+    "industry": "Capital Markets"
+  },
+  "IDR.MC": {
+    "shortName": "INDRA SISTEMAS S.A., SERIE A",
+    "sector": "Technology",
+    "industry": "Information Technology Services"
+  },
+  "IFX.DE": {
+    "shortName": "INFINEON TECHNOLOGIES AG      N",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  "IMB.L": {
+    "shortName": "IMPERIAL BRANDS PLC ORD 10P",
+    "sector": "Consumer Defensive",
+    "industry": "Tobacco"
+  },
+  "III.L": {
+    "shortName": "3I GROUP PLC ORD 73 19/22P",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "IMCD.AS": {
+    "shortName": "IMCD",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "INDT.ST": {
+    "shortName": "Indutrade AB",
+    "sector": "Industrials",
+    "industry": "Industrial Distribution"
+  },
+  "INCH.L": {
+    "shortName": "INCHCAPE PLC ORD 10P",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto & Truck Dealerships"
+  },
+  "IMI.L": {
+    "shortName": "IMI PLC ORD 28 4/7P",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "INVP.L": {
+    "shortName": "INVESTEC PLC ORD GBP0.0002",
+    "sector": "Financial Services",
+    "industry": "Capital Markets"
+  },
+  "INF.L": {
+    "shortName": "INFORMA PLC ORD 0.1P",
+    "sector": "Communication Services",
+    "industry": "Publishing"
+  },
+  "ING.WA": {
+    "shortName": "INGBSK",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "INGA.AS": {
+    "shortName": "ING GROEP N.V.",
+    "sector": "Financial Services",
+    "industry": "Banks - Diversified"
+  },
+  "INPST.AS": {
+    "shortName": "INPOST S.A.",
+    "sector": "Industrials",
+    "industry": "Integrated Freight & Logistics"
+  },
+  "INW.MI": {
+    "shortName": "INWIT",
+    "sector": "Real Estate",
+    "industry": "Real Estate Services"
+  },
+  "IPN.PA": {
+    "shortName": "IPSEN",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "IP.MI": {
+    "shortName": "INTERPUMP GROUP",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "ISP.MI": {
+    "shortName": "INTESA SANPAOLO",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "ISS.CO": {
+    "shortName": "ISS A/S",
+    "sector": "Industrials",
+    "industry": "Specialty Business Services"
+  },
+  "ITV.L": {
+    "shortName": "ITV PLC ORD 10P",
+    "sector": "Communication Services",
+    "industry": "Broadcasting"
+  },
+  "ITRK.L": {
+    "shortName": "INTERTEK GROUP PLC ORD 1P",
+    "sector": "Industrials",
+    "industry": "Specialty Business Services"
+  },
+  "ITX.MC": {
+    "shortName": "INDUSTRIA DE DISE...O TEXTIL S.",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Retail"
+  },
+  "JD.L": {
+    "shortName": "JD SPORTS FASHION PLC ORD 0.05P",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Retail"
+  },
+  "JDEP.AS": {
+    "shortName": "JDE PEET'S",
+    "sector": "Consumer Defensive",
+    "industry": "Packaged Foods"
+  },
+  "IVG.MI": {
+    "shortName": "IVECO GROUP",
+    "sector": "Industrials",
+    "industry": "Farm & Heavy Construction Machinery"
+  },
+  "JMAT.L": {
+    "shortName": "JOHNSON MATTHEY PLC ORD 110 49/",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "JMT.LS": {
+    "shortName": "J.MARTINS,SGPS",
+    "sector": "Consumer Defensive",
+    "industry": "Food Distribution"
+  },
+  "JYSK.CO": {
+    "shortName": "Jyske Bank A/S",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "KBC.BR": {
+    "shortName": "KBC",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "KBCA.BR": {
+    "shortName": "KBC ANCORA ord",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "KCR.HE": {
+    "shortName": "Konecranes Plc",
+    "sector": "Industrials",
+    "industry": "Farm & Heavy Construction Machinery"
+  },
+  "KEMIRA.HE": {
+    "shortName": "Kemira Oyj",
+    "sector": "Basic Materials",
+    "industry": "Chemicals"
+  },
+  "KBX.DE": {
+    "shortName": "Knorr-Bremse AG               I",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "KER.PA": {
+    "shortName": "KERING",
+    "sector": "Consumer Cyclical",
+    "industry": "Luxury Goods"
+  },
+  "KGF.L": {
+    "shortName": "KINGFISHER PLC ORD 15 5/7P",
+    "sector": "Consumer Cyclical",
+    "industry": "Home Improvement Retail"
+  },
+  "KGH.WA": {
+    "shortName": "KGHM",
+    "sector": "Basic Materials",
+    "industry": "Copper"
+  },
+  "KESKOB.HE": {
+    "shortName": "Kesko Corporation B",
+    "sector": "Consumer Defensive",
+    "industry": "Grocery Stores"
+  },
+  "KGX.DE": {
+    "shortName": "KION GROUP AG                 I",
+    "sector": "Industrials",
+    "industry": "Farm & Heavy Construction Machinery"
+  },
+  "KNEBV.HE": {
+    "shortName": "KONE Corporation",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "KOG.OL": {
+    "shortName": "KONGSBERG GRUPPEN",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "KNIN.SW": {
+    "shortName": "KUEHNE+NAGEL INT N",
+    "sector": "Industrials",
+    "industry": "Integrated Freight & Logistics"
+  },
+  "LDO.MI": {
+    "shortName": "LEONARDO",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "LAND.L": {
+    "shortName": "LAND SECURITIES GROUP PLC ORD 1",
+    "sector": "Real Estate",
+    "industry": "REIT - Diversified"
+  },
+  "LEG.DE": {
+    "shortName": "LEG Immobilien SE             N",
+    "sector": "Real Estate",
+    "industry": "Real Estate Services"
+  },
+  "KPN.AS": {
+    "shortName": "KPN KON",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "LGEN.L": {
+    "shortName": "LEGAL & GENERAL GROUP PLC ORD 2",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "LIGHT.AS": {
+    "shortName": "SIGNIFY NV",
+    "sector": "Industrials",
+    "industry": "Electrical Equipment & Parts"
+  },
+  "LHA.DE": {
+    "shortName": "DEUTSCHE LUFTHANSA AG         V",
+    "sector": "Industrials",
+    "industry": "Airlines"
+  },
+  "LI.PA": {
+    "shortName": "KLEPIERRE",
+    "sector": "Real Estate",
+    "industry": "REIT - Retail"
+  },
+  "LISP.SW": {
+    "shortName": "LINDT PS",
+    "sector": "Consumer Defensive",
+    "industry": "Confectioners"
+  },
+  "LLOY.L": {
+    "shortName": "LLOYDS BANKING GROUP PLC ORD 10",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "LOGN.SW": {
+    "shortName": "LOGITECH N",
+    "sector": "Technology",
+    "industry": "Computer Hardware"
+  },
+  "LONN.SW": {
+    "shortName": "LONZA N",
+    "sector": "Healthcare",
+    "industry": "Diagnostics & Research"
+  },
+  "LMP.L": {
+    "shortName": "LONDONMETRIC PROPERTY PLC ORD 1",
+    "sector": "Real Estate",
+    "industry": "REIT - Industrial"
+  },
+  "LPP.WA": {
+    "shortName": "LPP",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Manufacturing"
+  },
+  "LOOMIS.ST": {
+    "shortName": "Loomis AB",
+    "sector": "Industrials",
+    "industry": "Security & Protection Services"
+  },
+  "LOTB.BR": {
+    "shortName": "LOTUS BAKERIES",
+    "sector": "Consumer Defensive",
+    "industry": "Packaged Foods"
+  },
+  "LTMC.MI": {
+    "shortName": "LOTTOMATICA GROUP",
+    "sector": "Consumer Cyclical",
+    "industry": "Gambling"
+  },
+  "LSEG.L": {
+    "shortName": "LONDON STOCK EXCHANGE GROUP PLC",
+    "sector": "Financial Services",
+    "industry": "Financial Data & Stock Exchanges"
+  },
+  "MBG.DE": {
+    "shortName": "Mercedes-Benz Group AG        N",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Manufacturers"
+  },
+  "LR.PA": {
+    "shortName": "LEGRAND",
+    "sector": "Industrials",
+    "industry": "Electrical Equipment & Parts"
+  },
+  "MANTA.HE": {
+    "shortName": "Mandatum Oyj",
+    "sector": "Financial Services",
+    "industry": "Financial Conglomerates"
+  },
+  "LWLG": {
+    "shortName": "Lightwave Logic, Inc.",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "MBK.WA": {
+    "shortName": "MBANK",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "MAP.MC": {
+    "shortName": "MAPFRE, S.A.",
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified"
+  },
+  "MC.PA": {
+    "shortName": "LVMH",
+    "sector": "Consumer Cyclical",
+    "industry": "Luxury Goods"
+  },
+  "METSO.HE": {
+    "shortName": "Metso Oyj",
+    "sector": "Industrials",
+    "industry": "Farm & Heavy Construction Machinery"
+  },
+  "MNDI.L": {
+    "shortName": "MONDI PLC ORD EUR 0.22",
+    "sector": "Basic Materials",
+    "industry": "Paper & Paper Products"
+  },
+  "MICC.AS": {
+    "shortName": "THE MAGNUM ICE CREAM COMPANY N.",
+    "sector": "Consumer Defensive",
+    "industry": "Packaged Foods"
+  },
+  "ML.PA": {
+    "shortName": "MICHELIN",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "MKS.L": {
+    "shortName": "MARKS AND SPENCER GROUP PLC ORD",
+    "sector": "Consumer Cyclical",
+    "industry": "Department Stores"
+  },
+  "MF.PA": {
+    "shortName": "WENDEL",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "MNG.L": {
+    "shortName": "M&G PLC",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "MOBN.SW": {
+    "shortName": "MOBIMO N",
+    "sector": "Real Estate",
+    "industry": "Real Estate Services"
+  },
+  "MONC.MI": {
+    "shortName": "MONCLER",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Manufacturing"
+  },
+  "MT.AS": {
+    "shortName": "ARCELORMITTAL SA",
+    "sector": "Basic Materials",
+    "industry": "Steel"
+  },
+  "MRK.DE": {
+    "shortName": "MERCK KGAA                    I",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "MRL.MC": {
+    "shortName": "MERLIN PROPERTIES SOCIMI, S.A.",
+    "sector": "Real Estate",
+    "industry": "REIT - Office"
+  },
+  "MRO.L": {
+    "shortName": "MELROSE INDUSTRIES PLC ORD GBP0",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "MOWI.OL": {
+    "shortName": "MOWI",
+    "sector": "Consumer Defensive",
+    "industry": "Farm Products"
+  },
+  "MTO.L": {
+    "shortName": "MITIE GROUP PLC ORD 2.5P",
+    "sector": "Industrials",
+    "industry": "Specialty Business Services"
+  },
+  "MTX.DE": {
+    "shortName": "MTU Aero Engines AG           N",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "MUV2.DE": {
+    "shortName": "MUENCHENER RUECKVERS.-GES. AG N",
+    "sector": "Financial Services",
+    "industry": "Insurance - Reinsurance"
+  },
+  "NDX1.DE": {
+    "shortName": "Nordex SE                     I",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "NDA.DE": {
+    "shortName": "Aurubis AG                    I",
+    "sector": "Industrials",
+    "industry": "Metal Fabrication"
+  },
+  "NEM.DE": {
+    "shortName": "Nemetschek SE                 I",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "MYCR.ST": {
+    "shortName": "Mycronic AB",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "NESN.SW": {
+    "shortName": "NESTLE N",
+    "sector": "Consumer Defensive",
+    "industry": "Packaged Foods"
+  },
+  "NESTE.HE": {
+    "shortName": "Neste Corporation",
+    "sector": "Energy",
+    "industry": "Oil & Gas Refining & Marketing"
+  },
+  "NEX.PA": {
+    "shortName": "NEXANS",
+    "sector": "Industrials",
+    "industry": "Electrical Equipment & Parts"
+  },
+  "NEXI.MI": {
+    "shortName": "NEXI",
+    "sector": "Technology",
+    "industry": "Software - Infrastructure"
+  },
+  "NOD.OL": {
+    "shortName": "NORDIC SEMICONDUCTOR",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  "NHY.OL": {
+    "shortName": "NORSK HYDRO",
+    "sector": "Basic Materials",
+    "industry": "Aluminum"
+  },
+  "NG.L": {
+    "shortName": "NATIONAL GRID PLC ORD 12 204/47",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Electric"
+  },
+  "NKT.CO": {
+    "shortName": "NKT A/S",
+    "sector": "Industrials",
+    "industry": "Electrical Equipment & Parts"
+  },
+  "NN.AS": {
+    "shortName": "NN GROUP",
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified"
+  },
+  "NTGY.MC": {
+    "shortName": "NATURGY ENERGY GROUP, S.A.",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Gas"
+  },
+  "NOKIA.HE": {
+    "shortName": "Nokia Corporation",
+    "sector": "Technology",
+    "industry": "Communication Equipment"
+  },
+  "NOVN.SW": {
+    "shortName": "NOVARTIS N",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - General"
+  },
+  "OMV.VI": {
+    "shortName": "OMV AG",
+    "sector": "Energy",
+    "industry": "Oil & Gas Integrated"
+  },
+  "ORA.PA": {
+    "shortName": "ORANGE",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "NWG.L": {
+    "shortName": "NATWEST GROUP PLC ORD 107.69P",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "OR.PA": {
+    "shortName": "L'OREAL",
+    "sector": "Consumer Defensive",
+    "industry": "Household & Personal Products"
+  },
+  "NXT.L": {
+    "shortName": "NEXT PLC ORD 10P",
+    "sector": "Consumer Cyclical",
+    "industry": "Apparel Retail"
+  },
+  "ORNBV.HE": {
+    "shortName": "Orion Corporation B",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - General"
+  },
+  "ORK.OL": {
+    "shortName": "ORKLA",
+    "sector": "Consumer Defensive",
+    "industry": "Packaged Foods"
+  },
+  "ORSTED.CO": {
+    "shortName": "ORSTED A/S",
+    "sector": "Utilities",
+    "industry": "Utilities - Renewable"
+  },
+  "P911.DE": {
+    "shortName": "Dr. Ing. h.c. F. Porsche AG   I",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Manufacturers"
+  },
+  "PAF.L": {
+    "shortName": "PAN AFRICAN RESOURCES PLC ORD 1",
+    "sector": "Basic Materials",
+    "industry": "Gold"
+  },
+  "PEO.WA": {
+    "shortName": "PEKAO",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "PAH3.DE": {
+    "shortName": "Porsche Automobil Holding SE  I",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Manufacturers"
+  },
+  "PGHN.SW": {
+    "shortName": "PARTNERS GROUP N",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "PHIA.AS": {
+    "shortName": "KON.PHILIPS N.V.",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "PHP.L": {
+    "shortName": "PRIMARY HEALTH PROPERTIES PLC O",
+    "sector": "Real Estate",
+    "industry": "REIT - Healthcare Facilities"
+  },
+  "PIRC.MI": {
+    "shortName": "PIRELLI & C",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Parts"
+  },
+  "PLUS.L": {
+    "shortName": "PLUS500 LTD ORD ILS0.01 (DI)",
+    "sector": "Financial Services",
+    "industry": "Capital Markets"
+  },
+  "PNDORA.CO": {
+    "shortName": "Pandora A/S",
+    "sector": "Consumer Cyclical",
+    "industry": "Luxury Goods"
+  },
+  "PKO.WA": {
+    "shortName": "PKOBP",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "PNN.L": {
+    "shortName": "PENNON GROUP PLC ORD 61 1/20P",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Water"
+  },
+  "PKN.WA": {
+    "shortName": "PKNORLEN",
+    "sector": "Energy",
+    "industry": "Oil & Gas Integrated"
+  },
+  "PRY.MI": {
+    "shortName": "PRYSMIAN",
+    "sector": "Industrials",
+    "industry": "Electrical Equipment & Parts"
+  },
+  "PRU.L": {
+    "shortName": "PRUDENTIAL PLC ORD 5P",
+    "sector": "Financial Services",
+    "industry": "Insurance - Life"
+  },
+  "PRX.AS": {
+    "shortName": "PROSUS",
+    "sector": "Consumer Cyclical",
+    "industry": "Internet Retail"
+  },
+  "PSPN.SW": {
+    "shortName": "PSP N",
+    "sector": "Real Estate",
+    "industry": "Real Estate Services"
+  },
+  "PSN.L": {
+    "shortName": "PERSIMMON PLC ORD 10P",
+    "sector": "Consumer Cyclical",
+    "industry": "Residential Construction"
+  },
+  "PSON.L": {
+    "shortName": "PEARSON PLC ORD 25P",
+    "sector": "Communication Services",
+    "industry": "Publishing"
+  },
+  "PST.MI": {
+    "shortName": "POSTE ITALIANE",
+    "sector": "Industrials",
+    "industry": "Conglomerates"
+  },
+  "PUB.PA": {
+    "shortName": "PUBLICIS GROUPE SA",
+    "sector": "Communication Services",
+    "industry": "Advertising Agencies"
+  },
+  "PUM.DE": {
+    "shortName": "PUMA SE                       I",
+    "sector": "Consumer Cyclical",
+    "industry": "Footwear & Accessories"
+  },
+  "QLT.L": {
+    "shortName": "QUILTER PLC ORD 8 1/6P",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "PUIG.MC": {
+    "shortName": "PUIG BRANDS, S.A. CLASE B",
+    "sector": "\u2014",
+    "industry": "\u2014"
+  },
+  "PZU.WA": {
+    "shortName": "PZU",
+    "sector": "Financial Services",
+    "industry": "Insurance - Property & Casualty"
+  },
+  "QIA.DE": {
+    "shortName": "Qiagen N.V.                   A",
+    "sector": "Healthcare",
+    "industry": "Diagnostics & Research"
+  },
+  "RAA.DE": {
+    "shortName": "RATIONAL AG                   I",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "R3NK.DE": {
+    "shortName": "RENK Group AG                 I",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "RBI.VI": {
+    "shortName": "Raiffeisen Bank Internat. AG",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "RAND.AS": {
+    "shortName": "Randstad N.V.",
+    "sector": "Industrials",
+    "industry": "Staffing & Employment Services"
+  },
+  "RACE.MI": {
+    "shortName": "FERRARI",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Manufacturers"
+  },
+  "QQ.L": {
+    "shortName": "QINETIQ GROUP PLC ORD 1P",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "RBREW.CO": {
+    "shortName": "Royal UNIBREW A/S",
+    "sector": "Consumer Defensive",
+    "industry": "Beverages - Brewers"
+  },
+  "REC.MI": {
+    "shortName": "RECORDATI ORD",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - General"
+  },
+  "RED.MC": {
+    "shortName": "REDEIA CORPORACION, S.A.",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Electric"
+  },
+  "REL.L": {
+    "shortName": "RELX PLC ORD 14 51/116P",
+    "sector": "Industrials",
+    "industry": "Specialty Business Services"
+  },
+  "REP.MC": {
+    "shortName": "REPSOL,  S.A.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Integrated"
+  },
+  "RILBA.CO": {
+    "shortName": "Ringkj\u00f8bing Landbobank A/S",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "RIO.L": {
+    "shortName": "RIO TINTO PLC ORD 10P",
+    "sector": "Basic Materials",
+    "industry": "Other Industrial Metals & Mining"
+  },
+  "RHM.DE": {
+    "shortName": "RHEINMETALL AG                I",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "REY.MI": {
+    "shortName": "REPLY",
+    "sector": "Technology",
+    "industry": "Information Technology Services"
+  },
+  "RI.PA": {
+    "shortName": "PERNOD RICARD",
+    "sector": "Consumer Defensive",
+    "industry": "Beverages - Wineries & Distilleries"
+  },
+  "RKT.L": {
+    "shortName": "RECKITT BENCKISER GROUP PLC ORD",
+    "sector": "Consumer Defensive",
+    "industry": "Household & Personal Products"
+  },
+  "RMV.L": {
+    "shortName": "RIGHTMOVE PLC ORD 0.1P",
+    "sector": "Communication Services",
+    "industry": "Internet Content & Information"
+  },
+  "RMS.PA": {
+    "shortName": "HERMES INTL",
+    "sector": "Consumer Cyclical",
+    "industry": "Luxury Goods"
+  },
+  "RR.L": {
+    "shortName": "ROLLS-ROYCE HOLDINGS PLC ORD SH",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "RNO.PA": {
+    "shortName": "RENAULT",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Manufacturers"
+  },
+  "ROP.SW": {
+    "shortName": "ROCHE PS",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - General"
+  },
+  "ROR.L": {
+    "shortName": "ROTORK PLC ORD 0.5P",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "RTO.L": {
+    "shortName": "RENTOKIL INITIAL PLC ORD 1P",
+    "sector": "Industrials",
+    "industry": "Specialty Business Services"
+  },
+  "RWE.DE": {
+    "shortName": "RWE AG                        I",
+    "sector": "Utilities",
+    "industry": "Utilities - Diversified"
+  },
+  "RS1.L": {
+    "shortName": "RS GROUP PLC ORD 10P",
+    "sector": "Industrials",
+    "industry": "Industrial Distribution"
+  },
+  "RUI.PA": {
+    "shortName": "RUBIS",
+    "sector": "Energy",
+    "industry": "Oil & Gas Refining & Marketing"
+  },
+  "RYA.IR": {
+    "shortName": "RYANAIR HOLDINGS PLC",
+    "sector": "Industrials",
+    "industry": "Airlines"
+  },
+  "SAB.MC": {
+    "shortName": "BANCO DE SABADELL",
+    "sector": "Financial Services",
+    "industry": "Banks - Diversified"
+  },
+  "RXL.PA": {
+    "shortName": "REXEL",
+    "sector": "Technology",
+    "industry": "Electronics & Computer Distribution"
+  },
+  "SAF.PA": {
+    "shortName": "SAFRAN",
+    "sector": "Industrials",
+    "industry": "Aerospace & Defense"
+  },
+  "SAMPO.HE": {
+    "shortName": "Sampo Plc A",
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified"
+  },
+  "SALM.OL": {
+    "shortName": "SALMAR",
+    "sector": "Consumer Defensive",
+    "industry": "Farm Products"
+  },
+  "SAN.PA": {
+    "shortName": "SANOFI",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - General"
+  },
+  "SAN.MC": {
+    "shortName": "BANCO SANTANDER S.A.",
+    "sector": "Financial Services",
+    "industry": "Banks - Diversified"
+  },
+  "SAVE.ST": {
+    "shortName": "Nordnet AB",
+    "sector": "Financial Services",
+    "industry": "Capital Markets"
+  },
+  "SAP.DE": {
+    "shortName": "SAP SE                        I",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "SAND.ST": {
+    "shortName": "Sandvik AB",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "SB1NO.OL": {
+    "shortName": "SB1NO.OL",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "SBMO.AS": {
+    "shortName": "SBM OFFSHORE",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "SBRY.L": {
+    "shortName": "SAINSBURY (J) PLC ORD 28 4/7P",
+    "sector": "Consumer Defensive",
+    "industry": "Grocery Stores"
+  },
+  "SCHP.SW": {
+    "shortName": "SCHINDLER PS",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "SDF.DE": {
+    "shortName": "K+S Aktiengesellschaft        N",
+    "sector": "Basic Materials",
+    "industry": "Agricultural Inputs"
+  },
+  "SDLF.L": {
+    "shortName": "SDLF.L",
+    "sector": "Financial Services",
+    "industry": "Insurance - Life"
+  },
+  "SCR.PA": {
+    "shortName": "SCOR SE",
+    "sector": "Financial Services",
+    "industry": "Insurance - Reinsurance"
+  },
+  "SCMN.SW": {
+    "shortName": "SWISSCOM N",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "SDZ.SW": {
+    "shortName": "SANDOZ GROUP N",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "SDR.L": {
+    "shortName": "SCHRODERS PLC ORD 20P",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "SFZN.SW": {
+    "shortName": "SIEGFRIED N",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "SFSN.SW": {
+    "shortName": "SFS GROUP N",
+    "sector": "Industrials",
+    "industry": "Tools & Accessories"
+  },
+  "SGRO.L": {
+    "shortName": "SEGRO PLC ORD 10P",
+    "sector": "Real Estate",
+    "industry": "REIT - Industrial"
+  },
+  "SGO.PA": {
+    "shortName": "SAINT GOBAIN",
+    "sector": "Industrials",
+    "industry": "Building Products & Equipment"
+  },
+  "SGE.L": {
+    "shortName": "THE SAGE GROUP PLC ORD 1 4/77P",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "SGSN.SW": {
+    "shortName": "SGS N",
+    "sector": "Industrials",
+    "industry": "Consulting Services"
+  },
+  "SHELL.AS": {
+    "shortName": "SHELL PLC",
+    "sector": "Energy",
+    "industry": "Oil & Gas Integrated"
+  },
+  "SHC.L": {
+    "shortName": "SHAFTESBURY CAPITAL PLC ORD 25P",
+    "sector": "Real Estate",
+    "industry": "REIT - Retail"
+  },
+  "SHL.DE": {
+    "shortName": "Siemens Healthineers AG       N",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "SIGN.SW": {
+    "shortName": "SIG GROUP N",
+    "sector": "Consumer Cyclical",
+    "industry": "Packaging & Containers"
+  },
+  "SIE.DE": {
+    "shortName": "SIEMENS AG                    N",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "SIKA.SW": {
+    "shortName": "SIKA N",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "SMIN.L": {
+    "shortName": "SMITHS GROUP PLC ORD 37.5P",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "SLHN.SW": {
+    "shortName": "SWISS LIFE HOLDING AG N",
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified"
+  },
+  "SN.L": {
+    "shortName": "SMITH & NEPHEW PLC ORD USD0.20",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "SPIE.PA": {
+    "shortName": "SPIE",
+    "sector": "Industrials",
+    "industry": "Engineering & Construction"
+  },
+  "SOP.PA": {
+    "shortName": "SOPRA STERIA GROUP",
+    "sector": "Technology",
+    "industry": "Information Technology Services"
+  },
+  "SOON.SW": {
+    "shortName": "SONOVA N",
+    "sector": "Healthcare",
+    "industry": "Medical Devices"
+  },
+  "SOBI.ST": {
+    "shortName": "Swedish Orphan Biovitrum AB",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - Specialty & Generic"
+  },
+  "SPL.WA": {
+    "shortName": "SANPL",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "SOF.BR": {
+    "shortName": "SOFINA",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "SQN.SW": {
+    "shortName": "SWISSQUOTE N",
+    "sector": "Financial Services",
+    "industry": "Capital Markets"
+  },
+  "SPSN.SW": {
+    "shortName": "SWISS PRIME SITE N",
+    "sector": "Real Estate",
+    "industry": "Real Estate - Diversified"
+  },
+  "SPM.MI": {
+    "shortName": "SAIPEM",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "SPX.L": {
+    "shortName": "SPIRAX GROUP PLC ORD 26 12/13P",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "SREN.SW": {
+    "shortName": "SWISS RE N",
+    "sector": "Financial Services",
+    "industry": "Insurance - Reinsurance"
+  },
+  "SRG.MI": {
+    "shortName": "SNAM",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Gas"
+  },
+  "SRP.L": {
+    "shortName": "SERCO GROUP PLC ORD 2P",
+    "sector": "Industrials",
+    "industry": "Specialty Business Services"
+  },
+  "SRT3.DE": {
+    "shortName": "SARTORIUS AG                  V",
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies"
+  },
+  "STAN.L": {
+    "shortName": "STANDARD CHARTERED PLC ORD USD0",
+    "sector": "Financial Services",
+    "industry": "Banks - Diversified"
+  },
+  "SSE.L": {
+    "shortName": "SSE PLC ORD 50P",
+    "sector": "Utilities",
+    "industry": "Utilities - Diversified"
+  },
+  "STERV.HE": {
+    "shortName": "Stora Enso Oyj R",
+    "sector": "Consumer Cyclical",
+    "industry": "Packaging & Containers"
+  },
+  "STB.OL": {
+    "shortName": "STOREBRAND",
+    "sector": "Financial Services",
+    "industry": "Financial Conglomerates"
+  },
+  "STLAM.MI": {
+    "shortName": "STELLANTIS",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Manufacturers"
+  },
+  "STMMI.MI": {
+    "shortName": "STMICROELECTRONICS",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  "STJ.L": {
+    "shortName": "ST. JAMES'S PLACE PLC ORD 15P",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "STMN.SW": {
+    "shortName": "STRAUMANN N",
+    "sector": "Healthcare",
+    "industry": "Medical Instruments & Supplies"
+  },
+  "SUBC.OL": {
+    "shortName": "SUBSEA 7",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "SU.PA": {
+    "shortName": "SCHNEIDER ELECTRIC SE",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "SUN.SW": {
+    "shortName": "SULZER N",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "SUNB.L": {
+    "shortName": "SUNB.L",
+    "sector": "Industrials",
+    "industry": "Rental & Leasing Services"
+  },
+  "SUNN.SW": {
+    "shortName": "SUNRISE N",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "SVT.L": {
+    "shortName": "SEVERN TRENT PLC ORD 97 17/19P",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Water"
+  },
+  "SW.PA": {
+    "shortName": "SODEXO",
+    "sector": "Industrials",
+    "industry": "Specialty Business Services"
+  },
+  "SYENS.BR": {
+    "shortName": "SYENSQO",
+    "sector": "Basic Materials",
+    "industry": "Chemicals"
+  },
+  "SY1.DE": {
+    "shortName": "Symrise AG                    I",
+    "sector": "Basic Materials",
+    "industry": "Specialty Chemicals"
+  },
+  "TBCG.L": {
+    "shortName": "TBC BANK GROUP PLC ORD GBP0.01",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "TCAP.L": {
+    "shortName": "TP ICAP GROUP PLC ORD 25P",
+    "sector": "Financial Services",
+    "industry": "Capital Markets"
+  },
+  "TEG.DE": {
+    "shortName": "TAG Immobilien AG             I",
+    "sector": "Real Estate",
+    "industry": "Real Estate - Diversified"
+  },
+  "TEL.OL": {
+    "shortName": "TELENOR",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "TEF.MC": {
+    "shortName": "TELEFONICA,S.A.",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "TE.PA": {
+    "shortName": "TECHNIP ENERGIES N.V.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "TEMN.SW": {
+    "shortName": "TEMENOS N",
+    "sector": "Technology",
+    "industry": "Software - Application"
+  },
+  "TEP.PA": {
+    "shortName": "TELEPERFORMANCE",
+    "sector": "Industrials",
+    "industry": "Specialty Business Services"
+  },
+  "TELIA.ST": {
+    "shortName": "Telia Company AB",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "TEN.MI": {
+    "shortName": "TENARIS",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services"
+  },
+  "TKA.DE": {
+    "shortName": "thyssenkrupp AG               I",
+    "sector": "Industrials",
+    "industry": "Conglomerates"
+  },
+  "THULE.ST": {
+    "shortName": "Thule Group AB",
+    "sector": "Consumer Cyclical",
+    "industry": "Leisure"
+  },
+  "TIT.MI": {
+    "shortName": "TELECOM ITALIA",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "TLX.DE": {
+    "shortName": "Talanx AG                     N",
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified"
+  },
+  "TPE.WA": {
+    "shortName": "TAURONPE",
+    "sector": "Utilities",
+    "industry": "Utilities - Renewable"
+  },
+  "TOM.OL": {
+    "shortName": "TOMRA SYSTEMS",
+    "sector": "Industrials",
+    "industry": "Waste Management"
+  },
+  "TPRO.MI": {
+    "shortName": "TECHNOPROBE",
+    "sector": "Technology",
+    "industry": "Semiconductors"
+  },
+  "TSCO.L": {
+    "shortName": "TESCO PLC ORD 6 1/3P",
+    "sector": "Consumer Defensive",
+    "industry": "Grocery Stores"
+  },
+  "TUB.BR": {
+    "shortName": "TUBIZE-FIN",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "TTE.PA": {
+    "shortName": "TOTALENERGIES",
+    "sector": "Energy",
+    "industry": "Oil & Gas Integrated"
+  },
+  "TRYG.CO": {
+    "shortName": "Tryg A/S",
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified"
+  },
+  "UBSG.SW": {
+    "shortName": "UBS GROUP N",
+    "sector": "Financial Services",
+    "industry": "Banks - Diversified"
+  },
+  "TUI1.DE": {
+    "shortName": "TUI AG                        N",
+    "sector": "Consumer Cyclical",
+    "industry": "Travel Services"
+  },
+  "TW.L": {
+    "shortName": "TAYLOR WIMPEY PLC ORD 1P",
+    "sector": "Consumer Cyclical",
+    "industry": "Residential Construction"
+  },
+  "TRN.MI": {
+    "shortName": "TERNA",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Electric"
+  },
+  "UCB.BR": {
+    "shortName": "UCB",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "UHR.SW": {
+    "shortName": "SWATCH GROUP I",
+    "sector": "Consumer Cyclical",
+    "industry": "Luxury Goods"
+  },
+  "ULVR.L": {
+    "shortName": "UNILEVER PLC ORD 3.5P",
+    "sector": "Consumer Defensive",
+    "industry": "Household & Personal Products"
+  },
+  "UCG.MI": {
+    "shortName": "UNICREDIT",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "UMG.AS": {
+    "shortName": "UNIVERSAL MUSIC GROUP",
+    "sector": "Communication Services",
+    "industry": "Entertainment"
+  },
+  "UMI.BR": {
+    "shortName": "UMICORE",
+    "sector": "Industrials",
+    "industry": "Waste Management"
+  },
+  "UNI.MC": {
+    "shortName": "UNICAJA BANCO, S.A.",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "UNI.MI": {
+    "shortName": "UNIPOL",
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified"
+  },
+  "UPM.HE": {
+    "shortName": "UPM-Kymmene Corporation",
+    "sector": "Basic Materials",
+    "industry": "Paper & Paper Products"
+  },
+  "URW.PA": {
+    "shortName": "UNIBAIL-RODAMCO-WESTFIELD",
+    "sector": "Real Estate",
+    "industry": "REIT - Retail"
+  },
+  "UTG.L": {
+    "shortName": "UNITE GROUP PLC ORD 25P",
+    "sector": "Real Estate",
+    "industry": "REIT - Diversified"
+  },
+  "UU.L": {
+    "shortName": "UNITED UTILITIES GROUP PLC ORD ",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Water"
+  },
+  "VACN.SW": {
+    "shortName": "VAT GROUP N",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "VATN.SW": {
+    "shortName": "VALIANT N",
+    "sector": "Financial Services",
+    "industry": "Banks - Regional"
+  },
+  "VALMT.HE": {
+    "shortName": "Valmet Corporation",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "VEND.OL": {
+    "shortName": "VEND MARKETPLACES ASA",
+    "sector": "Communication Services",
+    "industry": "Internet Content & Information"
+  },
+  "VAR.OL": {
+    "shortName": "VAR.OL",
+    "sector": "Energy",
+    "industry": "Oil & Gas E&P"
+  },
+  "VIE.PA": {
+    "shortName": "VEOLIA ENVIRON.",
+    "sector": "Industrials",
+    "industry": "Waste Management"
+  },
+  "VER.VI": {
+    "shortName": "VERBUND AG Kat. A",
+    "sector": "Utilities",
+    "industry": "Utilities - Renewable"
+  },
+  "VID.MC": {
+    "shortName": "VIDRALA, S.A.",
+    "sector": "Consumer Cyclical",
+    "industry": "Packaging & Containers"
+  },
+  "VNA.DE": {
+    "shortName": "Vonovia SE                    N",
+    "sector": "Real Estate",
+    "industry": "Real Estate Services"
+  },
+  "VIS.MC": {
+    "shortName": "VISCOFAN, S.A.",
+    "sector": "Consumer Cyclical",
+    "industry": "Packaging & Containers"
+  },
+  "VK.PA": {
+    "shortName": "VALLOUREC",
+    "sector": "Basic Materials",
+    "industry": "Steel"
+  },
+  "VOW3.DE": {
+    "shortName": "VOLKSWAGEN AG                 V",
+    "sector": "Consumer Cyclical",
+    "industry": "Auto Manufacturers"
+  },
+  "VPK.AS": {
+    "shortName": "VOPAK",
+    "sector": "Energy",
+    "industry": "Oil & Gas Midstream"
+  },
+  "VOD.L": {
+    "shortName": "VODAFONE GROUP PLC ORD USD0.20 ",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
+  },
+  "VOE.VI": {
+    "shortName": "voestalpine AG",
+    "sector": "Basic Materials",
+    "industry": "Steel"
+  },
+  "VWS.CO": {
+    "shortName": "Vestas Wind Systems A/S",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "VSURE.ST": {
+    "shortName": "Verisure plc",
+    "sector": "Industrials",
+    "industry": "Security & Protection Services"
+  },
+  "VTY.L": {
+    "shortName": "VISTRY GROUP PLC ORD 50P",
+    "sector": "Consumer Cyclical",
+    "industry": "Residential Construction"
+  },
+  "VZN.SW": {
+    "shortName": "VZ HOLDING N",
+    "sector": "Financial Services",
+    "industry": "Asset Management"
+  },
+  "WIE.VI": {
+    "shortName": "Wienerberger AG",
+    "sector": "Basic Materials",
+    "industry": "Building Materials"
+  },
+  "WDP.BR": {
+    "shortName": "WAREHOUSES DE PAUW",
+    "sector": "Real Estate",
+    "industry": "REIT - Industrial"
+  },
+  "WEIR.L": {
+    "shortName": "WEIR GROUP PLC ORD 12.5P",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "WIHL.ST": {
+    "shortName": "Wihlborgs Fastigheter AB",
+    "sector": "Real Estate",
+    "industry": "Real Estate Services"
+  },
+  "WKL.AS": {
+    "shortName": "WOLTERS KLUWER",
+    "sector": "Industrials",
+    "industry": "Specialty Business Services"
+  },
+  "WISE.L": {
+    "shortName": "WISE PLC CLS A ORD GBP0.01",
+    "sector": "Technology",
+    "industry": "Information Technology Services"
+  },
+  "WPP.L": {
+    "shortName": "WPP PLC ORD 10P",
+    "sector": "Communication Services",
+    "industry": "Advertising Agencies"
+  },
+  "WTB.L": {
+    "shortName": "WHITBREAD PLC ORD 76 122/153P",
+    "sector": "Consumer Cyclical",
+    "industry": "Lodging"
+  },
+  "WRT1V.HE": {
+    "shortName": "W\u00e4rtsil\u00e4 Corporation",
+    "sector": "Industrials",
+    "industry": "Specialty Industrial Machinery"
+  },
+  "ZAB.WA": {
+    "shortName": "ZABKA",
+    "sector": "Consumer Defensive",
+    "industry": "Grocery Stores"
+  },
+  "YAR.OL": {
+    "shortName": "YARA INTERNATIONAL",
+    "sector": "Basic Materials",
+    "industry": "Agricultural Inputs"
+  },
+  "ZAL.DE": {
+    "shortName": "Zalando SE                    I",
+    "sector": "Consumer Cyclical",
+    "industry": "Internet Retail"
+  },
+  "ZEAL.CO": {
+    "shortName": "Zealand Pharma A/S",
+    "sector": "Healthcare",
+    "industry": "Biotechnology"
+  },
+  "ZURN.SW": {
+    "shortName": "ZURICH INSURANCE N",
+    "sector": "Financial Services",
+    "industry": "Insurance - Diversified"
+  },
+  "ZEG.L": {
+    "shortName": "ZEGONA COMMUNICATIONS PLC",
+    "sector": "Communication Services",
+    "industry": "Telecom Services"
   }
 }
